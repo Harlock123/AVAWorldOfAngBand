@@ -152,11 +152,17 @@ door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-t
   own, laid over them by id. A modded monster or item comes into the game through the mod's `bridge/monsters.json` and
   `bridge/items.json`, and its names through `ashen_names.json`. The Mods window shows what each adds and switches it
   off, and "Make an example mod" writes one to copy.
-- **The province** (the spec's section 7.4, milestone 7 under way). AshenReliquary's own zones lie outside Gallowmere,
-  ten years on: the south gate opens onto the Gallows Road and the west gate onto the Rotwater Fens. Each zone is read
-  from AshenReliquary's file and drawn as AshenReliquary drew it, its shores and lava shaped the same way. A few of
-  Angband's monsters of the depth a zone stands for wander it until AshenReliquary's own creatures come. Its other ways
-  on (to the Drowned Chapel and the rest of Vardmoor) open with the next parts of the milestone.
+- **The province** (the spec's section 7.4, milestone 7 under way). AshenReliquary's own Vardmoor lies outside
+  Gallowmere, ten years on: all 18 of its wild zones and its three waystations, from the Gallows Road (out of the south
+  gate) and the Rotwater Fens (out of the west) to the Ash Wastes and the Cinder Throne.
+  - Each zone is read from AshenReliquary's file and drawn as AshenReliquary drew it, in its own tileset (grassland,
+    the Iron March's, Oriel's snow, the dungeon's, the cinder caves).
+  - AshenReliquary's 58 creatures stand in the packs it placed, at their level and rank, and strike, shoot and cast
+    with their own numbers. Its Heralds are gone ten years on; their echoes wait below.
+  - Caches open once, and spill good things of the zone's depth. A shrine, one of Ashur's old waystones, offers three
+    blessings and gives one.
+  - Ironhold has a smith, Saint Oriel's Rest an apothecary and Ember Gate a quartermaster.
+  - Zones remember: a slain pack stays dead until the hero has been five levels down the shaft since.
 - **The balance bots** (the spec's M5). A hero made ready for a depth (the spec's level for it, runes, the protections
   Angband heroes have by then, potions) dives three levels from 5, 30, 60 and 90, and one made ready for the bottom
   goes down through Saint Ysmere and the Cinder. The tests hold them to it: most dives live, and a hero ready for the
@@ -164,6 +170,12 @@ door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-t
 
 ![The Gallows Road, out of Gallowmere's south gate: grass, a cobbled road, tents and a campfire, a fence and dark woods,
 as AshenReliquary drew it](docs/images/WorldOfAngBand-gallows-road.png)
+
+![The Drowned Chapel: flagstones and bookshelves in the dark, lit by two braziers, with Ashur's waystone in the middle,
+as AshenReliquary drew it](docs/images/WorldOfAngBand-zone-drowned_chapel.png)
+
+![The Frostbitten Pass: snow, frozen cliffs, a flagstone road and a cache among the rocks, in Oriel's snow
+tileset](docs/images/WorldOfAngBand-zone-frostbitten_pass.png)
 
 ![The birth window: a human priest, a Confessor, who heard it ended as Vessa's Legacy, The Lantern Rekindled, with the
 randarts option below](docs/images/WorldOfAngBand-birth.png)

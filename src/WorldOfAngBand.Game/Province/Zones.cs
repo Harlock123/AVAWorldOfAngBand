@@ -19,11 +19,26 @@ public sealed record LegendEntry(string Ground, IReadOnlyList<int>? Objects = nu
 public sealed record ZoneExit(string Id, string Label, int[] At, double Radius = 2.0, string? To = null, string? ToExit = null,
     int[]? Arrive = null);
 
-/// <summary>A pack AshenReliquary placed (its creatures come into this game with M7b).</summary>
-public sealed record ZoneSpawn(int[] At, double Radius = 2.0);
+/// <summary>One of a pack: which of AshenReliquary's creatures, at what rank, how many.</summary>
+public sealed record PackMember(string Creature, Rules.Creatures.CreatureRank Rank = Rules.Creatures.CreatureRank.Normal, int Count = 1);
 
-/// <summary>A place in a zone: a shrine, a cache, an NPC or a keepsake (M7b and M7c).</summary>
-public sealed record ZonePlace(string Id, int[] At, string? Name = null);
+/// <summary>
+/// A pack AshenReliquary placed: where, how far it spreads, its members, and the level it fights at (the zone's unless
+/// it says). <see cref="Requires"/> and <see cref="Unless"/> are AshenReliquary's story conditions.
+/// </summary>
+public sealed record ZoneSpawn(int[] At, IReadOnlyList<PackMember> Pack, double Radius = 2.0, int? Level = null,
+    System.Text.Json.JsonElement? Requires = null, System.Text.Json.JsonElement? Unless = null)
+{
+    /// <summary>
+    /// Ten years on, AshenReliquary's Heralds and its Prophet are gone (their echoes are below), and the packs that
+    /// hung on its story's turns stand down with them.
+    /// </summary>
+    public bool StandsTenYearsOn =>
+        Requires is null && Unless is null && Pack.All(m => m.Rank < Rules.Creatures.CreatureRank.Herald);
+}
+
+/// <summary>A place in a zone: a shrine, a cache, an NPC or a keepsake.</summary>
+public sealed record ZonePlace(string Id, int[] At, string? Name = null, int Facing = 0, string? Kind = null, string? Title = null);
 
 /// <summary>
 /// A zone of the province (the spec's section 7.4): AshenReliquary's zone file, read as it is
@@ -43,6 +58,7 @@ public sealed record ZoneDef(
     IReadOnlyList<ZonePlace>? Caches = null,
     IReadOnlyList<ZonePlace>? Npcs = null,
     IReadOnlyList<ZonePlace>? Interactables = null,
+    IReadOnlyList<ZonePlace>? Vendors = null,
     bool Town = false,
     string? Tagline = null,
     double? Darkness = null,
@@ -69,19 +85,30 @@ public sealed class ProvinceMap
     /// <summary>Fort Gallowmere's id in AshenReliquary's files: exits to it lead back to the town.</summary>
     public const string Gallowmere = "fort_gallowmere";
 
-    /// <summary>The zones open in this milestone (M7a: the first two; the rest come with M7b).</summary>
-    public static readonly IReadOnlySet<string> Open = new HashSet<string> { "gallows_road", "rotwater_fens" };
+    /// <summary>Whether a zone can be gone to: every zone of the province but Fort Gallowmere (which is Gallowmere itself).</summary>
+    public bool IsOpen(string id) => id != Gallowmere && _zones.ContainsKey(id);
 
     private readonly Dictionary<string, ZoneDef> _zones;
 
-    public ProvinceMap(IEnumerable<ZoneDef> zones) => _zones = zones.ToDictionary(z => z.Id);
+    private readonly Dictionary<string, AshenCreature> _creatures;
+
+    public ProvinceMap(IEnumerable<ZoneDef> zones, IEnumerable<AshenCreature>? creatures = null)
+    {
+        _zones = zones.ToDictionary(z => z.Id);
+        _creatures = (creatures ?? []).ToDictionary(c => c.Id);
+    }
+
+    /// <summary>One of AshenReliquary's creatures (data/province/creatures.json), by its id there.</summary>
+    public AshenCreature? Creature(string id) => _creatures.GetValueOrDefault(id);
+
+    public IReadOnlyCollection<AshenCreature> Creatures => _creatures.Values;
 
     public IReadOnlyCollection<ZoneDef> Zones => _zones.Values;
 
     public ZoneDef? this[string id] => _zones.GetValueOrDefault(id);
 
     /// <summary>Gallowmere's gates: the exits of Fort Gallowmere, each to an open zone.</summary>
-    public IEnumerable<ZoneExit> Gates => this[Gallowmere]?.Exits.Where(e => e.To is { } to && Open.Contains(to)) ?? [];
+    public IEnumerable<ZoneExit> Gates => this[Gallowmere]?.Exits.Where(e => e.To is { } to && IsOpen(to)) ?? [];
 
     private static readonly Lazy<ProvinceMap> SharedMap = new(() => Load());
 
@@ -90,7 +117,8 @@ public sealed class ProvinceMap
 
     public static ProvinceMap Load(string? dataDirectory = null)
     {
-        var dir = Path.Combine(dataDirectory ?? DataLoader.DefaultDataDirectory, "province", "zones");
+        var root = Path.Combine(dataDirectory ?? DataLoader.DefaultDataDirectory, "province");
+        var dir = Path.Combine(root, "zones");
         var options = new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true,
@@ -103,7 +131,10 @@ public sealed class ProvinceMap
             using var stream = File.OpenRead(path);
             return JsonSerializer.Deserialize<ZoneDef>(stream, options) ?? throw new GameDataException($"{path} is empty.");
         });
-        return new ProvinceMap(zones);
+        List<AshenCreature> creatures;
+        using (var stream = File.OpenRead(Path.Combine(root, "creatures.json")))
+            creatures = JsonSerializer.Deserialize<List<AshenCreature>>(stream, options) ?? [];
+        return new ProvinceMap(zones.ToList(), creatures);
     }
 
     /// <summary>

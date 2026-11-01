@@ -13,6 +13,9 @@ public sealed class Foe(Monster monster, FoeStats stats, DamageProfile defenses,
 {
     public Monster Monster { get; } = monster;
 
+    /// <summary>One of AshenReliquary's creatures in a province pack (its strikes are its own), or null for Angband's.</summary>
+    public Province.AshenFoe? Ashen { get; init; }
+
     public FoeStats Stats { get; } = stats;
 
     public string Name { get; } = name;

@@ -97,6 +97,24 @@ public static class ZoneBuilder
         return new Built(level, new DressedLevel(level, ThemeFor(zone), ground, objects, lights), gates);
     }
 
+    /// <summary>
+    /// A cache's chest, as AshenReliquary draws it (WorldView.DrawCache): the dungeon set's wooden chests (shut 144, open
+    /// 160), the ruins' in the snow (1264, 1266), the cave set's in the ash (160, 176), the grassland's elsewhere (76,
+    /// the open one dimmed); a reliquary cache is the skull chest. One on for a chest facing the other way.
+    /// </summary>
+    public static Piece CachePiece(ZoneDef zone, ZonePlace cache, bool opened)
+    {
+        var facing = cache.Facing == 1 ? 1 : 0;
+        var dungeon = zone.Tileset == "tileset_dungeon";
+        var snowy = zone.Tileset == "tileset_oriel";
+        var ashen = zone.Tileset == "tileset_cinder";
+        var id = cache.Kind == "Reliquary"
+            ? (dungeon ? 288 : snowy ? 1384 : ashen ? 266 : 297) + (facing == 0 ? 0 : 2) + (opened ? 1 : 0)
+            : dungeon ? (opened ? 160 : 144) + facing : snowy ? (opened ? 1266 : 1264) + facing
+            : ashen ? (opened ? 176 : 160) + facing : 76 + facing;
+        return new Piece(zone.Tileset, id, Tint: opened && cache.Kind != "Reliquary" && !dungeon && !snowy && !ashen ? Tint.Spent : Tint.None);
+    }
+
     /// <summary>Where a zone's square in AshenReliquary's coordinates is on the level (one in, for the border).</summary>
     public static Loc LevelAt(int[] at) => new(at[0] + 1, at[1] + 1);
 

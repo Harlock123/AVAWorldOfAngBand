@@ -86,6 +86,11 @@ internal sealed class Fight(DungeonSession session)
     /// </summary>
     public void MonsterMelee(Foe foe)
     {
+        if (foe.Ashen is not null)
+        {
+            AshenStrike(foe, ranged: false);
+            return;
+        }
         var hero = session.Hero;
         var seen = session.Seen(foe);
         var name = seen ? session.Subject(foe.Monster) : "It";
@@ -290,6 +295,74 @@ internal sealed class Fight(DungeonSession session)
             return;
         apply(degree == DegreeOfSuccess.CriticalFailure ? 2 : 1);
     }
+
+    /// <summary>
+    /// One of AshenReliquary's creatures strikes, as it struck there: one Strike a turn (a shot or a spell from afar
+    /// when it is <paramref name="ranged"/>), its own dice at its rank's share, its damage type, its poison and the
+    /// condition its hits leave (with the save that turns it aside).
+    /// </summary>
+    public void AshenStrike(Foe foe, bool ranged)
+    {
+        var hero = session.Hero;
+        var ashen = foe.Ashen!;
+        var creature = ashen.Creature;
+        var seen = session.Seen(foe);
+        var name = seen ? session.Subject(foe.Monster) : "It";
+        var penalty = foe.Round.AttackPenalty(agile: false);
+        foe.Round.Strike();
+        var flanked = !ranged && session.Flanked() ? -ConditionSet.OffGuardAcPenalty : 0;
+        var check = Check.Roll(Roller, foe.AttackModifier().Total + penalty, hero.Character.ArmorClass().Total + flanked);
+        var roll = Roll(check, penalty);
+        var verb = ranged ? creature.Caster ? "casts at" : "shoots at" : "hits";
+        if (ranged)
+            session.Publish(new SpellEvent(foe.Monster.Position, hero.Position, Engine.Definitions.MonsterSpellKind.Bolt, ElementOf(creature.DamageType), 0));
+        if (check.Degree < DegreeOfSuccess.Success)
+        {
+            session.Say($"{name} {(ranged ? verb : "misses")} you{(ranged ? " and misses" : "")} {roll}.");
+            session.Publish(new StrikeEvent(foe.Monster.Position, hero.Position, false, check.Degree, 0));
+            return;
+        }
+        var rolled = Math.Max(1, (int)Math.Round(ashen.Strike.Roll(Roller) * ashen.DamageMultiplier));
+        var damage = DamageCalculator.Compute(rolled, 0, check.Degree, creature.DamageType, hero.Character.Defenses);
+        var blocked = 0;
+        if (!ranged)
+        {
+            blocked = ShieldBlock(damage);
+            damage -= blocked;
+            var soaked = session.Powers.Soak(damage);
+            damage -= soaked;
+            blocked += soaked;
+        }
+        var crit = check.Degree == DegreeOfSuccess.CriticalSuccess ? ", critically" : "";
+        session.Say($"{name} {verb} you{crit} {roll}: {damage} {creature.DamageType.ToString().ToLowerInvariant()}{(blocked > 0 ? $", {blocked} blocked" : "")}.");
+        session.Publish(new StrikeEvent(foe.Monster.Position, hero.Position, false, check.Degree, damage));
+        if (damage > 0)
+            session.HurtHero(damage, session.Called(foe));
+        hero.Resource.OnCombat(taken: true);
+        if (hero.Character.IsDead)
+            return;
+        if (creature.PoisonOnHit is { } poison && session.Rng.RandInt0(1000) < creature.PoisonChance * 1000)
+        {
+            hero.Character.Persistent.Add(DamageType.Poison, Dice.Parse(poison));
+            session.Say("You are poisoned!");
+        }
+        if (creature.Inflicts is { } inflict)
+        {
+            var save = Enum.TryParse<StatisticKind>(inflict.Save, out var kind) ? kind : StatisticKind.Fortitude;
+            var saved = Check.Roll(Roller, hero.Character.Save(save).Total, foe.SaveDc).Degree;
+            if (saved < DegreeOfSuccess.Success)
+                Condition(inflict.Condition, inflict.Value + (saved == DegreeOfSuccess.CriticalFailure ? 1 : 0),
+                    inflict.Seconds > 0 ? inflict.Seconds : null, $"You are {inflict.Condition.ToString().ToLowerInvariant()}!");
+        }
+        if (!ranged && foe.Monster.IsActive)
+            session.Powers.Retaliate(foe);
+    }
+
+    private static string? ElementOf(DamageType type) => type switch
+    {
+        DamageType.Fire => "fire", DamageType.Cold => "cold", DamageType.Electricity => "elec", DamageType.Acid => "acid",
+        DamageType.Poison => "pois", DamageType.Void => "nether", DamageType.Mental => "chaos", _ => "arrow",
+    };
 
     private void Condition(ConditionKind kind, int value, double? seconds, string message)
     {

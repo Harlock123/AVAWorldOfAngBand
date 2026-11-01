@@ -46,3 +46,6 @@ public sealed record ChooseLevel(int Level, WorldOfAngBand.Rules.Characters.Leve
 
 /// <summary>Activate a worn artifact, at the monster at <see cref="Target"/> when it attacks (else the nearest in sight).</summary>
 public sealed record ActivateItem(WorldOfAngBand.Engine.Items.Item Item, Loc? Target = null) : GameCommand;
+
+/// <summary>Take one of the blessings a shrine offered (<see cref="ShrineEvent"/>).</summary>
+public sealed record TakeBlessing(string ShrineId, string Blessing) : GameCommand;

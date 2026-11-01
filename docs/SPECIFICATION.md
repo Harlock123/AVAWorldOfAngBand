@@ -593,7 +593,9 @@ M7 comes in three parts:
 - **M7a** (done): fixed-map levels from Ashen's files, gates and exits, the three new tilesets, and the first two
   zones (the Gallows Road and the Rotwater Fens). Outdoor zones are known from the moment the hero arrives, as in
   Ashen; dark ones are explored as the dungeon is;
-- **M7b:** Ashen's creatures bridged, caches, shrines, persistence, and every zone and waystation;
+- **M7b** (done): Ashen's creatures bridged, caches, shrines, persistence, and every zone and waystation. Packs
+  that hang on Ashen's story flags stand down with its Heralds; a creature strikes or shoots once a turn, its own dice at
+  its rank's share;
 - **M7c:** NPCs and keepsakes, weather, the tie-ins, the rifts, and a province bot that walks each zone at its
   expected level.
 

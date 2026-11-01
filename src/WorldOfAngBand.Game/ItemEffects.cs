@@ -81,6 +81,9 @@ internal sealed class ItemEffects(DungeonSession session)
         return true;
     }
 
+    /// <summary>One of the effects potions and scrolls have, given by something else (a shrine's blessing).</summary>
+    internal void ApplyEffect(string effect) => Apply(effect, null);
+
     private void Apply(string effect, Item? target)
     {
         var parts = effect.Split(':');

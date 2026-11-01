@@ -50,3 +50,6 @@ public sealed record HeroWonEvent(IReadOnlyList<string> Epilogue) : IGameEvent;
 
 /// <summary>The hero has gone past level 20 into a mythic tier.</summary>
 public sealed record MythicTierEvent(int Tier) : IGameEvent;
+
+/// <summary>The hero came to a shrine: the three blessings Ashur's whim offers (ids from <see cref="Province.Shrines"/>).</summary>
+public sealed record ShrineEvent(string ShrineId, string Name, IReadOnlyList<string> Blessings) : IGameEvent;

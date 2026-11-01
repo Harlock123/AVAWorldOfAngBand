@@ -76,7 +76,8 @@ public sealed class DungeonSession : ITurnHandler
         var artifacts = Birth.Randarts ? RandartGenerator.Generate(data, GameRandom.DeriveSeed(seed, RandartSeedSalt), Setting.NameWords) : data.Artifacts;
         Factory.Artifacts = artifacts.Where(a => data.Object(a.Kind) is { } kind && ItemBridge.Has(kind)).ToList();
         _generator = new DungeonGenerator(data);
-        _spawner = new MonsterSpawner(data) { Allowed = Bridge.Has };
+        // AshenReliquary's creatures only come in the packs its zones place.
+        _spawner = new MonsterSpawner(data) { Allowed = r => Bridge.Has(r) && !r.Has(AshenCreature.ProvinceFlag) };
         _brain = new MonsterBrain(this);
         Fight = new Fight(this);
         Spells = new MonsterSpells(this);
@@ -254,6 +255,7 @@ public sealed class DungeonSession : ITurnHandler
             ChooseStory choose => Choose(choose.StoryId, choose.Choice),
             UsePower power => (actions = Powers.Use(power.Id, power.Target)) > 0,
             ActivateItem activate => Effects.Activate(activate.Item, activate.Target),
+            TakeBlessing blessing => UseShrine(blessing.ShrineId, blessing.Blessing),
             ChooseLevel level => ChooseLevelPicks(level.Level, level.Choice),
             _ => throw new ArgumentOutOfRangeException(nameof(command), command, "Unknown command."),
         };
@@ -482,6 +484,8 @@ public sealed class DungeonSession : ITurnHandler
             Fight.HeroStrikes(foe);
             return true;
         }
+        if (Visit(to))
+            return true;
         var terrain = Level.FeatureAt(to);
         if (terrain.Has(TerrainFlags.DoorClosed))
         {
@@ -571,6 +575,8 @@ public sealed class DungeonSession : ITurnHandler
             QuestRoom: story is not null && (!_flags.ContainsKey(story.Id) || Unfinished(depth)) ? story.Room : null));
         Install(generated.Level, generated.PlayerStart);
         Hero.MaxDepth = Math.Max(Hero.MaxDepth, depth);
+        if (depth > 0)
+            LevelsDown++;
         if (depth == 0)
         {
             // Gallowmere's gates out to the province (the spec's section 7.4); back through one, the hero is beside it.
@@ -727,9 +733,12 @@ public sealed class DungeonSession : ITurnHandler
         if (!Level.IsPassable(Hero.Position))
             Hero.Position = Level.AllLocs().Where(Level.IsEmptyFloor).OrderBy(p => p.DistanceTo(start)).First();
         _insideGate = InsideGate();
-        // Until Ashen's own creatures come (M7b): a few of Angband's, of the zone's depth, about the zone.
+        var memory = MemoryOf(zone.Id);
+        PlacePacks(zone, memory);
+        PlacePlaces(zone, memory, built);
+        // A few of Angband's monsters of the zone's depth wander in among AshenReliquary's own.
         var area = zone.Width * zone.Height;
-        Level.Population = new PopulationBudget(Monsters: 3 + area / 2500, RoomObjects: 0, AnywhereObjects: 1 + area / 4000, Gold: 2 + area / 3000);
+        Level.Population = new PopulationBudget(Monsters: 1 + area / 5000, RoomObjects: 0, AnywhereObjects: 1 + area / 4000, Gold: 2 + area / 3000);
         _spawner.Populate(Level, Rng, Hero.Position, _uniquesGone);
         Loot.Populate();
         foreach (var monster in Level.Monsters.All)
@@ -737,6 +746,173 @@ public sealed class DungeonSession : ITurnHandler
         UpdateView();
         Publish(new LevelEnteredEvent(depth));
         Say(zone.Tagline is { Length: > 0 } tagline ? $"{zone.Name}. {tagline}" : zone.Name);
+    }
+
+    private readonly Dictionary<string, ZoneMemory> _zoneMemory = [];
+
+    /// <summary>How many dungeon levels the hero has gone down into (a zone's dead packs come back after five).</summary>
+    public int LevelsDown { get; private set; }
+
+    public ZoneMemory MemoryOf(string zoneId) => _zoneMemory.TryGetValue(zoneId, out var memory) ? memory : _zoneMemory[zoneId] = new ZoneMemory();
+
+    private sealed record AshenPlacement(AshenCreature Creature, int Level, Rules.Creatures.CreatureRank Rank, int Pack);
+
+    /// <summary>The Ashen creatures just placed, by monster id, until they are enlisted.</summary>
+    private readonly Dictionary<int, AshenPlacement> _ashenPlaced = [];
+
+    /// <summary>
+    /// AshenReliquary's packs where it placed them, asleep at their posts (Ashen's creatures idle until something comes
+    /// near): those that stand ten years on, and that the hero hasn't killed lately.
+    /// </summary>
+    private void PlacePacks(ZoneDef zone, ZoneMemory memory)
+    {
+        var spawns = zone.Spawns ?? [];
+        for (var pack = 0; pack < spawns.Count; pack++)
+        {
+            var spawn = spawns[pack];
+            if (!spawn.StandsTenYearsOn || memory.StillDead(pack, LevelsDown))
+                continue;
+            memory.SlainAt.Remove(pack);
+            var centre = ZoneBuilder.LevelAt(spawn.At);
+            foreach (var member in spawn.Pack)
+            {
+                if (Province.Creature(member.Creature) is not { } creature || Data.Monster(creature.RaceId) is not { } race)
+                    continue;
+                for (var i = 0; i < member.Count; i++)
+                {
+                    var spot = Level.AllLocs().Where(p => p.DistanceTo(centre) <= Math.Max(1.5, spawn.Radius + 0.5) && Level.IsEmptyFloor(p) && p != Hero.Position)
+                        .OrderBy(_ => Rng.RandInt0(1000)).Select(p => (Loc?)p).FirstOrDefault();
+                    if (spot is not { } at)
+                        continue;
+                    var monster = _spawner.Place(Level, Rng, race, at, asleep: true);
+                    monster.Sleep = 8 + Rng.RandInt0(12);
+                    _ashenPlaced[monster.Id] = new AshenPlacement(creature, spawn.Level ?? zone.Level, member.Rank, pack);
+                }
+            }
+        }
+    }
+
+    /// <summary>Places one of AshenReliquary's creatures, awake, at a level (tests).</summary>
+    internal Foe PlaceAshen(string creatureId, Loc at, int level, Rules.Creatures.CreatureRank rank = Rules.Creatures.CreatureRank.Normal)
+    {
+        var creature = Province.Creature(creatureId) ?? throw new InvalidOperationException($"No creature '{creatureId}'.");
+        var monster = _spawner.Place(Level, Rng, Data.Monster(creature.RaceId)!, at, asleep: false);
+        _ashenPlaced[monster.Id] = new AshenPlacement(creature, level, rank, -1);
+        return Enlist(monster);
+    }
+
+    /// <summary>A pack's last creature died: the pack stays dead a while.</summary>
+    private void PackSlain(Foe foe)
+    {
+        if (Zone is not { } zone || foe.Ashen is not { } ashen)
+            return;
+        if (_foes.Values.Any(f => f != foe && f.Ashen?.Pack == ashen.Pack && f.Monster.IsActive && !f.Monster.IsRemoved))
+            return;
+        MemoryOf(zone.Id).SlainAt[ashen.Pack] = LevelsDown;
+    }
+
+    /// <summary>
+    /// The places in a zone: its caches (Angband's objects of the zone's depth, once each), its shrines (a blessing
+    /// from three, once each), and a waystation's trader (the Smith in Ironhold, the Apothecary at Saint Oriel's Rest,
+    /// the Quartermaster at Ember Gate).
+    /// </summary>
+    private void PlacePlaces(ZoneDef zone, ZoneMemory memory, ZoneBuilder.Built built)
+    {
+        _places.Clear();
+        foreach (var cache in zone.Caches ?? [])
+        {
+            var at = ZoneBuilder.LevelAt(cache.At);
+            if (!Level.InBounds(at))
+                continue;
+            Level.SetFeature(at, Data.Terrain["zone_cache"].Index);
+            _places[at] = cache;
+            built.Dressed.SetObjects(at, [ZoneBuilder.CachePiece(zone, cache, memory.CachesOpened.Contains(cache.Id))]);
+        }
+        foreach (var shrine in zone.Shrines ?? [])
+        {
+            var at = ZoneBuilder.LevelAt(shrine.At);
+            if (!Level.InBounds(at))
+                continue;
+            Level.SetFeature(at, Data.Terrain[memory.ShrinesUsed.Contains(shrine.Id) ? "zone_shrine_spent" : "zone_shrine"].Index);
+            _places[at] = shrine;
+        }
+        if (WaystationTrader(zone.Id) is { } store && zone.Vendors is [var vendor, ..])
+        {
+            var at = ZoneBuilder.LevelAt(vendor.At);
+            if (Level.InBounds(at) && Data.Terrain.Shops.FirstOrDefault(t => t.Shop == store) is { } shop)
+                Level.SetFeature(at, shop.Index);
+        }
+    }
+
+    /// <summary>The one trader at each waystation.</summary>
+    public static string? WaystationTrader(string zoneId) => zoneId switch
+    {
+        "ironhold" => "weaponsmith",
+        "saint_oriels_rest" => "alchemist",
+        "ember_gate" => "general",
+        _ => null,
+    };
+
+    /// <summary>A zone's caches and shrines, by the square they stand on.</summary>
+    private readonly Dictionary<Loc, ZonePlace> _places = [];
+
+    /// <summary>The hero walked into a cache or a shrine: it opens, or offers its blessings. True when something happened.</summary>
+    private bool Visit(Loc at)
+    {
+        if (Zone is not { } zone || !_places.TryGetValue(at, out var place))
+            return false;
+        var memory = MemoryOf(zone.Id);
+        var terrain = Level.FeatureAt(at).Id;
+        if (terrain == "zone_cache")
+        {
+            if (!memory.CachesOpened.Add(place.Id))
+            {
+                Say("It is empty.");
+                return true;
+            }
+            var depth = Level.Depth;
+            var found = 0;
+            var spots = Level.Neighbors(at).Where(Level.IsEmptyFloor).ToList();
+            for (var i = 0; i < 2 + Rng.RandInt0(2) && spots.Count > 0; i++)
+            {
+                if (Factory.Make(Rng, depth + 3, good: true) is not { } item)
+                    continue;
+                Level.Objects.Add(spots[i % spots.Count], item);
+                found++;
+            }
+            if (spots.Count > 0)
+                Level.Objects.Add(spots[^1], Factory.MakeGold(Rng, depth + 3));
+            if (_dressed is { } dressed)
+                dressed.SetObjects(at, [ZoneBuilder.CachePiece(zone, place, opened: true)]);
+            Say(found > 0 ? "You open the cache. Things spill out round it." : "You open the cache: a little gold.");
+            Publish(new DoorOpenedEvent(at));
+            UpdateView();
+            return true;
+        }
+        if (terrain == "zone_shrine")
+        {
+            Publish(new ShrineEvent(place.Id, place.Name ?? "A shrine", Shrines.Offer(Rng)));
+            return true;
+        }
+        if (terrain == "zone_shrine_spent")
+        {
+            Say("The shrine is cold. Ashur has given what it will here.");
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>Takes a shrine's blessing (one of those it offered). Takes the hero's turn.</summary>
+    private bool UseShrine(string shrineId, string blessing)
+    {
+        if (Zone is not { } zone || zone.Shrines?.FirstOrDefault(s => s.Id == shrineId) is not { } shrine)
+            return false;
+        var memory = MemoryOf(zone.Id);
+        if (!memory.ShrinesUsed.Add(shrineId))
+            return false;
+        Shrines.Bless(this, blessing);
+        Level.SetFeature(ZoneBuilder.LevelAt(shrine.At), Data.Terrain["zone_shrine_spent"].Index);
+        return true;
     }
 
     /// <summary>The gate whose reach the hero stands in, if any.</summary>
@@ -768,7 +944,7 @@ public sealed class DungeonSession : ITurnHandler
                 Enter(0, StairArrival.None, exit.ToExit);
                 Say("You come back through Gallowmere's gate.");
                 break;
-            case { } to when ProvinceMap.Open.Contains(to):
+            case { } to when Province.IsOpen(to):
                 EnterZone(to, exit.ToExit);
                 break;
             default:
@@ -779,6 +955,17 @@ public sealed class DungeonSession : ITurnHandler
 
     private Foe Enlist(Monster monster)
     {
+        // One of AshenReliquary's, in a zone's pack: its numbers at the pack's level and rank.
+        if (_ashenPlaced.Remove(monster.Id, out var placed))
+        {
+            var (ashen, stats, hp) = AshenFoe.For(placed.Creature, placed.Level, placed.Rank, placed.Pack);
+            monster.MaxHp = monster.Hp = hp;
+            monster.Speed = placed.Creature.Speed;
+            var made = new Foe(monster, stats, placed.Creature.Defenses(), Bridge.NameOf(monster.Race)) { Ashen = ashen };
+            _foes[monster.Id] = made;
+            Scheduler.Add(monster);
+            return made;
+        }
         // Pathfinder's hit points for its level, nudged by Angband's as rolled (CreatureBridge.HitPointsFor).
         var wounded = monster.MaxHp > 0 ? (double)monster.Hp / monster.MaxHp : 1;
         monster.MaxHp = Bridge.HitPointsFor(monster.Race, monster.MaxHp);
@@ -1341,6 +1528,7 @@ public sealed class DungeonSession : ITurnHandler
         Publish(new MonsterDiedEvent(monster.Id, monster.Position, foe.Name, monster.Race.Id));
         Loot.Drop(monster);
         StoryKill(monster);
+        PackSlain(foe);
         GainExperience(Encounter.CreatureXp(foe.Level, Hero.Level) * ExperienceMultiplier);
     }
 

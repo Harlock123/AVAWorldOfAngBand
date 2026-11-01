@@ -1,0 +1,1750 @@
+[
+ {
+  "id": "ashen_fen_zombie",
+  "name": "fen zombie",
+  "glyph": "z",
+  "color": "Slate",
+  "base": "zombie",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 13,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Fen zombie, ten years on."
+ },
+ {
+  "id": "ashen_drowned_dead",
+  "name": "drowned dead",
+  "glyph": "s",
+  "color": "Slate",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 14,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Drowned dead, ten years on."
+ },
+ {
+  "id": "ashen_grave_knight",
+  "name": "grave knight",
+  "glyph": "s",
+  "color": "Slate",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 14,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Grave knight, ten years on."
+ },
+ {
+  "id": "ashen_bone_archer",
+  "name": "bone archer",
+  "glyph": "s",
+  "color": "Slate",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 16,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Bone archer, ten years on."
+ },
+ {
+  "id": "ashen_bog_witch",
+  "name": "bog witch",
+  "glyph": "s",
+  "color": "Purple",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Bog witch, ten years on."
+ },
+ {
+  "id": "ashen_cursed_grave",
+  "name": "cursed grave",
+  "glyph": "G",
+  "color": "Umber",
+  "base": "ghost",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 13,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "IM_POIS",
+   "NEVER_MOVE",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Cursed grave, ten years on."
+ },
+ {
+  "id": "ashen_plague_crawler",
+  "name": "plague crawler",
+  "glyph": "I",
+  "color": "Umber",
+  "base": "insect",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 14,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "bite",
+    "effect": "hurt",
+    "damage": "1d4"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "IM_POIS",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Plague crawler, ten years on."
+ },
+ {
+  "id": "ashen_cultist",
+  "name": "rot cultist",
+  "glyph": "p",
+  "color": "Umber",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Rot cultist, ten years on."
+ },
+ {
+  "id": "ashen_cult_chanter",
+  "name": "rot chanter",
+  "glyph": "p",
+  "color": "Green",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 16,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Rot chanter, ten years on."
+ },
+ {
+  "id": "ashen_drowned_prior",
+  "name": "Prior Aldous Venn",
+  "glyph": "s",
+  "color": "Slate",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD",
+   "UNIQUE"
+  ],
+  "description": "One of AshenReliquary's own: Prior Aldous Venn, ten years on."
+ },
+ {
+  "id": "ashen_mother_sallow",
+  "name": "Mother Sallow",
+  "glyph": "p",
+  "color": "Green",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 17,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE",
+   "UNIQUE"
+  ],
+  "description": "One of AshenReliquary's own: Mother Sallow, ten years on."
+ },
+ {
+  "id": "ashen_wolf",
+  "name": "wolf",
+  "glyph": "C",
+  "color": "Umber",
+  "base": "canine",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 14,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "bite",
+    "effect": "hurt",
+    "damage": "1d8"
+   }
+  ],
+  "flags": [
+   "ANIMAL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Wolf, ten years on."
+ },
+ {
+  "id": "ashen_dire_wolf",
+  "name": "the old wolf",
+  "glyph": "C",
+  "color": "Umber",
+  "base": "canine",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 14,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "bite",
+    "effect": "hurt",
+    "damage": "2d8"
+   }
+  ],
+  "flags": [
+   "ANIMAL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: The old wolf, ten years on."
+ },
+ {
+  "id": "ashen_raised_skeleton",
+  "name": "raised skeleton",
+  "glyph": "s",
+  "color": "Slate",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 14,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Raised skeleton, ten years on."
+ },
+ {
+  "id": "ashen_raised_knight",
+  "name": "bone knight",
+  "glyph": "s",
+  "color": "Slate",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 14,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d10"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Bone knight, ten years on."
+ },
+ {
+  "id": "ashen_legionary",
+  "name": "legionary",
+  "glyph": "s",
+  "color": "Slate",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Legionary, ten years on."
+ },
+ {
+  "id": "ashen_legion_crossbowman",
+  "name": "legion crossbowman",
+  "glyph": "s",
+  "color": "Slate",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 17,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d10"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Legion crossbowman, ten years on."
+ },
+ {
+  "id": "ashen_outlaw_raider",
+  "name": "outlaw raider",
+  "glyph": "p",
+  "color": "Umber",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Outlaw raider, ten years on."
+ },
+ {
+  "id": "ashen_outlaw_bowman",
+  "name": "outlaw bowman",
+  "glyph": "p",
+  "color": "Umber",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 16,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Outlaw bowman, ten years on."
+ },
+ {
+  "id": "ashen_centurion_varro",
+  "name": "Centurion Varro",
+  "glyph": "s",
+  "color": "Slate",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "2d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD",
+   "UNIQUE"
+  ],
+  "description": "One of AshenReliquary's own: Centurion Varro, ten years on."
+ },
+ {
+  "id": "ashen_barrow_dead",
+  "name": "barrow dead",
+  "glyph": "z",
+  "color": "Slate",
+  "base": "zombie",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 14,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Barrow dead, ten years on."
+ },
+ {
+  "id": "ashen_barrow_legionary",
+  "name": "barrow legionary",
+  "glyph": "s",
+  "color": "Slate",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Barrow legionary, ten years on."
+ },
+ {
+  "id": "ashen_grave_hound",
+  "name": "grave hound",
+  "glyph": "C",
+  "color": "Slate",
+  "base": "canine",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 16,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "bite",
+    "effect": "hurt",
+    "damage": "1d8"
+   }
+  ],
+  "flags": [
+   "ANIMAL",
+   "COLD_BLOOD",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Grave hound, ten years on."
+ },
+ {
+  "id": "ashen_barrow_wight",
+  "name": "barrow wight",
+  "glyph": "s",
+  "color": "LightBlue",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 16,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Barrow wight, ten years on."
+ },
+ {
+  "id": "ashen_barrow_knight",
+  "name": "barrow knight",
+  "glyph": "s",
+  "color": "Slate",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d12"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Barrow knight, ten years on."
+ },
+ {
+  "id": "ashen_quartermaster_corvin",
+  "name": "Quartermaster Corvin",
+  "glyph": "s",
+  "color": "Slate",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "2d8"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD",
+   "UNIQUE"
+  ],
+  "description": "One of AshenReliquary's own: Quartermaster Corvin, ten years on."
+ },
+ {
+  "id": "ashen_open_barrow",
+  "name": "open barrow",
+  "glyph": "G",
+  "color": "Umber",
+  "base": "ghost",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 14,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "IM_POIS",
+   "NEVER_MOVE",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Open barrow, ten years on."
+ },
+ {
+  "id": "ashen_ser_hadric",
+  "name": "Ser Hadric the Unburied",
+  "glyph": "p",
+  "color": "Slate",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 17,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d10"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD",
+   "UNIQUE"
+  ],
+  "description": "One of AshenReliquary's own: Ser Hadric the Unburied, ten years on."
+ },
+ {
+  "id": "ashen_legion_standard",
+  "name": "the iron legion's standard",
+  "glyph": "G",
+  "color": "Umber",
+  "base": "ghost",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 18,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "IM_POIS",
+   "NEVER_MOVE",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: The Iron Legion's standard, ten years on."
+ },
+ {
+  "id": "ashen_bone_colossus",
+  "name": "bone colossus",
+  "glyph": "s",
+  "color": "Slate",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 14,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "2d10"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Bone colossus, ten years on."
+ },
+ {
+  "id": "ashen_rime_crawler",
+  "name": "rime crawler",
+  "glyph": "a",
+  "color": "Umber",
+  "base": "ant",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 14,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "bite",
+    "effect": "hurt",
+    "damage": "1d8"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Rime crawler, ten years on."
+ },
+ {
+  "id": "ashen_frost_wraith",
+  "name": "frost wraith",
+  "glyph": "z",
+  "color": "LightBlue",
+  "base": "zombie",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Frost wraith, ten years on."
+ },
+ {
+  "id": "ashen_frost_hexer",
+  "name": "frost hexer",
+  "glyph": "s",
+  "color": "LightBlue",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 16,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Frost hexer, ten years on."
+ },
+ {
+  "id": "ashen_horned_guardian",
+  "name": "horned guardian",
+  "glyph": "H",
+  "color": "Umber",
+  "base": "hybrid",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "butt",
+    "effect": "hurt",
+    "damage": "2d8"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Horned guardian, ten years on."
+ },
+ {
+  "id": "ashen_hollow_stalker",
+  "name": "hollow stalker",
+  "glyph": "C",
+  "color": "Umber",
+  "base": "canine",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "bite",
+    "effect": "hurt",
+    "damage": "1d10"
+   }
+  ],
+  "flags": [
+   "ANIMAL",
+   "INVISIBLE",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Hollow stalker, ten years on."
+ },
+ {
+  "id": "ashen_phantom",
+  "name": "phantom",
+  "glyph": "s",
+  "color": "Violet",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Phantom, ten years on."
+ },
+ {
+  "id": "ashen_whisperer",
+  "name": "whisperer",
+  "glyph": "s",
+  "color": "Violet",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 16,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Whisperer, ten years on."
+ },
+ {
+  "id": "ashen_mirror_cultist",
+  "name": "mirror cultist",
+  "glyph": "p",
+  "color": "Umber",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Mirror cultist, ten years on."
+ },
+ {
+  "id": "ashen_catacomb_dead",
+  "name": "catacomb dead",
+  "glyph": "s",
+  "color": "Slate",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 14,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Catacomb dead, ten years on."
+ },
+ {
+  "id": "ashen_choir_acolyte",
+  "name": "choir acolyte",
+  "glyph": "p",
+  "color": "Violet",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 16,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Choir acolyte, ten years on."
+ },
+ {
+  "id": "ashen_hollow_abbot",
+  "name": "The Hollow Abbot",
+  "glyph": "s",
+  "color": "Purple",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "2d8"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD",
+   "UNIQUE"
+  ],
+  "description": "One of AshenReliquary's own: The Hollow Abbot, ten years on."
+ },
+ {
+  "id": "ashen_choir_agnete",
+  "name": "Sister Agnete",
+  "glyph": "p",
+  "color": "Violet",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 18,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "2d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE",
+   "UNIQUE"
+  ],
+  "description": "One of AshenReliquary's own: Sister Agnete, ten years on."
+ },
+ {
+  "id": "ashen_choir_brigid",
+  "name": "sister brigid",
+  "glyph": "p",
+  "color": "Violet",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 18,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "2d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Sister Brigid, ten years on."
+ },
+ {
+  "id": "ashen_choir_cille",
+  "name": "sister cille",
+  "glyph": "p",
+  "color": "Violet",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 18,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "2d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Sister Cille, ten years on."
+ },
+ {
+  "id": "ashen_choir_reflection",
+  "name": "sister agnete",
+  "glyph": "p",
+  "color": "Violet",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 18,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d8"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Sister Agnete, ten years on."
+ },
+ {
+  "id": "ashen_caddoc_turned",
+  "name": "Brother Caddoc",
+  "glyph": "p",
+  "color": "Umber",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 18,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "2d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE",
+   "UNIQUE"
+  ],
+  "description": "One of AshenReliquary's own: Brother Caddoc, ten years on."
+ },
+ {
+  "id": "ashen_ash_husk",
+  "name": "ash husk",
+  "glyph": "z",
+  "color": "Slate",
+  "base": "zombie",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d10"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Ash husk, ten years on."
+ },
+ {
+  "id": "ashen_cinder_wraith",
+  "name": "cinder wraith",
+  "glyph": "s",
+  "color": "Red",
+  "base": "skeleton",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 16,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "COLD_BLOOD",
+   "EVIL",
+   "IM_POIS",
+   "NO_FEAR",
+   "PROVINCE",
+   "UNDEAD"
+  ],
+  "description": "One of AshenReliquary's own: Cinder wraith, ten years on."
+ },
+ {
+  "id": "ashen_fire_ant",
+  "name": "fire ant",
+  "glyph": "a",
+  "color": "Red",
+  "base": "ant",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 14,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "bite",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Fire ant, ten years on."
+ },
+ {
+  "id": "ashen_tainted_antlion",
+  "name": "tainted antlion",
+  "glyph": "I",
+  "color": "Umber",
+  "base": "insect",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "bite",
+    "effect": "hurt",
+    "damage": "2d8"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Tainted antlion, ten years on."
+ },
+ {
+  "id": "ashen_cinder_drake",
+  "name": "cinder-drake",
+  "glyph": "d",
+  "color": "Red",
+  "base": "dragon",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 16,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "bite",
+    "effect": "hurt",
+    "damage": "2d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Cinder-drake, ten years on."
+ },
+ {
+  "id": "ashen_inquisitor",
+  "name": "inquisitor",
+  "glyph": "p",
+  "color": "Umber",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 15,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Inquisitor, ten years on."
+ },
+ {
+  "id": "ashen_inquisitor_zealot",
+  "name": "zealot",
+  "glyph": "p",
+  "color": "Red",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 16,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Zealot, ten years on."
+ },
+ {
+  "id": "ashen_inquisitor_captain",
+  "name": "inquisitor-captain",
+  "glyph": "p",
+  "color": "Umber",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 16,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "2d8"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Inquisitor-Captain, ten years on."
+ },
+ {
+  "id": "ashen_vorthrax",
+  "name": "Vorthrax the Cinderwyrm",
+  "glyph": "d",
+  "color": "Red",
+  "base": "dragon",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 17,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "bite",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "IM_POIS",
+   "PROVINCE",
+   "UNIQUE"
+  ],
+  "description": "One of AshenReliquary's own: Vorthrax the Cinderwyrm, ten years on."
+ },
+ {
+  "id": "ashen_malachar",
+  "name": "Malachar Vane",
+  "glyph": "p",
+  "color": "Purple",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 18,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "1d6"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "IM_POIS",
+   "PROVINCE",
+   "UNIQUE"
+  ],
+  "description": "One of AshenReliquary's own: Malachar Vane, ten years on."
+ },
+ {
+  "id": "ashen_lantern_knight",
+  "name": "knight of the last lantern",
+  "glyph": "p",
+  "color": "Umber",
+  "base": "person",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 14,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "2d8"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Knight of the Last Lantern, ten years on."
+ },
+ {
+  "id": "ashen_drakeling",
+  "name": "drakeling",
+  "glyph": "d",
+  "color": "Red",
+  "base": "dragon",
+  "depth": 1,
+  "rarity": 1,
+  "speed": 0,
+  "hitPoints": 10,
+  "armour": 10,
+  "sleep": 10,
+  "hearing": 14,
+  "smell": 10,
+  "experience": 0,
+  "blows": [
+   {
+    "method": "bite",
+    "effect": "hurt",
+    "damage": "1d8"
+   }
+  ],
+  "flags": [
+   "EVIL",
+   "PROVINCE"
+  ],
+  "description": "One of AshenReliquary's own: Drakeling, ten years on."
+ }
+]

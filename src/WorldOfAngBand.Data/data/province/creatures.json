@@ -1,0 +1,1679 @@
+[
+ {
+  "id": "fen_zombie",
+  "name": "Fen zombie",
+  "sprite": "zombie",
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 0.8,
+  "moveSpeed": 1.5,
+  "aggroRadius": 7,
+  "attackRange": 1.2,
+  "weaknesses": {
+   "Vitality": 3,
+   "Slashing": 1
+  },
+  "immunities": [
+   "Poison"
+  ],
+  "voice": "zombie",
+  "undead": true
+ },
+ {
+  "id": "drowned_dead",
+  "name": "Drowned dead",
+  "sprite": "skeleton_weak",
+  "damageType": "Slashing",
+  "attacksPerSecond": 1.0,
+  "moveSpeed": 2.4,
+  "aggroRadius": 8,
+  "attackRange": 1.2,
+  "weaknesses": {
+   "Vitality": 3,
+   "Bludgeoning": 2
+  },
+  "resistances": {
+   "Piercing": 2
+  },
+  "immunities": [
+   "Poison"
+  ],
+  "voice": "skeleton",
+  "undead": true
+ },
+ {
+  "id": "grave_knight",
+  "name": "Grave knight",
+  "sprite": "skeleton",
+  "damageType": "Slashing",
+  "attacksPerSecond": 0.9,
+  "moveSpeed": 2.2,
+  "aggroRadius": 8,
+  "attackRange": 1.3,
+  "weaknesses": {
+   "Vitality": 3,
+   "Bludgeoning": 2
+  },
+  "resistances": {
+   "Piercing": 3
+  },
+  "immunities": [
+   "Poison"
+  ],
+  "voice": "skeleton",
+  "undead": true
+ },
+ {
+  "id": "bone_archer",
+  "name": "Bone archer",
+  "sprite": "skeleton_archer",
+  "damageType": "Piercing",
+  "attacksPerSecond": 0.7,
+  "moveSpeed": 2.0,
+  "aggroRadius": 10,
+  "attackRange": 7,
+  "ranged": true,
+  "weaknesses": {
+   "Vitality": 3,
+   "Bludgeoning": 2
+  },
+  "resistances": {
+   "Piercing": 2
+  },
+  "immunities": [
+   "Poison"
+  ],
+  "voice": "skeleton",
+  "undead": true
+ },
+ {
+  "id": "bog_witch",
+  "name": "Bog witch",
+  "sprite": "skeleton_mage",
+  "damageType": "Void",
+  "attacksPerSecond": 0.6,
+  "moveSpeed": 1.8,
+  "aggroRadius": 9,
+  "attackRange": 6,
+  "ranged": true,
+  "weaknesses": {
+   "Vitality": 3
+  },
+  "resistances": {
+   "Void": 3
+  },
+  "immunities": [
+   "Poison"
+  ],
+  "voice": "skeleton",
+  "undead": true
+ },
+ {
+  "id": "cursed_grave",
+  "name": "Cursed grave",
+  "sprite": "cursed_grave",
+  "damageType": "Bludgeoning",
+  "aggroRadius": 7,
+  "attackRange": 0,
+  "stationary": true,
+  "summons": "fen_zombie",
+  "summonEverySeconds": 4,
+  "summonCap": 6,
+  "resistances": {
+   "Piercing": 3,
+   "Slashing": 1
+  },
+  "immunities": [
+   "Poison",
+   "Mental"
+  ],
+  "voice": "grave"
+ },
+ {
+  "id": "plague_crawler",
+  "name": "Plague crawler",
+  "sprite": "antlion_small",
+  "damageType": "Piercing",
+  "attacksPerSecond": 1.0,
+  "moveSpeed": 3.0,
+  "aggroRadius": 8,
+  "attackRange": 1.0,
+  "scale": 1.15,
+  "flanks": true,
+  "poisonOnHit": "1d2",
+  "poisonChance": 0.15,
+  "tint": "#d6c48e",
+  "weaknesses": {
+   "Fire": 2
+  },
+  "immunities": [
+   "Poison"
+  ],
+  "voice": "crawler",
+  "damage": "1d4"
+ },
+ {
+  "id": "cultist",
+  "name": "Rot cultist",
+  "sprite": "avatar",
+  "damageType": "Piercing",
+  "attacksPerSecond": 0.9,
+  "moveSpeed": 2.6,
+  "aggroRadius": 9,
+  "attackRange": 1.2,
+  "flanks": true,
+  "poisonOnHit": "1d2",
+  "poisonChance": 0.15,
+  "look": {
+   "head": "mage_hood_alt2",
+   "chest": "mage_vest_alt2",
+   "hands": "mage_sleeves_alt2",
+   "legs": "mage_skirt_alt2",
+   "feet": "mage_boots_alt2",
+   "main": "dagger"
+  },
+  "resistances": {
+   "Poison": 3
+  },
+  "voice": "cultist"
+ },
+ {
+  "id": "cult_chanter",
+  "name": "Rot chanter",
+  "sprite": "avatar",
+  "damageType": "Poison",
+  "attacksPerSecond": 0.6,
+  "moveSpeed": 2.0,
+  "aggroRadius": 10,
+  "attackRange": 6,
+  "ranged": true,
+  "caster": true,
+  "poisonOnHit": "1d3",
+  "poisonChance": 0.2,
+  "look": {
+   "head": "mage_hood_alt2",
+   "chest": "mage_vest_alt2",
+   "hands": "mage_sleeves_alt2",
+   "legs": "mage_skirt_alt2",
+   "feet": "mage_boots_alt2",
+   "main": "staff"
+  },
+  "resistances": {
+   "Poison": 3
+  },
+  "voice": "cultist"
+ },
+ {
+  "id": "drowned_prior",
+  "name": "Prior Aldous Venn",
+  "sprite": "skeleton",
+  "damageType": "Slashing",
+  "attacksPerSecond": 0.9,
+  "moveSpeed": 2.2,
+  "aggroRadius": 9,
+  "attackRange": 1.4,
+  "scale": 1.15,
+  "tint": "#a9cfc4",
+  "weaknesses": {
+   "Vitality": 3,
+   "Bludgeoning": 2
+  },
+  "resistances": {
+   "Piercing": 3,
+   "Poison": 3
+  },
+  "immunities": [
+   "Poison"
+  ],
+  "voice": "skeleton",
+  "named": true,
+  "rareDrop": true,
+  "hitPointsScale": 0.7,
+  "undead": true
+ },
+ {
+  "id": "mother_sallow",
+  "name": "Mother Sallow",
+  "sprite": "avatar",
+  "damageType": "Poison",
+  "attacksPerSecond": 0.5,
+  "moveSpeed": 1.7,
+  "aggroRadius": 11,
+  "attackRange": 7,
+  "ranged": true,
+  "caster": true,
+  "damage": "1d6",
+  "poisonOnHit": "1d4",
+  "poisonChance": 0.15,
+  "scale": 1.3,
+  "tint": "#b4d27a",
+  "hitPointsScale": 0.16,
+  "weaknesses": {
+   "Fire": 5,
+   "Vitality": 5
+  },
+  "resistances": {
+   "Poison": 10,
+   "Void": 5
+  },
+  "look": {
+   "head": "mage_hood",
+   "chest": "mage_vest",
+   "hands": "mage_sleeves",
+   "legs": "mage_skirt",
+   "feet": "mage_boots",
+   "main": "staff"
+  },
+  "voice": "crone",
+  "boss": {
+   "arenaRadius": 10,
+   "deathFlag": "act1.sallow",
+   "deathLine": "\"You... the vessel. He told us you would come. The Prophet will drink you dry...\"",
+   "journal": {
+    "id": "act1_sallow",
+    "title": "Mother Sallow",
+    "kind": "main",
+    "text": "I killed Mother Sallow in her mire. The Herald of Rot poisoned the wells for a master she called the Prophet, and with her last breath she called me \"the vessel\". The way east to Ironhold lies open."
+   },
+   "phases": [
+    {
+     "below": 1.0,
+     "name": "Mother Sallow",
+     "poolEverySeconds": 7,
+     "poolDamage": "2d4"
+    },
+    {
+     "below": 0.6,
+     "name": "The corpses rise and the mire floods",
+     "poolEverySeconds": 8,
+     "poolDamage": "2d4",
+     "summonEverySeconds": 12,
+     "summons": "fen_zombie",
+     "summonCount": 2,
+     "summonCap": 4,
+     "floods": true,
+     "dryRadius": 5
+    },
+    {
+     "below": 0.25,
+     "name": "She fuses with her cauldron",
+     "poolEverySeconds": 5,
+     "poolDamage": "2d6",
+     "fuses": true,
+     "enrageSeconds": 35,
+     "enrageEverySeconds": 2,
+     "enrageDamage": "4d6"
+    }
+   ]
+  }
+ },
+ {
+  "id": "wolf",
+  "name": "Wolf",
+  "sprite": "wolf",
+  "damageType": "Piercing",
+  "attacksPerSecond": 1.1,
+  "moveSpeed": 3.4,
+  "aggroRadius": 8,
+  "attackRange": 1.1,
+  "damage": "1d8",
+  "voice": "wolf",
+  "scale": 1.1
+ },
+ {
+  "id": "dire_wolf",
+  "name": "The old wolf",
+  "sprite": "wolf",
+  "damageType": "Piercing",
+  "attacksPerSecond": 1.2,
+  "moveSpeed": 3.6,
+  "aggroRadius": 8,
+  "attackRange": 1.3,
+  "damage": "2d8",
+  "voice": "wolf",
+  "scale": 1.5,
+  "tint": "#b8b0a8",
+  "hitPointsScale": 3.0
+ },
+ {
+  "id": "raised_skeleton",
+  "name": "Raised skeleton",
+  "sprite": "skeleton_weak",
+  "damageType": "Slashing",
+  "attacksPerSecond": 1.0,
+  "moveSpeed": 2.8,
+  "aggroRadius": 8,
+  "attackRange": 1.2,
+  "damage": "1d6",
+  "tint": "#c8e4ff",
+  "voice": "skeleton",
+  "undead": true,
+  "immunities": [
+   "Poison"
+  ]
+ },
+ {
+  "id": "raised_knight",
+  "name": "Bone knight",
+  "sprite": "skeleton",
+  "damageType": "Slashing",
+  "attacksPerSecond": 0.9,
+  "moveSpeed": 2.4,
+  "aggroRadius": 8,
+  "attackRange": 1.3,
+  "damage": "1d10",
+  "tint": "#c8e4ff",
+  "voice": "skeleton",
+  "undead": true,
+  "immunities": [
+   "Poison"
+  ],
+  "hitPointsScale": 2.0,
+  "scale": 1.1
+ },
+ {
+  "id": "legionary",
+  "name": "Legionary",
+  "sprite": "skeleton",
+  "damageType": "Slashing",
+  "attacksPerSecond": 0.9,
+  "moveSpeed": 2.3,
+  "aggroRadius": 9,
+  "attackRange": 1.3,
+  "tint": "#d6c3a8",
+  "resistances": {
+   "Piercing": 4
+  },
+  "weaknesses": {
+   "Vitality": 3,
+   "Bludgeoning": 2
+  },
+  "immunities": [
+   "Poison"
+  ],
+  "voice": "skeleton",
+  "undead": true
+ },
+ {
+  "id": "legion_crossbowman",
+  "name": "Legion crossbowman",
+  "sprite": "skeleton_archer",
+  "damageType": "Piercing",
+  "attacksPerSecond": 0.55,
+  "moveSpeed": 2.2,
+  "aggroRadius": 11,
+  "attackRange": 8,
+  "ranged": true,
+  "damage": "1d10",
+  "kites": true,
+  "tint": "#d6c3a8",
+  "resistances": {
+   "Piercing": 2
+  },
+  "weaknesses": {
+   "Vitality": 3,
+   "Bludgeoning": 2
+  },
+  "immunities": [
+   "Poison"
+  ],
+  "voice": "skeleton",
+  "undead": true
+ },
+ {
+  "id": "outlaw_raider",
+  "name": "Outlaw raider",
+  "sprite": "avatar",
+  "damageType": "Slashing",
+  "attacksPerSecond": 1.0,
+  "moveSpeed": 2.8,
+  "aggroRadius": 9,
+  "attackRange": 1.2,
+  "flanks": true,
+  "voice": "cultist",
+  "look": {
+   "head": "leather_hood",
+   "chest": "leather_chest",
+   "hands": "leather_gloves",
+   "legs": "leather_pants",
+   "feet": "leather_boots",
+   "main": "hand_axe"
+  }
+ },
+ {
+  "id": "outlaw_bowman",
+  "name": "Outlaw bowman",
+  "sprite": "avatar",
+  "damageType": "Piercing",
+  "attacksPerSecond": 0.7,
+  "moveSpeed": 2.8,
+  "aggroRadius": 10,
+  "attackRange": 8,
+  "ranged": true,
+  "kites": true,
+  "voice": "cultist",
+  "look": {
+   "head": "leather_hood",
+   "chest": "cloth_shirt",
+   "hands": "leather_gloves",
+   "legs": "cloth_pants",
+   "feet": "leather_boots",
+   "main": "shortbow"
+  }
+ },
+ {
+  "id": "centurion_varro",
+  "name": "Centurion Varro",
+  "sprite": "skeleton_knight_boss",
+  "damageType": "Slashing",
+  "attacksPerSecond": 0.8,
+  "moveSpeed": 2.3,
+  "aggroRadius": 9,
+  "attackRange": 1.5,
+  "damage": "2d6",
+  "hitPointsScale": 1.6,
+  "named": true,
+  "rareDrop": true,
+  "resistances": {
+   "Piercing": 4,
+   "Slashing": 2
+  },
+  "weaknesses": {
+   "Vitality": 3,
+   "Bludgeoning": 2
+  },
+  "immunities": [
+   "Poison"
+  ],
+  "voice": "skeleton",
+  "undead": true
+ },
+ {
+  "id": "barrow_dead",
+  "name": "Barrow dead",
+  "sprite": "zombie",
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 0.8,
+  "moveSpeed": 1.8,
+  "aggroRadius": 8,
+  "attackRange": 1.2,
+  "tint": "#b4bca8",
+  "revives": 7,
+  "weaknesses": {
+   "Vitality": 3,
+   "Slashing": 1
+  },
+  "voice": "zombie",
+  "immunities": [
+   "Poison"
+  ],
+  "undead": true
+ },
+ {
+  "id": "barrow_legionary",
+  "name": "Barrow legionary",
+  "sprite": "skeleton",
+  "damageType": "Slashing",
+  "attacksPerSecond": 0.9,
+  "moveSpeed": 2.3,
+  "aggroRadius": 9,
+  "attackRange": 1.3,
+  "tint": "#b9c4cc",
+  "revives": 8,
+  "weaknesses": {
+   "Vitality": 3,
+   "Bludgeoning": 2
+  },
+  "resistances": {
+   "Piercing": 4
+  },
+  "voice": "skeleton",
+  "immunities": [
+   "Poison"
+  ],
+  "undead": true
+ },
+ {
+  "id": "grave_hound",
+  "name": "Grave hound",
+  "sprite": "wolf",
+  "damageType": "Piercing",
+  "attacksPerSecond": 1.1,
+  "moveSpeed": 3.4,
+  "aggroRadius": 10,
+  "attackRange": 1.1,
+  "damage": "1d8",
+  "flanks": true,
+  "tint": "#9da89c",
+  "revives": 6,
+  "scale": 1.1,
+  "weaknesses": {
+   "Vitality": 3
+  },
+  "voice": "wolf",
+  "immunities": [
+   "Poison"
+  ],
+  "undead": true
+ },
+ {
+  "id": "barrow_wight",
+  "name": "Barrow wight",
+  "sprite": "skeleton_mage",
+  "damageType": "Cold",
+  "attacksPerSecond": 0.6,
+  "moveSpeed": 2.0,
+  "aggroRadius": 10,
+  "attackRange": 7,
+  "ranged": true,
+  "caster": true,
+  "tint": "#b4ccff",
+  "weaknesses": {
+   "Vitality": 3
+  },
+  "resistances": {
+   "Cold": 4
+  },
+  "voice": "skeleton",
+  "immunities": [
+   "Poison"
+  ],
+  "undead": true
+ },
+ {
+  "id": "barrow_knight",
+  "name": "Barrow knight",
+  "sprite": "skeleton",
+  "damageType": "Slashing",
+  "attacksPerSecond": 0.8,
+  "moveSpeed": 2.2,
+  "aggroRadius": 9,
+  "attackRange": 1.4,
+  "damage": "1d12",
+  "tint": "#8e98aa",
+  "revives": 9,
+  "hitPointsScale": 1.3,
+  "scale": 1.1,
+  "weaknesses": {
+   "Vitality": 3,
+   "Bludgeoning": 2
+  },
+  "resistances": {
+   "Piercing": 3,
+   "Slashing": 2
+  },
+  "voice": "skeleton",
+  "immunities": [
+   "Poison"
+  ],
+  "undead": true
+ },
+ {
+  "id": "quartermaster_corvin",
+  "name": "Quartermaster Corvin",
+  "sprite": "skeleton_knight_boss",
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 0.8,
+  "moveSpeed": 2.2,
+  "aggroRadius": 9,
+  "attackRange": 1.5,
+  "damage": "2d8",
+  "tint": "#d0b48c",
+  "hitPointsScale": 1.8,
+  "named": true,
+  "rareDrop": true,
+  "weaknesses": {
+   "Vitality": 3
+  },
+  "resistances": {
+   "Piercing": 4,
+   "Slashing": 2
+  },
+  "voice": "skeleton",
+  "immunities": [
+   "Poison"
+  ],
+  "undead": true
+ },
+ {
+  "id": "open_barrow",
+  "name": "Open barrow",
+  "sprite": "cursed_grave",
+  "damageType": "Bludgeoning",
+  "aggroRadius": 8,
+  "attackRange": 0,
+  "stationary": true,
+  "summons": "barrow_dead",
+  "summonEverySeconds": 6,
+  "summonCap": 6,
+  "tint": "#c8d0bc",
+  "resistances": {
+   "Piercing": 3,
+   "Slashing": 1
+  },
+  "immunities": [
+   "Poison",
+   "Mental"
+  ],
+  "voice": "grave"
+ },
+ {
+  "id": "ser_hadric",
+  "name": "Ser Hadric the Unburied",
+  "sprite": "avatar",
+  "damageType": "Slashing",
+  "attacksPerSecond": 0.75,
+  "moveSpeed": 2.3,
+  "aggroRadius": 11,
+  "attackRange": 1.6,
+  "damage": "1d10",
+  "scale": 1.35,
+  "tint": "#cdd8e6",
+  "hitPointsScale": 0.18,
+  "weaknesses": {
+   "Vitality": 5
+  },
+  "resistances": {
+   "Piercing": 5,
+   "Slashing": 3,
+   "Void": 5
+  },
+  "immunities": [
+   "Poison"
+  ],
+  "undead": true,
+  "voice": "skeleton",
+  "look": {
+   "head": "plate_helm",
+   "chest": "plate_cuirass",
+   "hands": "plate_gauntlets",
+   "legs": "plate_greaves",
+   "feet": "plate_boots",
+   "main": "longsword",
+   "off": "kite_shield"
+  },
+  "boss": {
+   "arenaRadius": 11,
+   "deathFlag": "act2.hadric",
+   "deathLine": "\"Edith... I held the gate. I held it as long as they asked...\"",
+   "journal": {
+    "id": "act2_hadric",
+    "title": "Ser Hadric the Unburied",
+    "kind": "main",
+    "text": "I put down Ser Hadric on Ironhold's broken walls. The Herald of Iron died asking after his wife and the gate he was sworn to hold. The Order sent his legion to guard a road to Mount Cindral; whatever lies at its end, the road north is open now."
+   },
+   "phases": [
+    {
+     "below": 1.0,
+     "name": "Ser Hadric holds the wall",
+     "acShift": 2,
+     "chargeEverySeconds": 9,
+     "chargeDamage": "2d10",
+     "summonEverySeconds": 20,
+     "summons": "barrow_legionary",
+     "summonCount": 1,
+     "summonCap": 2
+    },
+    {
+     "below": 0.65,
+     "name": "The Iron Legion's standard is raised",
+     "acShift": 0,
+     "chargeEverySeconds": 11,
+     "chargeDamage": "2d10",
+     "banner": "legion_standard",
+     "summonEverySeconds": 16,
+     "summons": "barrow_legionary",
+     "summonCount": 2,
+     "summonCap": 3
+    },
+    {
+     "below": 0.3,
+     "name": "He casts off his armour",
+     "acShift": -5,
+     "speedScale": 1.3,
+     "attackRateScale": 1.2,
+     "chargeEverySeconds": 9,
+     "chargeDamage": "2d10",
+     "look": {
+      "hands": "plate_gauntlets",
+      "legs": "plate_greaves",
+      "feet": "plate_boots",
+      "main": "greatsword"
+     }
+    }
+   ]
+  }
+ },
+ {
+  "id": "legion_standard",
+  "name": "The Iron Legion's standard",
+  "sprite": "cursed_grave",
+  "tile": 1293,
+  "damageType": "Bludgeoning",
+  "aggroRadius": 12,
+  "attackRange": 0,
+  "stationary": true,
+  "rallies": true,
+  "hitPointsScale": 0.7,
+  "tint": "#ffc080",
+  "resistances": {
+   "Piercing": 3
+  },
+  "immunities": [
+   "Poison",
+   "Mental"
+  ],
+  "voice": "grave"
+ },
+ {
+  "id": "bone_colossus",
+  "name": "Bone colossus",
+  "sprite": "skeleton",
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 0.8,
+  "moveSpeed": 2.4,
+  "aggroRadius": 8,
+  "attackRange": 1.5,
+  "damage": "2d10",
+  "tint": "#e8dcc4",
+  "voice": "skeleton",
+  "undead": true,
+  "immunities": [
+   "Poison"
+  ],
+  "hitPointsScale": 3.0,
+  "scale": 1.5
+ },
+ {
+  "id": "rime_crawler",
+  "name": "Rime crawler",
+  "sprite": "ice_ant",
+  "damageType": "Piercing",
+  "attacksPerSecond": 1.1,
+  "moveSpeed": 3.0,
+  "aggroRadius": 8,
+  "attackRange": 1.1,
+  "damage": "1d8",
+  "flanks": true,
+  "weaknesses": {
+   "Fire": 3
+  },
+  "resistances": {
+   "Cold": 5
+  },
+  "voice": "crawler"
+ },
+ {
+  "id": "frost_wraith",
+  "name": "Frost wraith",
+  "sprite": "zombie",
+  "damageType": "Cold",
+  "attacksPerSecond": 0.9,
+  "moveSpeed": 2.6,
+  "aggroRadius": 9,
+  "attackRange": 1.2,
+  "tint": "#c4dcff",
+  "alpha": 0.55,
+  "inflicts": {
+   "condition": "Slowed",
+   "value": 1,
+   "seconds": 2,
+   "save": "Fortitude"
+  },
+  "weaknesses": {
+   "Fire": 5,
+   "Vitality": 3
+  },
+  "resistances": {
+   "Cold": 10,
+   "Piercing": 3,
+   "Slashing": 3
+  },
+  "voice": "zombie",
+  "immunities": [
+   "Poison"
+  ],
+  "undead": true
+ },
+ {
+  "id": "frost_hexer",
+  "name": "Frost hexer",
+  "sprite": "skeleton_mage",
+  "damageType": "Cold",
+  "attacksPerSecond": 0.6,
+  "moveSpeed": 2.0,
+  "aggroRadius": 10,
+  "attackRange": 8,
+  "ranged": true,
+  "caster": true,
+  "kites": true,
+  "tint": "#b8d8ff",
+  "inflicts": {
+   "condition": "Slowed",
+   "value": 1,
+   "seconds": 3,
+   "save": "Fortitude"
+  },
+  "weaknesses": {
+   "Fire": 3,
+   "Vitality": 3
+  },
+  "resistances": {
+   "Cold": 10
+  },
+  "voice": "skeleton",
+  "immunities": [
+   "Poison"
+  ],
+  "undead": true
+ },
+ {
+  "id": "horned_guardian",
+  "name": "Horned guardian",
+  "sprite": "minotaur",
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 0.7,
+  "moveSpeed": 2.4,
+  "aggroRadius": 9,
+  "attackRange": 1.5,
+  "damage": "2d8",
+  "hitPointsScale": 1.4,
+  "tint": "#dfe6f0",
+  "resistances": {
+   "Cold": 5
+  },
+  "voice": "zombie"
+ },
+ {
+  "id": "hollow_stalker",
+  "name": "Hollow stalker",
+  "sprite": "wolf",
+  "damageType": "Piercing",
+  "attacksPerSecond": 1.1,
+  "moveSpeed": 3.3,
+  "aggroRadius": 9,
+  "attackRange": 1.1,
+  "damage": "1d10",
+  "flanks": true,
+  "unseen": true,
+  "tint": "#5a5a70",
+  "scale": 1.1,
+  "voice": "wolf"
+ },
+ {
+  "id": "phantom",
+  "name": "Phantom",
+  "sprite": "skeleton",
+  "damageType": "Mental",
+  "attacksPerSecond": 0.9,
+  "moveSpeed": 2.4,
+  "aggroRadius": 9,
+  "attackRange": 1.3,
+  "illusion": true,
+  "tint": "#e0d8ff",
+  "alpha": 0.75,
+  "voice": "skeleton"
+ },
+ {
+  "id": "whisperer",
+  "name": "Whisperer",
+  "sprite": "skeleton_mage",
+  "damageType": "Mental",
+  "attacksPerSecond": 0.55,
+  "moveSpeed": 2.1,
+  "aggroRadius": 10,
+  "attackRange": 8,
+  "ranged": true,
+  "caster": true,
+  "kites": true,
+  "tint": "#d0b8ff",
+  "alpha": 0.7,
+  "inflicts": {
+   "condition": "Frightened",
+   "value": 2,
+   "seconds": 6,
+   "save": "Will"
+  },
+  "weaknesses": {
+   "Vitality": 3
+  },
+  "resistances": {
+   "Mental": 5
+  },
+  "voice": "crone",
+  "immunities": [
+   "Poison"
+  ],
+  "undead": true
+ },
+ {
+  "id": "mirror_cultist",
+  "name": "Mirror cultist",
+  "sprite": "avatar",
+  "damageType": "Slashing",
+  "attacksPerSecond": 1.0,
+  "moveSpeed": 2.6,
+  "aggroRadius": 9,
+  "attackRange": 1.2,
+  "flanks": true,
+  "voice": "cultist",
+  "look": {
+   "head": "mage_hood",
+   "chest": "mage_vest",
+   "hands": "mage_sleeves",
+   "legs": "mage_skirt",
+   "feet": "mage_boots",
+   "main": "shortsword"
+  }
+ },
+ {
+  "id": "catacomb_dead",
+  "name": "Catacomb dead",
+  "sprite": "skeleton_weak",
+  "damageType": "Slashing",
+  "attacksPerSecond": 1.0,
+  "moveSpeed": 2.4,
+  "aggroRadius": 8,
+  "attackRange": 1.2,
+  "tint": "#d8d0c0",
+  "weaknesses": {
+   "Vitality": 3,
+   "Bludgeoning": 2
+  },
+  "resistances": {
+   "Piercing": 3
+  },
+  "voice": "skeleton",
+  "immunities": [
+   "Poison"
+  ],
+  "undead": true
+ },
+ {
+  "id": "choir_acolyte",
+  "name": "Choir acolyte",
+  "sprite": "avatar",
+  "damageType": "Mental",
+  "attacksPerSecond": 0.6,
+  "moveSpeed": 2.3,
+  "aggroRadius": 10,
+  "attackRange": 7,
+  "ranged": true,
+  "caster": true,
+  "kites": true,
+  "dominates": true,
+  "inflicts": {
+   "condition": "Stupefied",
+   "value": 1,
+   "seconds": 6,
+   "save": "Will"
+  },
+  "resistances": {
+   "Mental": 5
+  },
+  "voice": "cultist",
+  "look": {
+   "head": "mage_hood_alt2",
+   "chest": "mage_vest",
+   "hands": "mage_sleeves",
+   "legs": "mage_skirt",
+   "feet": "mage_boots",
+   "main": "wand"
+  }
+ },
+ {
+  "id": "hollow_abbot",
+  "name": "The Hollow Abbot",
+  "sprite": "skeleton_knight_boss",
+  "damageType": "Void",
+  "attacksPerSecond": 0.8,
+  "moveSpeed": 2.2,
+  "aggroRadius": 9,
+  "attackRange": 1.5,
+  "damage": "2d8",
+  "tint": "#cbb8f0",
+  "hitPointsScale": 1.8,
+  "named": true,
+  "rareDrop": true,
+  "dominates": true,
+  "weaknesses": {
+   "Vitality": 3
+  },
+  "resistances": {
+   "Void": 5,
+   "Mental": 5
+  },
+  "voice": "skeleton",
+  "immunities": [
+   "Poison"
+  ],
+  "undead": true
+ },
+ {
+  "id": "choir_agnete",
+  "name": "Sister Agnete",
+  "sprite": "avatar",
+  "damageType": "Mental",
+  "attacksPerSecond": 0.6,
+  "moveSpeed": 1.9,
+  "aggroRadius": 12,
+  "attackRange": 7,
+  "ranged": true,
+  "caster": true,
+  "damage": "2d6",
+  "scale": 1.25,
+  "tint": "#b8ccff",
+  "hitPointsScale": 0.2,
+  "inflicts": {
+   "condition": "Stupefied",
+   "value": 1,
+   "seconds": 6,
+   "save": "Will"
+  },
+  "resistances": {
+   "Mental": 10,
+   "Cold": 5
+  },
+  "voice": "crone",
+  "look": {
+   "head": "mage_hood_alt2",
+   "chest": "mage_vest_alt2",
+   "hands": "mage_sleeves_alt2",
+   "legs": "mage_skirt_alt2",
+   "feet": "mage_boots_alt2",
+   "main": "rod"
+  },
+  "boss": {
+   "arenaRadius": 10,
+   "barName": "The Choir of Whispers",
+   "sisters": [
+    "choir_brigid",
+    "choir_cille"
+   ],
+   "deathFlag": "act3.choir",
+   "deathLine": "\"Ilse? Is it morning? We were singing... I can't remember the words any more...\"",
+   "journal": {
+    "id": "act3_choir",
+    "title": "The Choir of Whispers",
+    "kind": "main",
+    "text": "I silenced the Choir of Whispers in the belfry of Saint Oriel. Agnete, Brigid and Cille were three sisters who went up the Bell Tower to pray when the ash fell; the hymn a lector in grey taught them sang through them for fifteen years. The bells of the Rest can ring again. The Choir sang of a heart in the mountain, the last piece their master needs, and of me, carrying it to him."
+   },
+   "phases": [
+    {
+     "below": 1.0,
+     "name": "The Choir of Whispers",
+     "summonEverySeconds": 18,
+     "summons": "mirror_cultist",
+     "summonCount": 1,
+     "summonCap": 2
+    },
+    {
+     "below": 0.6,
+     "name": "The sisters break into reflections",
+     "withdraw": true,
+     "reflections": 4,
+     "reflectEverySeconds": 12,
+     "reflection": "choir_reflection"
+    },
+    {
+     "below": 0.25,
+     "name": "They sing as one",
+     "songEverySeconds": 6,
+     "songSeconds": 3,
+     "joins": "caddoc_turned",
+     "joinsIf": {
+      "act3.penitent": "banished"
+     }
+    }
+   ]
+  }
+ },
+ {
+  "id": "choir_brigid",
+  "name": "Sister Brigid",
+  "sprite": "avatar",
+  "damageType": "Mental",
+  "attacksPerSecond": 0.55,
+  "moveSpeed": 1.9,
+  "aggroRadius": 12,
+  "attackRange": 7,
+  "ranged": true,
+  "caster": true,
+  "damage": "2d6",
+  "scale": 1.2,
+  "tint": "#c4ecc0",
+  "inflicts": {
+   "condition": "Frightened",
+   "value": 1,
+   "seconds": 4,
+   "save": "Will"
+  },
+  "resistances": {
+   "Mental": 10,
+   "Cold": 5
+  },
+  "voice": "crone",
+  "look": {
+   "head": "mage_hood_alt2",
+   "chest": "mage_vest_alt2",
+   "hands": "mage_sleeves_alt2",
+   "legs": "mage_skirt_alt2",
+   "feet": "mage_boots_alt2",
+   "main": "wand"
+  }
+ },
+ {
+  "id": "choir_cille",
+  "name": "Sister Cille",
+  "sprite": "avatar",
+  "damageType": "Mental",
+  "attacksPerSecond": 0.55,
+  "moveSpeed": 2.0,
+  "aggroRadius": 12,
+  "attackRange": 7,
+  "ranged": true,
+  "caster": true,
+  "damage": "2d6",
+  "scale": 1.15,
+  "tint": "#ffe4a8",
+  "dominates": true,
+  "resistances": {
+   "Mental": 10,
+   "Cold": 5
+  },
+  "voice": "crone",
+  "look": {
+   "head": "mage_hood_alt2",
+   "chest": "mage_vest_alt2",
+   "hands": "mage_sleeves_alt2",
+   "legs": "mage_skirt_alt2",
+   "feet": "mage_boots_alt2",
+   "main": "wand"
+  }
+ },
+ {
+  "id": "choir_reflection",
+  "name": "Sister Agnete",
+  "sprite": "avatar",
+  "damageType": "Mental",
+  "attacksPerSecond": 0.45,
+  "moveSpeed": 1.9,
+  "aggroRadius": 12,
+  "attackRange": 7,
+  "ranged": true,
+  "caster": true,
+  "damage": "1d8",
+  "scale": 1.25,
+  "tint": "#b8ccff",
+  "resistances": {
+   "Mental": 10,
+   "Cold": 5
+  },
+  "voice": "crone",
+  "look": {
+   "head": "mage_hood_alt2",
+   "chest": "mage_vest_alt2",
+   "hands": "mage_sleeves_alt2",
+   "legs": "mage_skirt_alt2",
+   "feet": "mage_boots_alt2",
+   "main": "rod"
+  }
+ },
+ {
+  "id": "caddoc_turned",
+  "name": "Brother Caddoc",
+  "sprite": "avatar",
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 0.8,
+  "moveSpeed": 2.4,
+  "aggroRadius": 12,
+  "attackRange": 1.4,
+  "damage": "2d6",
+  "named": true,
+  "tint": "#d8c8f0",
+  "inflicts": {
+   "condition": "Frightened",
+   "value": 1,
+   "seconds": 4,
+   "save": "Will"
+  },
+  "resistances": {
+   "Mental": 5
+  },
+  "voice": "cultist",
+  "look": {
+   "head": "leather_hood",
+   "chest": "mage_vest",
+   "hands": "cloth_gloves",
+   "legs": "cloth_pants",
+   "feet": "cloth_sandals",
+   "main": "staff"
+  }
+ },
+ {
+  "id": "ash_husk",
+  "name": "Ash husk",
+  "sprite": "zombie",
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 0.9,
+  "moveSpeed": 2.3,
+  "aggroRadius": 9,
+  "attackRange": 1.2,
+  "damage": "1d10",
+  "flanks": true,
+  "tint": "#8e8984",
+  "resistances": {
+   "Fire": 10
+  },
+  "weaknesses": {
+   "Cold": 5,
+   "Vitality": 3
+  },
+  "immunities": [
+   "Poison"
+  ],
+  "voice": "zombie",
+  "undead": true
+ },
+ {
+  "id": "cinder_wraith",
+  "name": "Cinder wraith",
+  "sprite": "skeleton_mage",
+  "damageType": "Fire",
+  "attacksPerSecond": 0.6,
+  "moveSpeed": 2.2,
+  "aggroRadius": 10,
+  "attackRange": 8,
+  "ranged": true,
+  "caster": true,
+  "kites": true,
+  "tint": "#ffb47a",
+  "alpha": 0.85,
+  "resistances": {
+   "Fire": 15
+  },
+  "weaknesses": {
+   "Cold": 5,
+   "Vitality": 3
+  },
+  "immunities": [
+   "Poison"
+  ],
+  "voice": "skeleton",
+  "undead": true
+ },
+ {
+  "id": "fire_ant",
+  "name": "Fire ant",
+  "sprite": "fire_ant",
+  "damageType": "Fire",
+  "attacksPerSecond": 1.2,
+  "moveSpeed": 3.2,
+  "aggroRadius": 8,
+  "attackRange": 1.0,
+  "damage": "1d6",
+  "scale": 0.85,
+  "flanks": true,
+  "resistances": {
+   "Fire": 10
+  },
+  "weaknesses": {
+   "Cold": 5
+  },
+  "voice": "crawler"
+ },
+ {
+  "id": "tainted_antlion",
+  "name": "Tainted antlion",
+  "sprite": "antlion",
+  "damageType": "Piercing",
+  "attacksPerSecond": 0.9,
+  "moveSpeed": 2.8,
+  "aggroRadius": 9,
+  "attackRange": 1.4,
+  "damage": "2d8",
+  "hitPointsScale": 1.3,
+  "tint": "#c4a6c8",
+  "poisonOnHit": "1d6",
+  "poisonChance": 0.2,
+  "resistances": {
+   "Fire": 5,
+   "Taint": 5
+  },
+  "weaknesses": {
+   "Cold": 3
+  },
+  "voice": "crawler"
+ },
+ {
+  "id": "cinder_drake",
+  "name": "Cinder-drake",
+  "sprite": "wyvern_fire",
+  "damageType": "Fire",
+  "attacksPerSecond": 0.7,
+  "moveSpeed": 3.0,
+  "aggroRadius": 10,
+  "attackRange": 4,
+  "ranged": true,
+  "caster": true,
+  "damage": "2d6",
+  "scale": 0.55,
+  "hitPointsScale": 1.2,
+  "resistances": {
+   "Fire": 15
+  },
+  "weaknesses": {
+   "Cold": 5
+  },
+  "voice": "wolf"
+ },
+ {
+  "id": "inquisitor",
+  "name": "Inquisitor",
+  "sprite": "avatar",
+  "damageType": "Slashing",
+  "attacksPerSecond": 1.0,
+  "moveSpeed": 2.6,
+  "aggroRadius": 9,
+  "attackRange": 1.3,
+  "flanks": true,
+  "tint": "#ff8a70",
+  "resistances": {
+   "Mental": 5,
+   "Fire": 5
+  },
+  "voice": "cultist",
+  "look": {
+   "head": "chain_coif",
+   "chest": "plate_cuirass",
+   "hands": "plate_gauntlets",
+   "legs": "plate_greaves",
+   "feet": "plate_boots",
+   "main": "longsword"
+  }
+ },
+ {
+  "id": "inquisitor_zealot",
+  "name": "Zealot",
+  "sprite": "avatar",
+  "damageType": "Fire",
+  "attacksPerSecond": 0.6,
+  "moveSpeed": 2.4,
+  "aggroRadius": 10,
+  "attackRange": 7,
+  "ranged": true,
+  "caster": true,
+  "kites": true,
+  "tint": "#ff9c7a",
+  "inflicts": {
+   "condition": "Frightened",
+   "value": 1,
+   "seconds": 4,
+   "save": "Will"
+  },
+  "resistances": {
+   "Mental": 5,
+   "Fire": 5
+  },
+  "voice": "cultist",
+  "look": {
+   "head": "mage_hood_alt2",
+   "chest": "mage_vest_alt2",
+   "hands": "mage_sleeves_alt2",
+   "legs": "mage_skirt_alt2",
+   "feet": "mage_boots_alt2",
+   "main": "rod"
+  }
+ },
+ {
+  "id": "inquisitor_captain",
+  "name": "Inquisitor-Captain",
+  "sprite": "avatar",
+  "damageType": "Slashing",
+  "attacksPerSecond": 0.8,
+  "moveSpeed": 2.4,
+  "aggroRadius": 10,
+  "attackRange": 1.5,
+  "damage": "2d8",
+  "hitPointsScale": 1.3,
+  "tint": "#ff7058",
+  "resistances": {
+   "Mental": 5,
+   "Fire": 5
+  },
+  "voice": "cultist",
+  "look": {
+   "head": "plate_helm",
+   "chest": "plate_cuirass",
+   "hands": "plate_gauntlets",
+   "legs": "plate_greaves",
+   "feet": "plate_boots",
+   "main": "greatsword"
+  }
+ },
+ {
+  "id": "vorthrax",
+  "name": "Vorthrax the Cinderwyrm",
+  "sprite": "wyvern_fire",
+  "damageType": "Fire",
+  "attacksPerSecond": 0.8,
+  "moveSpeed": 3.0,
+  "aggroRadius": 11,
+  "attackRange": 2.0,
+  "scale": 1.7,
+  "hitPointsScale": 0.18,
+  "named": true,
+  "rareDrop": true,
+  "voice": "wolf",
+  "resistances": {
+   "Fire": 20
+  },
+  "weaknesses": {
+   "Cold": 10
+  },
+  "immunities": [
+   "Poison"
+  ],
+  "boss": {
+   "arenaRadius": 12,
+   "deathFlag": "act4.vorthrax",
+   "deathLine": "Vorthrax falls across the gate he guarded, and the fire in him goes out like a forge at night. The Ember Gate stands open.",
+   "journal": {
+    "id": "act4_vorthrax",
+    "title": "The Cinderwyrm",
+    "kind": "main",
+    "text": "Vorthrax the Cinderwyrm, the fourth Herald, is dead on the floor of his cavern above the Ember Gate. The gate stands open, and the stair goes down into the Reliquary, where the Order kept Ashur's bones and where Malachar Vane went before me."
+   },
+   "phases": [
+    {
+     "below": 1.0,
+     "name": "Vorthrax the Cinderwyrm",
+     "breathEverySeconds": 8,
+     "breathArc": 60,
+     "breathRange": 7,
+     "breathDamage": "7d6"
+    },
+    {
+     "below": 0.6,
+     "name": "He takes to the air",
+     "flies": true,
+     "swoopEverySeconds": 7,
+     "swoopSeconds": 4.5,
+     "poolEverySeconds": 4,
+     "poolCount": 3,
+     "poolRadius": 1.4,
+     "poolSeconds": 5,
+     "poolDamage": "3d6",
+     "poolType": "Fire",
+     "summonEverySeconds": 25,
+     "summons": "cinder_drake",
+     "summonCount": 1,
+     "summonCap": 2
+    },
+    {
+     "below": 0.25,
+     "name": "He lands on the burning rock",
+     "breathEverySeconds": 6,
+     "breathArc": 70,
+     "breathRange": 7,
+     "breathDamage": "7d6",
+     "crumbleEverySeconds": 9,
+     "crumbleWarning": 3,
+     "crumbleDamage": "6d6",
+     "attackRateScale": 1.2
+    }
+   ]
+  }
+ },
+ {
+  "id": "malachar",
+  "name": "Malachar Vane",
+  "sprite": "avatar",
+  "damageType": "Void",
+  "attacksPerSecond": 0.55,
+  "moveSpeed": 2.4,
+  "aggroRadius": 12,
+  "attackRange": 7,
+  "ranged": true,
+  "caster": true,
+  "scale": 1.15,
+  "tint": "#f0d8c8",
+  "hitPointsScale": 0.16,
+  "named": true,
+  "rareDrop": true,
+  "voice": "cultist",
+  "inflicts": {
+   "condition": "Frightened",
+   "value": 1,
+   "seconds": 4,
+   "save": "Will"
+  },
+  "resistances": {
+   "Fire": 10,
+   "Void": 10,
+   "Mental": 10,
+   "Taint": 20
+  },
+  "immunities": [
+   "Poison"
+  ],
+  "look": {
+   "head": "mage_hood",
+   "chest": "mage_vest",
+   "hands": "mage_sleeves",
+   "legs": "mage_skirt",
+   "feet": "mage_boots",
+   "main": "greatstaff"
+  },
+  "boss": {
+   "arenaRadius": 12,
+   "barName": "Malachar Vane, the Ashen Prophet",
+   "deathFlag": "act5.malachar",
+   "court": true,
+   "allies": "lantern_knight",
+   "alliesCount": 2,
+   "alliesIf": {
+    "act4.beacon": "lit"
+   },
+   "deathLine": "Malachar Vane goes down on his knees before the Throne he built, and the god's bones behind him go dark.",
+   "journal": {
+    "id": "act5_throne",
+    "title": "The Cinder Throne",
+    "kind": "main",
+    "text": "Under the Reliquary, in a cavern of black glass, Malachar Vane was building Ashur a body out of his own bones, and waiting for the last piece: the Ember Heart in my chest. Malachar is down. The Throne stands empty."
+   },
+   "phases": [
+    {
+     "below": 1.0,
+     "name": "The Prophet's Court",
+     "summonEverySeconds": 18,
+     "summons": "inquisitor",
+     "summonCount": 2,
+     "summonCap": 4,
+     "poolEverySeconds": 8,
+     "poolType": "Taint",
+     "poolDamage": "3d6",
+     "poolRadius": 1.6,
+     "poolSeconds": 8,
+     "callsEchoEverySeconds": 8
+    },
+    {
+     "below": 0.6,
+     "name": "The Burning God",
+     "summonEverySeconds": 30,
+     "summons": "inquisitor",
+     "summonCount": 1,
+     "summonCap": 2,
+     "callsEchoEverySeconds": 12,
+     "taintRise": 2.5,
+     "taintRiseGrowth": 0.1,
+     "taintRiseMax": 8,
+     "whispersDamage": "6d6",
+     "lights": 3,
+     "lightRadius": 1.6,
+     "lightSpeed": 0.7,
+     "lightCleanse": 30,
+     "novaEverySeconds": 7,
+     "novaSpeed": 3.5,
+     "novaDamage": "6d6",
+     "damageTakenScale": 0.9,
+     "strikeTypes": [
+      "Fire",
+      "Void"
+     ]
+    },
+    {
+     "below": 0.25,
+     "name": "The Heart's Pull",
+     "fuses": true,
+     "pull": true,
+     "pullCheckSeconds": 1.5,
+     "pullEverySeconds": 12,
+     "pullStaggerSeconds": 4,
+     "pullPressCap": 10
+    }
+   ],
+   "parley": "malachar_parley",
+   "parleyIf": {
+    "daughter.toy": "carried",
+    "act5.parley": ""
+   }
+  }
+ },
+ {
+  "id": "lantern_knight",
+  "name": "Knight of the Last Lantern",
+  "sprite": "avatar",
+  "damageType": "Slashing",
+  "attacksPerSecond": 1.0,
+  "moveSpeed": 3.0,
+  "aggroRadius": 8,
+  "attackRange": 1.3,
+  "damage": "2d8",
+  "voice": "cultist",
+  "look": {
+   "head": "plate_helm",
+   "chest": "plate_cuirass",
+   "hands": "plate_gauntlets",
+   "legs": "plate_greaves",
+   "feet": "plate_boots",
+   "main": "longsword",
+   "off": "kite_shield"
+  }
+ },
+ {
+  "id": "drakeling",
+  "name": "Drakeling",
+  "sprite": "wyvern_fire",
+  "damageType": "Fire",
+  "attacksPerSecond": 1.0,
+  "moveSpeed": 3.4,
+  "aggroRadius": 8,
+  "attackRange": 1.3,
+  "damage": "1d8",
+  "scale": 0.32,
+  "resistances": {
+   "Fire": 10
+  },
+  "voice": "wolf"
+ }
+]

@@ -187,6 +187,10 @@ public sealed class MainWindow : Window
                 Stop();
                 Dispatcher.UIThread.Post(() => OpenStory(story));
                 break;
+            case ShrineEvent shrine:
+                Stop();
+                Dispatcher.UIThread.Post(() => OpenShrine(shrine));
+                break;
             case LevelUpEvent when Session.Hero.Character.PendingLevels.Count > 0 && ShowDialogs:
                 Stop();
                 Dispatcher.UIThread.Post(() => OpenLevelUp());
@@ -380,6 +384,15 @@ public sealed class MainWindow : Window
     public InventoryWindow OpenInventory()
     {
         var window = new InventoryWindow(Session, Do);
+        if (ShowDialogs)
+            _ = window.ShowDialog(this);
+        return window;
+    }
+
+    /// <summary>A shrine in the province.</summary>
+    public ShrineWindow OpenShrine(ShrineEvent shrine)
+    {
+        var window = new ShrineWindow(shrine, Do);
         if (ShowDialogs)
             _ = window.ShowDialog(this);
         return window;

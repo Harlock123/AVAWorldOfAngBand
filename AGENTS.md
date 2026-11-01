@@ -67,7 +67,11 @@ The code is **copied** from the two parent games, not linked, so neither has to 
     scripts.
   - `Province/`: AshenReliquary's zones above the shaft (the spec's section 7.4). `ProvinceMap` loads
     `data/province/zones/*.json`; `ZoneBuilder` makes a zone a level and its dressing, as AshenReliquary's TileMap does
-    (its ground table, per-cell hash, shores and lava). The session travels through gates (`EnterZone`, `Wayfare`).
+    (its ground table, per-cell hash, shores and lava). The session travels through gates (`EnterZone`, `Wayfare`),
+    places AshenReliquary's packs (`PlacePacks`), caches and shrines (`PlacePlaces`, `Visit`), and keeps each zone's
+    `ZoneMemory`. `AshenCreatures` gives AshenReliquary's creatures their numbers by pack level and rank; their races
+    (`data/province/monsters.json`) and bridge entries are made by `tools/province/make_province_monsters.py` from
+    `data/province/creatures.json` (edit the script, not its output). `Fight.AshenStrike` is how they hit and shoot.
   - `Flare/`: AshenReliquary's parsers for Flare's tileset and animation files.
   - `Setting`: names in the Ashen setting, from `data/setting/ashen_names.json` and each mod's own (`Setting.UseMods`,
     set by the session from the data's mod folders), and the words random artifacts are named from.
@@ -123,7 +127,8 @@ The code is **copied** from the two parent games, not linked, so neither has to 
   by hand; add to them without rewriting the rest (a script's `json.dump` reflows the whole file).
 - **AshenReliquary's zones stay as it wrote them.** `data/province/zones/` is a copy of AshenReliquary's
   `Content/Data/zones` (its mapgen scripts make them; don't hand-edit). What this game changes goes beside them.
-  `ProvinceTests` checks every cell is in its legend and every tile is in its tileset.
+  `ProvinceTests` checks every cell is in its legend, every tile is in its tileset, every zone can be reached
+  from Gallowmere, and no Ashen creature turns up in the dungeon.
 - **Mods layer, never replace.** A mod's `bridge/*.json` and `ashen_names.json` go over the shipped ones by id
   (`CreatureBridge.Load`, `ItemBridge.Load`, `Setting`), as its data files do (`DataLoader`).
 - **Warnings are errors** (`TreatWarningsAsErrors`), nullable reference types are on, and every change comes with

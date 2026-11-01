@@ -169,6 +169,7 @@ public sealed class IsoView : Control
             Tint.Quartz => SKColorFilter.CreateLighting(new SKColor(205, 212, 232), new SKColor(22, 24, 34)),
             Tint.Lava => SKColorFilter.CreateLighting(new SKColor(255, 130, 70), new SKColor(110, 34, 0)),
             Tint.Bog => SKColorFilter.CreateLighting(new SKColor(120, 132, 92), new SKColor(6, 10, 4)),
+            Tint.Spent => SKColorFilter.CreateLighting(new SKColor(120, 115, 110), SKColors.Black),
             _ => null,
         };
         // What is only remembered is drawn dim and cold, as Angband draws remembered squares darker.

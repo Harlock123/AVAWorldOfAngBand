@@ -1,0 +1,441 @@
+{
+ "_comment": "Made by tools/province/make_province_monsters.py from creatures.json; edit the script, not this file.",
+ "monsters": [
+  {
+   "id": "ashen_fen_zombie",
+   "sprite": "zombie"
+  },
+  {
+   "id": "ashen_drowned_dead",
+   "sprite": "skeleton_weak"
+  },
+  {
+   "id": "ashen_grave_knight",
+   "sprite": "skeleton"
+  },
+  {
+   "id": "ashen_bone_archer",
+   "sprite": "skeleton_archer"
+  },
+  {
+   "id": "ashen_bog_witch",
+   "sprite": "skeleton_mage"
+  },
+  {
+   "id": "ashen_cursed_grave",
+   "sprite": "cursed_grave"
+  },
+  {
+   "id": "ashen_plague_crawler",
+   "sprite": "antlion_small",
+   "scale": 1.15,
+   "tint": true
+  },
+  {
+   "id": "ashen_cultist",
+   "sprite": "doll",
+   "doll": {
+    "head": "mage_hood_alt2",
+    "chest": "mage_vest_alt2",
+    "hands": "mage_sleeves_alt2",
+    "legs": "mage_skirt_alt2",
+    "feet": "mage_boots_alt2",
+    "main": "dagger"
+   }
+  },
+  {
+   "id": "ashen_cult_chanter",
+   "sprite": "doll",
+   "doll": {
+    "head": "mage_hood_alt2",
+    "chest": "mage_vest_alt2",
+    "hands": "mage_sleeves_alt2",
+    "legs": "mage_skirt_alt2",
+    "feet": "mage_boots_alt2",
+    "main": "staff"
+   }
+  },
+  {
+   "id": "ashen_drowned_prior",
+   "sprite": "skeleton",
+   "scale": 1.15,
+   "tint": true
+  },
+  {
+   "id": "ashen_mother_sallow",
+   "sprite": "doll",
+   "doll": {
+    "head": "mage_hood",
+    "chest": "mage_vest",
+    "hands": "mage_sleeves",
+    "legs": "mage_skirt",
+    "feet": "mage_boots",
+    "main": "staff"
+   },
+   "scale": 1.3,
+   "tint": true
+  },
+  {
+   "id": "ashen_wolf",
+   "sprite": "wolf",
+   "scale": 1.1
+  },
+  {
+   "id": "ashen_dire_wolf",
+   "sprite": "wolf",
+   "scale": 1.5,
+   "tint": true
+  },
+  {
+   "id": "ashen_raised_skeleton",
+   "sprite": "skeleton_weak",
+   "tint": true
+  },
+  {
+   "id": "ashen_raised_knight",
+   "sprite": "skeleton",
+   "scale": 1.1,
+   "tint": true
+  },
+  {
+   "id": "ashen_legionary",
+   "sprite": "skeleton",
+   "tint": true
+  },
+  {
+   "id": "ashen_legion_crossbowman",
+   "sprite": "skeleton_archer",
+   "tint": true
+  },
+  {
+   "id": "ashen_outlaw_raider",
+   "sprite": "doll",
+   "doll": {
+    "head": "leather_hood",
+    "chest": "leather_chest",
+    "hands": "leather_gloves",
+    "legs": "leather_pants",
+    "feet": "leather_boots",
+    "main": "hand_axe"
+   }
+  },
+  {
+   "id": "ashen_outlaw_bowman",
+   "sprite": "doll",
+   "doll": {
+    "head": "leather_hood",
+    "chest": "cloth_shirt",
+    "hands": "leather_gloves",
+    "legs": "cloth_pants",
+    "feet": "leather_boots",
+    "main": "shortbow"
+   }
+  },
+  {
+   "id": "ashen_centurion_varro",
+   "sprite": "skeleton_knight_boss"
+  },
+  {
+   "id": "ashen_barrow_dead",
+   "sprite": "zombie",
+   "tint": true
+  },
+  {
+   "id": "ashen_barrow_legionary",
+   "sprite": "skeleton",
+   "tint": true
+  },
+  {
+   "id": "ashen_grave_hound",
+   "sprite": "wolf",
+   "scale": 1.1,
+   "tint": true
+  },
+  {
+   "id": "ashen_barrow_wight",
+   "sprite": "skeleton_mage",
+   "tint": true
+  },
+  {
+   "id": "ashen_barrow_knight",
+   "sprite": "skeleton",
+   "scale": 1.1,
+   "tint": true
+  },
+  {
+   "id": "ashen_quartermaster_corvin",
+   "sprite": "skeleton_knight_boss",
+   "tint": true
+  },
+  {
+   "id": "ashen_open_barrow",
+   "sprite": "cursed_grave",
+   "tint": true
+  },
+  {
+   "id": "ashen_ser_hadric",
+   "sprite": "doll",
+   "doll": {
+    "head": "plate_helm",
+    "chest": "plate_cuirass",
+    "hands": "plate_gauntlets",
+    "legs": "plate_greaves",
+    "feet": "plate_boots",
+    "main": "longsword",
+    "off": "kite_shield"
+   },
+   "scale": 1.35,
+   "tint": true
+  },
+  {
+   "id": "ashen_legion_standard",
+   "sprite": "cursed_grave",
+   "tint": true
+  },
+  {
+   "id": "ashen_bone_colossus",
+   "sprite": "skeleton",
+   "scale": 1.5,
+   "tint": true
+  },
+  {
+   "id": "ashen_rime_crawler",
+   "sprite": "ice_ant"
+  },
+  {
+   "id": "ashen_frost_wraith",
+   "sprite": "zombie",
+   "tint": true
+  },
+  {
+   "id": "ashen_frost_hexer",
+   "sprite": "skeleton_mage",
+   "tint": true
+  },
+  {
+   "id": "ashen_horned_guardian",
+   "sprite": "minotaur",
+   "tint": true
+  },
+  {
+   "id": "ashen_hollow_stalker",
+   "sprite": "wolf",
+   "scale": 1.1,
+   "tint": true
+  },
+  {
+   "id": "ashen_phantom",
+   "sprite": "skeleton",
+   "tint": true
+  },
+  {
+   "id": "ashen_whisperer",
+   "sprite": "skeleton_mage",
+   "tint": true
+  },
+  {
+   "id": "ashen_mirror_cultist",
+   "sprite": "doll",
+   "doll": {
+    "head": "mage_hood",
+    "chest": "mage_vest",
+    "hands": "mage_sleeves",
+    "legs": "mage_skirt",
+    "feet": "mage_boots",
+    "main": "shortsword"
+   }
+  },
+  {
+   "id": "ashen_catacomb_dead",
+   "sprite": "skeleton_weak",
+   "tint": true
+  },
+  {
+   "id": "ashen_choir_acolyte",
+   "sprite": "doll",
+   "doll": {
+    "head": "mage_hood_alt2",
+    "chest": "mage_vest",
+    "hands": "mage_sleeves",
+    "legs": "mage_skirt",
+    "feet": "mage_boots",
+    "main": "wand"
+   }
+  },
+  {
+   "id": "ashen_hollow_abbot",
+   "sprite": "skeleton_knight_boss",
+   "tint": true
+  },
+  {
+   "id": "ashen_choir_agnete",
+   "sprite": "doll",
+   "doll": {
+    "head": "mage_hood_alt2",
+    "chest": "mage_vest_alt2",
+    "hands": "mage_sleeves_alt2",
+    "legs": "mage_skirt_alt2",
+    "feet": "mage_boots_alt2",
+    "main": "rod"
+   },
+   "scale": 1.25,
+   "tint": true
+  },
+  {
+   "id": "ashen_choir_brigid",
+   "sprite": "doll",
+   "doll": {
+    "head": "mage_hood_alt2",
+    "chest": "mage_vest_alt2",
+    "hands": "mage_sleeves_alt2",
+    "legs": "mage_skirt_alt2",
+    "feet": "mage_boots_alt2",
+    "main": "wand"
+   },
+   "scale": 1.2,
+   "tint": true
+  },
+  {
+   "id": "ashen_choir_cille",
+   "sprite": "doll",
+   "doll": {
+    "head": "mage_hood_alt2",
+    "chest": "mage_vest_alt2",
+    "hands": "mage_sleeves_alt2",
+    "legs": "mage_skirt_alt2",
+    "feet": "mage_boots_alt2",
+    "main": "wand"
+   },
+   "scale": 1.15,
+   "tint": true
+  },
+  {
+   "id": "ashen_choir_reflection",
+   "sprite": "doll",
+   "doll": {
+    "head": "mage_hood_alt2",
+    "chest": "mage_vest_alt2",
+    "hands": "mage_sleeves_alt2",
+    "legs": "mage_skirt_alt2",
+    "feet": "mage_boots_alt2",
+    "main": "rod"
+   },
+   "scale": 1.25,
+   "tint": true
+  },
+  {
+   "id": "ashen_caddoc_turned",
+   "sprite": "doll",
+   "doll": {
+    "head": "leather_hood",
+    "chest": "mage_vest",
+    "hands": "cloth_gloves",
+    "legs": "cloth_pants",
+    "feet": "cloth_sandals",
+    "main": "staff"
+   },
+   "tint": true
+  },
+  {
+   "id": "ashen_ash_husk",
+   "sprite": "zombie",
+   "tint": true
+  },
+  {
+   "id": "ashen_cinder_wraith",
+   "sprite": "skeleton_mage",
+   "tint": true
+  },
+  {
+   "id": "ashen_fire_ant",
+   "sprite": "fire_ant",
+   "scale": 0.85
+  },
+  {
+   "id": "ashen_tainted_antlion",
+   "sprite": "antlion",
+   "tint": true
+  },
+  {
+   "id": "ashen_cinder_drake",
+   "sprite": "wyvern_fire",
+   "scale": 0.55
+  },
+  {
+   "id": "ashen_inquisitor",
+   "sprite": "doll",
+   "doll": {
+    "head": "chain_coif",
+    "chest": "plate_cuirass",
+    "hands": "plate_gauntlets",
+    "legs": "plate_greaves",
+    "feet": "plate_boots",
+    "main": "longsword"
+   },
+   "tint": true
+  },
+  {
+   "id": "ashen_inquisitor_zealot",
+   "sprite": "doll",
+   "doll": {
+    "head": "mage_hood_alt2",
+    "chest": "mage_vest_alt2",
+    "hands": "mage_sleeves_alt2",
+    "legs": "mage_skirt_alt2",
+    "feet": "mage_boots_alt2",
+    "main": "rod"
+   },
+   "tint": true
+  },
+  {
+   "id": "ashen_inquisitor_captain",
+   "sprite": "doll",
+   "doll": {
+    "head": "plate_helm",
+    "chest": "plate_cuirass",
+    "hands": "plate_gauntlets",
+    "legs": "plate_greaves",
+    "feet": "plate_boots",
+    "main": "greatsword"
+   },
+   "tint": true
+  },
+  {
+   "id": "ashen_vorthrax",
+   "sprite": "wyvern_fire",
+   "scale": 1.7
+  },
+  {
+   "id": "ashen_malachar",
+   "sprite": "doll",
+   "doll": {
+    "head": "mage_hood",
+    "chest": "mage_vest",
+    "hands": "mage_sleeves",
+    "legs": "mage_skirt",
+    "feet": "mage_boots",
+    "main": "greatstaff"
+   },
+   "scale": 1.15,
+   "tint": true
+  },
+  {
+   "id": "ashen_lantern_knight",
+   "sprite": "doll",
+   "doll": {
+    "head": "plate_helm",
+    "chest": "plate_cuirass",
+    "hands": "plate_gauntlets",
+    "legs": "plate_greaves",
+    "feet": "plate_boots",
+    "main": "longsword",
+    "off": "kite_shield"
+   }
+  },
+  {
+   "id": "ashen_drakeling",
+   "sprite": "wyvern_fire",
+   "scale": 0.32
+  }
+ ]
+}

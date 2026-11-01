@@ -3,5 +3,8 @@
   {"id": "zone_obstacle", "name": "obstacle", "description": "Something in the way, low enough to see over: a cart, a fence, a gravestone.", "glyph": ":", "color": "Umber", "priority": 9, "flags": ["Los", "Project", "Permanent", "NoScent", "NoFlow"]},
   {"id": "zone_water", "name": "deep water", "description": "Black water, too deep to wade.", "glyph": "~", "color": "Blue", "priority": 9, "flags": ["Los", "Project", "Permanent", "NoScent", "NoFlow"]},
   {"id": "zone_lava", "name": "lava", "description": "The mountain's blood, running.", "glyph": "~", "color": "Red", "priority": 9, "flags": ["Los", "Project", "Permanent", "Fiery", "Bright", "NoScent", "NoFlow"]},
-  {"id": "zone_gate", "name": "way on", "description": "The road goes on from here.", "glyph": ">", "color": "Yellow", "priority": 25, "flags": ["Los", "Project", "Passable", "Permanent", "Interesting", "Easy"]}
+  {"id": "zone_gate", "name": "way on", "description": "The road goes on from here.", "glyph": ">", "color": "Yellow", "priority": 25, "flags": ["Los", "Project", "Passable", "Permanent", "Interesting", "Easy"]},
+  {"id": "zone_cache", "name": "cache", "description": "A chest someone hid out here, and never came back for.", "glyph": "~", "color": "Gold", "priority": 24, "flags": ["Los", "Project", "Permanent", "Interesting", "NoScent", "NoFlow"]},
+  {"id": "zone_shrine", "name": "shrine", "description": "One of Ashur's old waystones. It is warm.", "glyph": "_", "color": "LightBlue", "priority": 24, "flags": ["Los", "Project", "Permanent", "Interesting", "Bright", "NoScent", "NoFlow"]},
+  {"id": "zone_shrine_spent", "name": "cold shrine", "description": "One of Ashur's old waystones. It has given what it will.", "glyph": "_", "color": "Slate", "priority": 24, "flags": ["Los", "Project", "Permanent", "Interesting", "NoScent", "NoFlow"]}
 ]

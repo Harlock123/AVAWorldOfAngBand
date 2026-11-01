@@ -53,7 +53,7 @@ public sealed class ChallengeBoard(string path)
         var fate = game.Won ? "put out the Cinder" : game.Death is { } death ? $"killed by {death.Killer}" : "gave up";
         var entry = new ChallengeTry(challenge.Kind, challenge.Stamp, all.Count(t => t.Kind == challenge.Kind && t.Stamp == challenge.Stamp) + 1,
             c.Name, c.Class.Name, c.Level, game.Hero.MaxDepth, ChallengeTry.PointsFor(game.Hero.MaxDepth, c.Level, game.Won), fate, game.Won,
-            DateTimeOffset.UtcNow, game.Data.ModDirectories.Any(d => d != Data.DataLoader.SettingDirectory));
+            DateTimeOffset.UtcNow, game.Data.ModDirectories.Any(d => d != Data.DataLoader.SettingDirectory && d != Data.DataLoader.ProvinceDirectory));
         all.Add(entry);
         try
         {

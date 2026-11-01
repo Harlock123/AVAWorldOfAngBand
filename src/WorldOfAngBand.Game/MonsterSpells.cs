@@ -39,6 +39,18 @@ internal sealed class MonsterSpells(DungeonSession session)
     {
         var monster = foe.Monster;
         var race = monster.Race;
+        // One of AshenReliquary's archers or casters: a shot or a spell, when the hero is in its range and in sight.
+        if (foe.Ashen is { Creature.Ranged: true } ashen && foe.Conditions.CanAct && monster.Confused == 0)
+        {
+            var distance = monster.Position.DistanceTo(Hero.Position);
+            if (distance > 1.5 && distance <= ashen.Creature.AttackRange + 0.5 && session.Rng.OneIn(2)
+                && ProjectionPath.Projectable(session.Level, monster.Position, Hero.Position, (int)Math.Ceiling(ashen.Creature.AttackRange) + 1))
+            {
+                session.Fight.AshenStrike(foe, ranged: true);
+                return true;
+            }
+            return false;
+        }
         if (race.Spells.Count == 0 || monster.Confused > 0 || !foe.Conditions.CanAct)
             return false;
         if (!ProjectionPath.Projectable(session.Level, monster.Position, Hero.Position, session.Data.Constants.MaxSight))

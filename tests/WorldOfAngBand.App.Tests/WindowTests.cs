@@ -64,6 +64,12 @@ public class WindowTests
         return frame;
     }
 
+    private static WriteableBitmap CaptureFrame(MainWindow window)
+    {
+        Pump();
+        return window.CaptureRenderedFrame() ?? throw new InvalidOperationException("No frame was drawn.");
+    }
+
     private static string FindRepoRoot()
     {
         var dir = AppContext.BaseDirectory;
@@ -397,6 +403,22 @@ public class WindowTests
             Pump();
             var frame = Capture(window, shot);
             Assert.True(DrawnShare(frame) > 0.4);
+        }
+        window.Close();
+    }
+
+    [AvaloniaFact]
+    public void Every_kind_of_zone_draws_in_its_own_tileset()
+    {
+        var window = Open(1402);
+        var game = window.Session;
+        foreach (var zone in new[] { "drowned_chapel", "frostbitten_pass", "lava_rivers", "ironhold", "iron_march" })
+        {
+            game.EnterZone(zone, null);
+            Pump();
+            // Two of them are the README's pictures; the rest are drawn and checked.
+            var frame = zone is "drowned_chapel" or "frostbitten_pass" ? Capture(window, $"WorldOfAngBand-zone-{zone}") : CaptureFrame(window);
+            Assert.True(DrawnShare(frame) > 0.15, zone);
         }
         window.Close();
     }

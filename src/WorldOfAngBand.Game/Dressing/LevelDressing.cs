@@ -16,6 +16,8 @@ public enum Tint
     Lava,
     /// <summary>Bog: grass darkened and greened, AshenReliquary's fen ground.</summary>
     Bog,
+    /// <summary>Something used up: an opened cache, greyed.</summary>
+    Spent,
 }
 
 /// <summary>One tile of Flare art: which tileset, which tile, and how it is drawn.</summary>
@@ -48,6 +50,13 @@ public sealed class DressedLevel
     public Piece? Ground(Loc p) => Level.InBounds(p) ? _ground[p.Y * Level.Width + p.X] : null;
 
     public IReadOnlyList<Piece> Objects(Loc p) => Level.InBounds(p) ? _objects[p.Y * Level.Width + p.X] ?? [] : [];
+
+    /// <summary>Changes what stands on a square (a cache opened).</summary>
+    internal void SetObjects(Loc p, Piece[] pieces)
+    {
+        if (Level.InBounds(p))
+            _objects[p.Y * Level.Width + p.X] = pieces;
+    }
 }
 
 /// <summary>
