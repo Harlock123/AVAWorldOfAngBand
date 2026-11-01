@@ -43,7 +43,8 @@ left of a god.
 
 ### Design pillars
 
-1. **Every descent is new.** Only the town and the story levels are hand-made. The rest is Angband's generator.
+1. **Every descent is new.** Below Gallowmere only the story levels are hand-made; the rest is Angband's generator.
+   Above it, from M7, lies AshenReliquary's own hand-made province (section 7.4).
 2. **One life.** Death is final, so every risk is a choice. The game makes the odds visible so that death is the
    player's fault, never the interface's.
 3. **The build is the long game.** You choose feats and runes over twenty levels and five mythic tiers.
@@ -428,6 +429,78 @@ treasure.
 The choices are world flags, which the epilogue reads. **Malachar's daughter Wren**, grown up, is the Lantern
 Archive's keeper. She knows the most about the Pyre and gives the story quests.
 
+### 7.4 The province: Vardmoor, ten years on (M7)
+
+AshenReliquary is an open world of 22 hand-made zones across the province of Vardmoor. Here they become the surface
+above the shaft: the same maps, ten years after the Cinder Throne. The dungeon stays the game's spine; the province is
+where a hero goes for its own stories, for loot and experience at their level, and for what it tells them about what
+waits below.
+
+**The map.** AshenReliquary's zones keep their places and the exits between them:
+
+| Region (Ashen act) | Zones (creature level) | Waystation |
+| --- | --- | --- |
+| Gallowmere's country (1) | Gallows Road (1), Rotwater Fens (2), Drowned Chapel (3), Prior's Ossuary (4), Sallow's Mire (4) | Gallowmere itself |
+| The Iron March (2) | Iron March (6), Barrow Fields (7), Old Barracks (8), Siege Walls (9) | Ironhold (6) |
+| The Oriel highlands (3) | Frostbitten Pass (11), Hollow Woods (12), Catacombs of Oriel (13), Bell Tower (14) | Saint Oriel's Rest (11) |
+| The Cinder country (4) | Ash Wastes (16), Lava Rivers (17), Wyrm's Nest (18), the Reliquary (19), the Cinder Throne (20) | Ember Gate (16) |
+
+- Fort Gallowmere's two exits become gates in Gallowmere's wall: the north gate to the Gallows Road, the east gate
+  to the Rotwater Fens. Gallowmere itself stays AVABand's generated town.
+- **Waystations** (Ironhold, Saint Oriel's Rest, Ember Gate) are small hand-made towns: a shrine, one trader each
+  (Ironhold a smith, the Rest an apothecary, Ember Gate a quartermaster) and a Lantern Rift.
+- **The Reliquary** is the Lid seen from above: its deepest hall ends at the sealed mouth of the shaft. The Cinder
+  Throne is where Ashen Reliquary ended; ten years on it is empty but for what the rumour (or the Legacy) left there.
+
+**Levels from Ashen's files.** A zone is a fixed level, read from AshenReliquary's zone format (rows and a legend),
+as the story rooms are:
+- the zone files are copied unchanged into `data/province/zones/`; what this game changes (its ten-years-on
+  taglines, its stores, its tie-ins) goes in `data/province/province.json` beside them, as the 4.2.5 data is kept;
+- the legend's ground, objects, `blocks` and `blocksSight` become terrain: floor, path, grass, water (shallow, slows),
+  trees and rubble (block, and block sight), walls;
+- `playerStart` is where the hero arrives from Gallowmere's gate; an exit is a gate square, which takes the hero to the
+  next zone's exit and its `arrive` square.
+
+**Danger.** A zone's level is its creature level (section 4.3). For loot and for Angband's wanderers it stands for the
+depth where a hero is expected to be that level (level 5 is depth 10, level 10 depth 30, level 16 depth 60, level 20
+depth 90). Ashen's `xpScale` stays.
+
+**Creatures.**
+- Ashen's 58 creatures come in as monsters of the setting (`data/setting/`, in Angband's format): their attacks
+  become blows, `undead`, `immunities` and `weaknesses` become flags. They are bridged with their Flare sprites.
+- Their packs stand where Ashen placed them, at the pack's rank.
+- A few of Angband's monsters of the zone's depth wander in, more at night (AVABand's day and night).
+
+**Persistence.** Unlike the dungeon, a zone is kept for the hero:
+- the packs a hero kills stay dead until they have been down at least five dungeon levels since;
+- each cache opens once;
+- each shrine is used once.
+
+**What a zone holds.**
+- **Caches** are chests (Angband's chest objects) holding good objects of the zone's depth.
+- **Shrines** are section 4.4's: one blessing from three, drawn by Ashur's whim. They are built here first.
+- **NPCs and keepsakes** stand where Ashen put them. Talking to an NPC gives their line ten years on; Ashen's full
+  dialogue trees (section 7.3) come later. Keepsakes are lore, kept in the hero's journal.
+- **Weather.** `darkness` and `heroLight` set the zone's light. `ashStorms` halve sight radius while a storm blows.
+  `cold` (the Frostbitten Pass) calls for a Fortitude save every minute against 1d6 cold, which cold resistance
+  negates.
+
+**Ten years on: tie-ins.** Each region has one side story that points below:
+- Sallow's Mire: where the Rot-Mother began (before the Font, at 15);
+- the Catacombs and the Bell Tower: the Choir's first song (before the Drowned Library, at 33);
+- the Barrow Fields and the Siege Walls: the words of Ser Hadric's oath (before the Oath Hall, at 45);
+- the Wyrm's Nest: the dam's old nest, cold now (before the Brood Nest, at 72).
+
+Each sets a story flag. Wren and the epilogue read it, and an altar below can offer a third choice for it.
+
+**Travel.**
+- Zones are walked, exit to exit.
+- The Lantern Rift (Word of Recall) takes the hero from any zone to Gallowmere.
+- A waystation's rift, once touched, takes the hero from Gallowmere back to that waystation.
+
+**Art.** Flare's cinder, ironhold and oriel tilesets come over from AshenReliquary (CC-BY-SA, as the rest), each
+with its level dressing. The classic views draw zones with AVABand's surface tiles and letters.
+
 ## 8. The screen
 
 - **The world:** AshenReliquary's isometric WorldView, at its tile size of 192×96, one Angband square to a tile.
@@ -514,6 +587,15 @@ the Pathfinder name.
 | **M5: To the Cinder** | The whole game | All profiles, vaults and pits; the five story levels; Saint Ysmere and the Cinder of Ashur; mythic tiers; bots clear it |
 | **M6: Breadth** | Polish | Priest, Druid and Blackguard; challenges; randarts; mods; Legacy from an AVAAshenReliquary save |
 
+| **M7: The province** | Ashen's world above the shaft | All 18 wild zones and 3 waystations, reached through Gallowmere's gates, with their creatures, caches, shrines, NPCs' lines and weather; kept per hero; the four tie-ins; bots clear each zone at its level |
+
+M7 comes in three parts:
+- **M7a:** fixed-map levels from Ashen's files, gates and exits, the three new tilesets, and the first two zones
+  (the Gallows Road and the Rotwater Fens);
+- **M7b:** Ashen's creatures bridged, caches, shrines, persistence, and every zone and waystation;
+- **M7c:** NPCs and keepsakes, weather, the tie-ins, the rifts, and a province bot that walks each zone at its
+  expected level.
+
 M6 as built: the Priest, Druid and Blackguard come with AshenReliquary's ability system played one action at a time,
 which makes its Fighter, Champion, Rogue and Wizard playable too. The Ranger, Necromancer and Gunslinger wait for
 companions, raised dead, bows and guns. AVABand's Famine twist has no food to work on here, so it becomes Thin Flasks
@@ -538,6 +620,7 @@ companions, raised dead, bows and guns. AVABand's Famine twist has no food to wo
 | A third god class | The session is split by concern from the start, as a rule in AGENTS.md |
 | A Tolkien name slips through | The bridge check scans every string shown to the player |
 | Licences | GPL-2 code, licence per asset, generated credits, ORC credit |
+| Ashen's zones were made for real time: a pack that rushed in over seconds now arrives over turns, and big zones (up to 96 by 220) are slow to cross | Ashen's packs are placed asleep at their posts and wake by Angband's rules; long zones get travel (click to travel already crosses seen ground) and their waystation rifts |
 
 ## 12. Settled after draft 2
 
