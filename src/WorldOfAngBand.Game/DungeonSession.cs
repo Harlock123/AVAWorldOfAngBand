@@ -449,11 +449,13 @@ public sealed class DungeonSession : ITurnHandler
             if (Depth > 0)
             {
                 Say("You feel yourself yanked upwards!");
+                Publish(new CueEvent(Cue.Recalled));
                 _pendingLevel = (0, StairArrival.None);
             }
             else
             {
                 Say("You feel yourself yanked downwards!");
+                Publish(new CueEvent(Cue.Recalled));
                 _pendingLevel = (Math.Max(1, Hero.MaxDepth), StairArrival.None);
             }
         }
@@ -463,6 +465,7 @@ public sealed class DungeonSession : ITurnHandler
             if (Zone is null && to > Depth)
             {
                 Say("The floor opens beneath you!");
+                Publish(new CueEvent(Cue.Recalled));
                 _pendingLevel = (to, StairArrival.None);
             }
             else
@@ -546,6 +549,7 @@ public sealed class DungeonSession : ITurnHandler
         }
         Hero.Character.Heal(healed);
         Say($"You drink from a flask and feel better ({healed} HP). {potion.Charges} left.");
+        Publish(new CueEvent(Cue.FlaskDrunk));
         return true;
     }
 
@@ -558,6 +562,7 @@ public sealed class DungeonSession : ITurnHandler
             return false;
         }
         Say(down ? "You enter a maze of down staircases." : "You enter a maze of up staircases.");
+        Publish(new CueEvent(down ? Cue.StairsDown : Cue.StairsUp));
         Enter(Depth + (down ? 1 : -1), down ? StairArrival.Descended : StairArrival.Ascended);
         return true;
     }
@@ -820,6 +825,8 @@ public sealed class DungeonSession : ITurnHandler
         if (_foes.Values.Any(f => f != foe && f.Ashen?.Pack == ashen.Pack && f.Monster.IsActive && !f.Monster.IsRemoved))
             return;
         MemoryOf(zone.Id).SlainAt[ashen.Pack] = LevelsDown;
+        if (!_foes.Values.Any(f => f != foe && f.Ashen is not null && f.Monster.IsActive && !f.Monster.IsRemoved))
+            Publish(new CueEvent(Cue.ZoneCleared));
     }
 
     /// <summary>
@@ -940,6 +947,7 @@ public sealed class DungeonSession : ITurnHandler
             if (_dressed is { } dressed)
                 dressed.SetObjects(at, [ZoneBuilder.CachePiece(zone, place, opened: true)]);
             Say(found > 0 ? "You open the cache. Things spill out round it." : "You open the cache: a little gold.");
+            Publish(new CueEvent(Cue.CacheOpened, at));
             Publish(new DoorOpenedEvent(at));
             UpdateView();
             return true;
@@ -1042,6 +1050,7 @@ public sealed class DungeonSession : ITurnHandler
             if (_townRift is { } rift)
                 Hero.Position = Level.Neighbors(rift).Where(Level.IsEmptyFloor).FirstOrDefault(rift);
             Say("You step out of the rift into Gallowmere.");
+            Publish(new CueEvent(Cue.RiftStepped));
             return true;
         }
         if (!_rifts.Contains(destination) || Province[destination]?.Shrines is not [var shrine, ..])
@@ -1052,6 +1061,7 @@ public sealed class DungeonSession : ITurnHandler
         _insideGate = InsideGate();
         UpdateView();
         Say($"You step out of the rift at {Province[destination]!.Name}.");
+        Publish(new CueEvent(Cue.RiftStepped));
         return true;
     }
 
@@ -1065,6 +1075,7 @@ public sealed class DungeonSession : ITurnHandler
             return false;
         Shrines.Bless(this, blessing);
         Level.SetFeature(ZoneBuilder.LevelAt(shrine.At), Data.Terrain["zone_shrine_spent"].Index);
+        Publish(new CueEvent(Cue.BlessingTaken, ZoneBuilder.LevelAt(shrine.At)));
         return true;
     }
 
@@ -1198,6 +1209,7 @@ public sealed class DungeonSession : ITurnHandler
     {
         Level.SetFeature(at, feature);
         Publish(new DoorOpenedEvent(at));
+        Publish(new CueEvent(feature == Data.Terrain.Ids.BrokenDoor ? Cue.DoorBroken : Cue.DoorOpened, at));
     }
 
     internal void DestroyWall(Loc at)
@@ -1504,6 +1516,7 @@ public sealed class DungeonSession : ITurnHandler
         var from = Hero.Position;
         Hero.Position = Rng.Pick(spots);
         Say("You feel yourself yanked across the dungeon!");
+        Publish(new CueEvent(Cue.Teleported));
         Publish(new HeroMovedEvent(from, Hero.Position));
         Publish(new LevelEnteredEvent(Depth));
     }
@@ -1577,6 +1590,7 @@ public sealed class DungeonSession : ITurnHandler
         // Never down past a quest level whose keeper still stands.
         var up = Depth > 0 && (Rng.OneIn(2) || Unfinished(Depth));
         Say(up ? "You rise up through the ceiling." : "You sink through the floor.");
+        Publish(new CueEvent(Cue.LevelTeleported));
         _pendingLevel = (Depth + (up ? -1 : 1), StairArrival.None);
     }
 
@@ -1665,6 +1679,7 @@ public sealed class DungeonSession : ITurnHandler
         var from = Hero.Position;
         Hero.Position = spot;
         Say("You are commanded to return.");
+        Publish(new CueEvent(Cue.Teleported));
         Publish(new HeroMovedEvent(from, spot));
         Publish(new LevelEnteredEvent(Depth));
     }
@@ -1815,7 +1830,7 @@ public sealed class DungeonSession : ITurnHandler
         {
             var visible = Seen(foe);
             if (visible && !foe.Monster.IsVisible)
-                Publish(new MonsterAppearedEvent(foe.Monster.Id, foe.Name));
+                Publish(new MonsterAppearedEvent(foe.Monster.Id, foe.Name, foe.Monster.Race.Id));
             foe.Monster.IsVisible = visible;
         }
     }

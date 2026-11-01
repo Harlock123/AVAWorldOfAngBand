@@ -114,7 +114,7 @@ internal sealed class Fight(DungeonSession session)
             if (check.Degree < DegreeOfSuccess.Success)
             {
                 session.Say($"{name} misses you {roll}.");
-                session.Publish(new StrikeEvent(foe.Monster.Position, hero.Position, false, check.Degree, 0));
+                session.Publish(new StrikeEvent(foe.Monster.Position, hero.Position, false, check.Degree, 0, blow.Method));
                 continue;
             }
             var type = TypeOf(blow);
@@ -136,7 +136,7 @@ internal sealed class Fight(DungeonSession session)
             session.Say(rolled > 0
                 ? $"{name} {Verb(blow.Method)} you{crit} {roll}: {damage} {type.ToString().ToLowerInvariant()}{shield}."
                 : $"{name} {Verb(blow.Method)} you {roll}.");
-            session.Publish(new StrikeEvent(foe.Monster.Position, hero.Position, false, check.Degree, damage));
+            session.Publish(new StrikeEvent(foe.Monster.Position, hero.Position, false, check.Degree, damage, blow.Method, blocked));
             if (damage > 0)
                 session.HurtHero(damage, session.Called(foe));
             hero.Resource.OnCombat(taken: true);
@@ -315,11 +315,12 @@ internal sealed class Fight(DungeonSession session)
         var roll = Roll(check, penalty);
         var verb = ranged ? creature.Caster ? "casts at" : "shoots at" : "hits";
         if (ranged)
-            session.Publish(new SpellEvent(foe.Monster.Position, hero.Position, Engine.Definitions.MonsterSpellKind.Bolt, ElementOf(creature.DamageType), 0));
+            session.Publish(new SpellEvent(foe.Monster.Position, hero.Position, Engine.Definitions.MonsterSpellKind.Bolt, ElementOf(creature.DamageType), 0,
+                creature.Caster ? "ASHEN_CAST" : "ASHEN_SHOOT"));
         if (check.Degree < DegreeOfSuccess.Success)
         {
             session.Say($"{name} {(ranged ? verb : "misses")} you{(ranged ? " and misses" : "")} {roll}.");
-            session.Publish(new StrikeEvent(foe.Monster.Position, hero.Position, false, check.Degree, 0));
+            session.Publish(new StrikeEvent(foe.Monster.Position, hero.Position, false, check.Degree, 0, ranged ? null : "hit"));
             return;
         }
         var rolled = Math.Max(1, (int)Math.Round(ashen.Strike.Roll(Roller) * ashen.DamageMultiplier));
@@ -335,7 +336,7 @@ internal sealed class Fight(DungeonSession session)
         }
         var crit = check.Degree == DegreeOfSuccess.CriticalSuccess ? ", critically" : "";
         session.Say($"{name} {verb} you{crit} {roll}: {damage} {creature.DamageType.ToString().ToLowerInvariant()}{(blocked > 0 ? $", {blocked} blocked" : "")}.");
-        session.Publish(new StrikeEvent(foe.Monster.Position, hero.Position, false, check.Degree, damage));
+        session.Publish(new StrikeEvent(foe.Monster.Position, hero.Position, false, check.Degree, damage, ranged ? null : "hit", blocked));
         if (damage > 0)
             session.HurtHero(damage, session.Called(foe));
         hero.Resource.OnCombat(taken: true);

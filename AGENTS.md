@@ -82,8 +82,9 @@ The code is **copied** from the two parent games, not linked, so neither has to 
   (AshenReliquary's copy: `OpenAlAudioEngine`, the decoders, `AudioBuffer` and `OpenAlConfig` for the mixing period,
   `AudioFailure`; `native/` holds OpenAL Soft for Windows x64 and x86, swapped in by `Directory.Build.targets`).
   `SoundPack` reads `audio/soundpack.json` and lays mods' packs over it by key. `Soundscape` says what mood and
-  ambience a place has; `SoundDirector` plays them, following the window's `Update` each frame. It reads the session
-  and never changes it.
+  ambience a place has, and `SoundCues` what each event sounds like; `SoundDirector` plays them, following the
+  session's events and the window's `Update` each frame (hit points, conditions and cooldowns it reads). It reads the
+  session and never changes it.
 - `src/WorldOfAngBand.App/`: Avalonia, built in code with no XAML.
   - `Rendering/ViewState`: what the views show besides the game, followed from its events: messages, slides,
     swings, floating numbers, the slain.
@@ -148,6 +149,9 @@ The code is **copied** from the two parent games, not linked, so neither has to 
 - **Sound never touches the game.** `SoundDirector` picks with its own `Random`, never `GameRandom`, and only reads
   the session, so a seed and its commands make the same game with sound on or off. Tests use a recording or silent
   `IAudioEngine` and never open a device.
+- **The game says what happened; the sound says how it sounds.** Something worth hearing that no event tells of gets
+  a `CueEvent` (or a field on the event it belongs to), never a sound name. `SoundTests` fails if any name
+  `SoundCues` can give is missing from the pack.
 - **Every sound is credited.** `SoundTests` fails on a file in `audio/` that `soundpack.json` doesn't list with its
   source and licence, and on a listed file the pack never plays.
 - **Tests never write the player's files.** A test that changes settings sets `MainWindow.SettingsPath` (and the

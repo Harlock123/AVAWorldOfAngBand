@@ -98,7 +98,7 @@ internal sealed class MonsterSpells(DungeonSession session)
         var seen = session.Seen(foe);
         var name = seen ? session.Subject(foe.Monster) : "It";
         session.Say(seen ? Message(spell.Message, name) : spell.UnseenMessage ?? "Something mumbles.");
-        session.Publish(new SpellEvent(monster.Position, Hero.Position, spell.Kind, spell.Element, spell.Kind == MonsterSpellKind.Ball ? 2 : 0));
+        session.Publish(new SpellEvent(monster.Position, Hero.Position, spell.Kind, spell.Element, spell.Kind == MonsterSpellKind.Ball ? 2 : 0, spell.Id));
         var element = spell.Element ?? spell.Id switch
         {
             "ARROW" or "BOLT" or "SHOT" => "arrow", "MISSILE" => "missile", "BA_HOLY" => "holy_orb", _ => null,

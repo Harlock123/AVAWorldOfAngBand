@@ -33,6 +33,7 @@ internal sealed class ItemEffects(DungeonSession session)
         var wasKnown = session.Knowledge.IsAware(item.Kind);
         var used = Hero.Pack.Remove(item, 1, () => session.Factory.NextSerial++);
         session.Say(reading ? $"You read {session.Belongings.Name(used)}." : $"You drink {session.Belongings.Name(used)}.");
+        session.Publish(new CueEvent(reading ? Cue.Read : Cue.Quaffed));
         Hero.Pack.Prune();
         session.Knowledge.MarkTried(used.Kind);
         foreach (var effect in effects.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries))
@@ -73,6 +74,7 @@ internal sealed class ItemEffects(DungeonSession session)
             return false;
         if (activation.Attack is null)
             session.Say($"You activate {session.Belongings.Name(item)}.");
+        session.Publish(new CueEvent(Cue.Activated));
         foreach (var effect in activation.Effects)
             Apply(effect, null);
         item.Timeout = art.Recharge is { } recharge ? Math.Max(1, Engine.Items.RandomValue.Parse(recharge).Roll(session.Rng, art.Level)) : 50;

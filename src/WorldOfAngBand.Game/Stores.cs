@@ -167,6 +167,7 @@ public sealed class Stores
         _session.Belongings.LearnAll(one);
         var stack = hero.Pack.Add(one)!;
         _session.Say(store.IsHome ? $"You have {_session.Belongings.Name(stack)}." : $"You bought {_session.Belongings.Name(one)} for {price} gold.");
+        _session.Publish(new CueEvent(store.IsHome ? Cue.ItemTaken : Cue.Bought, null, one.Base.Id));
         _session.Publish(new ItemsChangedEvent());
         return true;
     }
@@ -201,6 +202,7 @@ public sealed class Stores
         else
             store.Stock.Add(one);
         _session.Say(store.IsHome ? $"You leave {_session.Belongings.Name(one)}." : $"You sold {_session.Belongings.Name(one)} for {price} gold.");
+        _session.Publish(new CueEvent(store.IsHome ? Cue.ItemDropped : Cue.Sold, null, one.Base.Id));
         _session.Publish(new ItemsChangedEvent());
         return true;
     }
@@ -254,6 +256,7 @@ public sealed class Stores
         }
         _session.Belongings.Refit();
         _session.Say($"Edda etches the rune into {_session.Belongings.Name(item)} for {offer.Price} gold.");
+        _session.Publish(new CueEvent(Cue.RuneEtched));
         _session.Publish(new ItemsChangedEvent());
         return true;
     }

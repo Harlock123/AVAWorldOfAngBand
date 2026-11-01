@@ -6,9 +6,8 @@ hero, rules, art and story. Ten years after the Cinder Throne, the Reliquary und
 lid: below it a shaft goes down a hundred levels, to where the Order of the Pale Lantern first burned Ashur. You go
 down it as one of the Lantern-sworn, with no Ember Heart. When you die, you stay dead.
 
-**Status: milestone 8 ("Sound"), first part done.** The whole game is there, from Gallowmere to the Cinder of Ashur
-at depth 100, and AshenReliquary's province lies outside the town's gates, ten years on. Music and ambience play by
-place; sound effects come next. Levels are generated as Angband 4.2.5 generates them and drawn isometrically in Flare's art. The hero is a
+**Status: milestone 8 of 8 ("Sound").** The whole game is there, from Gallowmere to the Cinder of Ashur at depth 100,
+with AshenReliquary's province outside the town's gates, ten years on, and both games' music and sound. Levels are generated as Angband 4.2.5 generates them and drawn isometrically in Flare's art. The hero is a
 Pathfinder 2e character on AshenReliquary's rules, one of seven classes with their abilities and feats, fighting turn
 by turn on Angband's energy system. All of Angband's
 monsters are in, with their 91 spells and innate attacks in Pathfinder's terms, and every name Angband takes from
@@ -173,12 +172,18 @@ door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-t
     epilogue know of. Speaking the oath's last words releases all Nine Unburied.
   - Weather: ash storms halve sight on the Ash Wastes; the Frostbitten Pass's cold bites without a ward.
   - The waystations' shrines are Lantern Rifts: touch one, and Gallowmere's rift takes you back to it.
-- **Music and ambience** (the spec's section 8.1, milestone 8). Both parents' sound, as one:
+- **Sound and music** (the spec's section 8.1, milestone 8). Both parents' sound, as one:
   - AVABand's town music in Gallowmere and the waystations, its dungeon music down to depth 30 and its deep music
     below, and "The Pits of Angband" at birth and in the book of the dead;
   - AshenReliquary's exploring music in the province's open zones, and its title theme for the epilogue;
   - ambience under it: the town's morning, the fens' crickets, Ironhold's halls, the wind on the Pass and the Ash
-    Wastes, and the dungeon's by its layout and depth (caverns, labyrinths, the deep, the abyss).
+    Wastes, and the dungeon's by its layout and depth (caverns, labyrinths, the deep, the abyss);
+  - AshenReliquary's fight music while a monster hunts the hero in view, and its boss music for a unique or a story
+    keeper;
+  - effects: the hero's swings, hits and crits and abilities in Ashen's sounds; monsters' bites, claws, breaths and
+    summons in Angband's (Dubtrain's); creatures' voices; doors, stairs, shops, caches, shrines, potions, gold,
+    conditions, Second Breath and death. Each is placed left or right on screen and quieter far off, and only what
+    the hero sees or can hear plays.
   The Sound window (`Ctrl+O`) sets the volumes, turns each part on or off and sets the mixing period (extra large in
   a virtual machine, so it doesn't stutter); `Ctrl+M` mutes. With no sound device the game plays on and says why.
   A mod can bring its own `audio/soundpack.json`, laid over the game's by key.

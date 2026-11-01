@@ -681,8 +681,21 @@ M7 comes in three parts:
 M8 comes in two parts:
 - **M8a** (done): the audio project copied from AVABand, the sound pack beside the executable with its credits, the music
   and ambience by place (town, zone, depth and profile), and the Sound window;
-- **M8b**: the effects for every event, with the events the session lacks; placement by screen and distance;
+- **M8b** (done): the effects for every event, with the events the session lacks; placement by screen and distance;
   hearing by noise; the combat and great-foe music; footsteps and the ready tick.
+
+M8b as built:
+- The session publishes `CueEvent`s (doors, stairs, recall, pickups by item base, potions, shops, caches,
+  blessings, rifts, a zone cleared) and `AbilityUsedEvent`s, and its strikes and spells carry the blow's method
+  and the spell's id. What changes without an event (hit points, conditions, blessings, cooldowns, who is in view)
+  the director reads each frame. `SoundCues` says what each sounds like.
+- Angband's monster spells keep their own ids (BR_NETH, S_KIN); `SoundCues` gives them Dubtrain's names (BR_NETHER,
+  SUM_MONSTER). Bolts and balls, which Dubtrain has no sound for, use Ashen's: ignition and force bolt, its element
+  bursts.
+- A sound out of sight is heard if it is loud (a spell, a door) and the hero's noise reaches it within 20 steps, at a
+  third of its volume; a blow or a voice out of sight is not.
+- The fight's music holds 100 game turns (ten of the hero's at normal speed) after the last hunter leaves view.
+- Second Breath is Dubtrain's INVULN; the win is KILL_KING.
 
 M8a as built: the music and ambience follow the screen and the place each frame and change only when the mood or
 loop does; a mood plays a track at a time from its playlist, never the same one twice running. Sound names are

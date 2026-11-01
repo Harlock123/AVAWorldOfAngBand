@@ -32,7 +32,8 @@ public sealed record AshenCreature(
     bool Caster = false,
     string? PoisonOnHit = null,
     double PoisonChance = 0,
-    AshenInflict? Inflicts = null)
+    AshenInflict? Inflicts = null,
+    string? Voice = null)
 {
     public const string RacePrefix = "ashen_";
 

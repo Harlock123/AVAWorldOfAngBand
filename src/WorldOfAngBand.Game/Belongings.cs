@@ -41,6 +41,7 @@ internal sealed class Belongings(DungeonSession session)
             session.Knowledge.See(item);
             var stack = Pack.Add(item)!;
             session.Say($"You have {Name(stack)}.");
+            session.Publish(new CueEvent(Cue.ItemTaken, Hero.Position, item.Base.Id));
         }
         session.Publish(new ItemsChangedEvent());
         return true;
@@ -69,6 +70,7 @@ internal sealed class Belongings(DungeonSession session)
         // Gold Rush: worth twice as much.
         Hero.Gold += gold.GoldValue * (session.Birth.Twist == "gold" ? 2 : 1);
         session.Say($"You have found {gold.GoldValue} gold pieces worth of {ItemNaming.Plain(gold.Kind.Name, false)}.");
+        session.Publish(new CueEvent(Cue.GoldTaken, Hero.Position));
     }
 
     public bool Drop(Item item, int count = 1)
@@ -83,6 +85,7 @@ internal sealed class Belongings(DungeonSession session)
         var dropped = Pack.Remove(item, Math.Clamp(count, 1, item.Number), () => session.Factory.NextSerial++);
         session.Loot.DropNear(Hero.Position, dropped);
         session.Say($"You drop {Name(dropped)}.");
+        session.Publish(new CueEvent(Cue.ItemDropped, Hero.Position, dropped.Base.Id));
         session.Publish(new ItemsChangedEvent());
         return true;
     }
@@ -112,6 +115,7 @@ internal sealed class Belongings(DungeonSession session)
             Stow(previous);
         var worn = Pack.Equipment[slot]!;
         session.Say($"You are {(item.Base.IsWeapon ? "wielding" : "wearing")} {Name(worn)}.");
+        session.Publish(new CueEvent(Cue.Wielded, Hero.Position, worn.Base.Id));
         LearnObvious(worn);
         Refit();
         session.Publish(new ItemsChangedEvent());

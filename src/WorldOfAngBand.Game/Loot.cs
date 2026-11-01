@@ -52,8 +52,11 @@ internal sealed class Loot(DungeonSession session)
         {
             var gold = race.Has("ONLY_GOLD") || (!race.Has("ONLY_ITEM") && rng.OneIn(2));
             var item = gold ? session.Factory.MakeGold(rng, level) : session.Factory.Make(rng, level, good, great);
-            if (item is not null)
-                DropNear(monster.Position, item);
+            if (item is null)
+                continue;
+            DropNear(monster.Position, item);
+            if (item.IsArtifact || item.Ego is not null)
+                session.Publish(new CueEvent(Cue.RareDrop, monster.Position));
         }
     }
 

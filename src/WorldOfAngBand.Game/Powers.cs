@@ -198,6 +198,7 @@ public sealed class Powers(DungeonSession session)
 
     private int Carry(AbilityDefinition a, Foe? target, double spent)
     {
+        session.Publish(new AbilityUsedEvent(a.Id, a.Kind.ToString(), a.DamageType.ToString()));
         switch (a.Kind)
         {
             case AbilityKind.WeaponStrike:

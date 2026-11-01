@@ -97,6 +97,7 @@ public sealed class MainWindow : Window
         {
             field = value;
             Classic.Tiles = value == ViewMode.Tiles;
+            Sound.Isometric = value == ViewMode.Isometric;
             Content = value == ViewMode.Isometric ? View : Classic;
             Hud.KeysLine = value == ViewMode.Isometric
                 ? "Arrows/keypad: walk · 1–0: abilities · < >: stairs · g: pick up · i: pack · f: feats · J: journal · R: rest · q: flask · click: travel · wheel: zoom · Ctrl+T: classic view · Ctrl+O: sound · Ctrl+Q: quit"
@@ -130,6 +131,7 @@ public sealed class MainWindow : Window
         set
         {
             field = value;
+            value.Isometric = Mode == ViewMode.Isometric;
             if (value.Engine is NullAudioEngine { Reason: { } reason })
                 State.Note(reason);
         }
