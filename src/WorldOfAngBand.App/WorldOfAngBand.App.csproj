@@ -25,6 +25,9 @@
   <ItemGroup>
     <!-- Flare art (CC-BY-SA 3.0, see Assets/Flare/LICENSE.txt) plus its sprite and tileset definitions. -->
     <AvaloniaResource Include="Assets\**" />
+    <!-- AVABand's DCSS tiles (CC0), read through their manifest from beside the executable: the classic tile view, and
+         the paper fallback for monsters with no Flare sprite. -->
+    <Content Include="tilesets\**" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

@@ -6,9 +6,11 @@
   <ItemGroup>
     <InternalsVisibleTo Include="WorldOfAngBand.Tests" />
     <InternalsVisibleTo Include="WorldOfAngBand.App" />
+    <InternalsVisibleTo Include="WorldOfAngBand.App.Tests" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WorldOfAngBand.Engine\WorldOfAngBand.Engine.csproj" />
     <ProjectReference Include="..\WorldOfAngBand.Data\WorldOfAngBand.Data.csproj" />
+    <ProjectReference Include="..\WorldOfAngBand.Rules\WorldOfAngBand.Rules.csproj" />
   </ItemGroup>
 </Project>

@@ -13,3 +13,9 @@ public sealed record Hold : GameCommand;
 
 /// <summary>Take the staircase underfoot: down with <see cref="Down"/>, else up.</summary>
 public sealed record TakeStairs(bool Down) : GameCommand;
+
+/// <summary>Rest a turn, healing (a full rest takes <see cref="DungeonSession.TurnsToRestFully"/> turns); not with monsters in view.</summary>
+public sealed record Rest : GameCommand;
+
+/// <summary>Drink from a healing flask.</summary>
+public sealed record QuaffFlask : GameCommand;

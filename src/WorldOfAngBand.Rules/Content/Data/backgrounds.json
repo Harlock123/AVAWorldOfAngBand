@@ -1,0 +1,11 @@
+[
+  { "id": "gravedigger", "name": "Gravedigger", "boostChoices": ["Strength", "Wisdom"], "skill": "Religion", "lore": "Graveyard Lore", "skillFeat": "Sense the Dead" },
+  { "id": "deserter", "name": "Deserter", "boostChoices": ["Strength", "Constitution"], "skill": "Athletics", "lore": "Warfare Lore", "skillFeat": "Hardy Recovery" },
+  { "id": "hedge-scholar", "name": "Hedge Scholar", "boostChoices": ["Intelligence", "Wisdom"], "skill": "Arcana", "lore": "Academia Lore", "skillFeat": "Recall Lore" },
+  { "id": "smuggler", "name": "Smuggler", "boostChoices": ["Dexterity", "Charisma"], "skill": "Thievery", "lore": "Underworld Lore", "skillFeat": "Quick Lockpick" },
+  { "id": "lantern-acolyte", "name": "Lantern Acolyte", "boostChoices": ["Wisdom", "Charisma"], "skill": "Religion", "lore": "Order of the Pale Lantern Lore", "skillFeat": "Shrine Ward" },
+  { "id": "hunter", "name": "Hunter", "boostChoices": ["Dexterity", "Wisdom"], "skill": "Survival", "lore": "Hunting Lore", "skillFeat": "Track Prey" },
+  { "id": "street-urchin", "name": "Street Urchin", "boostChoices": ["Dexterity", "Intelligence"], "skill": "Stealth", "lore": "Ironhold Lore", "skillFeat": "Pickpocket" },
+  { "id": "noble-exile", "name": "Noble Exile", "boostChoices": ["Intelligence", "Charisma"], "skill": "Diplomacy", "lore": "Vardmoor Nobility Lore", "skillFeat": "Silver Tongue" },
+  { "id": "ironhold-gunhand", "name": "Ironhold Gunhand", "boostChoices": ["Dexterity", "Intelligence"], "skill": "Crafting", "lore": "Gunsmithing Lore", "skillFeat": "Powder Hand" }
+]

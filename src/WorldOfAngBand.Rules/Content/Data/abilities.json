@@ -1,0 +1,2621 @@
+[
+ {
+  "id": "strike",
+  "name": "Strike",
+  "class": "fighter",
+  "slot": "lmb",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "repeat": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Attack with your weapon. Builds Fury on a hit."
+ },
+ {
+  "id": "power_attack",
+  "name": "Power Attack",
+  "class": "fighter",
+  "slot": "rmb",
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 15,
+  "extraDice": 1,
+  "cadenceAttacks": 2,
+  "traits": [
+   "Attack",
+   "Flourish"
+  ],
+  "description": "A ponderous blow with an extra weapon damage die (2 at level 10, 3 at 18). Counts as two attacks for the cadence penalty."
+ },
+ {
+  "id": "sudden_charge",
+  "name": "Sudden Charge",
+  "class": "fighter",
+  "slot": "1",
+  "kind": "ChargeStrike",
+  "actions": 2,
+  "range": 6,
+  "cooldown": 8,
+  "traits": [
+   "Attack",
+   "Flourish",
+   "Open"
+  ],
+  "description": "Dash up to 6 tiles to an enemy and Strike."
+ },
+ {
+  "id": "cleave",
+  "name": "Cleave",
+  "class": "fighter",
+  "slot": "2",
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 20,
+  "targets": 3,
+  "arc": 120,
+  "traits": [
+   "Attack",
+   "Sweep"
+  ],
+  "description": "A broad cut through the enemies in front of you: Strike your target and up to two more within reach and 60° of it. Only the first hit builds Fury."
+ },
+ {
+  "id": "raise_shield",
+  "name": "Raise a Shield",
+  "class": "fighter",
+  "slot": "3",
+  "kind": "Ward",
+  "actions": 1,
+  "needsShield": true,
+  "wardSeconds": 6,
+  "traits": [
+   "Shield"
+  ],
+  "description": "Raise your shield for 6 s: its circumstance bonus to AC, and Shield Block takes its hardness off a blow (once every 6 s). Needs a shield in your off hand."
+ },
+ {
+  "id": "finishing_blow",
+  "name": "Finishing Blow",
+  "class": "fighter",
+  "slot": "4",
+  "level": 2,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 30,
+  "spendAll": true,
+  "resourcePerDie": 25,
+  "traits": [
+   "Attack",
+   "Flourish"
+  ],
+  "description": "Pour all your Fury (at least 30) into one Strike: an extra weapon damage die for every 25 Fury spent. Joins the bar at level 2."
+ },
+ {
+  "id": "ignition",
+  "name": "Ignition",
+  "class": "wizard",
+  "slot": "lmb",
+  "kind": "SpellBolt",
+  "actions": 2,
+  "repeat": true,
+  "range": 7,
+  "damageType": "Fire",
+  "dice": "2d6",
+  "heightenDice": "1d6",
+  "critPersistent": "1d4",
+  "traits": [
+   "Attack",
+   "Cantrip",
+   "Fire",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Hurl a flame: a spell attack for 2d6 fire (+1d6 per rank above 1). A critical hit also sets the target burning."
+ },
+ {
+  "id": "force_bolt",
+  "name": "Force Bolt",
+  "class": "wizard",
+  "slot": "rmb",
+  "kind": "Missiles",
+  "actions": 2,
+  "range": 9,
+  "cost": 12,
+  "damageType": "Force",
+  "dice": "1d4+1",
+  "missiles": 2,
+  "traits": [
+   "Force",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Two bolts of force that never miss, 1d4+1 force each (one more bolt every two ranks)."
+ },
+ {
+  "id": "staff_strike",
+  "name": "Staff Strike",
+  "class": "wizard",
+  "slot": "1",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Bash with your staff."
+ },
+ {
+  "id": "shield",
+  "name": "Shield",
+  "class": "wizard",
+  "slot": "2",
+  "kind": "Ward",
+  "actions": 1,
+  "wardAc": 1,
+  "wardHardness": 5,
+  "hardnessPerTwoRanks": 5,
+  "wardSeconds": 6,
+  "blockLockout": 10,
+  "traits": [
+   "Cantrip",
+   "Force",
+   "Concentrate"
+  ],
+  "description": "A cantrip ward of force for 6 s: +1 circumstance bonus to AC, and Shield Block takes 5 off a blow (+5 every two spell ranks). Once it blocks, the ward breaks and can't be cast again for 10 s."
+ },
+ {
+  "id": "intimidating_strike",
+  "name": "Intimidating Strike",
+  "class": "fighter",
+  "slot": "feat",
+  "feat": true,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 10,
+  "traits": [
+   "Attack",
+   "Emotion",
+   "Fear",
+   "Mental"
+  ],
+  "onHit": "Frightened",
+  "onHitValue": 1,
+  "description": "A blow meant to cow: on a hit the target is frightened 1 (frightened 2 on a critical hit)."
+ },
+ {
+  "id": "brutish_shove",
+  "name": "Brutish Shove",
+  "class": "fighter",
+  "slot": "feat",
+  "feat": true,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 10,
+  "traits": [
+   "Attack",
+   "Press"
+  ],
+  "onHit": "OffGuard",
+  "onHitSeconds": 2,
+  "knockback": 1.5,
+  "description": "Strike and shove: on a hit the target is knocked back 1.5 tiles and off-guard for 2 s."
+ },
+ {
+  "id": "knockdown",
+  "name": "Knockdown",
+  "class": "fighter",
+  "slot": "feat",
+  "feat": true,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 20,
+  "cooldown": 6,
+  "traits": [
+   "Attack",
+   "Flourish"
+  ],
+  "onHit": "Prone",
+  "onHitSeconds": 1.5,
+  "description": "Strike to bring them down: on a hit the target is knocked prone (off-guard, can't move) for 1.5 s."
+ },
+ {
+  "id": "swipe",
+  "name": "Swipe",
+  "class": "fighter",
+  "slot": "feat",
+  "feat": true,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 25,
+  "targets": 8,
+  "traits": [
+   "Attack",
+   "Flourish"
+  ],
+  "description": "One whirling swing at every enemy within reach, all around you. Only the first hit builds Fury.",
+  "arc": 360
+ },
+ {
+  "id": "electric_arc",
+  "name": "Electric Arc",
+  "class": "wizard",
+  "slot": "feat",
+  "feat": true,
+  "kind": "SpellBolt",
+  "actions": 2,
+  "range": 7,
+  "damageType": "Electricity",
+  "dice": "1d4",
+  "heightenDice": "1d4",
+  "chain": 1,
+  "traits": [
+   "Attack",
+   "Cantrip",
+   "Electricity",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "A cantrip arc of lightning: 1d4 electricity (+1d4 per rank above 1) that leaps to a second enemy within 3 tiles."
+ },
+ {
+  "id": "ray_of_frost",
+  "name": "Ray of Frost",
+  "class": "wizard",
+  "slot": "feat",
+  "feat": true,
+  "kind": "SpellBolt",
+  "actions": 2,
+  "range": 9,
+  "damageType": "Cold",
+  "dice": "2d4",
+  "heightenDice": "1d4",
+  "onHit": "Slowed",
+  "onHitSeconds": 2,
+  "traits": [
+   "Attack",
+   "Cantrip",
+   "Cold",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "A cantrip ray of cold: 2d4 cold (+1d4 per rank above 1); on a hit the target is slowed 1 for 2 s."
+ },
+ {
+  "id": "alchemists_fire",
+  "name": "Alchemist's fire",
+  "class": "item",
+  "slot": "belt",
+  "kind": "Bomb",
+  "actions": 1,
+  "range": 6,
+  "damageType": "Fire",
+  "dice": "1d8",
+  "heightenDice": "1d8",
+  "persistentDice": "0d1+1",
+  "splash": 1,
+  "traits": [
+   "Alchemical",
+   "Bomb",
+   "Fire",
+   "Splash"
+  ],
+  "description": "A flask of sticky fire: 1d8 fire and 1 persistent fire on a hit (more every two levels), 1 fire splash around the target even on a miss."
+ },
+ {
+  "id": "frost_vial",
+  "name": "Frost vial",
+  "class": "item",
+  "slot": "belt",
+  "kind": "Bomb",
+  "actions": 1,
+  "range": 6,
+  "damageType": "Cold",
+  "dice": "1d6",
+  "heightenDice": "1d6",
+  "splash": 1,
+  "onHit": "Slowed",
+  "onHitSeconds": 3,
+  "traits": [
+   "Alchemical",
+   "Bomb",
+   "Cold",
+   "Splash"
+  ],
+  "description": "A vial of biting cold: 1d6 cold on a hit (more every two levels) and slowed for 3 s, 1 cold splash around the target even on a miss."
+ },
+ {
+  "id": "bottled_lightning",
+  "name": "Bottled lightning",
+  "class": "item",
+  "slot": "belt",
+  "kind": "Bomb",
+  "actions": 1,
+  "range": 6,
+  "damageType": "Electricity",
+  "dice": "1d6",
+  "heightenDice": "1d6",
+  "splash": 1,
+  "onHit": "OffGuard",
+  "onHitSeconds": 3,
+  "traits": [
+   "Alchemical",
+   "Bomb",
+   "Electricity",
+   "Splash"
+  ],
+  "description": "A jar of crackling lightning: 1d6 electricity on a hit (more every two levels) and off-guard for 3 s, 1 electricity splash around the target even on a miss."
+ },
+ {
+  "id": "acid_flask",
+  "name": "Acid flask",
+  "class": "item",
+  "slot": "belt",
+  "kind": "Bomb",
+  "actions": 1,
+  "range": 6,
+  "damageType": "Acid",
+  "dice": "0d1+1",
+  "heightenDice": "0d1+1",
+  "persistentDice": "1d6",
+  "splash": 1,
+  "traits": [
+   "Alchemical",
+   "Bomb",
+   "Acid",
+   "Splash"
+  ],
+  "description": "A flask of eating acid: 1 acid and 1d6 persistent acid on a hit (more every two levels), 1 acid splash around the target even on a miss."
+ },
+ {
+  "id": "antidote",
+  "name": "Antidote",
+  "class": "item",
+  "slot": "belt",
+  "kind": "Elixir",
+  "actions": 1,
+  "cures": "Poison",
+  "resistsPoison": 2,
+  "buffSeconds": 120,
+  "traits": [
+   "Alchemical",
+   "Elixir"
+  ],
+  "description": "Ends any poison in you and gives +2 to saves against poison (the bog, the rot) for 2 minutes."
+ },
+ {
+  "id": "earthshaker",
+  "name": "Earthshaker",
+  "class": "fighter",
+  "slot": "feat",
+  "feat": true,
+  "kind": "Burst",
+  "actions": 2,
+  "cost": 20,
+  "cooldown": 5,
+  "radius": 2,
+  "save": "Reflex",
+  "weaponDamage": true,
+  "knockback": 1.5,
+  "needsTwoHanded": true,
+  "traits": [
+   "Attack",
+   "Flourish"
+  ],
+  "description": "Slam your two-handed weapon into the ground: every enemy within 2 tiles takes your weapon's damage against a basic Reflex save (your class DC), knocked back 1.5 tiles on a failure. 20 Fury, 5 s cooldown."
+ },
+ {
+  "id": "challenge",
+  "name": "Challenge",
+  "class": "fighter",
+  "slot": "feat",
+  "feat": true,
+  "kind": "Burst",
+  "actions": 1,
+  "cost": 10,
+  "cooldown": 12,
+  "radius": 5,
+  "save": "Will",
+  "onHit": "Frightened",
+  "onHitValue": 1,
+  "traits": [
+   "Auditory",
+   "Emotion",
+   "Fear",
+   "Mental"
+  ],
+  "description": "Roar a challenge: every enemy within 5 tiles turns on you, and those that fail a Will save against your class DC are frightened 1 (2 on a critical failure). 10 Fury, 12 s cooldown."
+ },
+ {
+  "id": "burning_hands",
+  "name": "Burning Hands",
+  "class": "wizard",
+  "slot": "feat",
+  "feat": true,
+  "kind": "Burst",
+  "actions": 2,
+  "cost": 14,
+  "radius": 3,
+  "arc": 90,
+  "save": "Reflex",
+  "damageType": "Fire",
+  "dice": "2d6",
+  "heightenDice": "1d6",
+  "traits": [
+   "Spell",
+   "Fire",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "A 3-tile cone of flame toward your target: 2d6 fire (+1d6 a rank above 1) to every enemy in it, against a basic Reflex save (your spell DC). 14 Mana."
+ },
+ {
+  "id": "thunderclap",
+  "name": "Thunderclap",
+  "class": "wizard",
+  "slot": "feat",
+  "feat": true,
+  "kind": "Burst",
+  "actions": 2,
+  "cost": 14,
+  "cooldown": 3,
+  "radius": 2.5,
+  "save": "Reflex",
+  "damageType": "Electricity",
+  "dice": "2d4",
+  "heightenDice": "1d4",
+  "knockback": 1,
+  "traits": [
+   "Spell",
+   "Electricity",
+   "Concentrate"
+  ],
+  "description": "Lightning cracks all round you: 2d4 electricity (+1d4 a rank above 1) to every enemy within 2.5 tiles against a basic Reflex save (your spell DC), knocked back a tile on a failure. 14 Mana, 3 s cooldown."
+ },
+ {
+  "id": "rogue_strike",
+  "name": "Strike",
+  "class": "rogue",
+  "slot": "lmb",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "repeat": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Attack with your weapon. Builds Momentum on a hit, more on a critical hit. With an agile or finesse weapon your sneak attack lands on any target off-guard to you: unaware of you, struck from hiding, prone or off-guard."
+ },
+ {
+  "id": "sneak_strike",
+  "name": "Sneak Strike",
+  "class": "rogue",
+  "slot": "rmb",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "cost": 20,
+  "feint": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "A feint and a quick thrust: the target is off-guard against this Strike (−2 AC), so your sneak attack lands. 20 Momentum."
+ },
+ {
+  "id": "tumble",
+  "name": "Tumble",
+  "class": "rogue",
+  "slot": "1",
+  "kind": "Tumble",
+  "actions": 1,
+  "range": 3.5,
+  "cooldown": 5,
+  "traits": [
+   "Move"
+  ],
+  "description": "Roll up to 3.5 tiles toward the pointer, through enemies; nothing can hit you mid-roll. Like any movement it builds Momentum. 5 s cooldown."
+ },
+ {
+  "id": "hide",
+  "name": "Hide in Shadows",
+  "class": "rogue",
+  "slot": "2",
+  "kind": "Hide",
+  "actions": 1,
+  "cooldown": 12,
+  "buffSeconds": 10,
+  "traits": [
+   "Secret"
+  ],
+  "description": "Slip into the shadows for 10 s. Monsters that haven't seen you notice you only once you are next to them; those hunting you from further than 2 tiles may lose you (your Stealth against their Perception). Your first blow out of hiding finds its target off-guard. You move at three-quarters speed, and attacking or being hit brings you out. 12 s cooldown."
+ },
+ {
+  "id": "eviscerate",
+  "name": "Eviscerate",
+  "class": "rogue",
+  "slot": "4",
+  "level": 2,
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "cost": 30,
+  "spendAll": true,
+  "resourcePerDie": 20,
+  "traits": [
+   "Attack",
+   "Flourish"
+  ],
+  "description": "Pour all your Momentum (at least 30) into one Strike: an extra weapon damage die for every 20 spent. Joins the bar at level 2."
+ },
+ {
+  "id": "gutting_strike",
+  "name": "Gutting Strike",
+  "class": "rogue",
+  "slot": "feat",
+  "feat": true,
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "cost": 15,
+  "damageType": "Bleed",
+  "persistentDice": "1d6",
+  "traits": [
+   "Attack"
+  ],
+  "description": "A Strike that opens a deep wound: on a hit, 1d6 persistent bleed (a die more at levels 5, 10 and 15). 15 Momentum."
+ },
+ {
+  "id": "snare",
+  "name": "Snare",
+  "class": "rogue",
+  "slot": "feat",
+  "feat": true,
+  "kind": "Trap",
+  "actions": 1,
+  "cost": 15,
+  "cooldown": 3,
+  "radius": 1.5,
+  "save": "Reflex",
+  "damageType": "Piercing",
+  "dice": "2d6",
+  "heightenDice": "1d6",
+  "onHit": "Immobilized",
+  "onHitSeconds": 2,
+  "buffSeconds": 45,
+  "traits": [
+   "Trap",
+   "Manipulate"
+  ],
+  "description": "Set a snare at your feet (two at most). Once armed, the first enemy to step on it sets it off: 2d6 piercing (+1d6 a rank above 1) to every enemy within 1.5 tiles against a basic Reflex save (your class DC), immobilized for 2 s on a failure. 15 Momentum, 3 s cooldown."
+ },
+ {
+  "id": "twin_feint",
+  "name": "Twin Feint",
+  "class": "rogue",
+  "slot": "feat",
+  "feat": true,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 15,
+  "twin": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Two quick Strikes, the second a feint: the target is off-guard against it, so your sneak attack lands. 15 Momentum."
+ },
+ {
+  "id": "whirling_blades",
+  "name": "Whirling Blades",
+  "class": "rogue",
+  "slot": "feat",
+  "feat": true,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 25,
+  "targets": 8,
+  "arc": 360,
+  "traits": [
+   "Attack",
+   "Flourish"
+  ],
+  "description": "Spin through the press: one Strike at every enemy within reach, all round you. Only the first hit builds Momentum. 25 Momentum."
+ },
+ {
+  "id": "ranger_strike",
+  "name": "Strike",
+  "class": "ranger",
+  "slot": "lmb",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "repeat": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Attack with your weapon: with a bow, an arrow at anything in range and in sight. Against your prey, Hunt Prey's precision die is added."
+ },
+ {
+  "id": "twin_shot",
+  "name": "Twin Shot",
+  "class": "ranger",
+  "slot": "rmb",
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 10,
+  "strikes": 2,
+  "needsRanged": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Loose two arrows at once at your target, each a Strike. 10 Focus. Needs a bow."
+ },
+ {
+  "id": "hunt_prey",
+  "name": "Hunt Prey",
+  "class": "ranger",
+  "slot": "1",
+  "kind": "Mark",
+  "actions": 1,
+  "range": 12,
+  "cooldown": 1,
+  "traits": [
+   "Concentrate"
+  ],
+  "description": "Mark a monster you can see within 12 tiles as your prey: your Strikes against it deal 1d8 more precision damage (2d8 at level 11). It stays your prey until it dies or you hunt another."
+ },
+ {
+  "id": "disengage",
+  "name": "Disengage",
+  "class": "ranger",
+  "slot": "2",
+  "kind": "Tumble",
+  "actions": 1,
+  "range": 3,
+  "cooldown": 6,
+  "traits": [
+   "Move"
+  ],
+  "description": "Spring up to 3 tiles toward the pointer, untouchable on the way: out of a melee and back into bow range. 6 s cooldown."
+ },
+ {
+  "id": "aimed_shot",
+  "name": "Aimed Shot",
+  "class": "ranger",
+  "slot": "4",
+  "level": 2,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 15,
+  "extraDice": 1,
+  "traits": [
+   "Attack"
+  ],
+  "description": "A careful Strike: one more weapon damage die (2 at level 10, 3 at 18). 15 Focus. Joins the bar at level 2."
+ },
+ {
+  "id": "piercing_shot",
+  "name": "Piercing Shot",
+  "class": "ranger",
+  "slot": "feat",
+  "feat": true,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 15,
+  "cooldown": 4,
+  "extraDice": 1,
+  "pierce": 3,
+  "needsRanged": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "An arrow driven clean through: one more weapon damage die, and it flies on through up to 3 enemies behind its target, a Strike at each. 15 Focus, 4 s cooldown. Needs a bow."
+ },
+ {
+  "id": "sic",
+  "name": "Sic 'Em",
+  "class": "ranger",
+  "slot": "feat",
+  "feat": true,
+  "kind": "Command",
+  "actions": 1,
+  "range": 10,
+  "cost": 10,
+  "cooldown": 8,
+  "extraDice": 1,
+  "onHit": "Prone",
+  "onHitSeconds": 1.5,
+  "traits": [
+   "Auditory"
+  ],
+  "description": "Send your wolf at a monster within 10 tiles: it bounds there and bites with one more damage die, knocking its target prone for 1.5 s on a hit. 10 Focus, 8 s cooldown."
+ },
+ {
+  "id": "champion_strike",
+  "name": "Strike",
+  "class": "champion",
+  "slot": "lmb",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "repeat": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Attack with your weapon. Builds a little Devotion on a hit; the blows you take build more."
+ },
+ {
+  "id": "smite",
+  "name": "Smite",
+  "class": "champion",
+  "slot": "rmb",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "cost": 10,
+  "extraDice": 1,
+  "traits": [
+   "Attack",
+   "Divine"
+  ],
+  "description": "A blow driven by your oath: one more weapon damage die (2 at level 10, 3 at 18). 10 Devotion."
+ },
+ {
+  "id": "lay_on_hands",
+  "name": "Lay on Hands",
+  "class": "champion",
+  "slot": "1",
+  "kind": "Heal",
+  "actions": 1,
+  "cost": 30,
+  "cooldown": 10,
+  "heal": 6,
+  "radius": 3,
+  "traits": [
+   "Champion",
+   "Healing",
+   "Vitality"
+  ],
+  "description": "Your hands mend wounds: you, and every ally within 3 tiles, heal 6 HP a spell rank. 30 Devotion, 10 s cooldown."
+ },
+ {
+  "id": "shield_of_faith",
+  "name": "Shield of Faith",
+  "class": "champion",
+  "slot": "2",
+  "kind": "Aura",
+  "actions": 1,
+  "cost": 25,
+  "buffSeconds": 15,
+  "radius": 3,
+  "auraAc": 1,
+  "soak": 1,
+  "raisesShield": true,
+  "traits": [
+   "Aura",
+   "Champion"
+  ],
+  "description": "An aura of faith for 15 s: +1 status bonus to AC and saves, and every blow at you or an ally within 3 tiles loses 1 damage (one more every two spell ranks). A shield in your off hand is raised for as long: its AC, and Shield Block. 25 Devotion."
+ },
+ {
+  "id": "lanterns_radiance",
+  "name": "Lantern's Radiance",
+  "class": "champion",
+  "slot": "feat",
+  "feat": true,
+  "kind": "Aura",
+  "actions": 1,
+  "cost": 25,
+  "buffSeconds": 12,
+  "radius": 2.5,
+  "dice": "1d4",
+  "save": "Fortitude",
+  "holy": true,
+  "auraHeal": 1,
+  "traits": [
+   "Aura",
+   "Champion",
+   "Light"
+  ],
+  "description": "Holy light for 12 s: every 2 s each enemy within 2.5 tiles takes 1d4 (a die more every two spell ranks) against a basic Fortitude save, vitality to the undead and fire to the living, and you and your allies within heal 1 (one more every two ranks). 25 Devotion."
+ },
+ {
+  "id": "aura_of_dread",
+  "name": "Aura of Dread",
+  "class": "champion",
+  "slot": "feat",
+  "feat": true,
+  "kind": "Aura",
+  "actions": 1,
+  "cost": 20,
+  "costsTaint": true,
+  "buffSeconds": 12,
+  "radius": 3,
+  "dice": "1d6",
+  "save": "Will",
+  "damageType": "Taint",
+  "drain": 0.5,
+  "onHit": "Frightened",
+  "onHitValue": 1,
+  "traits": [
+   "Aura",
+   "Champion",
+   "Fear",
+   "Emotion",
+   "Mental"
+  ],
+  "description": "Your broken oath spills out for 12 s: every 2 s each enemy within 3 tiles takes 1d6 Taint (a die more every two spell ranks) against a basic Will save, frightened 1 on a failure (2 on a critical failure), and half of what it deals heals you. Paid with 20 of your Taint meter, not Devotion."
+ },
+ {
+  "id": "blade_of_justice",
+  "name": "Blade of Justice",
+  "class": "champion",
+  "slot": "feat",
+  "feat": true,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 20,
+  "cooldown": 6,
+  "extraDice": 2,
+  "onHit": "Enfeebled",
+  "onHitValue": 1,
+  "onHitSeconds": 6,
+  "traits": [
+   "Attack",
+   "Champion",
+   "Divine"
+  ],
+  "description": "Your oath's verdict in one blow: a Strike with two weapon dice more (3 at level 10, 4 at 18), and the target is enfeebled 1 for 6 s, its own blows weaker. 20 Devotion, 6 s cooldown."
+ },
+ {
+  "id": "grave_bolt",
+  "name": "Grave Bolt",
+  "class": "necromancer",
+  "slot": "lmb",
+  "kind": "SpellBolt",
+  "actions": 2,
+  "repeat": true,
+  "range": 7,
+  "damageType": "Void",
+  "dice": "2d6",
+  "heightenDice": "1d6",
+  "traits": [
+   "Attack",
+   "Cantrip",
+   "Void",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "A cantrip bolt of grave-cold: a spell attack for 2d6 void (+1d6 per rank above 1)."
+ },
+ {
+  "id": "raise_bones",
+  "name": "Raise Bones",
+  "class": "necromancer",
+  "slot": "rmb",
+  "kind": "Summon",
+  "actions": 2,
+  "cost": 12,
+  "cooldown": 1,
+  "chargeInstead": true,
+  "creature": "raised_skeleton",
+  "traits": [
+   "Necromancer",
+   "Void",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "A skeleton claws its way out of the ground beside you and fights for you until it falls. You hold two (three from level 5); raising another makes the oldest crumble. Takes a Grave Charge if you have one, else 12 Mana."
+ },
+ {
+  "id": "siphon_life",
+  "name": "Siphon Life",
+  "class": "necromancer",
+  "slot": "1",
+  "kind": "SpellBolt",
+  "actions": 2,
+  "range": 7,
+  "cost": 10,
+  "damageType": "Void",
+  "dice": "1d8",
+  "heightenDice": "1d8",
+  "drain": 0.5,
+  "traits": [
+   "Attack",
+   "Void",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Draw the life out of an enemy: a spell attack for 1d8 void (+1d8 per rank above 1), and half the damage heals you. 10 Mana."
+ },
+ {
+  "id": "bone_rush",
+  "name": "Bone Rush",
+  "class": "necromancer",
+  "slot": "4",
+  "level": 2,
+  "kind": "Command",
+  "actions": 1,
+  "range": 10,
+  "charges": 1,
+  "cooldown": 6,
+  "extraDice": 1,
+  "traits": [
+   "Necromancer",
+   "Concentrate"
+  ],
+  "description": "Every skeleton you hold rushes a monster within 10 tiles, and its next blow deals one more die. A Grave Charge, 6 s cooldown. Joins the bar at level 2."
+ },
+ {
+  "id": "bone_armor",
+  "name": "Bone Armor",
+  "class": "necromancer",
+  "slot": "feat",
+  "feat": true,
+  "kind": "Ward",
+  "actions": 1,
+  "charges": 1,
+  "wardAc": 1,
+  "wardHardness": 4,
+  "hardnessPerTwoRanks": 2,
+  "wardSeconds": 15,
+  "traits": [
+   "Necromancer",
+   "Void",
+   "Concentrate"
+  ],
+  "description": "Bones knit round you for 15 s: +1 circumstance bonus to AC, and Shield Block takes 4 off a blow (+2 every two spell ranks) once every 6 s. A Grave Charge."
+ },
+ {
+  "id": "corpse_explosion",
+  "name": "Corpse Explosion",
+  "class": "necromancer",
+  "slot": "feat",
+  "feat": true,
+  "kind": "Blast",
+  "actions": 2,
+  "charges": 1,
+  "range": 8,
+  "radius": 2,
+  "dice": "2d6",
+  "heightenDice": "1d6",
+  "save": "Fortitude",
+  "damageType": "Void",
+  "onHit": "Sickened",
+  "onHitValue": 1,
+  "onHitSeconds": 4,
+  "traits": [
+   "Spell",
+   "Void",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "The grave's rot bursts round a monster within 8 tiles: 2d6 void (+1d6 a rank above 1) to every enemy within 2 tiles of it against a basic Fortitude save (your spell DC), sickened 1 for 4 s on a failure. A Grave Charge."
+ },
+ {
+  "id": "intimidating_roar",
+  "name": "Intimidating Roar",
+  "class": "fighter",
+  "slot": "6",
+  "level": 6,
+  "kind": "Burst",
+  "actions": 1,
+  "cost": 15,
+  "cooldown": 15,
+  "radius": 4,
+  "save": "Will",
+  "onHit": "Frightened",
+  "onHitValue": 2,
+  "traits": [
+   "Auditory",
+   "Emotion",
+   "Fear",
+   "Mental"
+  ],
+  "description": "A roar that breaks nerve: every enemy within 4 tiles that fails a Will save against your class DC is frightened 2 (3 on a critical failure), and turns on you. 15 Fury, 15 s cooldown. Joins the bar at level 6."
+ },
+ {
+  "id": "retributive_strike",
+  "name": "Retributive Strike",
+  "class": "champion",
+  "slot": "6",
+  "level": 6,
+  "kind": "Aura",
+  "actions": 1,
+  "cost": 20,
+  "buffSeconds": 12,
+  "radius": 1.5,
+  "retaliate": true,
+  "traits": [
+   "Aura",
+   "Champion"
+  ],
+  "description": "For 12 s your oath answers every blow: a monster that strikes you from within reach takes a Strike back at once (at most once a second). 20 Devotion. Joins the bar at level 6."
+ },
+ {
+  "id": "shadowstep",
+  "name": "Shadowstep",
+  "class": "rogue",
+  "slot": "6",
+  "level": 6,
+  "kind": "Tumble",
+  "actions": 1,
+  "range": 6,
+  "cost": 15,
+  "cooldown": 10,
+  "hideSeconds": 4,
+  "traits": [
+   "Move",
+   "Shadow"
+  ],
+  "description": "Step through the shadows up to 6 tiles toward the pointer, untouchable, and come out of them hidden for 4 s. 15 Momentum, 10 s cooldown. Joins the bar at level 6."
+ },
+ {
+  "id": "rain_of_arrows",
+  "name": "Rain of Arrows",
+  "class": "ranger",
+  "slot": "6",
+  "level": 6,
+  "kind": "Blast",
+  "actions": 2,
+  "cost": 20,
+  "cooldown": 6,
+  "range": 10,
+  "radius": 2.5,
+  "weaponDamage": true,
+  "save": "Reflex",
+  "needsRanged": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Arrows fall on a monster within 10 tiles and everything within 2.5 tiles of it: your bow's damage against a basic Reflex save (your class DC). 20 Focus, 6 s cooldown. Needs a bow. Joins the bar at level 6."
+ },
+ {
+  "id": "blink",
+  "name": "Blink",
+  "class": "wizard",
+  "slot": "6",
+  "level": 6,
+  "kind": "Tumble",
+  "actions": 1,
+  "range": 5,
+  "cost": 8,
+  "cooldown": 8,
+  "traits": [
+   "Teleportation",
+   "Concentrate"
+  ],
+  "description": "Vanish and reappear up to 5 tiles toward the pointer, untouchable for the moment between. 8 Mana, 8 s cooldown. Joins the bar at level 6."
+ },
+ {
+  "id": "bone_spear",
+  "name": "Bone Spear",
+  "class": "necromancer",
+  "slot": "6",
+  "level": 6,
+  "kind": "SpellBolt",
+  "actions": 2,
+  "cost": 10,
+  "charges": 1,
+  "range": 9,
+  "damageType": "Piercing",
+  "dice": "3d6",
+  "heightenDice": "1d6",
+  "chain": 2,
+  "traits": [
+   "Attack",
+   "Necromancer",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "A spear of bone: a spell attack for 3d6 piercing (+1d6 a rank above 1) that flies on through two more enemies. A Grave Charge and 10 Mana. Joins the bar at level 6."
+ },
+ {
+  "id": "whirlwind_strike",
+  "name": "Whirlwind Strike",
+  "class": "fighter",
+  "slot": "feat",
+  "feat": true,
+  "level": 8,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 30,
+  "cooldown": 6,
+  "targets": 12,
+  "arc": 360,
+  "extraDice": 1,
+  "needsTwoHanded": true,
+  "traits": [
+   "Attack",
+   "Flourish"
+  ],
+  "description": "Vanguard, level 8: one great turning blow at every enemy in reach, a weapon die more. Two-handed only. 30 Fury, 6 s cooldown."
+ },
+ {
+  "id": "shield_slam",
+  "name": "Shield Slam",
+  "class": "fighter",
+  "slot": "feat",
+  "feat": true,
+  "level": 8,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 20,
+  "cooldown": 8,
+  "extraDice": 1,
+  "onHit": "Prone",
+  "onHitSeconds": 2,
+  "knockback": 1.5,
+  "needsShield": true,
+  "traits": [
+   "Attack",
+   "Shield"
+  ],
+  "description": "Bulwark, level 8: drive your shield into them: a Strike with a weapon die more that knocks the target back 1.5 tiles and prone for 2 s. Needs a shield. 20 Fury, 8 s cooldown."
+ },
+ {
+  "id": "beacon_of_hope",
+  "name": "Beacon of Hope",
+  "class": "champion",
+  "slot": "feat",
+  "feat": true,
+  "level": 8,
+  "kind": "Heal",
+  "actions": 2,
+  "cost": 30,
+  "cooldown": 20,
+  "heal": 8,
+  "radius": 4,
+  "cleansesTaint": 50,
+  "traits": [
+   "Champion",
+   "Healing",
+   "Light"
+  ],
+  "description": "Lanternbearer, level 8: the lantern blazes: you and your allies within 4 tiles heal 8 HP a spell rank, and 50 Taint burns out of you. 30 Devotion, 20 s cooldown."
+ },
+ {
+  "id": "dread_harvest",
+  "name": "Dread Harvest",
+  "class": "champion",
+  "slot": "feat",
+  "feat": true,
+  "level": 8,
+  "kind": "Blast",
+  "actions": 2,
+  "cost": 30,
+  "costsTaint": true,
+  "cooldown": 10,
+  "range": 7,
+  "radius": 3,
+  "dice": "2d6",
+  "heightenDice": "1d6",
+  "save": "Will",
+  "damageType": "Taint",
+  "drain": 0.5,
+  "onHit": "Frightened",
+  "onHitValue": 1,
+  "traits": [
+   "Champion",
+   "Fear",
+   "Emotion",
+   "Mental"
+  ],
+  "description": "Oathbreaker, level 8: reap the dread round a monster within 7 tiles: 2d6 Taint (+1d6 a rank above 1) to all within 3 tiles of it against a basic Will save, frightened 1 on a failure; half of all it deals heals you. Paid with 30 of your Taint meter."
+ },
+ {
+  "id": "aura_of_justice",
+  "name": "Aura of Justice",
+  "class": "champion",
+  "slot": "feat",
+  "feat": true,
+  "level": 8,
+  "kind": "Aura",
+  "actions": 1,
+  "cost": 30,
+  "buffSeconds": 15,
+  "radius": 3,
+  "soak": 1,
+  "retaliate": true,
+  "extraDice": 1,
+  "traits": [
+   "Aura",
+   "Champion"
+  ],
+  "description": "Paladin, level 8: for 15 s your oath guards everyone near you: a monster that strikes you, or an ally within 3 tiles, from within your reach takes a Strike back at once with a weapon die more (at most once a second), and every blow at you or them loses 1 damage (one more every two spell ranks). 30 Devotion."
+ },
+ {
+  "id": "fan_of_knives",
+  "name": "Fan of Knives",
+  "class": "rogue",
+  "slot": "feat",
+  "feat": true,
+  "level": 8,
+  "kind": "Burst",
+  "actions": 2,
+  "cost": 30,
+  "cooldown": 6,
+  "radius": 3,
+  "weaponDamage": true,
+  "save": "Reflex",
+  "damageType": "Bleed",
+  "persistentDice": "1d6",
+  "traits": [
+   "Attack"
+  ],
+  "description": "Cutthroat, level 8: knives fly from you at every enemy within 3 tiles: your weapon's damage against a basic Reflex save, and 1d6 persistent bleed on a failure. 30 Momentum, 6 s cooldown."
+ },
+ {
+  "id": "smoke_bomb",
+  "name": "Smoke Bomb",
+  "class": "rogue",
+  "slot": "feat",
+  "feat": true,
+  "level": 8,
+  "kind": "Burst",
+  "actions": 1,
+  "cost": 20,
+  "cooldown": 15,
+  "radius": 3,
+  "save": "Reflex",
+  "onHit": "Dazzled",
+  "onHitSeconds": 4,
+  "hideSeconds": 4,
+  "traits": [
+   "Trickster"
+  ],
+  "description": "Trickster, level 8: a burst of smoke round you: every enemy within 3 tiles that fails a Reflex save is dazzled for 4 s (its blows may miss you), and you vanish into it, hidden for 4 s. 20 Momentum, 15 s cooldown."
+ },
+ {
+  "id": "deadeye",
+  "name": "Deadeye",
+  "class": "ranger",
+  "slot": "feat",
+  "feat": true,
+  "level": 8,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 25,
+  "cooldown": 8,
+  "extraDice": 3,
+  "pierce": 2,
+  "needsRanged": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Marksman, level 8: one perfect arrow: three weapon dice more, and it flies on through two enemies behind. 25 Focus, 8 s cooldown. Needs a bow."
+ },
+ {
+  "id": "call_of_the_pack",
+  "name": "Call of the Pack",
+  "class": "ranger",
+  "slot": "feat",
+  "feat": true,
+  "level": 8,
+  "kind": "Summon",
+  "actions": 1,
+  "cost": 25,
+  "cooldown": 30,
+  "creature": "wolf",
+  "count": 2,
+  "buffSeconds": 20,
+  "traits": [
+   "Auditory",
+   "Beastmaster"
+  ],
+  "description": "Beastmaster, level 8: you howl, and two more wolves run with your pack for 20 s. 25 Focus, 30 s cooldown."
+ },
+ {
+  "id": "fireball",
+  "name": "Fireball",
+  "class": "wizard",
+  "slot": "feat",
+  "feat": true,
+  "level": 8,
+  "kind": "Blast",
+  "actions": 2,
+  "cost": 22,
+  "cooldown": 3,
+  "range": 10,
+  "radius": 2.5,
+  "dice": "2d6",
+  "heightenDice": "1d6",
+  "save": "Reflex",
+  "damageType": "Fire",
+  "traits": [
+   "Spell",
+   "Fire",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Pyromancer, level 8: a bead of fire bursts on a monster within 10 tiles: 2d6 fire (+1d6 a rank above 1) to everything within 2.5 tiles against a basic Reflex save (your spell DC). 22 Mana, 3 s cooldown."
+ },
+ {
+  "id": "chain_lightning",
+  "name": "Chain Lightning",
+  "class": "wizard",
+  "slot": "feat",
+  "feat": true,
+  "level": 8,
+  "kind": "SpellBolt",
+  "actions": 2,
+  "cost": 20,
+  "cooldown": 4,
+  "range": 9,
+  "dice": "2d8",
+  "heightenDice": "1d8",
+  "damageType": "Electricity",
+  "chain": 4,
+  "traits": [
+   "Attack",
+   "Electricity",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Stormcaller, level 8: a spell attack for 2d8 electricity (+1d8 a rank above 1) that leaps on to four more enemies. 20 Mana, 4 s cooldown."
+ },
+ {
+  "id": "raise_bone_knight",
+  "name": "Raise Bone Knight",
+  "class": "necromancer",
+  "slot": "feat",
+  "feat": true,
+  "level": 8,
+  "kind": "Summon",
+  "actions": 2,
+  "charges": 2,
+  "cooldown": 20,
+  "creature": "raised_knight",
+  "traits": [
+   "Necromancer",
+   "Void",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Bonelord, level 8: a bone knight, twice as tough as a skeleton and armed with a great blade, rises to fight for you (among the skeletons you hold). Two Grave Charges, 20 s cooldown."
+ },
+ {
+  "id": "plague_cloud",
+  "name": "Plague Cloud",
+  "class": "necromancer",
+  "slot": "feat",
+  "feat": true,
+  "level": 8,
+  "kind": "Blast",
+  "actions": 2,
+  "charges": 2,
+  "cooldown": 8,
+  "range": 9,
+  "radius": 3,
+  "dice": "2d6",
+  "heightenDice": "1d6",
+  "save": "Fortitude",
+  "damageType": "Acid",
+  "onHit": "Sickened",
+  "onHitValue": 2,
+  "onHitSeconds": 6,
+  "traits": [
+   "Spell",
+   "Acid",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Plaguebringer, level 8: a cloud of rot round a monster within 9 tiles: 2d6 acid (+1d6 a rank above 1) to all within 3 tiles of it against a basic Fortitude save (your spell DC), sickened 2 for 6 s on a failure. Two Grave Charges, 8 s cooldown."
+ },
+ {
+  "id": "sundering_blow",
+  "name": "Sundering Blow",
+  "class": "fighter",
+  "slot": "11",
+  "level": 11,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 25,
+  "cooldown": 8,
+  "extraDice": 2,
+  "onHit": "OffGuard",
+  "onHitSeconds": 6,
+  "traits": [
+   "Attack",
+   "Flourish"
+  ],
+  "description": "A blow that splits armour: a Strike with two weapon dice more, and the target is off-guard for 6 s. 25 Fury, 8 s cooldown. Joins the bar at level 11."
+ },
+ {
+  "id": "divine_wrath",
+  "name": "Divine Wrath",
+  "class": "champion",
+  "slot": "11",
+  "level": 11,
+  "kind": "Burst",
+  "actions": 2,
+  "cost": 25,
+  "cooldown": 10,
+  "radius": 3,
+  "save": "Reflex",
+  "damageType": "Fire",
+  "dice": "3d6",
+  "heightenDice": "1d6",
+  "traits": [
+   "Champion",
+   "Fire",
+   "Light"
+  ],
+  "description": "Your god's anger breaks round you: 3d6 fire (+1d6 a rank above 1) to every enemy within 3 tiles against a basic Reflex save (your class DC). 25 Devotion, 10 s cooldown. Joins the bar at level 11."
+ },
+ {
+  "id": "crippling_strike",
+  "name": "Crippling Strike",
+  "class": "rogue",
+  "slot": "11",
+  "level": 11,
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "cost": 20,
+  "cooldown": 6,
+  "extraDice": 2,
+  "damageType": "Bleed",
+  "persistentDice": "1d6",
+  "onHit": "Slowed",
+  "onHitValue": 1,
+  "onHitSeconds": 4,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Cut the tendon: a Strike with two weapon dice more that leaves 1d6 persistent bleed, and the target is slowed for 4 s. 20 Momentum, 6 s cooldown. Joins the bar at level 11."
+ },
+ {
+  "id": "pinning_shot",
+  "name": "Pinning Shot",
+  "class": "ranger",
+  "slot": "11",
+  "level": 11,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 20,
+  "cooldown": 8,
+  "extraDice": 2,
+  "needsRanged": true,
+  "onHit": "Immobilized",
+  "onHitSeconds": 3,
+  "traits": [
+   "Attack"
+  ],
+  "description": "An arrow through the foot: two weapon dice more, and the target can't move for 3 s. 20 Focus, 8 s cooldown. Needs a bow. Joins the bar at level 11."
+ },
+ {
+  "id": "cone_of_cold",
+  "name": "Cone of Cold",
+  "class": "wizard",
+  "slot": "11",
+  "level": 11,
+  "kind": "Burst",
+  "actions": 2,
+  "cost": 24,
+  "cooldown": 4,
+  "radius": 5,
+  "arc": 90,
+  "save": "Reflex",
+  "damageType": "Cold",
+  "dice": "3d6",
+  "heightenDice": "1d6",
+  "onHit": "Slowed",
+  "onHitValue": 1,
+  "onHitSeconds": 4,
+  "traits": [
+   "Spell",
+   "Cold",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "A 5-tile cone of killing frost: 3d6 cold (+1d6 a rank above 1) against a basic Reflex save, slowed for 4 s on a failure. 24 Mana, 4 s cooldown. Joins the bar at level 11."
+ },
+ {
+  "id": "grasp_of_the_grave",
+  "name": "Grasp of the Grave",
+  "class": "necromancer",
+  "slot": "11",
+  "level": 11,
+  "kind": "Blast",
+  "actions": 2,
+  "cost": 12,
+  "charges": 1,
+  "cooldown": 8,
+  "range": 8,
+  "radius": 2.5,
+  "save": "Reflex",
+  "damageType": "Void",
+  "dice": "3d6",
+  "heightenDice": "1d6",
+  "onHit": "Immobilized",
+  "onHitSeconds": 2,
+  "traits": [
+   "Spell",
+   "Void",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Dead hands claw up round a monster within 8 tiles: 3d6 void (+1d6 a rank above 1) to all within 2.5 tiles of it against a basic Reflex save, held fast for 2 s on a failure. A Grave Charge and 12 Mana. Joins the bar at level 11."
+ },
+ {
+  "id": "earthsplitter",
+  "name": "Earthsplitter",
+  "class": "fighter",
+  "slot": "feat",
+  "feat": true,
+  "level": 13,
+  "kind": "Burst",
+  "actions": 2,
+  "cost": 35,
+  "cooldown": 10,
+  "radius": 4,
+  "arc": 90,
+  "weaponDamage": true,
+  "extraDice": 2,
+  "save": "Reflex",
+  "onHit": "Prone",
+  "onHitSeconds": 2,
+  "needsTwoHanded": true,
+  "traits": [
+   "Attack",
+   "Flourish"
+  ],
+  "description": "Vanguard, level 13: you split the ground in a 4-tile cone: your weapon's damage with two dice more against a basic Reflex save (your class DC), knocked prone for 2 s on a failure. Two-handed only. 35 Fury, 10 s cooldown."
+ },
+ {
+  "id": "shield_rush",
+  "name": "Shield Rush",
+  "class": "fighter",
+  "slot": "feat",
+  "feat": true,
+  "level": 13,
+  "kind": "ChargeStrike",
+  "actions": 2,
+  "cost": 25,
+  "cooldown": 10,
+  "range": 7,
+  "extraDice": 1,
+  "onHit": "Prone",
+  "onHitSeconds": 2,
+  "knockback": 2,
+  "needsShield": true,
+  "traits": [
+   "Attack",
+   "Shield",
+   "Flourish"
+  ],
+  "description": "Bulwark, level 13: charge up to 7 tiles behind your shield into a Strike with a weapon die more that knocks the target back 2 tiles and prone for 2 s. Needs a shield. 25 Fury, 10 s cooldown."
+ },
+ {
+  "id": "dawnbreak",
+  "name": "Dawnbreak",
+  "class": "champion",
+  "slot": "feat",
+  "feat": true,
+  "level": 13,
+  "kind": "Burst",
+  "actions": 2,
+  "cost": 35,
+  "cooldown": 15,
+  "radius": 4,
+  "save": "Reflex",
+  "damageType": "Fire",
+  "dice": "4d6",
+  "heightenDice": "1d6",
+  "drain": 0.25,
+  "traits": [
+   "Champion",
+   "Fire",
+   "Light"
+  ],
+  "description": "Lanternbearer, level 13: the lantern bursts like sunrise: 4d6 fire (+1d6 a rank above 1) to all within 4 tiles against a basic Reflex save, and a quarter of all it deals heals you; it hallows the rising dead it covers. 35 Devotion, 15 s cooldown."
+ },
+ {
+  "id": "ruinous_blow",
+  "name": "Ruinous Blow",
+  "class": "champion",
+  "slot": "feat",
+  "feat": true,
+  "level": 13,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 25,
+  "costsTaint": true,
+  "cooldown": 8,
+  "extraDice": 3,
+  "onHit": "Frightened",
+  "onHitValue": 2,
+  "traits": [
+   "Attack",
+   "Champion"
+  ],
+  "description": "Oathbreaker, level 13: a Strike with three weapon dice more, frightened 2 on a hit. Paid with 25 of your Taint meter. 8 s cooldown."
+ },
+ {
+  "id": "final_judgment",
+  "name": "Final Judgment",
+  "class": "champion",
+  "slot": "feat",
+  "feat": true,
+  "level": 13,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 35,
+  "cooldown": 10,
+  "targets": 6,
+  "arc": 180,
+  "extraDice": 3,
+  "traits": [
+   "Attack",
+   "Champion",
+   "Divine",
+   "Sweep"
+  ],
+  "description": "Paladin, level 13: judgment falls on all before you: Strike your target and up to five more within reach and 90° of it, each with three weapon dice more. 35 Devotion, 10 s cooldown."
+ },
+ {
+  "id": "assassinate",
+  "name": "Assassinate",
+  "class": "rogue",
+  "slot": "feat",
+  "feat": true,
+  "level": 13,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 35,
+  "cooldown": 10,
+  "extraDice": 3,
+  "damageType": "Bleed",
+  "persistentDice": "2d6",
+  "traits": [
+   "Attack"
+  ],
+  "description": "Cutthroat, level 13: a killing blow: three weapon dice more, and 2d6 persistent bleed. 35 Momentum, 10 s cooldown."
+ },
+ {
+  "id": "caltrops",
+  "name": "Caltrops",
+  "class": "rogue",
+  "slot": "feat",
+  "feat": true,
+  "level": 13,
+  "kind": "Trap",
+  "actions": 1,
+  "cost": 20,
+  "cooldown": 4,
+  "radius": 2,
+  "save": "Reflex",
+  "damageType": "Piercing",
+  "dice": "3d6",
+  "heightenDice": "1d6",
+  "onHit": "Slowed",
+  "onHitValue": 1,
+  "onHitSeconds": 6,
+  "buffSeconds": 45,
+  "traits": [
+   "Trap",
+   "Manipulate"
+  ],
+  "description": "Trickster, level 13: scatter caltrops at your feet: the first monster to cross them and all within 2 tiles take 3d6 piercing (+1d6 a rank above 1) against a basic Reflex save, slowed for 6 s on a failure. 20 Momentum."
+ },
+ {
+  "id": "killshot",
+  "name": "Killshot",
+  "class": "ranger",
+  "slot": "feat",
+  "feat": true,
+  "level": 13,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 35,
+  "cooldown": 10,
+  "extraDice": 4,
+  "pierce": 1,
+  "needsRanged": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Marksman, level 13: four weapon dice more, flying on through an enemy behind. 35 Focus, 10 s cooldown. Needs a bow."
+ },
+ {
+  "id": "hunt_as_one",
+  "name": "Hunt as One",
+  "class": "ranger",
+  "slot": "feat",
+  "feat": true,
+  "level": 13,
+  "kind": "Command",
+  "actions": 1,
+  "cost": 25,
+  "cooldown": 10,
+  "range": 10,
+  "extraDice": 2,
+  "traits": [
+   "Auditory",
+   "Beastmaster"
+  ],
+  "description": "Beastmaster, level 13: every wolf at your call leaps at the monster you mark, its next bite two dice the stronger. 25 Focus, 10 s cooldown."
+ },
+ {
+  "id": "meteor",
+  "name": "Meteor",
+  "class": "wizard",
+  "slot": "feat",
+  "feat": true,
+  "level": 13,
+  "kind": "Blast",
+  "actions": 2,
+  "cost": 32,
+  "cooldown": 8,
+  "range": 10,
+  "radius": 3.5,
+  "save": "Reflex",
+  "damageType": "Fire",
+  "dice": "4d6",
+  "heightenDice": "1d6",
+  "traits": [
+   "Spell",
+   "Fire",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Pyromancer, level 13: a burning stone falls on a monster within 10 tiles: 4d6 fire (+1d6 a rank above 1) to everything within 3.5 tiles against a basic Reflex save. 32 Mana, 8 s cooldown."
+ },
+ {
+  "id": "ball_lightning",
+  "name": "Ball Lightning",
+  "class": "wizard",
+  "slot": "feat",
+  "feat": true,
+  "level": 13,
+  "kind": "Blast",
+  "actions": 2,
+  "cost": 30,
+  "cooldown": 8,
+  "range": 9,
+  "radius": 2.5,
+  "save": "Reflex",
+  "damageType": "Electricity",
+  "dice": "4d8",
+  "heightenDice": "1d8",
+  "onHit": "Stunned",
+  "onHitValue": 1,
+  "onHitSeconds": 1,
+  "traits": [
+   "Spell",
+   "Electricity",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Stormcaller, level 13: a crackling sphere bursts on a monster within 9 tiles: 4d8 electricity (+1d8 a rank above 1) to all within 2.5 tiles against a basic Reflex save, stunned for a moment on a failure. 30 Mana, 8 s cooldown."
+ },
+ {
+  "id": "bone_colossus",
+  "name": "Bone Colossus",
+  "class": "necromancer",
+  "slot": "feat",
+  "feat": true,
+  "level": 13,
+  "kind": "Summon",
+  "actions": 2,
+  "charges": 3,
+  "cooldown": 40,
+  "creature": "bone_colossus",
+  "count": 1,
+  "buffSeconds": 25,
+  "traits": [
+   "Necromancer",
+   "Void",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Bonelord, level 13: the graves give up a colossus of fused bone that fights beside you for 25 s. Three Grave Charges, 40 s cooldown."
+ },
+ {
+  "id": "blight",
+  "name": "Blight",
+  "class": "necromancer",
+  "slot": "feat",
+  "feat": true,
+  "level": 13,
+  "kind": "Blast",
+  "actions": 2,
+  "charges": 2,
+  "cooldown": 8,
+  "range": 9,
+  "radius": 3,
+  "save": "Fortitude",
+  "damageType": "Poison",
+  "dice": "3d6",
+  "heightenDice": "1d6",
+  "persistentDice": "1d6",
+  "onHit": "Sickened",
+  "onHitValue": 2,
+  "onHitSeconds": 6,
+  "traits": [
+   "Spell",
+   "Poison",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Plaguebringer, level 13: rot blooms round a monster within 9 tiles: 3d6 poison (+1d6 a rank above 1) to all within 3 tiles against a basic Fortitude save, sickened 2 and 1d6 persistent poison on a failure. Two Grave Charges, 8 s cooldown."
+ },
+ {
+  "id": "gunslinger_strike",
+  "name": "Shoot",
+  "class": "gunslinger",
+  "slot": "lmb",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "repeat": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Attack with your weapon: a gun fires one round from its load at anything in range and in sight, and loads again by itself once it is empty (R to load early). Builds Grit on a hit, more on a critical hit."
+ },
+ {
+  "id": "crack_shot",
+  "name": "Crack Shot",
+  "class": "gunslinger",
+  "slot": "rmb",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "cost": 12,
+  "extraDice": 1,
+  "traits": [
+   "Attack"
+  ],
+  "description": "A shot placed just so: one more weapon damage die (2 at level 10, 3 at 18). 12 Grit."
+ },
+ {
+  "id": "risky_reload",
+  "name": "Risky Reload",
+  "class": "gunslinger",
+  "slot": "1",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "cooldown": 5,
+  "reloads": true,
+  "needsFirearm": true,
+  "traits": [
+   "Attack",
+   "Flourish"
+  ],
+  "description": "Load in an instant and fire: your gun is full again and the Strike goes off at once. 5 s cooldown. Needs a gun."
+ },
+ {
+  "id": "hit_the_dirt",
+  "name": "Hit the Dirt!",
+  "class": "gunslinger",
+  "slot": "2",
+  "kind": "Tumble",
+  "actions": 1,
+  "range": 3,
+  "cooldown": 7,
+  "reloads": true,
+  "traits": [
+   "Move"
+  ],
+  "description": "Fling yourself up to 3 tiles toward the pointer, untouchable on the way, and load your gun as you land. 7 s cooldown."
+ },
+ {
+  "id": "scattershot",
+  "name": "Scattershot",
+  "class": "gunslinger",
+  "slot": "4",
+  "level": 2,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 20,
+  "cooldown": 4,
+  "targets": 3,
+  "arc": 60,
+  "needsFirearm": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Shot sprayed wide: a Strike at your target and up to two more within reach and 30° of it, for one round. 20 Grit, 4 s cooldown. Needs a gun. Joins the bar at level 2."
+ },
+ {
+  "id": "fan_the_hammer",
+  "name": "Fan the Hammer",
+  "class": "gunslinger",
+  "slot": "feat",
+  "feat": true,
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "cost": 15,
+  "cooldown": 6,
+  "spendLoad": true,
+  "needsFirearm": true,
+  "traits": [
+   "Attack",
+   "Pistolero"
+  ],
+  "description": "Empty your guns at one target: a Strike for every round loaded, a beat apart. 15 Grit, 6 s cooldown. Needs a gun."
+ },
+ {
+  "id": "headshot",
+  "name": "Headshot",
+  "class": "gunslinger",
+  "slot": "feat",
+  "feat": true,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 20,
+  "cooldown": 5,
+  "extraDice": 2,
+  "onHit": "Stunned",
+  "onHitValue": 1,
+  "onHitSeconds": 1,
+  "needsFirearm": true,
+  "traits": [
+   "Attack",
+   "Sniper"
+  ],
+  "description": "A slow, sure aim: a Strike with two weapon dice more (3 at level 10, 4 at 18) that stuns the target for a second. 20 Grit, 5 s cooldown. Needs a gun."
+ },
+ {
+  "id": "penetrating_shot",
+  "name": "Penetrating Shot",
+  "class": "gunslinger",
+  "slot": "6",
+  "level": 6,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 20,
+  "cooldown": 6,
+  "extraDice": 1,
+  "pierce": 3,
+  "needsFirearm": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "A ball driven clean through: one more weapon damage die, and it flies on through up to 3 enemies behind its target, a Strike at each. 20 Grit, 6 s cooldown. Needs a gun. Joins the bar at level 6."
+ },
+ {
+  "id": "dead_mans_hand",
+  "name": "Dead Man's Hand",
+  "class": "gunslinger",
+  "slot": "feat",
+  "feat": true,
+  "level": 8,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 25,
+  "cooldown": 8,
+  "targets": 5,
+  "arc": 360,
+  "extraDice": 1,
+  "needsFirearm": true,
+  "traits": [
+   "Attack",
+   "Pistolero"
+  ],
+  "description": "Pistolero, level 8: turn on your heel and shoot everything near: a Strike with a weapon die more at your target and up to four more within reach, all round you. 25 Grit, 8 s cooldown. Needs a gun."
+ },
+ {
+  "id": "vital_shot",
+  "name": "Vital Shot",
+  "class": "gunslinger",
+  "slot": "feat",
+  "feat": true,
+  "level": 8,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 25,
+  "cooldown": 8,
+  "extraDice": 3,
+  "damageType": "Bleed",
+  "persistentDice": "2d6",
+  "needsFirearm": true,
+  "traits": [
+   "Attack",
+   "Sniper"
+  ],
+  "description": "Sniper, level 8: a shot through something that matters: three weapon dice more, and 2d6 persistent bleed on a hit (a die more at levels 10 and 15). 25 Grit, 8 s cooldown. Needs a gun."
+ },
+ {
+  "id": "hail_of_lead",
+  "name": "Hail of Lead",
+  "class": "gunslinger",
+  "slot": "11",
+  "level": 11,
+  "kind": "Blast",
+  "actions": 2,
+  "cost": 25,
+  "cooldown": 8,
+  "range": 10,
+  "radius": 2.5,
+  "weaponDamage": true,
+  "save": "Reflex",
+  "needsFirearm": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Fire, load and fire again into a crowd: a monster within 10 tiles and everything within 2.5 tiles of it take your gun's damage against a basic Reflex save. 25 Grit, 8 s cooldown. Needs a gun. Joins the bar at level 11."
+ },
+ {
+  "id": "twin_thunder",
+  "name": "Twin Thunder",
+  "class": "gunslinger",
+  "slot": "feat",
+  "feat": true,
+  "level": 13,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 35,
+  "cooldown": 10,
+  "strikes": 2,
+  "extraDice": 3,
+  "needsFirearm": true,
+  "traits": [
+   "Attack",
+   "Pistolero"
+  ],
+  "description": "Pistolero, level 13: both barrels at once: two Strikes at your target, each with three weapon dice more, for two rounds. 35 Grit, 10 s cooldown. Needs a gun."
+ },
+ {
+  "id": "one_shot_one_kill",
+  "name": "One Shot, One Kill",
+  "class": "gunslinger",
+  "slot": "feat",
+  "feat": true,
+  "level": 13,
+  "kind": "WeaponStrike",
+  "actions": 3,
+  "cost": 40,
+  "cooldown": 12,
+  "extraDice": 5,
+  "pierce": 1,
+  "needsFirearm": true,
+  "traits": [
+   "Attack",
+   "Sniper"
+  ],
+  "description": "Sniper, level 13: the shot of a lifetime: five weapon dice more, flying on through an enemy behind. 40 Grit, 12 s cooldown. Needs a gun."
+ },
+ {
+  "id": "unstoppable",
+  "name": "Unstoppable",
+  "class": "fighter",
+  "slot": "16",
+  "level": 16,
+  "kind": "Aura",
+  "actions": 1,
+  "cost": 40,
+  "cooldown": 30,
+  "buffSeconds": 10,
+  "attackRate": 1.5,
+  "steadfast": true,
+  "traits": [
+   "Fighter",
+   "Stance"
+  ],
+  "description": "For 10 s nothing stops you: your blows come half again as fast, and no stun, hold, slow, fear or fall takes you. 40 Fury, 30 s cooldown. Joins the bar at level 16."
+ },
+ {
+  "id": "avatar_of_the_lantern",
+  "name": "Avatar of the Lantern",
+  "class": "champion",
+  "slot": "16",
+  "level": 16,
+  "kind": "Aura",
+  "actions": 1,
+  "cost": 40,
+  "cooldown": 40,
+  "buffSeconds": 15,
+  "radius": 3,
+  "dice": "2d6",
+  "save": "Fortitude",
+  "holy": true,
+  "auraAc": 2,
+  "regenShare": 0.04,
+  "traits": [
+   "Aura",
+   "Champion",
+   "Light"
+  ],
+  "description": "For 15 s you burn with the Lantern's light: +2 status bonus to AC and saves, 4% of your HP back every 2 s, and every 2 s each enemy within 3 tiles takes 2d6 (a die more every two spell ranks) against a basic Fortitude save, vitality to the undead and fire to the living. 40 Devotion, 40 s cooldown. Joins the bar at level 16."
+ },
+ {
+  "id": "death_mark",
+  "name": "Death Mark",
+  "class": "rogue",
+  "slot": "16",
+  "level": 16,
+  "kind": "Aura",
+  "actions": 1,
+  "cost": 30,
+  "cooldown": 15,
+  "buffSeconds": 8,
+  "sureCritical": true,
+  "traits": [
+   "Rogue"
+  ],
+  "description": "You mark a death: for 8 s, your next Strike that hits is a critical hit. 30 Momentum, 15 s cooldown. Joins the bar at level 16."
+ },
+ {
+  "id": "hunters_apex",
+  "name": "Hunter's Apex",
+  "class": "ranger",
+  "slot": "16",
+  "level": 16,
+  "kind": "Aura",
+  "actions": 1,
+  "cost": 35,
+  "cooldown": 30,
+  "buffSeconds": 15,
+  "radius": 8,
+  "allPrey": true,
+  "traits": [
+   "Ranger"
+  ],
+  "description": "For 15 s every monster within 8 tiles of you is your hunted prey: your Strikes deal Hunt Prey's dice against each. 35 Focus, 30 s cooldown. Joins the bar at level 16."
+ },
+ {
+  "id": "disintegrate",
+  "name": "Disintegrate",
+  "class": "wizard",
+  "slot": "16",
+  "level": 16,
+  "kind": "SpellBolt",
+  "actions": 2,
+  "cost": 30,
+  "cooldown": 5,
+  "range": 10,
+  "damageType": "Force",
+  "dice": "2d10",
+  "heightenDice": "1d10",
+  "traits": [
+   "Spell",
+   "Force",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "A thin green ray that unmakes what it touches: a spell attack against a monster within 10 tiles, 2d10 force (+1d10 a rank above 1). 30 Mana, 5 s cooldown. Joins the bar at level 16."
+ },
+ {
+  "id": "lich_form",
+  "name": "Lich Form",
+  "class": "necromancer",
+  "slot": "16",
+  "level": 16,
+  "kind": "Aura",
+  "actions": 2,
+  "cost": 40,
+  "cooldown": 45,
+  "buffSeconds": 20,
+  "minionDamage": 1.0,
+  "auraAc": 1,
+  "traits": [
+   "Necromancer",
+   "Void",
+   "Concentrate"
+  ],
+  "description": "For 20 s you take the shape of the deathless: everything that fights for you deals double damage, and you have +1 status bonus to AC and saves. 40 Mana, 45 s cooldown. Joins the bar at level 16."
+ },
+ {
+  "id": "smoke_and_thunder",
+  "name": "Smoke and Thunder",
+  "class": "gunslinger",
+  "slot": "16",
+  "level": 16,
+  "kind": "Aura",
+  "actions": 1,
+  "cost": 40,
+  "cooldown": 30,
+  "buffSeconds": 10,
+  "attackRate": 1.3,
+  "freeReloads": true,
+  "traits": [
+   "Gunslinger"
+  ],
+  "description": "For 10 s you load faster than the eye follows: your guns never empty and fire a third again as fast. 40 Grit, 30 s cooldown. Joins the bar at level 16."
+ },
+ {
+  "id": "titans_wrath",
+  "name": "Titan's Wrath",
+  "class": "fighter",
+  "slot": "feat",
+  "feat": true,
+  "level": 18,
+  "kind": "Burst",
+  "actions": 2,
+  "cost": 45,
+  "cooldown": 12,
+  "radius": 3,
+  "weaponDamage": true,
+  "extraDice": 3,
+  "save": "Reflex",
+  "onHit": "Prone",
+  "onHitSeconds": 2,
+  "knockback": 1.5,
+  "needsTwoHanded": true,
+  "traits": [
+   "Attack",
+   "Flourish"
+  ],
+  "description": "Vanguard, level 18: a blow that shakes the mountain: your weapon's damage with three dice more to every enemy within 3 tiles against a basic Reflex save (your class DC), knocked back and prone for 2 s on a failure. Two-handed only. 45 Fury, 12 s cooldown."
+ },
+ {
+  "id": "bastion",
+  "name": "Bastion",
+  "class": "fighter",
+  "slot": "feat",
+  "feat": true,
+  "level": 18,
+  "kind": "Aura",
+  "actions": 1,
+  "cost": 40,
+  "cooldown": 30,
+  "buffSeconds": 12,
+  "radius": 2.5,
+  "auraAc": 2,
+  "soak": 6,
+  "retaliate": true,
+  "extraDice": 2,
+  "raisesShield": true,
+  "traits": [
+   "Fighter",
+   "Stance"
+  ],
+  "description": "Bulwark, level 18: for 12 s you are the wall: your shield is raised, +2 status bonus to AC and saves, every blow at you or an ally within 2.5 tiles loses 6 (one more every two ranks), and a monster that strikes you from within reach takes a Strike back with two weapon dice more (at most once a second). 40 Fury, 30 s cooldown."
+ },
+ {
+  "id": "sunburst",
+  "name": "Sunburst",
+  "class": "champion",
+  "slot": "feat",
+  "feat": true,
+  "level": 18,
+  "kind": "Burst",
+  "actions": 2,
+  "cost": 45,
+  "cooldown": 15,
+  "radius": 5,
+  "save": "Reflex",
+  "damageType": "Fire",
+  "dice": "6d6",
+  "heightenDice": "1d6",
+  "drain": 0.3,
+  "onHit": "Dazzled",
+  "onHitSeconds": 4,
+  "traits": [
+   "Champion",
+   "Fire",
+   "Light"
+  ],
+  "description": "Lanternbearer, level 18: the lantern becomes a sun: 6d6 fire (+1d6 a rank above 1) to all within 5 tiles against a basic Reflex save, dazzled for 4 s on a failure, and three tenths of all it deals heals you; it hallows the rising dead it covers. 45 Devotion, 15 s cooldown."
+ },
+ {
+  "id": "ashen_cataclysm",
+  "name": "Ashen Cataclysm",
+  "class": "champion",
+  "slot": "feat",
+  "feat": true,
+  "level": 18,
+  "kind": "Burst",
+  "actions": 2,
+  "cost": 40,
+  "costsTaint": true,
+  "cooldown": 15,
+  "radius": 4,
+  "save": "Fortitude",
+  "damageType": "Void",
+  "dice": "6d6",
+  "heightenDice": "1d6",
+  "drain": 0.3,
+  "onHit": "Frightened",
+  "onHitValue": 2,
+  "traits": [
+   "Champion",
+   "Void"
+  ],
+  "description": "Oathbreaker, level 18: the Taint in you bursts out as ash: 6d6 void (+1d6 a rank above 1) to all within 4 tiles against a basic Fortitude save, frightened 2 on a failure, and three tenths of all it deals heals you. Paid with 40 of your Taint meter. 15 s cooldown."
+ },
+ {
+  "id": "hammer_of_the_just",
+  "name": "Hammer of the Just",
+  "class": "champion",
+  "slot": "feat",
+  "feat": true,
+  "level": 18,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 40,
+  "cooldown": 12,
+  "extraDice": 5,
+  "onHit": "Stunned",
+  "onHitValue": 1,
+  "onHitSeconds": 1,
+  "traits": [
+   "Attack",
+   "Champion",
+   "Divine"
+  ],
+  "description": "Paladin, level 18: the sentence falls: a Strike with five weapon dice more, and the target is stunned for a moment on a hit. 40 Devotion, 12 s cooldown."
+ },
+ {
+  "id": "thousand_cuts",
+  "name": "A Thousand Cuts",
+  "class": "rogue",
+  "slot": "feat",
+  "feat": true,
+  "level": 18,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 40,
+  "cooldown": 10,
+  "twin": true,
+  "extraDice": 3,
+  "damageType": "Bleed",
+  "persistentDice": "2d6",
+  "traits": [
+   "Attack"
+  ],
+  "description": "Cutthroat, level 18: two killing blows faster than sight, each with three weapon dice more and 2d6 persistent bleed; the second finds the target off-guard. 40 Momentum, 10 s cooldown."
+ },
+ {
+  "id": "infernal_device",
+  "name": "Infernal Device",
+  "class": "rogue",
+  "slot": "feat",
+  "feat": true,
+  "level": 18,
+  "kind": "Trap",
+  "actions": 1,
+  "cost": 30,
+  "cooldown": 8,
+  "radius": 3,
+  "save": "Reflex",
+  "damageType": "Fire",
+  "dice": "6d6",
+  "heightenDice": "1d6",
+  "onHit": "Stunned",
+  "onHitValue": 1,
+  "onHitSeconds": 1.5,
+  "buffSeconds": 45,
+  "traits": [
+   "Trap",
+   "Manipulate"
+  ],
+  "description": "Trickster, level 18: a powder charge at your feet: the first monster to come close sets it off, 6d6 fire (+1d6 a rank above 1) to all within 3 tiles against a basic Reflex save, stunned for a moment on a failure. 30 Momentum, 8 s cooldown."
+ },
+ {
+  "id": "arrow_storm",
+  "name": "Arrow Storm",
+  "class": "ranger",
+  "slot": "feat",
+  "feat": true,
+  "level": 18,
+  "kind": "Blast",
+  "actions": 2,
+  "cost": 40,
+  "cooldown": 10,
+  "range": 12,
+  "radius": 3.5,
+  "weaponDamage": true,
+  "extraDice": 2,
+  "save": "Reflex",
+  "needsRanged": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Marksman, level 18: the sky darkens with arrows over a monster within 12 tiles: your bow's damage with two dice more to all within 3.5 tiles of it against a basic Reflex save. 40 Focus, 10 s cooldown. Needs a bow."
+ },
+ {
+  "id": "alphas_call",
+  "name": "Alpha's Call",
+  "class": "ranger",
+  "slot": "feat",
+  "feat": true,
+  "level": 18,
+  "kind": "Summon",
+  "actions": 1,
+  "cost": 35,
+  "cooldown": 40,
+  "creature": "dire_wolf",
+  "count": 1,
+  "buffSeconds": 30,
+  "traits": [
+   "Auditory",
+   "Beastmaster"
+  ],
+  "description": "Beastmaster, level 18: the old wolf of the mountain answers your howl and hunts beside you for 30 s. 35 Focus, 40 s cooldown."
+ },
+ {
+  "id": "meteor_swarm",
+  "name": "Meteor Swarm",
+  "class": "wizard",
+  "slot": "feat",
+  "feat": true,
+  "level": 18,
+  "kind": "Blast",
+  "actions": 3,
+  "cost": 45,
+  "cooldown": 12,
+  "range": 12,
+  "radius": 4.5,
+  "save": "Reflex",
+  "damageType": "Fire",
+  "dice": "6d6",
+  "heightenDice": "1d6",
+  "persistentDice": "2d6",
+  "onHit": "Prone",
+  "onHitSeconds": 1,
+  "traits": [
+   "Spell",
+   "Fire",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Pyromancer, level 18: burning stones rain on a monster within 12 tiles: 6d6 fire (+1d6 a rank above 1) to everything within 4.5 tiles against a basic Reflex save, knocked down and 2d6 persistent fire on a failure. 45 Mana, 12 s cooldown."
+ },
+ {
+  "id": "tempest",
+  "name": "Tempest",
+  "class": "wizard",
+  "slot": "feat",
+  "feat": true,
+  "level": 18,
+  "kind": "Burst",
+  "actions": 2,
+  "cost": 45,
+  "cooldown": 12,
+  "radius": 5,
+  "save": "Reflex",
+  "damageType": "Electricity",
+  "dice": "5d8",
+  "heightenDice": "1d8",
+  "onHit": "Stunned",
+  "onHitValue": 1,
+  "onHitSeconds": 1,
+  "knockback": 1,
+  "traits": [
+   "Spell",
+   "Electricity",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Stormcaller, level 18: the storm breaks round you: 5d8 electricity (+1d8 a rank above 1) to every enemy within 5 tiles against a basic Reflex save, thrown back and stunned for a moment on a failure. 45 Mana, 12 s cooldown."
+ },
+ {
+  "id": "army_of_the_dead",
+  "name": "Army of the Dead",
+  "class": "necromancer",
+  "slot": "feat",
+  "feat": true,
+  "level": 18,
+  "kind": "Summon",
+  "actions": 2,
+  "charges": 4,
+  "cooldown": 45,
+  "creature": "raised_knight",
+  "count": 4,
+  "buffSeconds": 20,
+  "traits": [
+   "Necromancer",
+   "Void",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Bonelord, level 18: the field gives up its dead: four bone knights fight beside you for 20 s. Four Grave Charges, 45 s cooldown."
+ },
+ {
+  "id": "plague_tide",
+  "name": "Plague Tide",
+  "class": "necromancer",
+  "slot": "feat",
+  "feat": true,
+  "level": 18,
+  "kind": "Blast",
+  "actions": 2,
+  "charges": 2,
+  "cost": 20,
+  "cooldown": 10,
+  "range": 10,
+  "radius": 4.5,
+  "save": "Fortitude",
+  "damageType": "Poison",
+  "dice": "5d6",
+  "heightenDice": "1d6",
+  "persistentDice": "2d6",
+  "onHit": "Sickened",
+  "onHitValue": 2,
+  "onHitSeconds": 6,
+  "traits": [
+   "Spell",
+   "Poison",
+   "Concentrate",
+   "Manipulate"
+  ],
+  "description": "Plaguebringer, level 18: a tide of rot round a monster within 10 tiles: 5d6 poison (+1d6 a rank above 1) to all within 4.5 tiles against a basic Fortitude save, sickened 2 and 2d6 persistent poison on a failure. Two Grave Charges and 20 Mana, 10 s cooldown."
+ },
+ {
+  "id": "lead_storm",
+  "name": "Lead Storm",
+  "class": "gunslinger",
+  "slot": "feat",
+  "feat": true,
+  "level": 18,
+  "kind": "WeaponStrike",
+  "actions": 2,
+  "cost": 40,
+  "cooldown": 10,
+  "targets": 6,
+  "arc": 150,
+  "extraDice": 2,
+  "reloads": true,
+  "needsFirearm": true,
+  "traits": [
+   "Attack",
+   "Pistolero"
+  ],
+  "description": "Pistolero, level 18: load and empty both guns into everything in front of you: a Strike with two weapon dice more at your target and up to five more within reach and 75° of it. 40 Grit, 10 s cooldown. Needs a gun."
+ },
+ {
+  "id": "perfect_shot",
+  "name": "Perfect Shot",
+  "class": "gunslinger",
+  "slot": "feat",
+  "feat": true,
+  "level": 18,
+  "kind": "WeaponStrike",
+  "actions": 3,
+  "cost": 50,
+  "cooldown": 14,
+  "extraDice": 7,
+  "pierce": 3,
+  "onHit": "Stunned",
+  "onHitValue": 1,
+  "onHitSeconds": 1,
+  "needsFirearm": true,
+  "traits": [
+   "Attack",
+   "Sniper"
+  ],
+  "description": "Sniper, level 18: breath held, the world still: seven weapon dice more, flying on through three enemies behind, and the target is stunned for a moment. 50 Grit, 14 s cooldown. Needs a gun."
+ },
+ {
+  "id": "incendiary_round",
+  "name": "Incendiary round",
+  "class": "item",
+  "slot": "belt",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "round": true,
+  "needsFirearm": true,
+  "extraDice": 1,
+  "damageType": "Fire",
+  "persistentDice": "1d6",
+  "traits": [
+   "Attack",
+   "Fire"
+  ],
+  "description": "Load a round of fire and shoot: a Strike with a weapon die more, and 1d6 persistent fire on a hit (a die more at levels 5, 10 and 15)."
+ },
+ {
+  "id": "silver_round",
+  "name": "Silvered round",
+  "class": "item",
+  "slot": "belt",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "round": true,
+  "needsFirearm": true,
+  "holy": true,
+  "dice": "2d6",
+  "traits": [
+   "Attack"
+  ],
+  "description": "Load a silvered round and shoot: a Strike that burns the undead for 2d6 vitality more (doubled on a critical hit)."
+ },
+ {
+  "id": "scatter_round",
+  "name": "Scatter round",
+  "class": "item",
+  "slot": "belt",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "round": true,
+  "needsFirearm": true,
+  "targets": 4,
+  "arc": 70,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Load a charge of shot and fire: a Strike at your target and up to three more within reach and 35° of it."
+ }
+]

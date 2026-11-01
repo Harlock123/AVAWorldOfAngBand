@@ -86,6 +86,9 @@ public sealed class FlareAssets
 
     public FlareAnimationSet AvatarLayer(string layer) => Animation($"animations/avatar/male/{layer}.txt");
 
+    /// <summary>A Flare creature's animations (wolf, fire_ant, skeleton_weak…).</summary>
+    public FlareAnimationSet Enemy(string sprite) => Animation($"animations/enemies/{sprite}.txt");
+
     private FlareAnimationSet Animation(string path)
     {
         if (!_animations.TryGetValue(path, out var set))

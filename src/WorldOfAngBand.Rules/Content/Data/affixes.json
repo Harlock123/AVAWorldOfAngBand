@@ -1,0 +1,314 @@
+[
+ {
+  "id": "sturdy",
+  "text": "Sturdy",
+  "prefix": true,
+  "stat": "MaxHitPoints",
+  "min": 2,
+  "max": 4,
+  "perLevel": 1,
+  "slots": [
+   "Head",
+   "Chest",
+   "Legs",
+   "Belt",
+   "OffHand",
+   "Shoulders",
+   "Cloak"
+  ]
+ },
+ {
+  "id": "swift",
+  "text": "Swift",
+  "prefix": true,
+  "stat": "MoveSpeed",
+  "min": 4,
+  "max": 8,
+  "slots": [
+   "Feet",
+   "Cloak"
+  ]
+ },
+ {
+  "id": "quick",
+  "text": "Quick",
+  "prefix": true,
+  "stat": "AttackSpeed",
+  "min": 4,
+  "max": 8,
+  "slots": [
+   "MainHand",
+   "Hands"
+  ],
+  "meleeOnly": false
+ },
+ {
+  "id": "vicious",
+  "text": "Vicious",
+  "prefix": true,
+  "stat": "WeaponDamage",
+  "min": 1,
+  "max": 1,
+  "perLevel": 0.25,
+  "slots": [
+   "MainHand"
+  ],
+  "meleeOnly": true
+ },
+ {
+  "id": "arcane",
+  "text": "Arcane",
+  "prefix": true,
+  "stat": "CastSpeed",
+  "min": 4,
+  "max": 8,
+  "slots": [
+   "MainHand",
+   "Head",
+   "Amulet"
+  ]
+ },
+ {
+  "id": "hungry",
+  "text": "Hungry",
+  "prefix": true,
+  "stat": "FuryPerHit",
+  "min": 2,
+  "max": 4,
+  "slots": [
+   "MainHand",
+   "Hands",
+   "Ring1"
+  ],
+  "meleeOnly": false
+ },
+ {
+  "id": "hearth",
+  "text": "of the Hearth",
+  "prefix": false,
+  "stat": "Resistance",
+  "resist": "Fire",
+  "min": 1,
+  "max": 3,
+  "perLevel": 0.4,
+  "slots": [
+   "Head",
+   "Chest",
+   "Hands",
+   "Legs",
+   "Feet",
+   "Belt",
+   "Ring1",
+   "Amulet",
+   "OffHand",
+   "Shoulders",
+   "Cloak"
+  ]
+ },
+ {
+  "id": "north",
+  "text": "of the North",
+  "prefix": false,
+  "stat": "Resistance",
+  "resist": "Cold",
+  "min": 1,
+  "max": 3,
+  "perLevel": 0.4,
+  "slots": [
+   "Head",
+   "Chest",
+   "Hands",
+   "Legs",
+   "Feet",
+   "Belt",
+   "Ring1",
+   "Amulet",
+   "OffHand",
+   "Shoulders",
+   "Cloak"
+  ]
+ },
+ {
+  "id": "barrow",
+  "text": "of the Barrow",
+  "prefix": false,
+  "stat": "Resistance",
+  "resist": "Void",
+  "min": 1,
+  "max": 3,
+  "perLevel": 0.4,
+  "slots": [
+   "Head",
+   "Chest",
+   "Hands",
+   "Legs",
+   "Feet",
+   "Belt",
+   "Ring1",
+   "Amulet",
+   "OffHand",
+   "Shoulders",
+   "Cloak"
+  ]
+ },
+ {
+  "id": "purity",
+  "text": "of Purity",
+  "prefix": false,
+  "stat": "Resistance",
+  "resist": "Poison",
+  "min": 1,
+  "max": 3,
+  "perLevel": 0.4,
+  "slots": [
+   "Head",
+   "Chest",
+   "Hands",
+   "Legs",
+   "Feet",
+   "Belt",
+   "Ring1",
+   "Amulet",
+   "OffHand",
+   "Shoulders",
+   "Cloak"
+  ]
+ },
+ {
+  "id": "lantern",
+  "text": "of the Lantern",
+  "prefix": false,
+  "stat": "Resistance",
+  "resist": "Taint",
+  "min": 1,
+  "max": 2,
+  "perLevel": 0.3,
+  "slots": [
+   "Ring1",
+   "Amulet",
+   "Chest",
+   "Cloak"
+  ]
+ },
+ {
+  "id": "grit",
+  "text": "of Grit",
+  "prefix": false,
+  "stat": "Fortitude",
+  "min": 1,
+  "max": 1,
+  "slots": [
+   "Head",
+   "Chest",
+   "Hands",
+   "Legs",
+   "Feet",
+   "Belt",
+   "Ring1",
+   "Amulet",
+   "OffHand",
+   "Shoulders",
+   "Cloak"
+  ],
+  "minLevel": 2
+ },
+ {
+  "id": "evasion",
+  "text": "of Evasion",
+  "prefix": false,
+  "stat": "Reflex",
+  "min": 1,
+  "max": 1,
+  "slots": [
+   "Head",
+   "Chest",
+   "Hands",
+   "Legs",
+   "Feet",
+   "Belt",
+   "Ring1",
+   "Amulet",
+   "OffHand",
+   "Shoulders",
+   "Cloak"
+  ],
+  "minLevel": 2
+ },
+ {
+  "id": "resolve",
+  "text": "of Resolve",
+  "prefix": false,
+  "stat": "Will",
+  "min": 1,
+  "max": 1,
+  "slots": [
+   "Head",
+   "Chest",
+   "Hands",
+   "Legs",
+   "Feet",
+   "Belt",
+   "Ring1",
+   "Amulet",
+   "OffHand",
+   "Shoulders",
+   "Cloak"
+  ],
+  "minLevel": 2
+ },
+ {
+  "id": "vigor",
+  "text": "of Vigor",
+  "prefix": false,
+  "stat": "MaxHitPoints",
+  "min": 2,
+  "max": 5,
+  "perLevel": 0.5,
+  "slots": [
+   "Ring1",
+   "Amulet",
+   "Belt",
+   "Hands",
+   "Feet",
+   "OffHand"
+  ]
+ },
+ {
+  "id": "insight",
+  "text": "of Insight",
+  "prefix": false,
+  "stat": "ResourceRegen",
+  "min": 10,
+  "max": 20,
+  "slots": [
+   "Ring1",
+   "Amulet",
+   "Head",
+   "Cloak"
+  ]
+ },
+ {
+  "id": "haste",
+  "text": "of Haste",
+  "prefix": false,
+  "stat": "AttackSpeed",
+  "min": 3,
+  "max": 6,
+  "slots": [
+   "Hands",
+   "Ring1"
+  ]
+ },
+ {
+  "id": "sorcery",
+  "text": "of Sorcery",
+  "prefix": false,
+  "stat": "CastSpeed",
+  "min": 3,
+  "max": 6,
+  "slots": [
+   "Hands",
+   "Ring1"
+  ]
+ }
+]

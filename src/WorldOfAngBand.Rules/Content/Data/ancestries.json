@@ -1,0 +1,169 @@
+[
+ {
+  "id": "human",
+  "name": "Human",
+  "hitPoints": 8,
+  "speedFeet": 25,
+  "boosts": [],
+  "freeBoosts": 2,
+  "flaws": [],
+  "senses": "Normal vision",
+  "trait": "Versatile: an extra general feat at level 1",
+  "heritages": [
+   {
+    "id": "skilled",
+    "name": "Skilled",
+    "description": "An extra trained skill, which becomes expert at level 5."
+   },
+   {
+    "id": "half-elf",
+    "name": "Half-elf",
+    "description": "Low-light vision and access to elf ancestry feats."
+   }
+  ]
+ },
+ {
+  "id": "dwarf",
+  "name": "Dwarf",
+  "hitPoints": 10,
+  "speedFeet": 20,
+  "boosts": [
+   "Constitution",
+   "Wisdom"
+  ],
+  "freeBoosts": 1,
+  "flaws": [
+   "Charisma"
+  ],
+  "senses": "Darkvision",
+  "trait": "Clan's Edge: +1 status bonus to saves against poison",
+  "heritages": [
+   {
+    "id": "forge-blooded",
+    "name": "Forge-blooded",
+    "description": "Fire resistance 5.",
+    "resistances": {
+     "Fire": 5
+    }
+   },
+   {
+    "id": "rock-rooted",
+    "name": "Rock-rooted",
+    "description": "+2 against being shoved or knocked prone."
+   }
+  ]
+ },
+ {
+  "id": "elf",
+  "name": "Elf",
+  "hitPoints": 6,
+  "speedFeet": 30,
+  "boosts": [
+   "Dexterity",
+   "Intelligence"
+  ],
+  "freeBoosts": 1,
+  "flaws": [
+   "Constitution"
+  ],
+  "senses": "Low-light vision",
+  "trait": "+2 status bonus to saves against sleep and charm",
+  "heritages": [
+   {
+    "id": "whisperwood",
+    "name": "Whisperwood",
+    "description": "Hard to detect in forest zones."
+   },
+   {
+    "id": "ancient",
+    "name": "Ancient",
+    "description": "An extra cantrip from the arcane list."
+   }
+  ]
+ },
+ {
+  "id": "halfling",
+  "name": "Halfling",
+  "hitPoints": 6,
+  "speedFeet": 25,
+  "boosts": [
+   "Dexterity",
+   "Wisdom"
+  ],
+  "freeBoosts": 1,
+  "flaws": [
+   "Strength"
+  ],
+  "senses": "Keen Eyes",
+  "trait": "Lucky: once per zone, reroll a failed save",
+  "heritages": [
+   {
+    "id": "gutsy",
+    "name": "Gutsy",
+    "description": "Fear effects are reduced one step."
+   },
+   {
+    "id": "nimble-foot",
+    "name": "Nimble-foot",
+    "description": "+5 ft speed.",
+    "speedFeet": 5
+   }
+  ]
+ },
+ {
+  "id": "orc",
+  "name": "Orc",
+  "hitPoints": 10,
+  "speedFeet": 25,
+  "boosts": [
+   "Strength"
+  ],
+  "freeBoosts": 1,
+  "flaws": [],
+  "senses": "Darkvision",
+  "trait": "Ferocity: once per fight, stay at 1 HP instead of dying",
+  "heritages": [
+   {
+    "id": "grave-marked",
+    "name": "Grave-marked",
+    "description": "+1 to saves against undead abilities."
+   },
+   {
+    "id": "battle-scarred",
+    "name": "Battle-scarred",
+    "description": "+2 HP per level.",
+    "hitPointsPerLevel": 2
+   }
+  ]
+ },
+ {
+  "id": "ashborn",
+  "name": "Ashborn",
+  "hitPoints": 8,
+  "speedFeet": 25,
+  "boosts": [
+   "Charisma",
+   "Constitution"
+  ],
+  "freeBoosts": 1,
+  "flaws": [
+   "Wisdom"
+  ],
+  "senses": "Normal vision",
+  "trait": "Taint-touched: fire resistance equal to half your level; Taint builds 25% more slowly",
+  "heritages": [
+   {
+    "id": "cinder-veined",
+    "name": "Cinder-veined",
+    "description": "Fire damage +1 per die."
+   },
+   {
+    "id": "pale-lit",
+    "name": "Pale-lit",
+    "description": "An innate light spell and +1 to Will saves.",
+    "will": 1
+   }
+  ],
+  "fireResistancePerTwoLevels": 1
+ }
+]

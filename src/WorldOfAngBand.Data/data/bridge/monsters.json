@@ -1,0 +1,231 @@
+{
+ "_comment": "How each Angband 4.2.5 monster is brought into the game (the spec's section 6.1). sprite: a Flare sprite family, 'doll' for the paper-doll body (dressed in 'doll', Flare's avatar layers by slot), or absent for the paper fallback (a DCSS tile standing on the floor). tint: colour the sprite by the monster's Angband colour. name: its name in the Ashen setting, where 4.2.5's is Tolkien's or doesn't fit.",
+ "monsters": [
+  {
+   "id": "grey_mold"
+  },
+  {
+   "id": "jackal",
+   "sprite": "wolf",
+   "scale": 0.7
+  },
+  {
+   "id": "rock_lizard"
+  },
+  {
+   "id": "soldier_ant",
+   "sprite": "fire_ant",
+   "scale": 0.6,
+   "tint": true
+  },
+  {
+   "id": "floating_eye"
+  },
+  {
+   "id": "small_kobold",
+   "sprite": "doll",
+   "scale": 0.75,
+   "tint": true,
+   "doll": {
+    "chest": "leather_chest",
+    "legs": "cloth_pants",
+    "main": "club"
+   }
+  },
+  {
+   "id": "white_worm_mass"
+  },
+  {
+   "id": "giant_yellow_centipede",
+   "sprite": "antlion_small",
+   "scale": 0.7,
+   "tint": true
+  },
+  {
+   "id": "giant_white_centipede",
+   "sprite": "antlion_small",
+   "scale": 0.75,
+   "tint": true
+  },
+  {
+   "id": "white_icky_thing"
+  },
+  {
+   "id": "giant_white_mouse"
+  },
+  {
+   "id": "large_white_snake"
+  },
+  {
+   "id": "fruit_bat"
+  },
+  {
+   "id": "kobold",
+   "sprite": "doll",
+   "scale": 0.85,
+   "tint": true,
+   "doll": {
+    "chest": "leather_chest",
+    "legs": "cloth_pants",
+    "main": "club"
+   }
+  },
+  {
+   "id": "cave_spider",
+   "sprite": "antlion_small",
+   "scale": 0.45,
+   "tint": true
+  },
+  {
+   "id": "fang",
+   "sprite": "wolf",
+   "scale": 0.85,
+   "name": "Ash, the Ferryman's Hound"
+  },
+  {
+   "id": "grip",
+   "sprite": "wolf",
+   "scale": 0.85,
+   "name": "Ember, the Ferryman's Hound"
+  },
+  {
+   "id": "soldier",
+   "sprite": "doll",
+   "name": "Vardmoor deserter",
+   "doll": {
+    "head": "chain_coif",
+    "chest": "chain_cuirass",
+    "legs": "leather_pants",
+    "feet": "leather_boots",
+    "main": "longsword"
+   }
+  },
+  {
+   "id": "cutpurse",
+   "sprite": "doll",
+   "scale": 0.95,
+   "doll": {
+    "head": "leather_hood",
+    "chest": "leather_chest",
+    "legs": "cloth_pants",
+    "feet": "cloth_sandals",
+    "main": "dagger"
+   }
+  },
+  {
+   "id": "giant_black_ant",
+   "sprite": "fire_ant",
+   "scale": 0.7,
+   "tint": true
+  },
+  {
+   "id": "salamander"
+  },
+  {
+   "id": "blue_yeek",
+   "sprite": "doll",
+   "scale": 0.6,
+   "tint": true,
+   "doll": {
+    "legs": "cloth_pants"
+   }
+  },
+  {
+   "id": "green_worm_mass"
+  },
+  {
+   "id": "crow"
+  },
+  {
+   "id": "metallic_green_centipede",
+   "sprite": "antlion_small",
+   "scale": 0.75,
+   "tint": true
+  },
+  {
+   "id": "white_jelly"
+  },
+  {
+   "id": "black_naga"
+  },
+  {
+   "id": "giant_white_ant",
+   "sprite": "ice_ant",
+   "scale": 0.7
+  },
+  {
+   "id": "metallic_blue_centipede",
+   "sprite": "antlion_small",
+   "scale": 0.8,
+   "tint": true
+  },
+  {
+   "id": "scruffy_looking_hobbit",
+   "sprite": "doll",
+   "scale": 0.7,
+   "name": "scruffy-looking halfling",
+   "doll": {
+    "chest": "cloth_shirt",
+    "legs": "cloth_pants",
+    "main": "dagger"
+   }
+  },
+  {
+   "id": "yellow_mold"
+  },
+  {
+   "id": "cave_lizard"
+  },
+  {
+   "id": "giant_white_rat"
+  },
+  {
+   "id": "large_grey_snake"
+  },
+  {
+   "id": "large_kobold",
+   "sprite": "doll",
+   "scale": 1.05,
+   "tint": true,
+   "doll": {
+    "chest": "leather_chest",
+    "legs": "leather_pants",
+    "feet": "leather_boots",
+    "main": "mace"
+   }
+  },
+  {
+   "id": "skeleton_kobold",
+   "sprite": "skeleton_weak",
+   "scale": 0.85
+  },
+  {
+   "id": "copperhead_snake"
+  },
+  {
+   "id": "bullroarer",
+   "sprite": "doll",
+   "scale": 0.8,
+   "name": "Tamsin Barrowbell",
+   "doll": {
+    "head": "leather_hood",
+    "chest": "leather_chest",
+    "legs": "leather_pants",
+    "feet": "leather_boots",
+    "main": "shortsword",
+    "off": "buckler"
+   }
+  },
+  {
+   "id": "wood_spider",
+   "sprite": "antlion_small",
+   "scale": 0.5,
+   "tint": true
+  },
+  {
+   "id": "zombified_kobold",
+   "sprite": "zombie",
+   "scale": 0.85
+  }
+ ]
+}

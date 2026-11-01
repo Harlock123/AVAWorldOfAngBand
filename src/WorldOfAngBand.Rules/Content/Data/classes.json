@@ -1,0 +1,96 @@
+[
+  {
+    "id": "fighter", "trainedSkills": ["Athletics"], "skillPicks": 3, "armorCategories": ["Light", "Medium", "Heavy"], "name": "Fighter", "hitPointsPerLevel": 10, "keyAttributes": ["Strength", "Dexterity"],
+    "resource": "Fury", "subclasses": ["Vanguard", "Bulwark"],
+    "proficiencies": {
+      "Attack": { "1": "Expert", "5": "Master", "13": "Legendary" },
+      "Armor": { "1": "Trained", "11": "Expert", "17": "Master" },
+      "Fortitude": { "1": "Expert", "9": "Master" },
+      "Reflex": { "1": "Expert", "15": "Master" },
+      "Will": { "1": "Trained", "3": "Expert" },
+      "Perception": { "1": "Expert", "7": "Master" },
+      "ClassDc": { "1": "Trained", "11": "Expert", "19": "Master" }
+    }
+  },
+  {
+    "id": "champion", "trainedSkills": ["Religion"], "skillPicks": 2, "armorCategories": ["Light", "Medium", "Heavy"], "name": "Champion", "hitPointsPerLevel": 10, "keyAttributes": ["Strength", "Dexterity"],
+    "resource": "Devotion", "subclasses": ["Lanternbearer", "Oathbreaker", "Paladin"], "also": "paladin",
+    "proficiencies": {
+      "Attack": { "1": "Trained", "5": "Expert", "13": "Master" },
+      "Spell": { "1": "Trained", "9": "Expert", "17": "Master" },
+      "Armor": { "1": "Trained", "7": "Expert", "11": "Master", "17": "Legendary" },
+      "Fortitude": { "1": "Expert", "9": "Master" },
+      "Reflex": { "1": "Trained", "9": "Expert" },
+      "Will": { "1": "Expert", "11": "Master" },
+      "Perception": { "1": "Trained", "11": "Expert" },
+      "ClassDc": { "1": "Trained", "9": "Expert", "17": "Master" }
+    }
+  },
+  {
+    "id": "rogue", "trainedSkills": ["Stealth", "Thievery"], "skillPicks": 7, "armorCategories": ["Light"], "name": "Rogue", "hitPointsPerLevel": 8, "keyAttributes": ["Dexterity"],
+    "resource": "Momentum", "subclasses": ["Cutthroat", "Trickster"], "sneakAttack": true, "finesseDamage": true,
+    "proficiencies": {
+      "Attack": { "1": "Trained", "5": "Expert", "13": "Master" },
+      "Armor": { "1": "Trained", "13": "Expert", "19": "Master" },
+      "Fortitude": { "1": "Trained", "9": "Expert" },
+      "Reflex": { "1": "Expert", "7": "Master", "13": "Legendary" },
+      "Will": { "1": "Expert", "17": "Master" },
+      "Perception": { "1": "Expert", "7": "Master", "13": "Legendary" },
+      "ClassDc": { "1": "Trained", "11": "Expert", "19": "Master" }
+    }
+  },
+  {
+    "id": "ranger", "trainedSkills": ["Nature", "Survival"], "skillPicks": 4, "armorCategories": ["Light", "Medium"], "name": "Ranger", "hitPointsPerLevel": 10, "keyAttributes": ["Dexterity"],
+    "resource": "Focus", "subclasses": ["Marksman", "Beastmaster"], "huntsPrey": true,
+    "proficiencies": {
+      "Attack": { "1": "Trained", "5": "Expert", "13": "Master" },
+      "Armor": { "1": "Trained", "11": "Expert", "19": "Master" },
+      "Fortitude": { "1": "Expert", "11": "Master" },
+      "Reflex": { "1": "Expert", "7": "Master" },
+      "Will": { "1": "Trained", "3": "Expert" },
+      "Perception": { "1": "Expert", "7": "Master", "15": "Legendary" },
+      "ClassDc": { "1": "Trained", "9": "Expert", "17": "Master" }
+    }
+  },
+  {
+    "id": "wizard", "trainedSkills": ["Arcana"], "skillPicks": 2, "armorCategories": [], "name": "Wizard", "hitPointsPerLevel": 6, "keyAttributes": ["Intelligence"],
+    "resource": "Mana", "subclasses": ["Pyromancer", "Stormcaller"],
+    "proficiencies": {
+      "Attack": { "1": "Trained", "11": "Expert" },
+      "Spell": { "1": "Trained", "7": "Expert", "15": "Master", "19": "Legendary" },
+      "Armor": { "1": "Trained", "13": "Expert" },
+      "Fortitude": { "1": "Trained", "9": "Expert" },
+      "Reflex": { "1": "Trained", "11": "Expert" },
+      "Will": { "1": "Expert", "17": "Master" },
+      "Perception": { "1": "Trained", "11": "Expert" },
+      "ClassDc": { "1": "Trained", "7": "Expert", "15": "Master", "19": "Legendary" }
+    }
+  },
+  {
+    "id": "necromancer", "trainedSkills": ["Occultism"], "skillPicks": 2, "armorCategories": [], "name": "Necromancer", "hitPointsPerLevel": 6, "keyAttributes": ["Intelligence"],
+    "resource": "Mana + Grave Charges", "subclasses": ["Bonelord", "Plaguebringer"], "graveCharges": true,
+    "proficiencies": {
+      "Attack": { "1": "Trained", "11": "Expert" },
+      "Spell": { "1": "Trained", "7": "Expert", "15": "Master", "19": "Legendary" },
+      "Armor": { "1": "Trained", "13": "Expert" },
+      "Fortitude": { "1": "Trained", "5": "Expert" },
+      "Reflex": { "1": "Trained", "11": "Expert" },
+      "Will": { "1": "Expert", "17": "Master" },
+      "Perception": { "1": "Trained", "11": "Expert" },
+      "ClassDc": { "1": "Trained", "7": "Expert", "15": "Master", "19": "Legendary" }
+    }
+  },
+  {
+    "id": "gunslinger", "trainedSkills": ["Crafting"], "skillPicks": 3, "armorCategories": ["Light", "Medium"], "name": "Gunslinger", "hitPointsPerLevel": 8, "keyAttributes": ["Dexterity"],
+    "resource": "Grit", "subclasses": ["Pistolero", "Sniper"], "gunDamage": true,
+    "proficiencies": {
+      "Attack": { "1": "Expert", "5": "Master", "13": "Legendary" },
+      "Armor": { "1": "Trained", "13": "Expert" },
+      "Fortitude": { "1": "Expert", "11": "Master" },
+      "Reflex": { "1": "Expert", "9": "Master" },
+      "Will": { "1": "Trained", "3": "Expert" },
+      "Perception": { "1": "Expert", "7": "Master" },
+      "ClassDc": { "1": "Trained", "9": "Expert", "17": "Master" }
+    }
+  }
+]

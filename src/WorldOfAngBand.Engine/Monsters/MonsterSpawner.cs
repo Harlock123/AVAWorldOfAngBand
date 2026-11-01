@@ -20,6 +20,12 @@ public sealed class MonsterSpawner(GameData data)
     public Func<IReadOnlyList<MonsterRaceDef>>? Seasonal { get; init; }
 
     /// <summary>
+    /// The races that may be placed at all (AVAWorldOfAngBand: those brought into the game so far), or null for every
+    /// race.
+    /// </summary>
+    public Func<MonsterRaceDef, bool>? Allowed { get; init; }
+
+    /// <summary>
     /// Picks a race for <paramref name="depth"/>, weighted by 1/rarity. Town monsters only appear in
     /// town; unavailable uniques are skipped.
     /// </summary>
@@ -37,7 +43,8 @@ public sealed class MonsterSpawner(GameData data)
                 && !r.Has(MonsterFlags.Questor)
                 && !(r.Has(MonsterFlags.ForceDepth) && r.Depth > levelDepth)
                 && !(r.IsUnique && unavailableUniques.Contains(r.Id))
-                && (filter?.Invoke(r) ?? true))
+                && (filter?.Invoke(r) ?? true)
+                && (Allowed?.Invoke(r) ?? true))
             .ToList();
         return rng.PickWeighted(eligible, r => Math.Max(1, 100 / Math.Max(1, r.Rarity)));
     }
@@ -94,7 +101,7 @@ public sealed class MonsterSpawner(GameData data)
             var total = friend.Number.Roll(rng);
             MonsterRaceDef? friendRace;
             if (friend.IsSame) friendRace = race;
-            else if (friend.Race is { } id) friendRace = data.Monster(id);
+            else if (friend.Race is { } id) friendRace = data.Monster(id) is { } named && (Allowed?.Invoke(named) ?? true) ? named : null;
             else
             {
                 // Angband: get_mon_num(race->level) restricted to the base; no race, no more escorts.
@@ -201,7 +208,7 @@ public sealed class MonsterSpawner(GameData data)
                     var bar = tag.IndexOf('|');
                     var race = data.Monster(bar < 0 ? tag : tag[..bar]);
                     var opts = bar < 0 ? "sleep" : tag[(bar + 1)..];
-                    if (race is null || (race.IsUnique && unavailableUniques.Contains(race.Id))) break;
+                    if (race is null || (race.IsUnique && unavailableUniques.Contains(race.Id)) || !(Allowed?.Invoke(race) ?? true)) break;
                     Put(race, opts.Contains("sleep", StringComparison.Ordinal), opts.Contains("group", StringComparison.Ordinal));
                     break;
                 }

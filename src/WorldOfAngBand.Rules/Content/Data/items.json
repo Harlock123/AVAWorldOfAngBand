@@ -1,0 +1,2213 @@
+[
+ {
+  "id": "dagger",
+  "name": "Dagger",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 96,
+  "loot": "dagger",
+  "gfx": "dagger",
+  "damageDie": 4,
+  "damageType": "Piercing",
+  "attacksPerSecond": 1.6,
+  "traits": [
+   "Agile",
+   "Finesse",
+   "Versatile"
+  ],
+  "versatile": "Slashing"
+ },
+ {
+  "id": "shortsword",
+  "name": "Shortsword",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 97,
+  "loot": "shortsword",
+  "gfx": "shortsword",
+  "damageDie": 6,
+  "damageType": "Piercing",
+  "attacksPerSecond": 1.4,
+  "traits": [
+   "Agile",
+   "Finesse",
+   "Versatile"
+  ],
+  "versatile": "Slashing"
+ },
+ {
+  "id": "longsword",
+  "name": "Longsword",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 98,
+  "loot": "longsword",
+  "gfx": "longsword",
+  "damageDie": 8,
+  "damageType": "Slashing",
+  "attacksPerSecond": 1.2,
+  "traits": [
+   "Versatile"
+  ],
+  "versatile": "Piercing"
+ },
+ {
+  "id": "greatsword",
+  "name": "Greatsword",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 99,
+  "loot": "greatsword",
+  "gfx": "greatsword",
+  "damageDie": 12,
+  "damageType": "Slashing",
+  "attacksPerSecond": 0.9,
+  "traits": [
+   "TwoHand",
+   "Versatile"
+  ],
+  "versatile": "Piercing"
+ },
+ {
+  "id": "greataxe",
+  "name": "Greataxe",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 119,
+  "loot": "battle_axe",
+  "gfx": "battle_axe",
+  "damageDie": 12,
+  "damageType": "Slashing",
+  "attacksPerSecond": 0.9,
+  "traits": [
+   "TwoHand",
+   "Sweep"
+  ]
+ },
+ {
+  "id": "maul",
+  "name": "Maul",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 103,
+  "loot": "maul",
+  "gfx": "maul",
+  "damageDie": 12,
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 0.85,
+  "traits": [
+   "TwoHand",
+   "Shove"
+  ]
+ },
+ {
+  "id": "shortbow",
+  "name": "Shortbow",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 113,
+  "loot": "shortbow",
+  "gfx": "shortbow",
+  "damageDie": 6,
+  "damageType": "Piercing",
+  "attacksPerSecond": 1.25,
+  "ranged": true,
+  "range": 8,
+  "deadlyDie": 10,
+  "traits": [
+   "TwoHand",
+   "Deadly"
+  ]
+ },
+ {
+  "id": "longbow",
+  "name": "Longbow",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 114,
+  "loot": "longbow",
+  "gfx": "longbow",
+  "minLevel": 2,
+  "damageDie": 8,
+  "damageType": "Piercing",
+  "attacksPerSecond": 1.0,
+  "ranged": true,
+  "range": 10,
+  "deadlyDie": 10,
+  "traits": [
+   "TwoHand",
+   "Deadly"
+  ]
+ },
+ {
+  "id": "greatbow",
+  "name": "Greatbow",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 115,
+  "loot": "greatbow",
+  "gfx": "greatbow",
+  "minLevel": 4,
+  "damageDie": 10,
+  "damageType": "Piercing",
+  "attacksPerSecond": 0.85,
+  "ranged": true,
+  "range": 11,
+  "deadlyDie": 12,
+  "traits": [
+   "TwoHand",
+   "Deadly"
+  ]
+ },
+ {
+  "id": "flintlock_pistol",
+  "name": "Flintlock pistol",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 0,
+  "loot": "pistol",
+  "gfx": "pistol",
+  "glyph": "flintlock",
+  "weight": 6,
+  "damageDie": 8,
+  "damageType": "Piercing",
+  "attacksPerSecond": 1.1,
+  "ranged": true,
+  "range": 7,
+  "fatalDie": 12,
+  "traits": [
+   "Fatal",
+   "Versatile"
+  ],
+  "versatile": "Bludgeoning",
+  "capacity": 2,
+  "reloadSeconds": 1.2,
+  "description": "Ironhold work: a short barrel, a flint and a pan. Two rounds before it must be loaded again."
+ },
+ {
+  "id": "dueling_pistol",
+  "name": "Dueling pistol",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 0,
+  "loot": "pistol",
+  "gfx": "pistol",
+  "glyph": "flintlock",
+  "minLevel": 4,
+  "weight": 5,
+  "damageDie": 8,
+  "damageType": "Piercing",
+  "attacksPerSecond": 1.25,
+  "ranged": true,
+  "range": 8,
+  "fatalDie": 12,
+  "traits": [
+   "Fatal",
+   "Versatile"
+  ],
+  "versatile": "Bludgeoning",
+  "capacity": 2,
+  "reloadSeconds": 1.1,
+  "description": "A gentleman's pistol, long in the barrel and quick in the hand."
+ },
+ {
+  "id": "arquebus",
+  "name": "Arquebus",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 0,
+  "loot": "long_gun",
+  "gfx": "long_gun",
+  "glyph": "musket",
+  "weight": 6,
+  "damageDie": 10,
+  "damageType": "Piercing",
+  "attacksPerSecond": 0.85,
+  "ranged": true,
+  "range": 11,
+  "fatalDie": 12,
+  "traits": [
+   "TwoHand",
+   "Fatal",
+   "Versatile"
+  ],
+  "versatile": "Bludgeoning",
+  "capacity": 2,
+  "reloadSeconds": 1.3,
+  "description": "Ironhold's first long gun: a heavy ball a long way, two rounds before it must be loaded again."
+ },
+ {
+  "id": "twin_barrel_musket",
+  "name": "Twin-barrel musket",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 0,
+  "loot": "long_gun",
+  "gfx": "long_gun",
+  "glyph": "musket",
+  "minLevel": 3,
+  "weight": 5,
+  "damageDie": 10,
+  "damageType": "Piercing",
+  "attacksPerSecond": 0.9,
+  "ranged": true,
+  "range": 9,
+  "fatalDie": 12,
+  "traits": [
+   "TwoHand",
+   "Fatal",
+   "Versatile"
+  ],
+  "versatile": "Bludgeoning",
+  "capacity": 3,
+  "reloadSeconds": 1.6,
+  "description": "Two barrels side by side and a third round in the breech: three shots, and a long reload after."
+ },
+ {
+  "id": "ironhold_long_rifle",
+  "name": "Ironhold long rifle",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 0,
+  "loot": "long_gun",
+  "gfx": "long_gun",
+  "glyph": "musket",
+  "minLevel": 6,
+  "weight": 5,
+  "damageDie": 12,
+  "damageType": "Piercing",
+  "attacksPerSecond": 0.8,
+  "ranged": true,
+  "range": 13,
+  "fatalDie": 12,
+  "traits": [
+   "TwoHand",
+   "Fatal",
+   "Versatile"
+  ],
+  "versatile": "Bludgeoning",
+  "capacity": 2,
+  "reloadSeconds": 1.3,
+  "description": "A rifled barrel as long as a man is tall. The wall-gunners of Ironhold swear by it."
+ },
+ {
+  "id": "hand_axe",
+  "name": "Hatchet",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 117,
+  "loot": "hand_axe",
+  "gfx": "hand_axe",
+  "damageDie": 6,
+  "damageType": "Slashing",
+  "attacksPerSecond": 1.3,
+  "traits": [
+   "Agile",
+   "Sweep"
+  ]
+ },
+ {
+  "id": "club",
+  "name": "Club",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 109,
+  "loot": "club",
+  "gfx": "club",
+  "damageDie": 6,
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 1.2,
+  "traits": []
+ },
+ {
+  "id": "reinforced_club",
+  "name": "Reinforced club",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 110,
+  "loot": "reinforced_club",
+  "gfx": "reinforced_club",
+  "damageDie": 8,
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 1.1,
+  "minLevel": 6
+ },
+ {
+  "id": "mace",
+  "name": "Mace",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 111,
+  "loot": "mace",
+  "gfx": "mace",
+  "damageDie": 6,
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 1.2,
+  "traits": [
+   "Shove"
+  ],
+  "minLevel": 1
+ },
+ {
+  "id": "war_hammer",
+  "name": "War hammer",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 102,
+  "loot": "war_hammer",
+  "gfx": "war_hammer",
+  "damageDie": 8,
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 1.1,
+  "traits": [
+   "Shove",
+   "Forceful"
+  ],
+  "minLevel": 6
+ },
+ {
+  "id": "staff",
+  "name": "Staff",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 106,
+  "loot": "staff",
+  "gfx": "staff",
+  "damageDie": 4,
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 1.0,
+  "traits": [
+   "TwoHand"
+  ],
+  "casterFocus": true
+ },
+ {
+  "id": "greatstaff",
+  "name": "Great staff",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 107,
+  "loot": "greatstaff",
+  "gfx": "greatstaff",
+  "damageDie": 6,
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 1.0,
+  "traits": [
+   "TwoHand"
+  ],
+  "casterFocus": true,
+  "implicit": {
+   "castSpeed": 0.08
+  },
+  "minLevel": 6
+ },
+ {
+  "id": "wand",
+  "name": "Wand",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 104,
+  "loot": "wand",
+  "gfx": "wand",
+  "damageDie": 4,
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 1.1,
+  "traits": [],
+  "casterFocus": true,
+  "implicit": {
+   "castSpeed": 0.05
+  },
+  "minLevel": 1
+ },
+ {
+  "id": "rod",
+  "name": "Rod",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 105,
+  "loot": "rod",
+  "gfx": "rod",
+  "damageDie": 6,
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 1.0,
+  "traits": [],
+  "casterFocus": true,
+  "implicit": {
+   "resourceRegen": 0.1
+  },
+  "minLevel": 1
+ },
+ {
+  "id": "cloth_shirt",
+  "name": "Shirt",
+  "category": "Armor",
+  "slot": "Chest",
+  "icon": 129,
+  "loot": "clothes",
+  "gfx": "cloth_shirt",
+  "armorCategory": "Unarmored",
+  "acBonus": 0,
+  "dexCap": 99,
+  "weight": 6
+ },
+ {
+  "id": "mage_vest",
+  "name": "Robes",
+  "category": "Armor",
+  "slot": "Chest",
+  "icon": 137,
+  "loot": "clothes",
+  "gfx": "mage_vest",
+  "armorCategory": "Unarmored",
+  "acBonus": 0,
+  "dexCap": 5,
+  "implicit": {
+   "castSpeed": 0.03
+  }
+ },
+ {
+  "id": "leather_chest",
+  "name": "Leather armour",
+  "category": "Armor",
+  "slot": "Chest",
+  "icon": 145,
+  "loot": "leather_armor",
+  "gfx": "leather_chest",
+  "armorCategory": "Light",
+  "acBonus": 1,
+  "dexCap": 4,
+  "checkPenalty": -1
+ },
+ {
+  "id": "chain_cuirass",
+  "name": "Chain mail",
+  "category": "Armor",
+  "slot": "Chest",
+  "icon": 153,
+  "loot": "steel_armor",
+  "gfx": "chain_cuirass",
+  "armorCategory": "Medium",
+  "acBonus": 4,
+  "dexCap": 1,
+  "checkPenalty": -2,
+  "speedPenalty": 5,
+  "strength": 2,
+  "minLevel": 1
+ },
+ {
+  "id": "full_plate",
+  "name": "Full plate",
+  "category": "Armor",
+  "slot": "Chest",
+  "icon": 161,
+  "loot": "steel_armor",
+  "gfx": "plate_cuirass",
+  "armorCategory": "Heavy",
+  "acBonus": 6,
+  "dexCap": 0,
+  "checkPenalty": -3,
+  "speedPenalty": 10,
+  "strength": 4,
+  "minLevel": 7
+ },
+ {
+  "id": "leather_hood",
+  "name": "Leather hood",
+  "category": "Armor",
+  "slot": "Head",
+  "icon": 144,
+  "loot": "leather_armor",
+  "gfx": "leather_hood"
+ },
+ {
+  "id": "chain_coif",
+  "name": "Chain coif",
+  "category": "Armor",
+  "slot": "Head",
+  "icon": 152,
+  "loot": "steel_armor",
+  "gfx": "chain_coif",
+  "minLevel": 1
+ },
+ {
+  "id": "plate_helm",
+  "name": "Plate helm",
+  "category": "Armor",
+  "slot": "Head",
+  "icon": 160,
+  "loot": "steel_armor",
+  "gfx": "plate_helm",
+  "minLevel": 6
+ },
+ {
+  "id": "mage_hood",
+  "name": "Mage hood",
+  "category": "Armor",
+  "slot": "Head",
+  "icon": 136,
+  "loot": "clothes",
+  "gfx": "mage_hood"
+ },
+ {
+  "id": "cloth_gloves",
+  "name": "Cloth gloves",
+  "category": "Armor",
+  "slot": "Hands",
+  "icon": 130,
+  "loot": "clothes",
+  "gfx": "cloth_gloves",
+  "weight": 6
+ },
+ {
+  "id": "leather_gloves",
+  "name": "Leather gloves",
+  "category": "Armor",
+  "slot": "Hands",
+  "icon": 146,
+  "loot": "leather_armor",
+  "gfx": "leather_gloves"
+ },
+ {
+  "id": "chain_gloves",
+  "name": "Chain gloves",
+  "category": "Armor",
+  "slot": "Hands",
+  "icon": 154,
+  "loot": "steel_armor",
+  "gfx": "chain_gloves",
+  "minLevel": 1
+ },
+ {
+  "id": "plate_gauntlets",
+  "name": "Plate gauntlets",
+  "category": "Armor",
+  "slot": "Hands",
+  "icon": 162,
+  "loot": "steel_armor",
+  "gfx": "plate_gauntlets",
+  "minLevel": 6
+ },
+ {
+  "id": "mage_sleeves",
+  "name": "Mage sleeves",
+  "category": "Armor",
+  "slot": "Hands",
+  "icon": 138,
+  "loot": "clothes",
+  "gfx": "mage_sleeves"
+ },
+ {
+  "id": "cloth_pants",
+  "name": "Trousers",
+  "category": "Armor",
+  "slot": "Legs",
+  "icon": 131,
+  "loot": "clothes",
+  "gfx": "cloth_pants",
+  "weight": 6
+ },
+ {
+  "id": "leather_pants",
+  "name": "Leather leggings",
+  "category": "Armor",
+  "slot": "Legs",
+  "icon": 147,
+  "loot": "leather_armor",
+  "gfx": "leather_pants"
+ },
+ {
+  "id": "chain_greaves",
+  "name": "Chain greaves",
+  "category": "Armor",
+  "slot": "Legs",
+  "icon": 155,
+  "loot": "steel_armor",
+  "gfx": "chain_greaves",
+  "minLevel": 1
+ },
+ {
+  "id": "plate_greaves",
+  "name": "Plate greaves",
+  "category": "Armor",
+  "slot": "Legs",
+  "icon": 163,
+  "loot": "steel_armor",
+  "gfx": "plate_greaves",
+  "minLevel": 6
+ },
+ {
+  "id": "mage_skirt",
+  "name": "Mage skirt",
+  "category": "Armor",
+  "slot": "Legs",
+  "icon": 139,
+  "loot": "clothes",
+  "gfx": "mage_skirt"
+ },
+ {
+  "id": "cloth_sandals",
+  "name": "Sandals",
+  "category": "Armor",
+  "slot": "Feet",
+  "icon": 132,
+  "loot": "clothes",
+  "gfx": "cloth_sandals",
+  "weight": 6
+ },
+ {
+  "id": "leather_boots",
+  "name": "Leather boots",
+  "category": "Armor",
+  "slot": "Feet",
+  "icon": 148,
+  "loot": "boots",
+  "gfx": "leather_boots"
+ },
+ {
+  "id": "chain_boots",
+  "name": "Chain boots",
+  "category": "Armor",
+  "slot": "Feet",
+  "icon": 156,
+  "loot": "steel_armor",
+  "gfx": "chain_boots",
+  "minLevel": 1
+ },
+ {
+  "id": "plate_boots",
+  "name": "Plate boots",
+  "category": "Armor",
+  "slot": "Feet",
+  "icon": 164,
+  "loot": "steel_armor",
+  "gfx": "plate_boots",
+  "minLevel": 6
+ },
+ {
+  "id": "mage_boots",
+  "name": "Mage boots",
+  "category": "Armor",
+  "slot": "Feet",
+  "icon": 140,
+  "loot": "boots",
+  "gfx": "mage_boots"
+ },
+ {
+  "id": "pauldrons",
+  "name": "Pauldrons",
+  "category": "Armor",
+  "slot": "Shoulders",
+  "icon": 0,
+  "loot": "steel_armor",
+  "glyph": "pauldrons",
+  "weight": 8
+ },
+ {
+  "id": "cloak",
+  "name": "Cloak",
+  "category": "Armor",
+  "slot": "Cloak",
+  "icon": 0,
+  "loot": "clothes",
+  "glyph": "cloak",
+  "weight": 8
+ },
+ {
+  "id": "wooden_buckler",
+  "name": "Wooden buckler",
+  "category": "Armor",
+  "slot": "OffHand",
+  "icon": 120,
+  "loot": "buckler",
+  "gfx": "buckler",
+  "weight": 5,
+  "acBonus": 1,
+  "hardness": 3
+ },
+ {
+  "id": "wooden_shield",
+  "name": "Wooden shield",
+  "category": "Armor",
+  "slot": "OffHand",
+  "icon": 122,
+  "loot": "shield",
+  "gfx": "kite_shield",
+  "weight": 5,
+  "acBonus": 2,
+  "hardness": 3
+ },
+ {
+  "id": "iron_buckler",
+  "name": "Iron buckler",
+  "category": "Armor",
+  "slot": "OffHand",
+  "icon": 121,
+  "loot": "buckler",
+  "gfx": "iron_buckler",
+  "weight": 3,
+  "minLevel": 2,
+  "acBonus": 1,
+  "hardness": 5
+ },
+ {
+  "id": "steel_shield",
+  "name": "Steel shield",
+  "category": "Armor",
+  "slot": "OffHand",
+  "icon": 123,
+  "loot": "shield",
+  "gfx": "shield",
+  "weight": 3,
+  "minLevel": 2,
+  "acBonus": 2,
+  "hardness": 5
+ },
+ {
+  "id": "belt",
+  "name": "Belt",
+  "category": "Accessory",
+  "slot": "Belt",
+  "icon": 208,
+  "loot": "belt",
+  "implicit": {
+   "maxHitPoints": 2
+  }
+ },
+ {
+  "id": "silver_ring",
+  "name": "Silver ring",
+  "category": "Accessory",
+  "slot": "Ring1",
+  "icon": 198,
+  "loot": "ring",
+  "weight": 6
+ },
+ {
+  "id": "gold_ring",
+  "name": "Gold ring",
+  "category": "Accessory",
+  "slot": "Ring1",
+  "icon": 199,
+  "loot": "ring",
+  "weight": 4
+ },
+ {
+  "id": "silver_amulet",
+  "name": "Silver amulet",
+  "category": "Accessory",
+  "slot": "Amulet",
+  "icon": 214,
+  "loot": "gem",
+  "weight": 5
+ },
+ {
+  "id": "gold_amulet",
+  "name": "Gold amulet",
+  "category": "Accessory",
+  "slot": "Amulet",
+  "icon": 212,
+  "loot": "gem",
+  "weight": 3
+ },
+ {
+  "id": "healing_draught",
+  "name": "Healing draught",
+  "category": "Consumable",
+  "slot": null,
+  "icon": 64,
+  "loot": "hp_potion"
+ },
+ {
+  "id": "alchemists_fire",
+  "name": "Alchemist's fire",
+  "category": "Consumable",
+  "slot": null,
+  "icon": 85,
+  "loot": "hp_potion",
+  "ability": "alchemists_fire",
+  "stack": 10,
+  "price": 6,
+  "weight": 10,
+  "description": "Thrown: 1d8 fire and 1 persistent fire, splashing 1 fire around the target even on a miss. Grows every two levels."
+ },
+ {
+  "id": "frost_vial",
+  "name": "Frost vial",
+  "category": "Consumable",
+  "slot": null,
+  "icon": 86,
+  "loot": "mp_potion",
+  "ability": "frost_vial",
+  "stack": 10,
+  "price": 6,
+  "weight": 8,
+  "description": "Thrown: 1d6 cold and slowed for 3 s, splashing 1 cold around the target even on a miss. Grows every two levels."
+ },
+ {
+  "id": "bottled_lightning",
+  "name": "Bottled lightning",
+  "category": "Consumable",
+  "slot": null,
+  "icon": 81,
+  "loot": "mp_potion",
+  "ability": "bottled_lightning",
+  "stack": 10,
+  "price": 6,
+  "weight": 8,
+  "description": "Thrown: 1d6 electricity and off-guard for 3 s, splashing 1 electricity around the target even on a miss. Grows every two levels."
+ },
+ {
+  "id": "acid_flask",
+  "name": "Acid flask",
+  "category": "Consumable",
+  "slot": null,
+  "icon": 80,
+  "loot": "hp_potion",
+  "ability": "acid_flask",
+  "stack": 10,
+  "price": 6,
+  "weight": 8,
+  "description": "Thrown: 1 acid and 1d6 persistent acid, splashing 1 acid around the target even on a miss. Grows every two levels."
+ },
+ {
+  "id": "antidote",
+  "name": "Antidote",
+  "category": "Consumable",
+  "slot": null,
+  "icon": 83,
+  "loot": "mp_potion",
+  "ability": "antidote",
+  "stack": 10,
+  "price": 5,
+  "weight": 8,
+  "description": "Drunk: ends any poison in you and gives +2 to saves against poison for 2 minutes."
+ },
+ {
+  "id": "pilgrims_lantern",
+  "name": "Pilgrim's lantern",
+  "category": "Key",
+  "slot": null,
+  "icon": 0,
+  "loot": "ring",
+  "glyph": "lantern",
+  "lightRadius": 2.5,
+  "description": "A hooded Lantern-Order lamp, still trimmed. Carried, it throws your light 2.5 tiles further in dark places."
+ },
+ {
+  "id": "cinder_relic",
+  "name": "Sallow's Cinder Relic",
+  "category": "Key",
+  "slot": null,
+  "icon": 0,
+  "loot": "gem",
+  "glyph": "ember",
+  "description": "An ember that will not cool, wrapped in a girl's grey shawl. It beats like a heart. Ysolde might make a cure of it; the Prophet would make Sallow of it again."
+ },
+ {
+  "id": "ysoldes_phial",
+  "name": "Ysolde's Phial",
+  "category": "Accessory",
+  "slot": "Amulet",
+  "icon": 213,
+  "loot": "gem",
+  "unique": true,
+  "minLevel": 1,
+  "implicit": {
+   "maxHitPoints": 10,
+   "resourceRegen": 0.1
+  },
+  "description": "A stoppered phial of the cure, on a cord. What is left over keeps you.",
+  "story": true,
+  "trait": "Leftover Cure",
+  "traitText": "You recover a quarter faster out of a fight.",
+  "effects": [
+   {
+    "recovery": 0.25
+   }
+  ]
+ },
+ {
+  "id": "ferrymans_knot",
+  "name": "Ferryman's Knot",
+  "category": "Accessory",
+  "slot": "Ring1",
+  "icon": 203,
+  "loot": "ring",
+  "unique": true,
+  "minLevel": 1,
+  "implicit": {
+   "maxHitPoints": 6,
+   "moveSpeed": 0.08
+  },
+  "description": "A ring of tarred rope, the Brothers' sign. Boats wait for whoever wears it.",
+  "story": true,
+  "trait": "Boats Wait",
+  "traitText": "+1 to Reflex saves.",
+  "effects": [
+   {
+    "statistic": "Reflex",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "weeping_soulgem",
+  "name": "The Weeping Soul-gem",
+  "category": "Accessory",
+  "slot": "Ring1",
+  "icon": 206,
+  "loot": "ring",
+  "unique": true,
+  "minLevel": 1,
+  "implicit": {
+   "castSpeed": 0.08,
+   "resourceRegen": 0.15
+  },
+  "description": "A pale stone that is always wet. Something in it is still sorry.",
+  "story": true,
+  "trait": "Sorrow",
+  "traitText": "Taint builds 15% more slowly in you.",
+  "effects": [
+   {
+    "taintRate": 0.15
+   }
+  ]
+ },
+ {
+  "id": "hangmans_mercy",
+  "name": "Hangman's Mercy",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 98,
+  "loot": "longsword",
+  "gfx": "longsword",
+  "damageDie": 8,
+  "damageType": "Slashing",
+  "attacksPerSecond": 1.2,
+  "traits": [
+   "Versatile"
+  ],
+  "versatile": "Piercing",
+  "minLevel": 1,
+  "unique": true,
+  "potency": 1,
+  "trait": "Last Rites",
+  "traitText": "Your Strikes deal 1 more vitality damage to the undead (2 at level 9), and 2 more on a critical hit.",
+  "effects": [
+   {
+    "undeadBane": 1
+   },
+   {
+    "critDamage": 2
+   }
+  ],
+  "description": "The blade that cut the Ashbound down from the gallows, they say, and has been looking for the hangman since."
+ },
+ {
+  "id": "rotgut_girdle",
+  "name": "Rotgut Girdle",
+  "category": "Accessory",
+  "slot": "Belt",
+  "icon": 208,
+  "loot": "belt",
+  "implicit": {
+   "maxHitPoints": 8
+  },
+  "minLevel": 1,
+  "unique": true,
+  "trait": "Iron Stomach",
+  "traitText": "Resistance 4 poison, and Taint builds 20% more slowly.",
+  "effects": [
+   {
+    "resist": "Poison",
+    "value": 4
+   },
+   {
+    "taintRate": 0.2
+   }
+  ],
+  "description": "Cured in bog water. Nothing it holds goes bad."
+ },
+ {
+  "id": "whisperknife",
+  "name": "Whisperknife",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 96,
+  "loot": "dagger",
+  "gfx": "dagger",
+  "damageDie": 4,
+  "damageType": "Piercing",
+  "attacksPerSecond": 1.6,
+  "traits": [
+   "Agile",
+   "Finesse",
+   "Versatile"
+  ],
+  "versatile": "Slashing",
+  "minLevel": 2,
+  "unique": true,
+  "potency": 1,
+  "trait": "Whispers",
+  "traitText": "1 more sneak attack die (a rogue's), and 3 more damage on a critical hit.",
+  "effects": [
+   {
+    "sneakDice": 1
+   },
+   {
+    "critDamage": 3
+   }
+  ],
+  "description": "Thin enough to slide between two words."
+ },
+ {
+  "id": "cinderheart_staff",
+  "name": "Cinderheart Staff",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 106,
+  "loot": "staff",
+  "gfx": "staff",
+  "damageDie": 4,
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 1.0,
+  "traits": [
+   "TwoHand"
+  ],
+  "casterFocus": true,
+  "minLevel": 2,
+  "unique": true,
+  "implicit": {
+   "castSpeed": 0.08
+  },
+  "trait": "Ember Well",
+  "traitText": "Your resource returns a quarter faster, and your spells reach a tile further.",
+  "effects": [
+   {
+    "resourceRegen": 0.25
+   },
+   {
+    "spellRange": 1
+   }
+  ],
+  "description": "A knot of ember sleeps in the wood. It wakes when you speak."
+ },
+ {
+  "id": "mirewalker_boots",
+  "name": "Mirewalker Boots",
+  "category": "Armor",
+  "slot": "Feet",
+  "icon": 148,
+  "loot": "boots",
+  "gfx": "leather_boots",
+  "minLevel": 2,
+  "unique": true,
+  "trait": "Bog-born",
+  "traitText": "+5 ft speed and resistance 3 poison.",
+  "effects": [
+   {
+    "speedFeet": 5
+   },
+   {
+    "resist": "Poison",
+    "value": 3
+   }
+  ],
+  "description": "Stitched by a fen-runner who never once sank."
+ },
+ {
+  "id": "thornwood_bow",
+  "name": "Thornwood Bow",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 114,
+  "loot": "longbow",
+  "gfx": "longbow",
+  "minLevel": 3,
+  "damageDie": 8,
+  "damageType": "Piercing",
+  "attacksPerSecond": 1.0,
+  "ranged": true,
+  "range": 10,
+  "deadlyDie": 10,
+  "traits": [
+   "TwoHand",
+   "Deadly"
+  ],
+  "unique": true,
+  "potency": 1,
+  "trait": "Thorned Flights",
+  "traitText": "Every arrow flies on through one more enemy, and the bow reaches a tile further.",
+  "effects": [
+   {
+    "pierce": 1
+   },
+   {
+    "weaponRange": 1
+   }
+  ],
+  "description": "Grown, not carved, from a thorn that drank at a gallows."
+ },
+ {
+  "id": "gravewardens_cowl",
+  "name": "Gravewarden's Cowl",
+  "category": "Armor",
+  "slot": "Head",
+  "icon": 152,
+  "loot": "steel_armor",
+  "gfx": "chain_coif",
+  "minLevel": 3,
+  "unique": true,
+  "trait": "Grave-sight",
+  "traitText": "Your light reaches 1.5 tiles further, and +2 Perception.",
+  "effects": [
+   {
+    "light": 1.5
+   },
+   {
+    "statistic": "Perception",
+    "value": 2
+   }
+  ],
+  "description": "Worn by the men who watched the barrows. They saw everything coming."
+ },
+ {
+  "id": "shroud_of_the_drowned",
+  "name": "Shroud of the Drowned",
+  "category": "Armor",
+  "slot": "Cloak",
+  "icon": 0,
+  "loot": "clothes",
+  "glyph": "cloak",
+  "minLevel": 3,
+  "unique": true,
+  "trait": "Drowned Pallor",
+  "traitText": "Resistance 3 cold and 3 void, and +1 to Reflex saves.",
+  "effects": [
+   {
+    "resist": "Cold",
+    "value": 3
+   },
+   {
+    "resist": "Void",
+    "value": 3
+   },
+   {
+    "statistic": "Reflex",
+    "value": 1
+   }
+  ],
+  "description": "Lifted from a chapel bier, still cold, still damp."
+ },
+ {
+  "id": "lanterns_rebuke",
+  "name": "The Lantern's Rebuke",
+  "category": "Armor",
+  "slot": "OffHand",
+  "icon": 123,
+  "loot": "shield",
+  "gfx": "shield",
+  "minLevel": 4,
+  "acBonus": 2,
+  "hardness": 5,
+  "unique": true,
+  "trait": "Rebuke",
+  "traitText": "Shield Block takes 3 more off a blow, and you strike back at the attacker in reach.",
+  "effects": [
+   {
+    "blockHardness": 3
+   },
+   {
+    "blockCounter": true
+   }
+  ],
+  "description": "The Order's sigil, half burned away. The half left still blazes."
+ },
+ {
+  "id": "prophets_weight",
+  "name": "The Prophet's Weight",
+  "category": "Armor",
+  "slot": "Shoulders",
+  "icon": 0,
+  "loot": "steel_armor",
+  "glyph": "pauldrons",
+  "minLevel": 5,
+  "unique": true,
+  "trait": "Weight of Ash",
+  "traitText": "+2 HP a level, and +1 to Will saves.",
+  "effects": [
+   {
+    "hitPointsPerLevel": 2
+   },
+   {
+    "statistic": "Will",
+    "value": 1
+   }
+  ],
+  "description": "Malachar Vane's own, left behind when he broke the seals. Heavier than iron."
+ },
+ {
+  "id": "gallowsmen_hood",
+  "name": "Gallowsman's Hood",
+  "category": "Armor",
+  "slot": "Head",
+  "icon": 144,
+  "loot": "leather_armor",
+  "gfx": "leather_hood",
+  "minLevel": 1,
+  "set": "gallowsmen",
+  "implicit": {
+   "maxHitPoints": 3
+  },
+  "description": "Black leather, oiled for the rain on Gallows Hill."
+ },
+ {
+  "id": "gallowsmen_gloves",
+  "name": "Gallowsman's Gloves",
+  "category": "Armor",
+  "slot": "Hands",
+  "icon": 146,
+  "loot": "leather_armor",
+  "gfx": "leather_gloves",
+  "minLevel": 1,
+  "set": "gallowsmen",
+  "implicit": {
+   "attackSpeed": 0.04
+  },
+  "description": "Black leather, oiled for the rain on Gallows Hill."
+ },
+ {
+  "id": "gallowsmen_boots",
+  "name": "Gallowsman's Boots",
+  "category": "Armor",
+  "slot": "Feet",
+  "icon": 148,
+  "loot": "boots",
+  "gfx": "leather_boots",
+  "minLevel": 1,
+  "set": "gallowsmen",
+  "implicit": {
+   "moveSpeed": 0.04
+  },
+  "description": "Black leather, oiled for the rain on Gallows Hill."
+ },
+ {
+  "id": "warden_coif",
+  "name": "Lantern Warden's Coif",
+  "category": "Armor",
+  "slot": "Head",
+  "icon": 152,
+  "loot": "steel_armor",
+  "gfx": "chain_coif",
+  "minLevel": 3,
+  "set": "lantern_warden",
+  "implicit": {
+   "maxHitPoints": 4
+  },
+  "description": "Mail of the Order's wardens, a lantern etched on every plate."
+ },
+ {
+  "id": "warden_gauntlets",
+  "name": "Lantern Warden's Gauntlets",
+  "category": "Armor",
+  "slot": "Hands",
+  "icon": 154,
+  "loot": "steel_armor",
+  "gfx": "chain_gloves",
+  "minLevel": 3,
+  "set": "lantern_warden",
+  "implicit": {
+   "maxHitPoints": 4
+  },
+  "description": "Mail of the Order's wardens, a lantern etched on every plate."
+ },
+ {
+  "id": "warden_greaves",
+  "name": "Lantern Warden's Greaves",
+  "category": "Armor",
+  "slot": "Legs",
+  "icon": 155,
+  "loot": "steel_armor",
+  "gfx": "chain_greaves",
+  "minLevel": 3,
+  "set": "lantern_warden",
+  "implicit": {
+   "maxHitPoints": 4
+  },
+  "description": "Mail of the Order's wardens, a lantern etched on every plate."
+ },
+ {
+  "id": "warden_pauldrons",
+  "name": "Lantern Warden's Pauldrons",
+  "category": "Armor",
+  "slot": "Shoulders",
+  "icon": 0,
+  "loot": "steel_armor",
+  "glyph": "pauldrons",
+  "minLevel": 3,
+  "set": "lantern_warden",
+  "implicit": {
+   "maxHitPoints": 4
+  },
+  "description": "Mail of the Order's wardens, a lantern etched on every plate."
+ },
+ {
+  "id": "mirewitch_hood",
+  "name": "Mire-Witch's Hood",
+  "category": "Armor",
+  "slot": "Head",
+  "icon": 136,
+  "loot": "clothes",
+  "gfx": "mage_hood",
+  "minLevel": 4,
+  "set": "mirewitch",
+  "implicit": {
+   "castSpeed": 0.05
+  },
+  "description": "Sallow's sisters wore these, before the Taint took them."
+ },
+ {
+  "id": "mirewitch_sleeves",
+  "name": "Mire-Witch's Sleeves",
+  "category": "Armor",
+  "slot": "Hands",
+  "icon": 138,
+  "loot": "clothes",
+  "gfx": "mage_sleeves",
+  "minLevel": 4,
+  "set": "mirewitch",
+  "implicit": {
+   "resourceRegen": 0.08
+  },
+  "description": "Sallow's sisters wore these, before the Taint took them."
+ },
+ {
+  "id": "mirewitch_shawl",
+  "name": "Mire-Witch's Shawl",
+  "category": "Armor",
+  "slot": "Cloak",
+  "icon": 0,
+  "loot": "clothes",
+  "glyph": "cloak",
+  "minLevel": 4,
+  "set": "mirewitch",
+  "implicit": {
+   "maxHitPoints": 4
+  },
+  "description": "Sallow's sisters wore these, before the Taint took them."
+ },
+ {
+  "id": "ironhold_oathblade",
+  "name": "Ironhold Oathblade",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 98,
+  "loot": "longsword",
+  "gfx": "longsword",
+  "damageDie": 8,
+  "damageType": "Slashing",
+  "attacksPerSecond": 1.2,
+  "traits": [
+   "Versatile"
+  ],
+  "versatile": "Piercing",
+  "minLevel": 6,
+  "unique": true,
+  "potency": 1,
+  "striking": 1,
+  "trait": "Oathkeeper",
+  "traitText": "+1 AC, and 4 more damage on a critical hit.",
+  "effects": [
+   {
+    "statistic": "ArmorClass",
+    "value": 1
+   },
+   {
+    "critDamage": 4
+   }
+  ],
+  "description": "Sworn on at every Guard captain's taking of office, for two hundred years."
+ },
+ {
+  "id": "mirellas_draw",
+  "name": "Red Mirella's Draw",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 114,
+  "loot": "longbow",
+  "gfx": "longbow",
+  "minLevel": 7,
+  "damageDie": 8,
+  "damageType": "Piercing",
+  "attacksPerSecond": 1.0,
+  "ranged": true,
+  "range": 10,
+  "deadlyDie": 10,
+  "traits": [
+   "TwoHand",
+   "Deadly"
+  ],
+  "unique": true,
+  "potency": 1,
+  "striking": 1,
+  "trait": "Outlaw's Aim",
+  "traitText": "Your bow reaches 2 tiles further, and 3 more damage on a critical hit.",
+  "effects": [
+   {
+    "weaponRange": 2
+   },
+   {
+    "critDamage": 3
+   }
+  ],
+  "description": "Every notch on the grip is a Guard sergeant who came looking for her."
+ },
+ {
+  "id": "siegebreaker",
+  "name": "Siegebreaker",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 102,
+  "loot": "war_hammer",
+  "gfx": "war_hammer",
+  "damageDie": 8,
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 1.1,
+  "traits": [
+   "Shove",
+   "Forceful"
+  ],
+  "minLevel": 8,
+  "unique": true,
+  "potency": 1,
+  "striking": 1,
+  "trait": "Wallbreaker",
+  "traitText": "+3 damage on every hit.",
+  "effects": [
+   {
+    "statistic": "Damage",
+    "value": 3
+   }
+  ],
+  "description": "It broke the Iron March gate in the old war. The gate has not been rebuilt."
+ },
+ {
+  "id": "cinderglass_staff",
+  "name": "Cinderglass Staff",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 107,
+  "loot": "greatstaff",
+  "gfx": "greatstaff",
+  "damageDie": 6,
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 1.0,
+  "traits": [
+   "TwoHand"
+  ],
+  "casterFocus": true,
+  "implicit": {
+   "castSpeed": 0.1
+  },
+  "minLevel": 8,
+  "unique": true,
+  "trait": "Glassfire",
+  "traitText": "Your spells reach 2 tiles further, and +1 to spell attacks.",
+  "effects": [
+   {
+    "spellRange": 2
+   },
+   {
+    "statistic": "SpellAttack",
+    "value": 1
+   }
+  ],
+  "description": "Glass blown from the ash of the first burning, still warm."
+ },
+ {
+  "id": "crown_of_the_unburied",
+  "name": "Crown of the Unburied",
+  "category": "Armor",
+  "slot": "Head",
+  "icon": 160,
+  "loot": "steel_armor",
+  "gfx": "plate_helm",
+  "minLevel": 9,
+  "unique": true,
+  "implicit": {
+   "maxHitPoints": 10
+  },
+  "trait": "Unburied",
+  "traitText": "Resistance 5 void, and +2 to Will saves.",
+  "effects": [
+   {
+    "resist": "Void",
+    "value": 5
+   },
+   {
+    "statistic": "Will",
+    "value": 2
+   }
+  ],
+  "description": "A dead knight's helm, still warm inside."
+ },
+ {
+  "id": "guard_helm",
+  "name": "Ironhold Guard's Helm",
+  "category": "Armor",
+  "slot": "Head",
+  "icon": 160,
+  "loot": "steel_armor",
+  "gfx": "plate_helm",
+  "minLevel": 7,
+  "set": "ironhold_guard",
+  "implicit": {
+   "maxHitPoints": 6
+  },
+  "description": "The Guard's own plate, the city's hammer on every piece."
+ },
+ {
+  "id": "guard_gauntlets",
+  "name": "Ironhold Guard's Gauntlets",
+  "category": "Armor",
+  "slot": "Hands",
+  "icon": 162,
+  "loot": "steel_armor",
+  "gfx": "plate_gauntlets",
+  "minLevel": 7,
+  "set": "ironhold_guard",
+  "implicit": {
+   "attackSpeed": 0.05
+  },
+  "description": "The Guard's own plate, the city's hammer on every piece."
+ },
+ {
+  "id": "guard_boots",
+  "name": "Ironhold Guard's Boots",
+  "category": "Armor",
+  "slot": "Feet",
+  "icon": 164,
+  "loot": "steel_armor",
+  "gfx": "plate_boots",
+  "minLevel": 7,
+  "set": "ironhold_guard",
+  "implicit": {
+   "maxHitPoints": 6
+  },
+  "description": "The Guard's own plate, the city's hammer on every piece."
+ },
+ {
+  "id": "hadrics_oath_sword",
+  "name": "Hadric's Oath-Sword",
+  "category": "Key",
+  "slot": null,
+  "icon": 0,
+  "loot": "greatsword",
+  "glyph": "oath_sword",
+  "description": "Ser Hadric's own blade, left in his empty tomb under the barracks. The oath of the Iron Legion is cut into the fuller: TO HOLD THE GATE, AND COME HOME TO HER."
+ },
+ {
+  "id": "confessor_mainspring",
+  "name": "Brass mainspring",
+  "category": "Key",
+  "slot": null,
+  "icon": 0,
+  "loot": "gem",
+  "glyph": "spring",
+  "description": "A coiled brass spring as long as your forearm, still tight. Some great clockwork wanted it badly."
+ },
+ {
+  "id": "confessor_governor",
+  "name": "Governor cog",
+  "category": "Key",
+  "slot": null,
+  "icon": 0,
+  "loot": "gem",
+  "glyph": "cog",
+  "description": "A toothed brass wheel stamped with the Lantern Order's sign. It turns smoothly, as if oiled yesterday."
+ },
+ {
+  "id": "confessor_grille",
+  "name": "Speaking-grille",
+  "category": "Key",
+  "slot": null,
+  "icon": 0,
+  "loot": "gem",
+  "glyph": "grille",
+  "description": "A brass face-plate pierced like a confessional screen. Behind it, a tiny bellows and a reed."
+ },
+ {
+  "id": "wyrm_egg",
+  "name": "The Wyrm's Egg",
+  "category": "Key",
+  "slot": null,
+  "icon": 0,
+  "loot": "gem",
+  "glyph": "egg",
+  "description": "An egg the size of a helm, black and hot, from Vorthrax's nest. Something inside it knocks. A forge would be warm enough to hatch it."
+ },
+ {
+  "id": "hadrics_severed_oath",
+  "name": "Hadric's Severed Oath",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 99,
+  "loot": "greatsword",
+  "gfx": "greatsword",
+  "damageDie": 12,
+  "damageType": "Slashing",
+  "attacksPerSecond": 0.9,
+  "traits": [
+   "TwoHand",
+   "Versatile"
+  ],
+  "versatile": "Piercing",
+  "minLevel": 8,
+  "unique": true,
+  "potency": 1,
+  "striking": 1,
+  "trait": "No Gate Held",
+  "traitText": "+2 damage on every hit, and 6 more on a critical hit.",
+  "effects": [
+   {
+    "statistic": "Damage",
+    "value": 2
+   },
+   {
+    "critDamage": 6
+   }
+  ],
+  "description": "You broke it across his wife's headstone. The oath went out of the steel, and the blade that is left holds nothing back.",
+  "story": true
+ },
+ {
+  "id": "frostbrand",
+  "name": "Frostbrand",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 99,
+  "loot": "greatsword",
+  "gfx": "greatsword",
+  "damageDie": 12,
+  "damageType": "Cold",
+  "attacksPerSecond": 0.9,
+  "traits": [
+   "TwoHand",
+   "Versatile"
+  ],
+  "versatile": "Piercing",
+  "minLevel": 11,
+  "potency": 2,
+  "striking": 1,
+  "trait": "Rime",
+  "traitText": "+2 damage on every hit, and resistance 5 cold.",
+  "effects": [
+   {
+    "statistic": "Damage",
+    "value": 2
+   },
+   {
+    "resist": "Cold",
+    "value": 5
+   }
+  ],
+  "description": "Forged for the monastery's wardens in the pass, and never once warm.",
+  "unique": true
+ },
+ {
+  "id": "oriels_crook",
+  "name": "Saint Oriel's Crook",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 107,
+  "loot": "greatstaff",
+  "gfx": "greatstaff",
+  "damageDie": 6,
+  "damageType": "Bludgeoning",
+  "attacksPerSecond": 1.0,
+  "traits": [
+   "TwoHand"
+  ],
+  "casterFocus": true,
+  "implicit": {
+   "castSpeed": 0.1
+  },
+  "minLevel": 12,
+  "trait": "Bell-Toll",
+  "traitText": "+1 to spell attacks and spell DCs, and your Mana returns a fifth faster.",
+  "effects": [
+   {
+    "statistic": "SpellAttack",
+    "value": 1
+   },
+   {
+    "statistic": "SpellDc",
+    "value": 1
+   },
+   {
+    "resourceRegen": 0.2
+   }
+  ],
+  "description": "The abbesses carried it up the cliff stair for six hundred years. Its iron bell hangs silent.",
+  "unique": true
+ },
+ {
+  "id": "whisperbane",
+  "name": "Whisperbane",
+  "category": "Armor",
+  "slot": "Head",
+  "icon": 160,
+  "loot": "steel_armor",
+  "gfx": "plate_helm",
+  "minLevel": 13,
+  "implicit": {
+   "maxHitPoints": 12
+  },
+  "trait": "Shut Ears",
+  "traitText": "+2 to Will saves, and resistance 5 mental.",
+  "effects": [
+   {
+    "statistic": "Will",
+    "value": 2
+   },
+   {
+    "resist": "Mental",
+    "value": 5
+   }
+  ],
+  "description": "The visor is lined with wax and lead. Whatever it shuts out, it shuts out well.",
+  "unique": true
+ },
+ {
+  "id": "penitents_shroud",
+  "name": "The Penitent's Shroud",
+  "category": "Armor",
+  "slot": "Cloak",
+  "icon": 0,
+  "loot": "clothes",
+  "glyph": "cloak",
+  "weight": 8,
+  "minLevel": 14,
+  "implicit": {
+   "maxHitPoints": 10
+  },
+  "trait": "Contrition",
+  "traitText": "+1 AC, and the Taint builds in you a quarter more slowly.",
+  "effects": [
+   {
+    "statistic": "ArmorClass",
+    "value": 1
+   },
+   {
+    "taintRate": 0.25
+   }
+  ],
+  "description": "Grey wool, mended a hundred times by someone who meant every stitch.",
+  "unique": true
+ },
+ {
+  "id": "frostfang",
+  "name": "Frostfang",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 114,
+  "loot": "longbow",
+  "gfx": "longbow",
+  "damageDie": 8,
+  "damageType": "Cold",
+  "attacksPerSecond": 1.0,
+  "ranged": true,
+  "range": 10,
+  "deadlyDie": 10,
+  "traits": [
+   "TwoHand",
+   "Deadly"
+  ],
+  "minLevel": 15,
+  "potency": 2,
+  "striking": 2,
+  "trait": "Winter's Bite",
+  "traitText": "+1 to attack rolls, and 6 more damage on a critical hit.",
+  "effects": [
+   {
+    "statistic": "Attack",
+    "value": 1
+   },
+   {
+    "critDamage": 6
+   }
+  ],
+  "description": "Strung with a sinew that never thaws. The arrows come back frosted.",
+  "unique": true
+ },
+ {
+  "id": "oriel_vestment",
+  "name": "Vestment of Saint Oriel",
+  "category": "Armor",
+  "slot": "Chest",
+  "icon": 137,
+  "loot": "clothes",
+  "gfx": "mage_vest",
+  "armorCategory": "Unarmored",
+  "acBonus": 0,
+  "dexCap": 5,
+  "implicit": {
+   "castSpeed": 0.05,
+   "maxHitPoints": 10
+  },
+  "minLevel": 12,
+  "set": "oriel_vestments",
+  "description": "White wool worked with a silver bell at the breast."
+ },
+ {
+  "id": "oriel_cowl",
+  "name": "Cowl of Saint Oriel",
+  "category": "Armor",
+  "slot": "Head",
+  "icon": 136,
+  "loot": "clothes",
+  "gfx": "mage_hood",
+  "minLevel": 12,
+  "set": "oriel_vestments",
+  "implicit": {
+   "maxHitPoints": 8
+  },
+  "description": "Its hem is stitched with the names of abbesses."
+ },
+ {
+  "id": "oriel_sandals",
+  "name": "Pilgrim-Boots of Saint Oriel",
+  "category": "Armor",
+  "slot": "Feet",
+  "icon": 140,
+  "loot": "boots",
+  "gfx": "mage_boots",
+  "minLevel": 12,
+  "set": "oriel_vestments",
+  "implicit": {
+   "moveSpeed": 0.05
+  },
+  "description": "Worn up the cliff stair a thousand times, and never down."
+ },
+ {
+  "id": "emberfall",
+  "name": "Emberfall",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 103,
+  "loot": "maul",
+  "gfx": "maul",
+  "damageDie": 12,
+  "damageType": "Fire",
+  "attacksPerSecond": 0.85,
+  "traits": [
+   "TwoHand",
+   "Shove"
+  ],
+  "minLevel": 16,
+  "potency": 3,
+  "striking": 2,
+  "trait": "Banked Coals",
+  "traitText": "+3 damage on every hit, and resistance 10 fire.",
+  "effects": [
+   {
+    "statistic": "Damage",
+    "value": 3
+   },
+   {
+    "resist": "Fire",
+    "value": 10
+   }
+  ],
+  "description": "Its head is a lump of the mountain's own slag, hot enough to boil rain.",
+  "unique": true
+ },
+ {
+  "id": "drakescale_mail",
+  "name": "Drakescale Mail",
+  "category": "Armor",
+  "slot": "Chest",
+  "icon": 161,
+  "loot": "steel_armor",
+  "gfx": "plate_cuirass",
+  "armorCategory": "Heavy",
+  "acBonus": 6,
+  "dexCap": 0,
+  "checkPenalty": -3,
+  "speedPenalty": 10,
+  "strength": 4,
+  "minLevel": 17,
+  "potency": 2,
+  "resilient": 2,
+  "implicit": {
+   "maxHitPoints": 20
+  },
+  "trait": "Cinder-Proof",
+  "traitText": "+1 AC, and resistance 10 fire.",
+  "effects": [
+   {
+    "statistic": "ArmorClass",
+    "value": 1
+   },
+   {
+    "resist": "Fire",
+    "value": 10
+   }
+  ],
+  "description": "Scales shed by the cinder-drakes of the Nest, riveted on a smith's anvil at the Ember Gate. They never cool.",
+  "unique": true
+ },
+ {
+  "id": "inquisitors_verdict",
+  "name": "The Inquisitor's Verdict",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 0,
+  "loot": "pistol",
+  "gfx": "pistol",
+  "glyph": "flintlock",
+  "minLevel": 18,
+  "weight": 5,
+  "damageDie": 8,
+  "damageType": "Fire",
+  "attacksPerSecond": 1.25,
+  "ranged": true,
+  "range": 9,
+  "fatalDie": 12,
+  "traits": [
+   "Fatal",
+   "Versatile"
+  ],
+  "versatile": "Piercing",
+  "capacity": 3,
+  "reloadSeconds": 1.0,
+  "potency": 3,
+  "striking": 2,
+  "trait": "Sentence Passed",
+  "traitText": "+1 to attack rolls, and 6 more damage on a critical hit.",
+  "effects": [
+   {
+    "statistic": "Attack",
+    "value": 1
+   },
+   {
+    "critDamage": 6
+   }
+  ],
+  "description": "The Prophet's Inquisitors carry a pistol each, loaded with ash. This one has passed a great many sentences.",
+  "unique": true
+ },
+ {
+  "id": "pyrebrand_staff",
+  "name": "Pyrebrand",
+  "category": "Weapon",
+  "slot": "MainHand",
+  "icon": 107,
+  "loot": "greatstaff",
+  "gfx": "greatstaff",
+  "damageDie": 6,
+  "damageType": "Fire",
+  "attacksPerSecond": 1.0,
+  "traits": [
+   "TwoHand"
+  ],
+  "casterFocus": true,
+  "implicit": {
+   "castSpeed": 0.12
+  },
+  "minLevel": 19,
+  "trait": "The Burning",
+  "traitText": "+2 to spell attacks and spell DCs, and resistance 5 fire.",
+  "effects": [
+   {
+    "statistic": "SpellAttack",
+    "value": 2
+   },
+   {
+    "statistic": "SpellDc",
+    "value": 2
+   },
+   {
+    "resist": "Fire",
+    "value": 5
+   }
+  ],
+  "description": "A branch from the tree Ashur was burned on, they say at the Ember Gate, and it has not stopped burning since.",
+  "unique": true
+ },
+ {
+  "id": "ashurs_ember",
+  "name": "Ashur's Ember",
+  "category": "Accessory",
+  "slot": "Amulet",
+  "icon": 213,
+  "loot": "gem",
+  "unique": true,
+  "minLevel": 20,
+  "implicit": {
+   "maxHitPoints": 30,
+   "resourceRegen": 0.15
+  },
+  "trait": "The Shepherd's Fire",
+  "traitText": "+3 HP a level, +1 to every save, and the Taint builds in you half as fast.",
+  "effects": [
+   {
+    "hitPointsPerLevel": 3
+   },
+   {
+    "statistic": "Fortitude",
+    "value": 1
+   },
+   {
+    "statistic": "Reflex",
+    "value": 1
+   },
+   {
+    "statistic": "Will",
+    "value": 1
+   },
+   {
+    "taintRate": 0.5
+   }
+  ],
+  "description": "A coal in a cage of old iron. It is warm in the hand, and it beats, slowly, like a heart."
+ },
+ {
+  "id": "last_lantern_helm",
+  "name": "Last Lantern Helm",
+  "category": "Armor",
+  "slot": "Head",
+  "icon": 160,
+  "loot": "steel_armor",
+  "gfx": "plate_helm",
+  "minLevel": 17,
+  "set": "last_lantern",
+  "implicit": {
+   "maxHitPoints": 14
+  },
+  "description": "Soot-black plate with the Pale Lantern worked in silver, kept by the Order's last knights at the Ember Gate."
+ },
+ {
+  "id": "last_lantern_gauntlets",
+  "name": "Last Lantern Gauntlets",
+  "category": "Armor",
+  "slot": "Hands",
+  "icon": 162,
+  "loot": "steel_armor",
+  "gfx": "plate_gauntlets",
+  "minLevel": 17,
+  "set": "last_lantern",
+  "implicit": {
+   "attackSpeed": 0.06
+  },
+  "description": "Soot-black plate with the Pale Lantern worked in silver, kept by the Order's last knights at the Ember Gate."
+ },
+ {
+  "id": "last_lantern_boots",
+  "name": "Last Lantern Boots",
+  "category": "Armor",
+  "slot": "Feet",
+  "icon": 164,
+  "loot": "steel_armor",
+  "gfx": "plate_boots",
+  "minLevel": 17,
+  "set": "last_lantern",
+  "implicit": {
+   "maxHitPoints": 14
+  },
+  "description": "Soot-black plate with the Pale Lantern worked in silver, kept by the Order's last knights at the Ember Gate."
+ },
+ {
+  "id": "black_powder",
+  "name": "Black powder",
+  "category": "Material",
+  "slot": null,
+  "icon": 0,
+  "loot": "mp_potion",
+  "glyph": "powder",
+  "stack": 99,
+  "price": 2,
+  "weight": 40,
+  "description": "Ironhold corned powder in a waxed bag. Cast into special rounds at a forge, and spent refitting guns."
+ },
+ {
+  "id": "lead_shot",
+  "name": "Lead shot",
+  "category": "Material",
+  "slot": null,
+  "icon": 0,
+  "loot": "gem",
+  "glyph": "lead",
+  "stack": 99,
+  "price": 2,
+  "weight": 40,
+  "description": "Soft lead balls and the means to cast more. Cast into special rounds at a forge."
+ },
+ {
+  "id": "gun_parts",
+  "name": "Gun parts",
+  "category": "Material",
+  "slot": null,
+  "icon": 0,
+  "loot": "gem",
+  "glyph": "gears",
+  "stack": 99,
+  "price": 4,
+  "weight": 20,
+  "description": "Springs, frizzens, pins and a spare barrel band. A smith refits a gun with them to hold one round more."
+ },
+ {
+  "id": "incendiary_round",
+  "name": "Incendiary round",
+  "category": "Consumable",
+  "slot": null,
+  "icon": 0,
+  "loot": "hp_potion",
+  "glyph": "round_fire",
+  "ability": "incendiary_round",
+  "stack": 20,
+  "price": 8,
+  "weight": 0,
+  "description": "Fired from a gun: a Strike with a weapon die more and 1d6 persistent fire. Cast from black powder and lead shot at a forge."
+ },
+ {
+  "id": "silver_round",
+  "name": "Silvered round",
+  "category": "Consumable",
+  "slot": null,
+  "icon": 0,
+  "loot": "gem",
+  "glyph": "round_silver",
+  "ability": "silver_round",
+  "stack": 20,
+  "price": 10,
+  "weight": 0,
+  "minLevel": 3,
+  "description": "Fired from a gun: a Strike that burns the undead for 2d6 vitality more. Cast from black powder and lead shot at a forge."
+ },
+ {
+  "id": "scatter_round",
+  "name": "Scatter round",
+  "category": "Consumable",
+  "slot": null,
+  "icon": 0,
+  "loot": "mp_potion",
+  "glyph": "round_scatter",
+  "ability": "scatter_round",
+  "stack": 20,
+  "price": 8,
+  "weight": 0,
+  "minLevel": 2,
+  "description": "Fired from a gun: a spread of shot, a Strike at the target and up to three more in front of you. Cast from black powder and lead shot at a forge."
+ },
+ {
+  "id": "lantern_bird",
+  "name": "Carved lantern-bird",
+  "category": "Key",
+  "slot": null,
+  "icon": 0,
+  "loot": "gem",
+  "glyph": "bird",
+  "description": "A child's toy: a little bird whittled from pale wood, a lantern painted on each wing, worn smooth by small hands. WREN is cut under its tail."
+ }
+]

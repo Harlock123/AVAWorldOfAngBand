@@ -2,6 +2,7 @@
   <Folder Name="/src/">
     <Project Path="src/WorldOfAngBand.Engine/WorldOfAngBand.Engine.csproj" />
     <Project Path="src/WorldOfAngBand.Data/WorldOfAngBand.Data.csproj" />
+    <Project Path="src/WorldOfAngBand.Rules/WorldOfAngBand.Rules.csproj" />
     <Project Path="src/WorldOfAngBand.Game/WorldOfAngBand.Game.csproj" />
     <Project Path="src/WorldOfAngBand.App/WorldOfAngBand.App.csproj" />
   </Folder>

@@ -6,18 +6,20 @@ using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
 using SkiaSharp;
 using WorldOfAngBand.Engine.Geometry;
-using Rect = Avalonia.Rect;
 using WorldOfAngBand.Engine.World;
 using WorldOfAngBand.Game;
+using WorldOfAngBand.Game.Bridge;
 using WorldOfAngBand.Game.Dressing;
 using WorldOfAngBand.Game.Flare;
+using Rect = Avalonia.Rect;
 
 namespace WorldOfAngBand.App.Rendering;
 
 /// <summary>
 /// Draws the session isometrically in Flare's art, as AshenReliquary's WorldView does: the ground, then walls, doors,
-/// stairs and the hero sorted by depth, then the dark with pools of light, then the depth and the message log. Squares
-/// the hero sees are drawn in full, squares only remembered are dimmed, and squares never seen are not drawn.
+/// stairs, monsters and the hero sorted by depth, then the dark with pools of light, then the HUD. Squares the hero
+/// sees are drawn in full, squares only remembered are dimmed, and squares never seen are not drawn. Monsters are drawn
+/// from their bridge entry: a Flare creature, the paper-doll body, or a DCSS tile standing on the floor.
 /// </summary>
 public sealed class IsoView : Control
 {
@@ -28,70 +30,44 @@ public sealed class IsoView : Control
     public static readonly double[] ZoomSteps = [0.36, 0.45, 0.55, 0.67, 0.82];
     public const int DefaultZoomLevel = 2;
 
-    /// <summary>How long the hero takes to slide from one square to the next.</summary>
-    public const double StepSeconds = 0.13;
-
-    /// <summary>How many lines of the message log show.</summary>
-    public const int MessageLines = 4;
-
-    /// <summary>
-    /// The hero's paper doll, by Flare's slots: until there is equipment, a Lantern-sworn's leathers and longsword
-    /// (AshenReliquary's rogue kit, with the fighter's blade).
-    /// </summary>
-    private static readonly Dictionary<string, string> HeroSlots = new()
-    {
-        ["head"] = "leather_hood", ["chest"] = "leather_chest", ["legs"] = "leather_pants", ["feet"] = "leather_boots",
-        ["hands"] = "leather_gloves", ["main"] = "longsword",
-    };
+    /// <summary>How tall a paper-fallback monster stands, in unzoomed pixels.</summary>
+    public const float CardHeight = 150f;
 
     private readonly FlareAssets _assets = FlareAssets.Shared;
     private readonly SpriteCache _sprites = new(FlareAssets.Shared);
-    private readonly System.Diagnostics.Stopwatch _clock = System.Diagnostics.Stopwatch.StartNew();
-    private readonly List<(string Text, double At)> _messages = [];
     private readonly Dictionary<(Tint Tint, bool Memory), SKPaint?> _paints = [];
+    private readonly Dictionary<string, SKPaint?> _tints = [];
     private readonly SKPaint _seeThrough = new() { Color = SKColors.White.WithAlpha(90) };
-    private DungeonSession? _session;
     private DressedLevel? _dressed;
-    private Loc _slideFrom;
-    private double _slideStart = double.NegativeInfinity;
     private int _zoomLevel = DefaultZoomLevel;
     private float _deviceScale = 1f;
     private SKRect _viewport;
 
-    public IsoView()
+    public IsoView(ViewState state, HudPainter hud)
     {
+        State = state;
+        Hud = hud;
         ClipToBounds = true;
         Focusable = true;
+        state.TerrainChanged += Dress;
+        state.Changed += InvalidateVisual;
+        Dress();
     }
+
+    public ViewState State { get; }
+
+    public HudPainter Hud { get; }
 
     /// <summary>Held while the session changes and while a frame is drawn (Avalonia draws on its render thread).</summary>
     public object Gate { get; } = new();
 
-    /// <summary>A fixed time for the clock-driven art (torch flicker, the hero's breathing), so test pictures repeat.</summary>
-    public double? FixedTime { get; set; }
+    private DungeonSession? Session => State.Session;
 
-    private double Time => FixedTime ?? _clock.Elapsed.TotalSeconds;
-
-    public DungeonSession? Session
+    private void Dress()
     {
-        get => _session;
-        set
-        {
-            if (_session is not null)
-                _session.Published -= OnPublished;
-            _session = value;
-            _messages.Clear();
-            if (value is not null)
-            {
-                value.Published += OnPublished;
-                _dressed = LevelDressing.Dress(value.Level);
-                _slideStart = double.NegativeInfinity;
-            }
-            InvalidateVisual();
-        }
+        _dressed = Session is { } session ? LevelDressing.Dress(session.Level) : null;
+        InvalidateVisual();
     }
-
-    public IReadOnlyList<string> Messages => _messages.Select(m => m.Text).ToList();
 
     public int ZoomLevel
     {
@@ -105,44 +81,11 @@ public sealed class IsoView : Control
 
     public double Zoom => ZoomSteps[_zoomLevel];
 
-    /// <summary>True while the hero is still sliding into the square they moved to (never with the clock stopped).</summary>
-    public bool Sliding => FixedTime is null && Time - _slideStart < StepSeconds;
-
-    private void OnPublished(IGameEvent e)
-    {
-        switch (e)
-        {
-            case MessageEvent m:
-                _messages.Add((m.Text, Time));
-                if (_messages.Count > 50)
-                    _messages.RemoveAt(0);
-                break;
-            case HeroMovedEvent moved:
-                _slideFrom = moved.From;
-                _slideStart = Time;
-                break;
-            case LevelEnteredEvent:
-                _dressed = LevelDressing.Dress(_session!.Level);
-                _slideStart = double.NegativeInfinity;
-                break;
-            case DoorOpenedEvent:
-                _dressed = LevelDressing.Dress(_session!.Level);
-                break;
-        }
-        InvalidateVisual();
-    }
-
-    /// <summary>Where the hero is drawn, in map units: their square's centre, or on the way to it.</summary>
-    private (double X, double Y) HeroAt()
-    {
-        var to = _session!.Hero.Position;
-        var t = Sliding ? Math.Clamp((Time - _slideStart) / StepSeconds, 0, 1) : 1;
-        return (_slideFrom.X + (to.X - _slideFrom.X) * t + 0.5, _slideFrom.Y + (to.Y - _slideFrom.Y) * t + 0.5);
-    }
+    private (double X, double Y) Camera => Session is { } s ? State.DrawnAt(ViewState.HeroKey, s.Hero.Position) : (0, 0);
 
     public SKPoint ToScreen(double x, double y)
     {
-        var (cx, cy) = HeroAt();
+        var (cx, cy) = Camera;
         var z = Zoom;
         return new SKPoint((float)(((x - cx) - (y - cy)) * HalfTileWidth * z + Bounds.Width / 2),
             (float)(((x - cx) + (y - cy)) * HalfTileHeight * z + Bounds.Height / 2));
@@ -151,7 +94,7 @@ public sealed class IsoView : Control
     /// <summary>The square under a point on screen.</summary>
     public Loc ToMap(Point screen)
     {
-        var (cx, cy) = HeroAt();
+        var (cx, cy) = Camera;
         var a = (screen.X - Bounds.Width / 2) / (HalfTileWidth * Zoom);
         var b = (screen.Y - Bounds.Height / 2) / (HalfTileHeight * Zoom);
         return new Loc((int)Math.Floor(cx + (a + b) / 2), (int)Math.Floor(cy + (b - a) / 2));
@@ -190,8 +133,9 @@ public sealed class IsoView : Control
     internal void Draw(SKCanvas canvas, SKSize size)
     {
         canvas.Clear(new SKColor(9, 8, 13));
-        if (_session is not { } session || _dressed is not { } dressed)
+        if (Session is not { } session || _dressed is not { } dressed)
             return;
+        State.Prune();
         _viewport = SKRect.Create(size);
         _deviceScale = Math.Max(0.25f, canvas.TotalMatrix.ScaleX);
         VisibleCells(size, session.Level, out var x0, out var y0, out var x1, out var y1);
@@ -206,8 +150,10 @@ public sealed class IsoView : Control
         }
         DrawDepthSorted(canvas, session, dressed, x0, y0, x1, y1);
         DrawDark(canvas, size, session, dressed, x0, y0, x1, y1);
+        DrawHealthBars(canvas, session);
+        DrawFloats(canvas);
         DrawShopSigns(canvas, session, x0, y0, x1, y1);
-        DrawHud(canvas, size, session);
+        Hud.Draw(canvas, size, session, State);
     }
 
     private static bool Remembered(Level level, Loc p) => !level[p].Has(SquareFlags.Seen);
@@ -231,6 +177,20 @@ public sealed class IsoView : Control
         return paint;
     }
 
+    /// <summary>A monster's colour, from its Angband colour name, laid over its sprite (a kobold's green, a yeek's blue).</summary>
+    private SKPaint? TintFor(string colourName)
+    {
+        if (_tints.TryGetValue(colourName, out var paint))
+            return paint;
+        if (Session is { } session && session.Data.Colors.TryGetValue(colourName, out var hex) && SKColor.TryParse(hex, out var colour))
+        {
+            static byte Mix(byte c) => (byte)(255 * 0.45 + c * 0.55);
+            paint = new SKPaint { ColorFilter = SKColorFilter.CreateLighting(new SKColor(Mix(colour.Red), Mix(colour.Green), Mix(colour.Blue)), SKColors.Black) };
+        }
+        _tints[colourName] = paint;
+        return paint;
+    }
+
     private void VisibleCells(SKSize size, Level level, out int x0, out int y0, out int x1, out int y1)
     {
         var margin = 520 * Zoom;
@@ -245,7 +205,7 @@ public sealed class IsoView : Control
         y1 = Math.Min(level.Height - 1, corners.Max(c => c.Y));
     }
 
-    private readonly record struct DepthItem(double Key, double X, int Order, Piece? Piece, SKPoint At, SKPaint? Paint);
+    private readonly record struct DepthItem(double Key, double X, int Order, Piece? Piece, SKPoint At, SKPaint? Paint, Action? Draw);
 
     private static readonly Comparison<DepthItem> DepthOrder = (a, b) =>
         a.Key != b.Key ? a.Key.CompareTo(b.Key) : a.X != b.X ? a.X.CompareTo(b.X) : a.Order.CompareTo(b.Order);
@@ -256,7 +216,7 @@ public sealed class IsoView : Control
     {
         var items = _depthItems;
         items.Clear();
-        var (hx, hy) = HeroAt();
+        var (hx, hy) = Camera;
         var heroKey = hx + hy;
         var heroFoot = ToScreen(hx, hy);
         var z = (float)Zoom;
@@ -274,45 +234,171 @@ public sealed class IsoView : Control
                 if (!_assets.Tileset(piece.Tileset).Tiles.TryGetValue(piece.Id, out var tile))
                     continue;
                 var s = z * piece.Scale;
-                if (!SKRect.Create(at.X - tile.OffsetX * s, at.Y - tile.OffsetY * s, tile.Width * s, tile.Height * s).IntersectsWith(_viewport))
+                var bounds = SKRect.Create(at.X - tile.OffsetX * s, at.Y - tile.OffsetY * s, tile.Width * s, tile.Height * s);
+                if (!bounds.IntersectsWith(_viewport))
                     continue;
                 // Flat things on the ground (stairs down, rubble) sort under everything standing on them; tall things in
                 // front of the hero fade so the hero is never lost behind them.
                 var flat = tile.Height * piece.Scale <= 110;
                 var key = x + y + (flat ? 0.0 : 1.0);
                 var paint = PaintFor(piece.Tint, memory);
-                if (!flat && key > heroKey && SKRect.Create(at.X - tile.OffsetX * s, at.Y - tile.OffsetY * s, tile.Width * s, tile.Height * s).IntersectsWith(heroTorso))
+                if (!flat && key > heroKey && bounds.IntersectsWith(heroTorso))
                     paint = _seeThrough;
-                items.Add(new DepthItem(key, x, items.Count, piece, at, paint));
+                items.Add(new DepthItem(key, x, items.Count, piece, at, paint, null));
             }
         }
-        items.Add(new DepthItem(heroKey, hx, items.Count, null, heroFoot, null));
+        void Add(double key, double x, Action draw) => items.Add(new DepthItem(key, x, items.Count, null, default, null, draw));
+        foreach (var foe in session.VisibleFoes())
+        {
+            var f = foe;
+            var (mx, my) = State.DrawnAt(f.Monster.Id, f.Monster.Position);
+            Add(mx + my, mx, () => DrawFoe(canvas, session, f, ToScreen(mx, my)));
+        }
+        foreach (var corpse in State.Corpses)
+        {
+            var c = corpse;
+            if (session.Level.InBounds(c.Where) && session.Level[c.Where].Has(SquareFlags.Seen))
+                Add(c.Where.X + c.Where.Y + 0.4, c.Where.X, () => DrawCorpse(canvas, session, c));
+        }
+        Add(heroKey, hx, () => DrawDoll(canvas, Appearance.For(session.Hero.Gear), FlareAssets.SpriteDirection(session.Hero.Facing),
+            State.Animation(ViewState.HeroKey), heroFoot, 1f, null));
         items.Sort(DepthOrder);
         foreach (var item in items)
         {
             if (item.Piece is { } piece)
                 DrawPiece(canvas, piece, item.At, item.Paint);
             else
-                DrawHero(canvas, session.Hero, item.At);
+                item.Draw!();
         }
     }
 
-    private void DrawHero(SKCanvas canvas, Hero hero, SKPoint foot)
+    /// <summary>A monster, by its bridge entry: a Flare creature, the paper doll, or the DCSS card.</summary>
+    private void DrawFoe(SKCanvas canvas, DungeonSession session, Foe foe, SKPoint foot)
     {
-        var direction = FlareAssets.SpriteDirection(hero.Facing);
-        var moving = Sliding;
+        var race = foe.Monster.Race;
+        var bridged = session.Bridge.For(race);
+        var tint = bridged?.Tint == true ? TintFor(race.Color) : null;
+        DrawMonsterArt(canvas, race.Id, bridged, FlareAssets.SpriteDirection(State.Facing(foe.Monster.Id)),
+            State.Animation(foe.Monster.Id), foot, tint, 1f);
+    }
+
+    /// <summary>A monster just slain: its death throes, fading away.</summary>
+    private void DrawCorpse(SKCanvas canvas, DungeonSession session, Corpse corpse)
+    {
+        if (session.Data.Monster(corpse.RaceId) is not { } race)
+            return;
+        var bridged = session.Bridge.For(race);
+        var age = State.Time - corpse.At;
+        var fade = (float)Math.Clamp(1 - (age - ViewState.CorpseSeconds * 0.6) / (ViewState.CorpseSeconds * 0.4), 0, 1);
+        var tint = bridged?.Tint == true ? TintFor(race.Color) : null;
+        using var faded = new SKPaint { Color = SKColors.White.WithAlpha((byte)(255 * fade)), ColorFilter = tint?.ColorFilter };
+        DrawMonsterArt(canvas, race.Id, bridged, FlareAssets.SpriteDirection(corpse.Facing), ("die", age),
+            ToScreen(corpse.Where.X + 0.5, corpse.Where.Y + 0.5), faded, fade);
+    }
+
+    private void DrawMonsterArt(SKCanvas canvas, string raceId, BridgedMonster? bridged, int direction,
+        (string Animation, double Seconds) animation, SKPoint foot, SKPaint? paint, float fade)
+    {
+        var scale = (float)(bridged?.Scale ?? 1);
+        switch (bridged?.Sprite)
+        {
+            case "doll":
+                DrawDoll(canvas, Appearance.For(bridged.Doll), direction, animation, foot, scale, paint);
+                break;
+            case { } family:
+                var set = _assets.Enemy(family);
+                if (Pick(set, animation.Animation) is { } anim)
+                    DrawFrame(canvas, anim.Image ?? set.Image, anim.Frame(anim.FrameAt(animation.Seconds), direction), foot, scale, paint);
+                break;
+            default:
+                DrawCard(canvas, raceId, animation, foot, scale, fade);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// The paper fallback: the monster's DCSS tile standing upright on the floor, with a shadow at its feet. It hops
+    /// when it strikes and sinks into the floor when it dies.
+    /// </summary>
+    private void DrawCard(SKCanvas canvas, string raceId, (string Animation, double Seconds) animation, SKPoint foot, float scale, float fade)
+    {
+        if (DcssTiles.Shared is not { } tiles || tiles.Layers($"monster:{raceId}") is not { Count: > 0 } layers)
+            return;
+        var height = CardHeight * (float)Zoom * scale;
+        var t = Math.Min(1, animation.Seconds / (animation.Animation == "die" ? ViewState.CorpseSeconds : ViewState.ActionSeconds));
+        var hop = animation.Animation == "swing" ? (float)Math.Sin(t * Math.PI) * height * 0.12f : 0;
+        var sink = animation.Animation == "die" ? (float)t * height * 0.6f : 0;
+        using (var shadow = new SKPaint { Color = SKColors.Black.WithAlpha((byte)(110 * fade)), IsAntialias = true })
+            canvas.DrawOval(foot.X, foot.Y, height * 0.32f, height * 0.12f, shadow);
+        var rect = SKRect.Create(foot.X - height / 2, foot.Y - height - hop + sink, height, height);
+        using var paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(255 * fade)) };
+        canvas.Save();
+        // Sinking: the floor hides what has gone below it.
+        canvas.ClipRect(SKRect.Create(rect.Left - 4, rect.Top - height, rect.Width + 8, foot.Y + 2 - (rect.Top - height)));
+        foreach (var image in layers)
+            canvas.DrawImage(image, rect, new SKSamplingOptions(SKFilterMode.Nearest), paint);
+        canvas.Restore();
+    }
+
+    private static FlareAnimation? Pick(FlareAnimationSet set, string name) => set[name] ?? set["stance"];
+
+    private void DrawDoll(SKCanvas canvas, IReadOnlyDictionary<string, string> layers, int direction,
+        (string Animation, double Seconds) animation, SKPoint foot, float scale, SKPaint? paint)
+    {
         foreach (var slot in _assets.LayerOrder(direction))
         {
-            if (!HeroSlots.TryGetValue(slot, out var layer))
+            if (!layers.TryGetValue(slot, out var layer))
                 continue;
             var set = _assets.AvatarLayer(layer);
-            if (((moving ? set["run"] : null) ?? set["stance"]) is not { } anim)
+            if (Pick(set, animation.Animation) is not { } anim)
                 continue;
-            var t = moving ? Time - _slideStart : Time;
-            var frame = anim.Frame(anim.FrameAt(t), direction);
-            if (frame.Width == 0)
+            DrawFrame(canvas, anim.Image ?? set.Image, anim.Frame(anim.FrameAt(animation.Seconds), direction), foot, scale, paint);
+        }
+    }
+
+    private void DrawFrame(SKCanvas canvas, string sheet, FlareFrame frame, SKPoint foot, float scale, SKPaint? paint)
+    {
+        if (frame.Width == 0)
+            return;
+        Blit(canvas, sheet, frame.X, frame.Y, frame.Width, frame.Height, frame.OffsetX, frame.OffsetY, foot, (float)Zoom * scale, paint);
+    }
+
+    /// <summary>A bar over each hurt monster the hero can see.</summary>
+    private void DrawHealthBars(SKCanvas canvas, DungeonSession session)
+    {
+        var z = (float)Zoom;
+        using var trough = new SKPaint { Color = new SKColor(20, 8, 8, 200) };
+        using var fill = new SKPaint { Color = new SKColor(200, 40, 34) };
+        foreach (var foe in session.VisibleFoes())
+        {
+            var m = foe.Monster;
+            if (m.Hp >= m.MaxHp)
                 continue;
-            Blit(canvas, anim.Image ?? set.Image, frame.X, frame.Y, frame.Width, frame.Height, frame.OffsetX, frame.OffsetY, foot, (float)Zoom, null);
+            var (x, y) = State.DrawnAt(m.Id, m.Position);
+            var foot = ToScreen(x, y);
+            var scale = (float)(session.Bridge.For(m.Race)?.Scale ?? 1);
+            var bar = SKRect.Create(foot.X - 24 * z, foot.Y - 150 * z * scale, 48 * z, 6 * z);
+            canvas.DrawRect(bar, trough);
+            canvas.DrawRect(SKRect.Create(bar.Left, bar.Top, bar.Width * Math.Clamp(m.Hp / (float)m.MaxHp, 0, 1), bar.Height), fill);
+        }
+    }
+
+    /// <summary>Numbers floating up from where blows landed: white on monsters, red on the hero, "miss" grey.</summary>
+    private void DrawFloats(SKCanvas canvas)
+    {
+        using var typeface = SKTypeface.FromFamilyName("Inter", SKFontStyle.Bold) ?? SKTypeface.Default;
+        using var font = new SKFont(typeface, 18);
+        using var shadow = new SKPaint { Color = SKColors.Black.WithAlpha(180), IsAntialias = true };
+        var z = (float)Zoom;
+        foreach (var f in State.Floats)
+        {
+            var t = (float)Math.Clamp((State.Time - f.At) / ViewState.FloatSeconds, 0, 1);
+            var at = ToScreen(f.Where.X + 0.5, f.Where.Y + 0.5);
+            var y = at.Y - 120 * z - t * 50;
+            var colour = f.Text == "miss" ? new SKColor(190, 186, 176) : f.Hurt ? new SKColor(255, 80, 60) : new SKColor(255, 240, 210);
+            using var ink = new SKPaint { Color = colour.WithAlpha((byte)(255 * (1 - t * t))), IsAntialias = true };
+            canvas.DrawText(f.Text, at.X + 1, y + 1, SKTextAlign.Center, font, shadow);
+            canvas.DrawText(f.Text, at.X, y, SKTextAlign.Center, font, ink);
         }
     }
 
@@ -320,7 +406,7 @@ public sealed class IsoView : Control
     {
         if (!_assets.Tileset(piece.Tileset).Tiles.TryGetValue(piece.Id, out var tile))
             return;
-        var (sx, sy) = AnimationFrame(tile, Time);
+        var (sx, sy) = AnimationFrame(tile, State.Time);
         Blit(canvas, tile.Image, sx, sy, tile.Width, tile.Height, tile.OffsetX, tile.OffsetY, at, (float)Zoom * piece.Scale, paint);
     }
 
@@ -356,15 +442,15 @@ public sealed class IsoView : Control
 
     /// <summary>
     /// The dark: below the town everything lies under a shroud, with pools of light round the hero's torch, the torches
-    /// on the walls and whatever else glows. (AshenReliquary's darkness, drawn at a quarter of the size and stretched.)
+    /// on the walls, and the lit rooms the hero can see. (AshenReliquary's darkness, drawn at a quarter size and stretched.)
     /// </summary>
     private void DrawDark(SKCanvas canvas, SKSize size, DungeonSession session, DressedLevel dressed, int x0, int y0, int x1, int y1)
     {
         if (session.Depth == 0)
             return;
         var z = (float)Zoom;
-        var time = Time;
-        var (hx, hy) = HeroAt();
+        var time = State.Time;
+        var (hx, hy) = Camera;
         var lights = new List<(SKPoint At, float Radius, SKColor Glow)>
         {
             (ToScreen(hx, hy), session.Hero.LightRadius + 2.2f, new SKColor(255, 190, 120, 30)),
@@ -378,7 +464,6 @@ public sealed class IsoView : Control
             var glow = fire ? new SKColor(255, 140, 50, 70) : SKColor.Parse(l.Color).WithAlpha(60);
             lights.Add((ToScreen(l.At.X + 0.5, l.At.Y + 0.5), l.Radius + flicker, glow));
         }
-
         // A lit room the hero can see lies open under its own light, square by square.
         var roomLight = new List<SKPoint>();
         for (var y = y0; y <= y1; y++)
@@ -456,35 +541,4 @@ public sealed class IsoView : Control
         <= 80 => "The Cinder Deeps",
         _ => "The Pyre",
     };
-
-    private void DrawHud(SKCanvas canvas, SKSize size, DungeonSession session)
-    {
-        using var typeface = SKTypeface.FromFamilyName("Inter") ?? SKTypeface.Default;
-        using var title = new SKFont(typeface, 20);
-        using var small = new SKFont(typeface, 14);
-        using var ink = new SKPaint { Color = new SKColor(236, 222, 196), IsAntialias = true };
-        using var dim = new SKPaint { Color = new SKColor(170, 160, 146), IsAntialias = true };
-        using var shadow = new SKPaint { Color = SKColors.Black.WithAlpha(200), IsAntialias = true };
-
-        void Text(string text, float x, float y, SKFont font, SKPaint paint, SKTextAlign align = SKTextAlign.Left)
-        {
-            canvas.DrawText(text, x + 1, y + 1, align, font, shadow);
-            canvas.DrawText(text, x, y, align, font, paint);
-        }
-
-        var depth = session.Depth;
-        Text(Stratum(depth), 16, 30, title, ink);
-        Text(depth == 0 ? "The town" : $"Level {depth}  ·  {depth * DungeonSession.FeetPerLevel} ft", 16, 52, small, dim);
-        Text($"Turn {session.Turn / 10}", size.Width - 16, 30, small, dim, SKTextAlign.Right);
-
-        var shown = _messages.TakeLast(MessageLines).ToList();
-        for (var i = 0; i < shown.Count; i++)
-        {
-            var age = Time - shown[i].At;
-            var alpha = (byte)Math.Clamp(255 - Math.Max(0, age - 6) * 120, 60, 255);
-            using var line = new SKPaint { Color = new SKColor(236, 222, 196, alpha), IsAntialias = true };
-            Text(shown[i].Text, 16, size.Height - 40 - (shown.Count - 1 - i) * 20, small, line);
-        }
-        Text("Arrows or keypad: walk  ·  < >: stairs  ·  click: travel  ·  wheel: zoom", 16, size.Height - 14, small, dim);
-    }
 }

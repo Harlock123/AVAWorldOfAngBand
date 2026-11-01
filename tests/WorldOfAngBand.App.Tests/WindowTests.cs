@@ -8,6 +8,7 @@ using WorldOfAngBand.Data;
 using WorldOfAngBand.Engine.Definitions;
 using WorldOfAngBand.Engine.Geometry;
 using WorldOfAngBand.Game;
+using WorldOfAngBand.App.Services;
 
 namespace WorldOfAngBand.App.Tests;
 
@@ -18,8 +19,9 @@ public class WindowTests
     /// <summary>A game window, shown headless, with the clock stopped so pictures repeat.</summary>
     private static MainWindow Open(ulong seed = 1234)
     {
-        var window = new MainWindow(new DungeonSession(Data.Value, seed)) { Width = 1280, Height = 800 };
-        window.View.FixedTime = 0.4;
+        var book = Path.Combine(Path.GetTempPath(), "worldofangband-tests", Guid.NewGuid().ToString("N"), "graveyard.json");
+        var window = new MainWindow(new DungeonSession(Data.Value, seed), new Graveyard(book)) { Width = 1280, Height = 800 };
+        window.State.Frozen = true;
         window.Show();
         Pump();
         return window;
@@ -138,12 +140,93 @@ public class WindowTests
         Assert.Equal(stairs, window.Session.Hero.Position);
         Assert.True(window.Type(">"));
         Assert.Equal(1, window.Session.Depth);
-        Assert.Contains("You enter a maze of down staircases.", window.View.Messages);
+        Assert.Contains(window.State.Messages, m => m.Text == "You enter a maze of down staircases.");
         Assert.Equal("The Lid", IsoView.Stratum(window.Session.Depth));
 
         ExploreToALitRoom(window);
         var frame = Capture(window, "WorldOfAngBand-lid");
         Assert.True(DrawnShare(frame) > 0.12, $"Only {DrawnShare(frame):P0} of the level was drawn.");
+        window.Close();
+    }
+
+    /// <summary>Puts monsters of these races round the hero, awake, and lets a turn pass so they are seen.</summary>
+    private static void Surround(MainWindow window, params string[] races)
+    {
+        var game = window.Session;
+        var spots = DirectionExtensions.Compass.Select(d => game.Hero.Position.Step(d).Step(d))
+            .Concat(DirectionExtensions.Compass.Select(d => game.Hero.Position.Step(d)))
+            .Where(p => game.Level.InBounds(p) && game.Level.IsEmptyFloor(p) && game.PathTo(p) is not null).ToList();
+        for (var i = 0; i < races.Length && i < spots.Count; i++)
+            game.Spawn(Data.Value.Monster(races[i])!, spots[i], asleep: true);
+        window.Press(Key.NumPad5);
+    }
+
+    private static MainWindow OnFirstLevel(ulong seed)
+    {
+        var window = Open(seed);
+        var stairs = window.Session.Level.FindFeature(TerrainFlags.DownStair).First();
+        window.TravelTo(stairs);
+        Walk(window);
+        window.Type(">");
+        return window;
+    }
+
+    [AvaloniaFact]
+    public void Monsters_are_drawn_from_their_bridge_entry_and_named_under_the_pointer()
+    {
+        var window = OnFirstLevel(1234);
+        ExploreToALitRoom(window);
+        Surround(window, "kobold", "jackal", "giant_yellow_centipede", "rock_lizard", "cutpurse", "skeleton_kobold");
+        var game = window.Session;
+        Assert.True(game.VisibleFoes().Count() >= 3, "The monsters put round the hero should be in sight.");
+        var frame = Capture(window, "WorldOfAngBand-fight");
+        Assert.True(DrawnShare(frame) > 0.12);
+        var foe = game.VisibleFoes().First();
+        var at = window.View.ToScreen(foe.Monster.Position.X + 0.5, foe.Monster.Position.Y + 0.5);
+        window.MouseMove(new Avalonia.Point(at.X, at.Y - 4));
+        Pump();
+        Assert.NotNull(window.Hud.Hover);
+        Assert.StartsWith(foe.Name, window.Hud.Hover!.Value.Text);
+        window.Close();
+    }
+
+    [AvaloniaFact]
+    public void Ctrl_T_turns_to_the_classic_letters_then_tiles_where_up_is_north()
+    {
+        var window = OnFirstLevel(1234);
+        ExploreToALitRoom(window);
+        Surround(window, "kobold", "jackal");
+        Assert.True(window.Press(Key.T, KeyModifiers.Control));
+        Assert.Equal(ViewMode.Letters, window.Mode);
+        Assert.IsType<ClassicView>(window.Content);
+        Capture(window, "WorldOfAngBand-letters");
+        Assert.True(window.Press(Key.T, KeyModifiers.Control));
+        Assert.Equal(ViewMode.Tiles, window.Mode);
+        var frame = Capture(window, "WorldOfAngBand-tiles");
+        Assert.True(DrawnShare(frame) > 0.02);
+        Assert.Equal(Direction.North, MainWindow.ClassicDirectionFor(Key.Up));
+        Assert.True(window.Press(Key.T, KeyModifiers.Control));
+        Assert.Equal(ViewMode.Isometric, window.Mode);
+        window.Close();
+    }
+
+    [AvaloniaFact]
+    public void Death_writes_the_hero_into_the_book_and_enter_sends_another_down()
+    {
+        var window = OnFirstLevel(77);
+        var game = window.Session;
+        game.HurtHero(10_000, "a kobold");
+        game.HurtHero(10_000, "a kobold");
+        Assert.True(game.IsOver);
+        Pump();
+        Capture(window, "WorldOfAngBand-death");
+        var record = Assert.Single(window.Hud.Book);
+        Assert.Equal("a kobold", record.Killer);
+        Assert.False(window.Type(">"));
+        Assert.True(window.Press(Key.Enter));
+        Assert.NotSame(game, window.Session);
+        Assert.False(window.Session.IsOver);
+        Assert.Equal(0, window.Session.Depth);
         window.Close();
     }
 }

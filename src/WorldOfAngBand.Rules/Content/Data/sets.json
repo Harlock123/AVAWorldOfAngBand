@@ -1,0 +1,206 @@
+[
+ {
+  "id": "gallowsmen",
+  "name": "Gallowsman's Garb",
+  "bonuses": [
+   {
+    "pieces": 2,
+    "description": "+5 ft speed.",
+    "effects": [
+     {
+      "speedFeet": 5
+     }
+    ]
+   },
+   {
+    "pieces": 3,
+    "description": "+3 damage on a critical hit, and +1 to Reflex saves.",
+    "effects": [
+     {
+      "critDamage": 3
+     },
+     {
+      "statistic": "Reflex",
+      "value": 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "lantern_warden",
+  "name": "Lantern Warden's Mail",
+  "bonuses": [
+   {
+    "pieces": 2,
+    "description": "+1 AC.",
+    "effects": [
+     {
+      "statistic": "ArmorClass",
+      "value": 1
+     }
+    ]
+   },
+   {
+    "pieces": 3,
+    "description": "Shield Block takes 2 more off a blow, and resistance 3 Taint.",
+    "effects": [
+     {
+      "blockHardness": 2
+     },
+     {
+      "resist": "Taint",
+      "value": 3
+     }
+    ]
+   },
+   {
+    "pieces": 4,
+    "description": "+2 HP a level.",
+    "effects": [
+     {
+      "hitPointsPerLevel": 2
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "mirewitch",
+  "name": "Mire-Witch's Regalia",
+  "bonuses": [
+   {
+    "pieces": 2,
+    "description": "Your resource returns a fifth faster.",
+    "effects": [
+     {
+      "resourceRegen": 0.2
+     }
+    ]
+   },
+   {
+    "pieces": 3,
+    "description": "Your spells reach 2 tiles further, and resistance 5 poison.",
+    "effects": [
+     {
+      "spellRange": 2
+     },
+     {
+      "resist": "Poison",
+      "value": 5
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "ironhold_guard",
+  "name": "Ironhold Guard's Plate",
+  "bonuses": [
+   {
+    "pieces": 2,
+    "description": "+1 AC.",
+    "effects": [
+     {
+      "statistic": "ArmorClass",
+      "value": 1
+     }
+    ]
+   },
+   {
+    "pieces": 3,
+    "description": "+2 HP a level, and resistance 5 Taint.",
+    "effects": [
+     {
+      "hitPointsPerLevel": 2
+     },
+     {
+      "resist": "Taint",
+      "value": 5
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "oriel_vestments",
+  "name": "Vestments of Saint Oriel",
+  "bonuses": [
+   {
+    "pieces": 2,
+    "description": "+1 to Will saves and +1 to spell attacks.",
+    "effects": [
+     {
+      "statistic": "Will",
+      "value": 1
+     },
+     {
+      "statistic": "SpellAttack",
+      "value": 1
+     }
+    ]
+   },
+   {
+    "pieces": 3,
+    "description": "+2 HP a level, resistance 5 mental, and the Taint builds in you a quarter more slowly.",
+    "effects": [
+     {
+      "hitPointsPerLevel": 2
+     },
+     {
+      "resist": "Mental",
+      "value": 5
+     },
+     {
+      "taintRate": 0.25
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "last_lantern",
+  "name": "The Last Lantern's Plate",
+  "bonuses": [
+   {
+    "pieces": 2,
+    "description": "+1 AC, and resistance 5 fire.",
+    "effects": [
+     {
+      "statistic": "ArmorClass",
+      "value": 1
+     },
+     {
+      "resist": "Fire",
+      "value": 5
+     }
+    ]
+   },
+   {
+    "pieces": 3,
+    "description": "+3 HP a level, +1 to every save, and resistance 5 Taint.",
+    "effects": [
+     {
+      "hitPointsPerLevel": 3
+     },
+     {
+      "statistic": "Fortitude",
+      "value": 1
+     },
+     {
+      "statistic": "Reflex",
+      "value": 1
+     },
+     {
+      "statistic": "Will",
+      "value": 1
+     },
+     {
+      "resist": "Taint",
+      "value": 5
+     }
+    ]
+   }
+  ]
+ }
+]

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    AshenReliquary's rules on Pathfinder 2e (ORC licence): checks and degrees of success, typed bonuses, proficiency,
+    conditions and damage, characters and their feats, items with runes and affixes. No UI, no packages.
+  -->
+  <PropertyGroup>
+    <RootNamespace>WorldOfAngBand.Rules</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="WorldOfAngBand.Tests" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Data\**\*.json" LogicalName="WorldOfAngBand.Content.%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>
