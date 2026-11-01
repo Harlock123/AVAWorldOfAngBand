@@ -6,8 +6,8 @@ hero, rules, art and story. Ten years after the Cinder Throne, the Reliquary und
 lid: below it a shaft goes down a hundred levels, to where the Order of the Pale Lantern first burned Ashur. You go
 down it as one of the Lantern-sworn, with no Ember Heart. When you die, you stay dead.
 
-**Status: milestone 6 of 6 ("Breadth").** The whole game is there, from Gallowmere to the Cinder of Ashur at
-depth 100. Levels are generated as Angband 4.2.5 generates them and drawn isometrically in Flare's art. The hero is a
+**Status: milestone 7 ("The province").** The whole game is there, from Gallowmere to the Cinder of Ashur at
+depth 100, and AshenReliquary's province lies outside the town's gates, ten years on. Levels are generated as Angband 4.2.5 generates them and drawn isometrically in Flare's art. The hero is a
 Pathfinder 2e character on AshenReliquary's rules, one of seven classes with their abilities and feats, fighting turn
 by turn on Angband's energy system. All of Angband's
 monsters are in, with their 91 spells and innate attacks in Pathfinder's terms, and every name Angband takes from
@@ -15,7 +15,8 @@ Tolkien is renamed for the Ashen setting. Angband's items lie on the floor with 
 buy and sell, and the Smith etches runes. Ashen Reliquary's story goes on through five story levels, Saint Ysmere and
 the Cinder, and past level 20 the hero rises through five mythic tiers. Angband's artifacts come in renamed (or as
 randarts), there are daily and weekly challenges, mods, and a Legacy from an AVAAshenReliquary save. Balance bots play
-it to the bottom and win. Death is final. What is left is in [the design specification](docs/SPECIFICATION.md).
+it to the bottom and win. Death is final. New to it? Start with [How to play](#how-to-play). What is left is in
+[the design specification](docs/SPECIFICATION.md).
 
 ![A fight on the first level: a skeleton kobold, a jackal, a giant centipede and a rock lizard round the hero in a
 lit hall; at the top right the hit points, round, Second Breath and Fury, and the fighter's abilities on keys 1 to 6;
@@ -179,6 +180,9 @@ door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-t
 ![The Gallows Road, out of Gallowmere's south gate: grass, a cobbled road, tents and a campfire, a fence and dark woods,
 as AshenReliquary drew it](docs/images/WorldOfAngBand-gallows-road.png)
 
+![The Rotwater Fens, out of Gallowmere's west gate: a cobbled path through dark grass and woods, Ashur's waystone
+glowing blue, and a cache beside the path](docs/images/WorldOfAngBand-fens.png)
+
 ![The Drowned Chapel: flagstones and bookshelves in the dark, lit by two braziers, with Ashur's waystone in the middle,
 as AshenReliquary drew it](docs/images/WorldOfAngBand-zone-drowned_chapel.png)
 
@@ -188,11 +192,20 @@ tileset](docs/images/WorldOfAngBand-zone-frostbitten_pass.png)
 ![Ironhold: flagstones, campfires and the forest's edge, with Captain Oswin Thale standing beside the
 hero](docs/images/WorldOfAngBand-ironhold.png)
 
+![The journal: a child's toy found on the Gallows Road, a little wooden bird with a lantern on each wing, and what
+the old woman by the fire says of Wren Vane](docs/images/WorldOfAngBand-journal.png)
+
 ![The birth window: a human priest, a Confessor, who heard it ended as Vessa's Legacy, The Lantern Rekindled, with the
 randarts option below](docs/images/WorldOfAngBand-birth.png)
 
+![A new level's picks: a wizard at level 2 choosing a class feat (Cantrip Expansion: Ray of Frost) and a skill feat
+(Quick Lockpick), each with what it does beneath](docs/images/WorldOfAngBand-levelup.png)
+
 ![This week's challenge: Lean Times, everyone going down as an elf champion; and today's dungeon, a human
 wizard](docs/images/WorldOfAngBand-challenges.png)
+
+![The Mods window: the example mod switched on, with what each of its files adds or replaces, and the button that
+writes it](docs/images/WorldOfAngBand-mods.png)
 
 ![The Rot-Mother's Font: grey water seeps from the font into the Pyre's wells, and the altar offers two choices, to
 seal the font with the Lantern's wax or to quench a blade in it](docs/images/WorldOfAngBand-altar.png)
@@ -201,8 +214,14 @@ seal the font with the Lantern's wax or to quench a blade in it](docs/images/Wor
 holds, no drakes over the Ember Peaks, Saint Ysmere struck through, and the human fighter who did it never quite warm
 again](docs/images/WorldOfAngBand-epilogue.png)
 
+![Death: the Book of the Lantern-sworn over the darkened town, the hero's line struck through, and Enter to send
+another down](docs/images/WorldOfAngBand-death.png)
+
 ![Things on the floor of a lit hall: a long sword, a potion, a coat of mail and a scatter of coins round the hero, drawn
 with Flare's loot sprites](docs/images/WorldOfAngBand-loot.png)
+
+![The pack: what is worn (a long sword, a torch, chain mail, a leather shield, gloves and boots) and what is carried,
+with the hero's gold, AC, attack, speed, light and stealth along the top](docs/images/WorldOfAngBand-pack.png)
 
 ![The Smith's window: swords and axes for sale with their Pathfinder dice and runes, the pack beside them, and the
 runework below: +1 potency on the long sword for 400 gold, and striking and armour potency waiting on the hero's
@@ -212,6 +231,56 @@ level](docs/images/WorldOfAngBand-smith.png)
 spirit at them and an archer behind](docs/images/WorldOfAngBand-deep.png)
 
 ![The first level in the classic tile view: DCSS tiles seen from above, the hero in a corridor with a kobold ahead and a jackal in the room behind](docs/images/WorldOfAngBand-tiles.png)
+
+![The first level in the classic letter view: Angband's `@` in a corridor, a kobold `k` ahead, a jackal `C`, gold
+`$` and a scroll `?` in the room below](docs/images/WorldOfAngBand-letters.png)
+
+## How to play
+
+**Make a hero.** The birth window comes first. Pick a name, ancestry, background, class and subclass; the summary
+under them shows your hit points and key attribute at level 1. The Fighter is the easiest start: a long sword, a
+shield, and Fury that builds as you hit things. The Priest and Druid start with spells and heal themselves. Classes
+marked "(not yet)" need things the game doesn't have yet. "How you heard it ended" decides which of Ashen
+Reliquary's endings the world remembers, and which echo waits near the bottom.
+
+**Gallowmere** is where every trip starts and ends. Walk into a shop's door to trade:
+
+- the **Quartermaster** has torches and cloaks; the **Armourer** and the **Smith** sell armour and weapons, and the Smith etches potency and striking runes once you are high enough level;
+- the **Apothecary** sells potions of healing and curing, Phase Door and **Word of Recall**, which takes you from the
+  dungeon to town and back to your deepest level;
+- **the Lantern Archive** is Wren's. She tells you where the story goes next;
+- **your room at the inn** keeps what you leave there; **the Hanged Man** sells rare things at three times the price.
+
+Coming back to town fills your three healing flasks again, gives back Second Breath and restocks the shops.
+
+**Two ways out.** The stairs (`>`) go down the shaft, a hundred generated levels as Angband makes them. The **south
+and west gates** lead into the province, AshenReliquary's hand-made zones. The Gallows Road (south) and the Rotwater
+Fens (west) are for a level 1 or 2 hero; the zone's name and the level of its creatures show at the top left. Zones
+further out are harder, up to the Cinder Throne at about level 20. Both pay in experience and loot, so mix them as
+you like: the province has caches, shrines with blessings, people to talk to and things to read (`J` keeps them),
+and the shaft has the story.
+
+**Fighting.** Walk into a monster to Strike it, or use an ability (`1`–`0`) on the monster under the pointer or the
+nearest one. Each Strike or step is one action; three make a round, and each Strike after the first in a round takes
+−5, then −10, to hit. The message log shows every roll. Abilities cost actions and the class resource (Fury, Mana,
+Devotion or Momentum) shown on the bar at the top right, with cooldowns.
+
+**Staying alive.**
+
+- `q` drinks from a healing flask; `R` rests until healed, once no monster is in sight.
+- The first time you drop to 0 HP on a trip, Second Breath holds you at 1. The second time, you die, and the game
+  starts again with a new hero. There is no saving yet: a game lasts as long as the window is open.
+- Corridors keep packs from surrounding you. Phase Door gets you out of a bad spot, and Word of Recall takes you home.
+- Potions and scrolls are unknown until tried. Try them when it is safe.
+
+**Growing.** Experience gives levels; when one comes, press `f` to choose its feats and skill increase (the window
+suggests picks). Better gear lies deeper, and the pack (`i`) shows what you wear and carry. Past level 20 come the
+mythic tiers.
+
+**The story.** Story levels lie at depths 15, 33, 45 and 72, each with a keeper and an altar where you choose. Saint
+Ysmere waits at 99 and the Cinder of Ashur at 100, and neither level lets you past until its keeper is gone. Some
+things read in the province (a name, a hymn, an oath's last words, a shard of egg) open a third choice at an altar.
+Put out the Cinder and the epilogue tells what your choices did.
 
 ## Keys
 
