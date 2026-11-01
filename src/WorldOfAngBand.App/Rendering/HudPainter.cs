@@ -88,10 +88,18 @@ public sealed class HudPainter : IDisposable
         }
         Text(canvas, hero.Round.ReactionReady ? "reaction ready" : "reaction used", x + 104, y + 50, _tiny, hero.Round.ReactionReady ? Ink : Dim);
 
-        Text(canvas, $"AC {c.ArmorClass().Total}  ·  attack +{c.AttackModifier().Total}  ·  flasks {c.Potion.Charges}", x, y + 70, _tiny, Dim);
+        Text(canvas, $"AC {c.ArmorClass().Total}  ·  attack +{c.AttackModifier().Total}  ·  flasks {c.Potion.Charges}  ·  {hero.Gold} gold", x, y + 70, _tiny, Dim);
         Text(canvas, c.SecondBreath.Ready ? "Second Breath ready" : "Second Breath spent", x, y + 88, _tiny, c.SecondBreath.Ready ? Ink : Blood);
         var conditions = c.Conditions.Active.Select(a => a.Value > 1 ? $"{a.Kind} {a.Value}" : a.Kind.ToString())
-            .Concat(c.Persistent.Types.Select(t => t == DamageType.Poison ? "Poisoned" : $"{t} (persistent)")).ToList();
+            .Concat(c.Persistent.Types.Select(t => t == DamageType.Poison ? "Poisoned" : $"{t} (persistent)"))
+            .Concat(hero.Timed.Keys.Select(t => t switch
+            {
+                "haste" => "Hasted", "heroism" => "Heroic", "berserk" => "Berserk", "bless" => "Blessed",
+                _ when t.StartsWith("resist:", StringComparison.Ordinal) => $"Resisting {t[7..].ToLowerInvariant()}",
+                _ => t,
+            }))
+            .Concat(hero.RecallIn > 0 ? ["Recall"] : [])
+            .Concat(hero.DescentIn > 0 ? ["Descending"] : []).ToList();
         if (conditions.Count > 0)
             Text(canvas, string.Join(", ", conditions), x, y + 106, _tiny, new SKColor(220, 140, 120));
     }

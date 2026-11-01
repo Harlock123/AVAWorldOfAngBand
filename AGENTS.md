@@ -35,9 +35,16 @@ The code is **copied** from the two parent games, not linked, so neither has to 
     experience. The other work goes to helpers:
     - `Fight`: Strikes, blows, Shield Block and blow effects;
     - `MonsterBrain`: AVABand's port of mon-move.c, trimmed;
-    - `Bridge/CreatureBridge`: Angband monsters in Pathfinder terms, from `data/bridge/monsters.json`.
+    - `Bridge/CreatureBridge`: Angband monsters in Pathfinder terms, from `data/bridge/monsters.json`;
+    - `Bridge/ItemBridge`: Angband items in Pathfinder terms (weapons, armour, shields, what potions and scrolls do,
+      the egos in the game), from `data/bridge/items.json`;
+    - `Gear`: what the worn Angband items come to in Pathfinder's terms, set on the character whenever they change;
+    - `Belongings`: picking up, dropping, wielding and learning runes;
+    - `Loot`: floor objects and monster drops;
+    - `ItemEffects`: what potions and scrolls do;
+    - `Stores`: the shops, the home and the Smith's runework.
   - `Round`: Pathfinder's three-action round, with the multiple attack penalty and the reaction.
-  - `Hero`: the character and their gear.
+  - `Hero`: the character, their Angband pack and equipment, gold and timed effects.
   - `Foe`: an engine `Monster` with its Pathfinder numbers and conditions.
   - `Bots/DiveBot`: plays the game, for balance tests.
   - `Dressing/LevelDressing`: turns a level's terrain into Flare tiles. The wall faces follow AshenReliquary's map
@@ -52,6 +59,8 @@ The code is **copied** from the two parent games, not linked, so neither has to 
   - `Rendering/ClassicView`: AVABand's letters and tiles from above.
   - `Rendering/HudPainter`: the HUD and the death screen, over either view.
   - `Services/Graveyard`: the book of the dead (`graveyard.json`).
+  - `Windows/InventoryWindow` and `Windows/StoreWindow`: the pack and the shops.
+  - `Rendering/ItemArt`: Flare's loot sprites (or DCSS tiles) for things on the floor.
   - `MainWindow`: keys, clicks, travel and rest.
   - `Assets/Flare` holds the embedded art; `tilesets/dcss` (AVABand's DCSS tiles) ships beside the executable.
 - `tests/WorldOfAngBand.Tests/` (the engine and the game) and `tests/WorldOfAngBand.App.Tests/` (the window, headless,
@@ -70,6 +79,9 @@ The code is **copied** from the two parent games, not linked, so neither has to 
   files beside it.
 - **No Tolkien names on screen.** The setting renames them (see the spec's section 3).
 - **The view is changed under `IsoView.Gate`**, since Avalonia draws on its own thread.
+- **Items stay Angband's.** The hero carries engine `Item`s in an engine `Inventory`; Pathfinder's numbers are derived
+  (`Gear`), never stored. Only bridged kinds and egos are made (`ObjectFactory.AllowedKind`, `AllowedEgo`); artifacts
+  and curses are off until they come in.
 - **Monsters come in through the bridge.** The spawner only places races in `data/bridge/monsters.json`. Bring one in
   by adding its entry, with a sprite family if Flare has one; otherwise it stands as its DCSS tile.
 - **Balance is measured, not guessed.** `FightTests` runs the dive bot over fixed seeds. If a change moves those

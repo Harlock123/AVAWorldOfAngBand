@@ -1,4 +1,6 @@
-using WorldOfAngBand.Rules.Items;
+using WorldOfAngBand.Engine.Definitions;
+using WorldOfAngBand.Game;
+using WorldOfAngBand.Game.Bridge;
 
 namespace WorldOfAngBand.App.Rendering;
 
@@ -11,26 +13,26 @@ public static class Appearance
         ["head"] = "head_short", ["chest"] = "default_chest", ["legs"] = "default_legs", ["feet"] = "default_feet", ["hands"] = "default_hands",
     };
 
-    /// <summary>The layers for what the hero wears.</summary>
-    public static IReadOnlyDictionary<string, string> For(Equipment gear)
+    /// <summary>
+    /// The layers for what the hero wears: each worn item's layer from the item bridge, and the legs dressed to match the
+    /// body armour (Angband has no leg armour).
+    /// </summary>
+    public static IReadOnlyDictionary<string, string> For(Hero hero, ItemBridge bridge)
     {
         var layers = Bare();
-        foreach (var (slot, item) in gear.Worn)
+        foreach (var item in hero.Pack.Equipped)
         {
-            if (item.Definition.Gfx is not { } gfx)
+            if (bridge.GfxFor(item) is not { } gfx)
                 continue;
-            // A bow is held in the off hand, as Flare draws it; a gun in the weapon hand, and a second pistol in the
-            // off hand has a layer of its own.
-            if (slot == EquipSlot.OffHand && item.Definition.IsPistol)
-                gfx += "_offhand";
-            var layer = slot switch
+            var layer = item.Base.Slot switch
             {
-                EquipSlot.MainHand when item.Definition.Ranged && !item.Definition.IsFirearm => "off",
-                EquipSlot.MainHand => "main", EquipSlot.OffHand => "off", EquipSlot.Head => "head", EquipSlot.Chest => "chest",
-                EquipSlot.Hands => "hands", EquipSlot.Legs => "legs", EquipSlot.Feet => "feet", _ => null,
+                EquipSlot.Weapon => "main", EquipSlot.Shield => "off", EquipSlot.Head => "head", EquipSlot.Body => "chest",
+                EquipSlot.Hands => "hands", EquipSlot.Feet => "feet", _ => null,
             };
             if (layer is not null)
                 layers[layer] = gfx;
+            if (item.Base.Slot == EquipSlot.Body && bridge.LegsFor(item) is { } legs)
+                layers["legs"] = legs;
         }
         return layers;
     }

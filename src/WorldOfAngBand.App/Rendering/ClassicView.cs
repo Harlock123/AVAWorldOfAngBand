@@ -143,6 +143,17 @@ public sealed class ClassicView : Control
             var colour = Colour(session, terrain.Color);
             Glyph(p, terrain.Glyph, seen ? colour : colour.WithAlpha(110));
         }
+        for (var y = hero.Y - rows; y <= hero.Y + rows; y++)
+        for (var x = hero.X - columns; x <= hero.X + columns; x++)
+        {
+            var p = new Loc(x, y);
+            if (!level.InBounds(p) || !session.Known.IsKnown(p) || session.Known.RememberedObject(p) is not { } item)
+                continue;
+            if (tiles is not null && ItemArt.TileKeys(item).Any(key => Tile(p, key, level[p].Has(SquareFlags.Seen) ? null : memory)))
+                continue;
+            var glyph = item.IsGold ? '$' : item.Base.Glyph;
+            Glyph(p, glyph, Colour(session, item.Kind.Color ?? item.Base.Color ?? "White"));
+        }
         foreach (var foe in session.VisibleFoes())
         {
             var race = foe.Monster.Race;

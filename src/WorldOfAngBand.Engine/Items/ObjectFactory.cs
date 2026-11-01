@@ -27,6 +27,15 @@ public sealed class ObjectFactory(GameData data)
     /// <summary>False with Angband's birth_no_artifacts: no artifacts are generated.</summary>
     public bool AllowArtifacts { get; set; } = true;
 
+    /// <summary>The kinds that may be made at all (AVAWorldOfAngBand: those brought into the game so far), or null for every kind.</summary>
+    public Func<ObjectKindDef, bool>? AllowedKind { get; set; }
+
+    /// <summary>The egos that may be made at all, or null for every ego.</summary>
+    public Func<EgoItemDef, bool>? AllowedEgo { get; set; }
+
+    /// <summary>Whether wearables may be cursed (AVAWorldOfAngBand leaves curses out until cursed runes come in).</summary>
+    public bool AllowCurses { get; set; } = true;
+
     /// <summary>Whether the player could read a book of this kind (Angband obj_kind_can_browse); null: any.</summary>
     public Func<ObjectKindDef, bool>? CanBrowse { get; set; }
 
@@ -88,7 +97,8 @@ public sealed class ObjectFactory(GameData data)
         var eligible = data.Objects.Where(k =>
                 k.Commonness > 0 && (k.MinDepth ?? k.Level) <= level && k.MaxDepth >= level
                 && data.ObjectBase(k.Base) is { } b && b.Id != "gold"
-                && (filter?.Invoke(k) ?? true))
+                && (filter?.Invoke(k) ?? true)
+                && (AllowedKind?.Invoke(k) ?? true))
             .ToList();
         return rng.PickWeighted(eligible, weight ?? (k => k.Commonness));
     }
@@ -202,7 +212,7 @@ public sealed class ObjectFactory(GameData data)
         }
 
         if (power == 2) TryMakeEgo(rng, item, level);
-        if (rng.OneIn(20) && (item.IsWearable || item.Base.Id == "bag")) level = ApplyCurse(rng, item, level);
+        if (AllowCurses && rng.OneIn(20) && (item.IsWearable || item.Base.Id == "bag")) level = ApplyCurse(rng, item, level);
 
         var b = item.Base;
         if (b.IsWeapon || b.Slot == EquipSlot.Bow || b.IsAmmo) ApplyWeaponMagic(rng, item, level, power);
@@ -414,7 +424,7 @@ public sealed class ObjectFactory(GameData data)
         var egos = new List<EgoItemDef>();
         foreach (var e in data.Egos)
         {
-            if (level > e.MaxDepth || !e.Fits(item.Kind)) continue;
+            if (level > e.MaxDepth || !e.Fits(item.Kind) || !(AllowedEgo?.Invoke(e) ?? true)) continue;
             if (level >= e.Level || rng.OneIn(Math.Max(2, (e.Level - level) / 3))) egos.Add(e);
         }
         var ego = rng.PickWeighted(egos, e => e.Commonness);

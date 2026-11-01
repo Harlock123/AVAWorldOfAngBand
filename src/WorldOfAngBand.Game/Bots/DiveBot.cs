@@ -4,9 +4,9 @@ using WorldOfAngBand.Engine.Geometry;
 namespace WorldOfAngBand.Game.Bots;
 
 /// <summary>
-/// A bot that dives: it fights what it sees, drinks when badly hurt, rests when alone, explores, and goes down the
-/// first staircase it finds once it has looked around a little. The balance tests use it to measure how deep a plain
-/// fighter gets (the spec's M2: a bot reaches depth 5).
+/// A bot that dives: it fights what it sees, drinks when badly hurt (its flasks, then potions it knows heal), rests when
+/// alone, explores (picking up gold on the way), and goes down the first staircase it finds once it has looked around a
+/// little. The balance tests use it to measure how deep a plain fighter gets (the spec's M2: a bot reaches depth 5).
 /// </summary>
 public sealed class DiveBot(DungeonSession game)
 {
@@ -34,6 +34,11 @@ public sealed class DiveBot(DungeonSession game)
             _waited = 0;
         var hurt = hero.HitPoints < hero.MaxHitPoints * 0.4;
         if (hurt && hero.Character.Potion.Charges > 0 && game.Perform(new QuaffFlask()))
+            return;
+        // Then a potion it knows heals.
+        if (hurt && hero.Pack.Pack.FirstOrDefault(i => game.Knowledge.IsAware(i.Kind)
+                && game.ItemBridge.UseOf(i.Kind)?.StartsWith("heal:", StringComparison.Ordinal) == true) is { } potion
+            && game.Perform(new UseItem(potion)))
             return;
         // Things that never move (molds, floating eyes) and monsters that haven't noticed the hero are left alone
         // unless they are right beside them.

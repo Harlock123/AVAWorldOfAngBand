@@ -254,13 +254,24 @@ public sealed class IsoView : Control
             var (mx, my) = State.DrawnAt(f.Monster.Id, f.Monster.Position);
             Add(mx + my, mx, () => DrawFoe(canvas, session, f, ToScreen(mx, my)));
         }
+        // What lies on the floor, as the hero last saw it: flat on the ground, under everyone standing there.
+        for (var y = y0; y <= y1; y++)
+        for (var x = x0; x <= x1; x++)
+        {
+            var p = new Loc(x, y);
+            if (session.Known.IsKnown(p) && session.Known.RememberedObject(p) is { } item)
+            {
+                var memory = Remembered(session.Level, p);
+                Add(x + y + 0.2, x, () => DrawItem(canvas, session, item, ToScreen(p.X + 0.5, p.Y + 0.5), memory));
+            }
+        }
         foreach (var corpse in State.Corpses)
         {
             var c = corpse;
             if (session.Level.InBounds(c.Where) && session.Level[c.Where].Has(SquareFlags.Seen))
                 Add(c.Where.X + c.Where.Y + 0.4, c.Where.X, () => DrawCorpse(canvas, session, c));
         }
-        Add(heroKey, hx, () => DrawDoll(canvas, Appearance.For(session.Hero.Gear), FlareAssets.SpriteDirection(session.Hero.Facing),
+        Add(heroKey, hx, () => DrawDoll(canvas, Appearance.For(session.Hero, session.ItemBridge), FlareAssets.SpriteDirection(session.Hero.Facing),
             State.Animation(ViewState.HeroKey), heroFoot, 1f, null));
         items.Sort(DepthOrder);
         foreach (var item in items)
@@ -270,6 +281,28 @@ public sealed class IsoView : Control
             else
                 item.Draw!();
         }
+    }
+
+    /// <summary>An item on the floor: its Flare loot sprite where there is one, else its DCSS tile lying small.</summary>
+    private void DrawItem(SKCanvas canvas, DungeonSession session, Engine.Items.Item item, SKPoint at, bool memory)
+    {
+        var paint = PaintFor(Tint.None, memory);
+        if (ItemArt.Loot(item, session.ItemBridge) is { } loot)
+        {
+            var set = _assets.Loot(loot);
+            if (set["power"] is { } anim)
+                DrawFrame(canvas, anim.Image ?? set.Image, anim.Frame(anim.FrameCount - 1, 0), at, 0.8f, paint);
+            return;
+        }
+        if (DcssTiles.Shared is not { } tiles)
+            return;
+        var layers = ItemArt.TileKeys(item).Select(tiles.Layers).FirstOrDefault(l => l.Count > 0);
+        if (layers is null)
+            return;
+        var size = 64 * (float)Zoom;
+        var rect = SKRect.Create(at.X - size / 2, at.Y - size * 0.75f, size, size);
+        foreach (var image in layers)
+            canvas.DrawImage(image, rect, new SKSamplingOptions(SKFilterMode.Nearest), paint);
     }
 
     /// <summary>A monster, by its bridge entry: a Flare creature, the paper doll, or the DCSS card.</summary>

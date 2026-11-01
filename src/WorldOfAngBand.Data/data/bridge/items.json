@@ -1,0 +1,651 @@
+{
+ "_comment": "How Angband 4.2.5's items come into the game (the spec's section 6.3). weapons: the Pathfinder die, damage type, traits and paper-doll layer of each melee weapon (its potency comes from its to-hit, its striking from its to-dam). armour: body armour's Pathfinder category, AC, Dex cap, check penalty and Strength, with the paper-doll layers for chest and legs. shields: Shield Block's hardness. worn: other wearables and their paper-doll layer (or null). use: what a potion or scroll does. egos: the egos that may be made so far. egoNames: ego names in the Ashen setting.",
+ "weapons": {
+  "dagger": {
+   "die": 4,
+   "type": "Piercing",
+   "gfx": "dagger",
+   "traits": [
+    "Agile",
+    "Finesse",
+    "Thrown",
+    "Versatile"
+   ]
+  },
+  "main_gauche": {
+   "die": 4,
+   "type": "Piercing",
+   "gfx": "dagger",
+   "traits": [
+    "Agile",
+    "Finesse",
+    "Parry"
+   ]
+  },
+  "rapier": {
+   "die": 6,
+   "type": "Piercing",
+   "gfx": "shortsword",
+   "traits": [
+    "Finesse"
+   ],
+   "deadly": 8
+  },
+  "short_sword": {
+   "die": 6,
+   "type": "Piercing",
+   "gfx": "shortsword",
+   "traits": [
+    "Agile",
+    "Finesse",
+    "Versatile"
+   ]
+  },
+  "cutlass": {
+   "die": 6,
+   "type": "Slashing",
+   "gfx": "shortsword",
+   "traits": [
+    "Forceful",
+    "Sweep"
+   ]
+  },
+  "tulwar": {
+   "die": 8,
+   "type": "Slashing",
+   "gfx": "longsword"
+  },
+  "long_sword": {
+   "die": 8,
+   "type": "Slashing",
+   "gfx": "longsword",
+   "traits": [
+    "Versatile"
+   ]
+  },
+  "broad_sword": {
+   "die": 8,
+   "type": "Slashing",
+   "gfx": "longsword"
+  },
+  "scimitar": {
+   "die": 6,
+   "type": "Slashing",
+   "gfx": "longsword",
+   "traits": [
+    "Forceful",
+    "Sweep"
+   ]
+  },
+  "bastard_sword": {
+   "die": 10,
+   "type": "Slashing",
+   "gfx": "greatsword",
+   "traits": [
+    "TwoHand"
+   ]
+  },
+  "katana": {
+   "die": 10,
+   "type": "Slashing",
+   "gfx": "longsword",
+   "traits": [
+    "TwoHand",
+    "Versatile"
+   ],
+   "deadly": 8
+  },
+  "zweihander": {
+   "die": 12,
+   "type": "Slashing",
+   "gfx": "greatsword",
+   "traits": [
+    "TwoHand",
+    "Versatile"
+   ]
+  },
+  "executioners_sword": {
+   "die": 12,
+   "type": "Slashing",
+   "gfx": "greatsword",
+   "traits": [
+    "TwoHand"
+   ],
+   "deadly": 10
+  },
+  "whip": {
+   "die": 4,
+   "type": "Slashing",
+   "gfx": "rod",
+   "traits": [
+    "Finesse",
+    "Reach",
+    "Trip"
+   ]
+  },
+  "mace": {
+   "die": 6,
+   "type": "Bludgeoning",
+   "gfx": "mace",
+   "traits": [
+    "Shove"
+   ]
+  },
+  "war_hammer": {
+   "die": 8,
+   "type": "Bludgeoning",
+   "gfx": "war_hammer",
+   "traits": [
+    "Shove"
+   ]
+  },
+  "morning_star": {
+   "die": 6,
+   "type": "Bludgeoning",
+   "gfx": "mace",
+   "traits": [
+    "Versatile"
+   ]
+  },
+  "flail": {
+   "die": 6,
+   "type": "Bludgeoning",
+   "gfx": "mace",
+   "traits": [
+    "Sweep",
+    "Trip"
+   ]
+  },
+  "lead_filled_mace": {
+   "die": 8,
+   "type": "Bludgeoning",
+   "gfx": "reinforced_club",
+   "traits": [
+    "Shove"
+   ]
+  },
+  "ball_and_chain": {
+   "die": 8,
+   "type": "Bludgeoning",
+   "gfx": "mace",
+   "traits": [
+    "Sweep"
+   ]
+  },
+  "quarterstaff": {
+   "die": 8,
+   "type": "Bludgeoning",
+   "gfx": "staff",
+   "traits": [
+    "TwoHand"
+   ]
+  },
+  "maul": {
+   "die": 12,
+   "type": "Bludgeoning",
+   "gfx": "maul",
+   "traits": [
+    "TwoHand",
+    "Shove"
+   ]
+  },
+  "great_hammer": {
+   "die": 12,
+   "type": "Bludgeoning",
+   "gfx": "maul",
+   "traits": [
+    "TwoHand",
+    "Shove"
+   ]
+  },
+  "mighty_hammer": {
+   "die": 12,
+   "type": "Bludgeoning",
+   "gfx": "maul",
+   "traits": [
+    "TwoHand",
+    "Forceful"
+   ]
+  },
+  "two_handed_great_flail": {
+   "die": 10,
+   "type": "Bludgeoning",
+   "gfx": "maul",
+   "traits": [
+    "TwoHand",
+    "Sweep",
+    "Trip"
+   ]
+  },
+  "spear": {
+   "die": 6,
+   "type": "Piercing",
+   "gfx": "staff",
+   "traits": [
+    "Thrown"
+   ]
+  },
+  "trident": {
+   "die": 8,
+   "type": "Piercing",
+   "gfx": "staff",
+   "traits": [
+    "Thrown"
+   ]
+  },
+  "awl_pike": {
+   "die": 10,
+   "type": "Piercing",
+   "gfx": "greatstaff",
+   "traits": [
+    "TwoHand",
+    "Reach"
+   ]
+  },
+  "pike": {
+   "die": 10,
+   "type": "Piercing",
+   "gfx": "greatstaff",
+   "traits": [
+    "TwoHand",
+    "Reach"
+   ]
+  },
+  "halberd": {
+   "die": 10,
+   "type": "Piercing",
+   "gfx": "greatstaff",
+   "traits": [
+    "TwoHand",
+    "Reach",
+    "Versatile"
+   ]
+  },
+  "lance": {
+   "die": 8,
+   "type": "Piercing",
+   "gfx": "greatstaff",
+   "traits": [
+    "TwoHand"
+   ],
+   "deadly": 8
+  },
+  "lucerne_hammer": {
+   "die": 10,
+   "type": "Bludgeoning",
+   "gfx": "greatstaff",
+   "traits": [
+    "TwoHand",
+    "Reach",
+    "Shove"
+   ]
+  },
+  "glaive": {
+   "die": 8,
+   "type": "Slashing",
+   "gfx": "greatstaff",
+   "traits": [
+    "TwoHand",
+    "Forceful",
+    "Reach"
+   ],
+   "deadly": 8
+  },
+  "beaked_axe": {
+   "die": 10,
+   "type": "Slashing",
+   "gfx": "battle_axe",
+   "traits": [
+    "TwoHand",
+    "Sweep"
+   ]
+  },
+  "broad_axe": {
+   "die": 8,
+   "type": "Slashing",
+   "gfx": "battle_axe",
+   "traits": [
+    "Sweep"
+   ]
+  },
+  "battle_axe": {
+   "die": 8,
+   "type": "Slashing",
+   "gfx": "battle_axe",
+   "traits": [
+    "Sweep"
+   ]
+  },
+  "great_axe": {
+   "die": 12,
+   "type": "Slashing",
+   "gfx": "battle_axe",
+   "traits": [
+    "TwoHand",
+    "Sweep"
+   ]
+  },
+  "lochaber_axe": {
+   "die": 12,
+   "type": "Slashing",
+   "gfx": "battle_axe",
+   "traits": [
+    "TwoHand",
+    "Sweep",
+    "Reach"
+   ]
+  },
+  "scythe": {
+   "die": 10,
+   "type": "Slashing",
+   "gfx": "greatstaff",
+   "traits": [
+    "TwoHand",
+    "Trip"
+   ],
+   "deadly": 10
+  }
+ },
+ "armour": {
+  "robe": {
+   "category": "Unarmored",
+   "ac": 0,
+   "dexCap": 99,
+   "gfx": "mage_vest",
+   "legs": "mage_skirt",
+   "checkPenalty": 0,
+   "strength": 0
+  },
+  "soft_leather_armour": {
+   "category": "Light",
+   "ac": 1,
+   "dexCap": 4,
+   "gfx": "leather_chest",
+   "legs": "leather_pants",
+   "checkPenalty": 0,
+   "strength": 0
+  },
+  "hard_leather_armour": {
+   "category": "Light",
+   "ac": 2,
+   "dexCap": 3,
+   "gfx": "leather_chest",
+   "legs": "leather_pants",
+   "checkPenalty": -1,
+   "strength": 1
+  },
+  "studded_leather_armour": {
+   "category": "Light",
+   "ac": 2,
+   "dexCap": 3,
+   "gfx": "leather_chest",
+   "legs": "leather_pants",
+   "checkPenalty": -1,
+   "strength": 1
+  },
+  "soft_armour_leather_scale_mail": {
+   "category": "Medium",
+   "ac": 3,
+   "dexCap": 2,
+   "gfx": "leather_chest",
+   "legs": "chain_greaves",
+   "checkPenalty": -2,
+   "strength": 2
+  },
+  "chain_mail": {
+   "category": "Medium",
+   "ac": 4,
+   "dexCap": 1,
+   "gfx": "chain_cuirass",
+   "legs": "chain_greaves",
+   "checkPenalty": -2,
+   "strength": 3
+  },
+  "metal_scale_mail": {
+   "category": "Medium",
+   "ac": 4,
+   "dexCap": 1,
+   "gfx": "chain_cuirass",
+   "legs": "chain_greaves",
+   "checkPenalty": -2,
+   "strength": 3
+  },
+  "augmented_chain_mail": {
+   "category": "Medium",
+   "ac": 4,
+   "dexCap": 1,
+   "gfx": "chain_cuirass",
+   "legs": "chain_greaves",
+   "checkPenalty": -2,
+   "strength": 3
+  },
+  "bar_chain_mail": {
+   "category": "Medium",
+   "ac": 4,
+   "dexCap": 1,
+   "gfx": "chain_cuirass",
+   "legs": "chain_greaves",
+   "checkPenalty": -2,
+   "strength": 3
+  },
+  "metal_brigandine_armour": {
+   "category": "Heavy",
+   "ac": 5,
+   "dexCap": 1,
+   "gfx": "plate_cuirass",
+   "legs": "plate_greaves",
+   "checkPenalty": -3,
+   "strength": 3
+  },
+  "partial_plate_armour": {
+   "category": "Heavy",
+   "ac": 5,
+   "dexCap": 1,
+   "gfx": "plate_cuirass",
+   "legs": "plate_greaves",
+   "checkPenalty": -3,
+   "strength": 3
+  },
+  "metal_lamellar_armour": {
+   "category": "Heavy",
+   "ac": 5,
+   "dexCap": 1,
+   "gfx": "plate_cuirass",
+   "legs": "plate_greaves",
+   "checkPenalty": -3,
+   "strength": 4
+  },
+  "full_plate_armour": {
+   "category": "Heavy",
+   "ac": 6,
+   "dexCap": 0,
+   "gfx": "plate_cuirass",
+   "legs": "plate_greaves",
+   "checkPenalty": -3,
+   "strength": 4
+  },
+  "ribbed_plate_armour": {
+   "category": "Heavy",
+   "ac": 6,
+   "dexCap": 0,
+   "gfx": "plate_cuirass",
+   "legs": "plate_greaves",
+   "checkPenalty": -3,
+   "strength": 4
+  },
+  "mithril_chain_mail": {
+   "category": "Medium",
+   "ac": 4,
+   "dexCap": 1,
+   "gfx": "chain_cuirass",
+   "legs": "chain_greaves",
+   "checkPenalty": 0,
+   "strength": 0
+  },
+  "mithril_plate_mail": {
+   "category": "Heavy",
+   "ac": 6,
+   "dexCap": 0,
+   "gfx": "plate_cuirass",
+   "legs": "plate_greaves",
+   "checkPenalty": -1,
+   "strength": 2
+  },
+  "adamantite_plate_mail": {
+   "category": "Heavy",
+   "ac": 6,
+   "dexCap": 0,
+   "gfx": "plate_cuirass",
+   "legs": "plate_greaves",
+   "checkPenalty": -3,
+   "strength": 4
+  }
+ },
+ "shields": {
+  "wicker_shield": {
+   "hardness": 3,
+   "gfx": "buckler"
+  },
+  "leather_shield": {
+   "hardness": 4,
+   "gfx": "kite_shield"
+  },
+  "small_metal_shield": {
+   "hardness": 5,
+   "gfx": "iron_buckler"
+  },
+  "large_metal_shield": {
+   "hardness": 6,
+   "gfx": "shield"
+  },
+  "knights_shield": {
+   "hardness": 7,
+   "gfx": "shield"
+  },
+  "mithril_shield": {
+   "hardness": 8,
+   "gfx": "shield"
+  }
+ },
+ "worn": {
+  "hard_leather_cap": "leather_hood",
+  "metal_cap": "chain_coif",
+  "iron_helm": "plate_helm",
+  "steel_helm": "plate_helm",
+  "leather_gloves": "leather_gloves",
+  "gauntlets": "chain_gloves",
+  "set_of_mithril_gauntlets": "plate_gauntlets",
+  "set_of_caestus": "chain_gloves",
+  "leather_sandals": "cloth_sandals",
+  "leather_boots": "leather_boots",
+  "pair_of_iron_shod_boots": "chain_boots",
+  "pair_of_steel_shod_boots": "plate_boots",
+  "pair_of_mithril_shod_boots": "plate_boots",
+  "cloak": null,
+  "fur_cloak": null,
+  "wooden_torch": null,
+  "lantern": null,
+  "ring_of_resist_fire_and_cold": null,
+  "ring_of_free_action": null,
+  "ring_of_see_invisible": null,
+  "ring_of_strength": null,
+  "ring_of_dexterity": null,
+  "ring_of_constitution": null,
+  "ring_of_the_mouse": null,
+  "ring_of_the_dog": null,
+  "ring_of_light": null,
+  "ring_of_protection": null,
+  "ring_of_damage": null,
+  "ring_of_accuracy": null,
+  "amulet_of_resist_lightning": null,
+  "amulet_of_resist_acid": null,
+  "amulet_of_wisdom": null,
+  "amulet_of_regeneration": null
+ },
+ "use": {
+  "cure_light_wounds": "heal:2d8+5,cure:Blinded",
+  "cure_serious_wounds": "heal:4d8+10,cure:Blinded,cure:Stupefied,cure:poison",
+  "potion_of_cure_critical_wounds": "heal:6d8+15,cure:Blinded,cure:Stupefied,cure:poison,cure:Stunned,cure:Drained",
+  "potion_of_healing": "heal:50%,cure:Blinded,cure:Stupefied,cure:poison,cure:Stunned",
+  "neutralize_poison": "cure:poison",
+  "boldness": "cure:Frightened",
+  "speed": "haste:20",
+  "potion_of_heroism": "heroism:25",
+  "potion_of_berserk_strength": "berserk:25",
+  "potion_of_resist_heat": "resist:Fire:30",
+  "potion_of_resist_cold": "resist:Cold:30",
+  "potion_of_resist_poison": "resist:Poison:30",
+  "sleep": "bad:Stunned",
+  "confusion": "bad:Stupefied",
+  "potion_of_blindness": "bad:Blinded",
+  "potion_of_poison": "bad:poison",
+  "potion_of_slowness": "bad:Slowed",
+  "potion_of_salt_water": "bad:salt",
+  "phase_door": "blink:10",
+  "teleportation": "blink:60",
+  "light": "light",
+  "magic_mapping": "map:30",
+  "treasure_detection": "detect_treasure:20",
+  "scroll_of_word_of_recall": "recall",
+  "scroll_of_deep_descent": "deep_descent",
+  "scroll_of_teleport_level": "teleport_level",
+  "scroll_of_blessing": "bless:12",
+  "scroll_of_holy_chant": "bless:24",
+  "scroll_of_enchant_weapon_to_hit": "enchant:to_h",
+  "scroll_of_enchant_weapon_to_dam": "enchant:to_d",
+  "scroll_of_enchant_armour": "enchant:to_a",
+  "identify_rune": "identify",
+  "scroll_of_darkness": "bad:darkness",
+  "scroll_of_aggravate_monster": "bad:aggravate",
+  "scroll_of_summon_monster": "bad:summon"
+ },
+ "egos": [
+  "slay_animal",
+  "slay_evil",
+  "slay_orc",
+  "slay_undead",
+  "burning",
+  "freezing",
+  "venom",
+  "blessed",
+  "of_acid",
+  "of_lightning",
+  "of_slay_demon",
+  "of_slay_troll",
+  "of_slay_giant",
+  "of_slay_dragon",
+  "westernesse",
+  "defender",
+  "holy_avenger",
+  "of_extra_attacks",
+  "resist_fire",
+  "resist_cold",
+  "resist_acid",
+  "resist_lightning",
+  "resistance",
+  "dwarven",
+  "resist_fire_shield",
+  "resist_cold_shield",
+  "resist_acid_shield",
+  "resist_lightning_shield",
+  "resistance_shield",
+  "free_action",
+  "of_slaying",
+  "of_free_action",
+  "of_slow_descent",
+  "speed",
+  "of_intelligence",
+  "of_wisdom",
+  "of_regeneration",
+  "seeing",
+  "of_protection",
+  "stealth_cloak",
+  "of_brightness",
+  "everburning"
+ ],
+ "egoNames": {
+  "westernesse": "of the Pale Lantern",
+  "holy_avenger": "of the Order",
+  "defender": "(Defender)"
+ }
+}

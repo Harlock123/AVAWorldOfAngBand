@@ -6,11 +6,12 @@ hero, rules, art and story. Ten years after the Cinder Throne, the Reliquary und
 lid: below it a shaft goes down a hundred levels, to where the Order of the Pale Lantern first burned Ashur. You go
 down it as one of the Lantern-sworn, with no Ember Heart. When you die, you stay dead.
 
-**Status: milestone 2 of 6 ("Fight").** Levels are generated as Angband 4.2.5 generates them and drawn
+**Status: milestone 3 of 6 ("Loot").** Levels are generated as Angband 4.2.5 generates them and drawn
 isometrically in Flare's art. The hero is a Pathfinder 2e fighter on AshenReliquary's rules, and fights forty of
-Angband's monsters from its first ten levels, turn by turn on Angband's energy system. Death is final, and every
-death goes into the Order's book. Items, the shops and character creation come next. The plan for all of it is in
-[the design specification](docs/SPECIFICATION.md).
+Angband's monsters from its first ten levels, turn by turn on Angband's energy system. Angband's items lie on the
+floor and drop from monsters: weapons and armour with Pathfinder's runes, egos, potions and scrolls whose flavours
+are learned by trying them. Gallowmere's shops buy and sell, and the Smith etches runes. Death is final. The plan for
+the rest is in [the design specification](docs/SPECIFICATION.md).
 
 ![A fight on the first level: a skeleton kobold, a jackal, a giant centipede and a rock lizard round the hero in a
 lit hall, a "miss" floating over the hero, the hit points, round and Second Breath at the top right, and the rolls in
@@ -48,11 +49,39 @@ door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-t
 - **One life.** At 0 HP, Second Breath holds the hero at 1 HP once per trip down; it comes back in town. After that,
   death is final. The hero's line goes into the Order's book of the Lantern-sworn, struck through, and the next one
   starts from Gallowmere.
-- **Healing:** three flasks, filled again in town, and rest (`R`) with no monster in sight.
+- **Healing:** three flasks, filled again in town, potions, and rest (`R`) with no monster in sight.
+- **Angband's items, with Pathfinder's numbers.** Things lie on the floor where the generator put them, and monsters
+  drop what their Angband entries say. The items stay Angband's; what they are in Pathfinder's terms is worked out from
+  them:
+  - a weapon's to-hit becomes its potency rune (+1 to +3), its to-dam its striking rune, and its kind a Pathfinder
+    weapon (a long sword is a d8 slashing versatile blade, a maul a d12 two-hander);
+  - body armour is light, medium or heavy with its AC and Dex cap, and its to-AC is its potency;
+  - a shield's Shield Block takes off as much as its hardness.
+  - **42 of Angband's egos come in as runes:** slays give +1d6 against their foes, brands +1d6 of their element,
+    resistances 5. Free action, courage, sight and the sustains turn blow effects aside. Speed and stealth stay on
+    Angband's scales.
+- **Learning what things are, as in Angband 4.2.** Potions and scrolls go by their flavours until tried, and an ego
+  shows `{??}` until its runes show themselves. Each rune is learned when it shows itself (a hit, a resisted blow, a
+  paralysis that never comes), and then it is known on every item.
+- **Potions and scrolls:**
+  - healing, curing, speed, heroism, berserk strength, resistances;
+  - Phase Door, Teleportation, Light, Magic Mapping, Treasure Detection, Word of Recall, Deep Descent, Teleport Level;
+  - blessings, enchantments and Identify Rune;
+  - and the bad ones, which teach their flavour the hard way.
+- **Gallowmere's shops,** Angband's eight with their stock tables, kept by the Ashen setting's people. They sell what
+  is in the game so far and buy at half. The Hanged Man sells good things at three times the price, and your room at
+  the inn keeps what you leave there. **The Smith** etches potency and striking at Pathfinder's levels, for gold.
 - **The classic views.** `Ctrl+T` turns from the isometric view to AVABand's letters and then its DCSS tiles, seen from
   above.
 - **Gallowmere,** the town, by day: stone shops with their names over the doors, and a wood of dead trees round them.
 - **A dive bot** that plays the game: in tests it takes a level-1 fighter to depth 5 in most games.
+
+![Things on the floor of a lit hall: a long sword, a potion, a coat of mail and a scatter of coins round the hero, drawn
+with Flare's loot sprites](docs/images/WorldOfAngBand-loot.png)
+
+![The Smith's window: swords and axes for sale with their Pathfinder dice and runes, the pack beside them, and the
+runework below: +1 potency on the long sword for 400 gold, and striking and armour potency waiting on the hero's
+level](docs/images/WorldOfAngBand-smith.png)
 
 ![The first level in the classic tile view: DCSS tiles seen from above, the hero in a corridor with a kobold ahead and a jackal in the room behind](docs/images/WorldOfAngBand-tiles.png)
 
@@ -67,8 +96,11 @@ classic views up is north, as in Angband.
 | `>` / `<` | Go down / up the stairs underfoot |
 | `,` or keypad `5` | Stay put a turn |
 | `R` | Rest until healed (stops when a monster appears) |
+| `g` | Pick up what lies here (gold is picked up as you walk) |
+| `i` | The pack: wear, take off, drink, read or drop (Enter does what suits the item) |
 | `q` | Drink from a healing flask |
 | Click | Travel to a square you have seen, or strike a monster beside you |
+| Walk into a shop's door | Its window: buy and sell; at the Smith, runework |
 | `Escape` | Stop travelling or resting |
 | `Ctrl+T` | Isometric, letters, tiles |
 | Mouse wheel | Zoom |

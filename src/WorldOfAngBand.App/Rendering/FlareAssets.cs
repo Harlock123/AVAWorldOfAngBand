@@ -86,6 +86,9 @@ public sealed class FlareAssets
 
     public FlareAnimationSet AvatarLayer(string layer) => Animation($"animations/avatar/male/{layer}.txt");
 
+    /// <summary>A dropped item's sprite: Flare plays its "power" animation once (tumbling to the ground) and holds the last frame.</summary>
+    public FlareAnimationSet Loot(string loot) => Animation($"animations/loot/{loot}.txt");
+
     /// <summary>A Flare creature's animations (wolf, fire_ant, skeleton_weak…).</summary>
     public FlareAnimationSet Enemy(string sprite) => Animation($"animations/enemies/{sprite}.txt");
 

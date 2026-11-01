@@ -22,6 +22,7 @@ public class WindowTests
         var book = Path.Combine(Path.GetTempPath(), "worldofangband-tests", Guid.NewGuid().ToString("N"), "graveyard.json");
         var window = new MainWindow(new DungeonSession(Data.Value, seed), new Graveyard(book)) { Width = 1280, Height = 800 };
         window.State.Frozen = true;
+        window.ShowDialogs = false;
         window.Show();
         Pump();
         return window;
@@ -229,4 +230,103 @@ public class WindowTests
         Assert.Equal(0, window.Session.Depth);
         window.Close();
     }
+
+    /// <summary>Shows a dialog window headless, draws it, and saves the picture like the main window's.</summary>
+    private static WriteableBitmap CaptureDialog(Avalonia.Controls.Window dialog, string name)
+    {
+        dialog.Show();
+        Pump();
+        var frame = dialog.CaptureRenderedFrame() ?? throw new InvalidOperationException("No frame was drawn.");
+        if (Environment.GetEnvironmentVariable("WORLDOFANGBAND_SHOTS") is { Length: > 0 } folder)
+        {
+            var path = Path.Combine(Path.IsPathRooted(folder) ? folder : Path.Combine(FindRepoRoot(), folder), name + ".png");
+            frame.Save(path, PngBitmapEncoderOptions.Default);
+        }
+        return frame;
+    }
+
+    [AvaloniaFact]
+    public void Things_lie_on_the_floor_and_are_named_under_the_pointer()
+    {
+        var window = OnFirstLevel(1234);
+        ExploreToALitRoom(window);
+        var game = window.Session;
+        var spots = DirectionExtensions.Compass.Select(game.Hero.Position.Step).Where(game.Level.IsEmptyFloor).Take(4).ToList();
+        string[] kinds = ["long_sword", "chain_mail", "cure_light_wounds", "phase_door"];
+        for (var i = 0; i < spots.Count; i++)
+            game.Level.Objects.Add(spots[i], game.Factory.Create(kinds[i]));
+        game.Level.Objects.Add(spots[0], game.Factory.MakeGold(game.Rng, 5));
+        window.Press(Key.NumPad5);
+        Assert.NotNull(game.Known.RememberedObject(spots[0]));
+        var frame = Capture(window, "WorldOfAngBand-loot");
+        Assert.True(DrawnShare(frame) > 0.12);
+        var at = window.View.ToScreen(spots[1].X + 0.5, spots[1].Y + 0.5);
+        window.MouseMove(new Avalonia.Point(at.X, at.Y));
+        Pump();
+        Assert.Contains("Chain Mail", window.Hud.Hover!.Value.Text);
+        window.Close();
+    }
+
+    [AvaloniaFact]
+    public void The_pack_window_wears_and_uses_things()
+    {
+        var window = Open();
+        var game = window.Session;
+        var cap = game.Hero.Pack.Add(game.Factory.Create("hard_leather_cap"))!;
+        var pack = window.OpenInventory();
+        Assert.Contains(pack.WornLines, l => l.StartsWith("a Long Sword", StringComparison.Ordinal));
+        Assert.Contains(pack.PackLines, l => l.Contains("Cure Light Wounds"));
+        CaptureDialog(pack, "WorldOfAngBand-pack");
+        pack.SelectCarried(cap);
+        pack.Default();
+        Assert.Same(cap, game.Hero.Pack.InSlot(EquipSlot.Head));
+        pack.Close();
+        window.Close();
+    }
+
+    [AvaloniaFact]
+    public void A_shop_window_buys_and_sells_and_the_smith_offers_runework()
+    {
+        var window = Open();
+        var game = window.Session;
+        var shop = window.OpenStore("alchemist");
+        Assert.Contains(shop.StockLines, l => l.Contains("Cure Light Wounds") && l.EndsWith("gold", StringComparison.Ordinal));
+        var potion = shop.Store.Stock.First(i => i.Kind.Id == "cure_light_wounds");
+        var gold = game.Hero.Gold;
+        shop.SelectStock(potion);
+        shop.Buy();
+        Assert.True(game.Hero.Gold < gold);
+        Assert.StartsWith("You bought", shop.Said);
+        shop.Close();
+
+        game.Hero.Character.LevelUp();
+        game.Hero.Gold = 2000;
+        var smith = window.OpenStore("weaponsmith");
+        CaptureDialog(smith, "WorldOfAngBand-smith");
+        smith.Etch(game.Hero.Pack.Weapon!, Etching.Potency);
+        Assert.Equal(1, game.Hero.Character.Weapon.Potency);
+        smith.Close();
+        window.Close();
+    }
+
+    [AvaloniaFact]
+    public void Walking_into_a_shop_door_opens_its_window()
+    {
+        var window = Open();
+        var game = window.Session;
+        var door = game.Level.FindFeature(TerrainFlags.Shop).First(p => game.Level.FeatureAt(p).Shop == "alchemist");
+        var beside = game.Level.Neighbors(door).First(p => game.Level.IsPassable(p) && !game.Level.Has(p, TerrainFlags.Shop) && game.PathTo(p) is not null);
+        Assert.True(window.TravelTo(beside));
+        Walk(window);
+        Assert.Equal(beside, game.Hero.Position);
+        var entered = new List<string>();
+        game.Published += e => { if (e is ShopEnteredEvent s) entered.Add(s.StoreId); };
+        window.Press(window.Mode == ViewMode.Isometric ? IsoKey(DirectionExtensions.FromOffset(door.X - beside.X, door.Y - beside.Y)) : Key.None);
+        Assert.Equal(["alchemist"], entered);
+        window.Close();
+    }
+
+    /// <summary>The isometric key that walks a map direction.</summary>
+    private static Key IsoKey(Direction direction) =>
+        new[] { Key.Up, Key.PageUp, Key.Right, Key.PageDown, Key.Down, Key.End, Key.Left, Key.Home }.First(k => MainWindow.DirectionFor(k) == direction);
 }

@@ -6,6 +6,7 @@ using Avalonia.Threading;
 using SkiaSharp;
 using WorldOfAngBand.App.Rendering;
 using WorldOfAngBand.App.Services;
+using WorldOfAngBand.App.Windows;
 using WorldOfAngBand.Engine.Geometry;
 using WorldOfAngBand.Game;
 
@@ -93,8 +94,8 @@ public sealed class MainWindow : Window
             Classic.Tiles = value == ViewMode.Tiles;
             Content = value == ViewMode.Isometric ? View : Classic;
             Hud.KeysLine = value == ViewMode.Isometric
-                ? "Arrows/keypad: walk · < >: stairs · R: rest · q: flask · click: travel · wheel: zoom · Ctrl+T: classic view"
-                : "Arrows/keypad: walk (up is north) · < >: stairs · R: rest · q: flask · click: travel · Ctrl+T: next view";
+                ? "Arrows/keypad: walk · < >: stairs · g: pick up · i: pack · R: rest · q: flask · click: travel · wheel: zoom · Ctrl+T: classic view"
+                : "Arrows/keypad: walk (up is north) · < >: stairs · g: pick up · i: pack · R: rest · q: flask · click: travel · Ctrl+T: next view";
             Redraw();
         }
     }
@@ -123,6 +124,11 @@ public sealed class MainWindow : Window
             case HeroDiedEvent died:
                 Stop();
                 Hud.Book = _graveyard.Add(died.Record);
+                break;
+            case ShopEnteredEvent shop:
+                Stop();
+                // Once the step is done: the shop's window.
+                Dispatcher.UIThread.Post(() => OpenStore(shop.StoreId));
                 break;
         }
     }
@@ -222,8 +228,37 @@ public sealed class MainWindow : Window
                 return true;
             case "R":
                 return StartResting();
+            case "g":
+                Stop();
+                Do(new PickUp());
+                return true;
+            case "i":
+                Stop();
+                OpenInventory();
+                return true;
         }
         return false;
+    }
+
+    /// <summary>Whether a dialog (the pack, a shop) is open: tests open them without showing them.</summary>
+    public bool ShowDialogs { get; set; } = true;
+
+    /// <summary>The pack's window: wield, use, take off or drop.</summary>
+    public InventoryWindow OpenInventory()
+    {
+        var window = new InventoryWindow(Session, Do);
+        if (ShowDialogs)
+            _ = window.ShowDialog(this);
+        return window;
+    }
+
+    /// <summary>A shop's window.</summary>
+    public StoreWindow OpenStore(string id)
+    {
+        var window = new StoreWindow(Session, Session.Stores[id], View.Gate);
+        if (ShowDialogs)
+            _ = window.ShowDialog(this);
+        return window;
     }
 
     /// <summary>Rests until healed, or until a monster turns up (Angband's R&amp;).</summary>
@@ -269,7 +304,9 @@ public sealed class MainWindow : Window
                 ? (new SKPoint((float)p.X, (float)p.Y),
                     $"{foe.Name}  ·  level {foe.Level}, AC {foe.ArmorClass().Total}, {Math.Max(0, foe.Monster.Hp)}/{foe.Monster.MaxHp} HP"
                     + (foe.Monster.IsAsleep ? ", asleep" : foe.Monster.IsAfraid ? ", afraid" : ""))
-                : null;
+                : Session.Level.InBounds(at) && Session.Known.IsKnown(at) && Session.Known.RememberedObject(at) is { } item
+                    ? (new SKPoint((float)p.X, (float)p.Y), Session.NameOf(item))
+                    : null;
         }
     }
 

@@ -19,3 +19,18 @@ public sealed record Rest : GameCommand;
 
 /// <summary>Drink from a healing flask.</summary>
 public sealed record QuaffFlask : GameCommand;
+
+/// <summary>Pick up what lies here.</summary>
+public sealed record PickUp : GameCommand;
+
+/// <summary>Put down some of a carried item.</summary>
+public sealed record DropItem(WorldOfAngBand.Engine.Items.Item Item, int Count = 1) : GameCommand;
+
+/// <summary>Wield or wear an item from the pack (or the floor).</summary>
+public sealed record WieldItem(WorldOfAngBand.Engine.Items.Item Item) : GameCommand;
+
+/// <summary>Take off a worn item.</summary>
+public sealed record TakeOffItem(WorldOfAngBand.Engine.Items.Item Item) : GameCommand;
+
+/// <summary>Drink a potion or read a scroll; <see cref="Target"/> is what an enchantment or identification is for.</summary>
+public sealed record UseItem(WorldOfAngBand.Engine.Items.Item Item, WorldOfAngBand.Engine.Items.Item? Target = null) : GameCommand;

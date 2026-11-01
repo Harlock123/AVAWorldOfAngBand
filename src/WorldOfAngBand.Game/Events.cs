@@ -32,3 +32,9 @@ public sealed record SecondBreathEvent : IGameEvent;
 
 /// <summary>The hero is dead; the record is their line in the Order's book.</summary>
 public sealed record HeroDiedEvent(DeathRecord Record) : IGameEvent;
+
+/// <summary>The hero's things, or those on the floor, changed.</summary>
+public sealed record ItemsChangedEvent : IGameEvent;
+
+/// <summary>The hero walked into a shop (or their room at the inn).</summary>
+public sealed record ShopEnteredEvent(string StoreId) : IGameEvent;

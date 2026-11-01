@@ -45,7 +45,28 @@ internal sealed class Fight(DungeonSession session)
         var extra = critical ? Strike.CriticalExtraDice(weapon).Roll(Roller) : 0;
         var type = definition.TypeAgainst(foe.Defenses);
         var damage = DamageCalculator.Compute(dice, character.DamageBonus().Total, check.Degree, type, foe.Defenses, GrazeEffect.None, extra);
-        session.Say($"You {(critical ? "critically hit" : "hit")} {name} {roll}: {damage} {type.ToString().ToLowerInvariant()}.");
+        // A hit shows the weapon's potency and striking for what they are.
+        if (hero.Gear.Weapon is not null)
+        {
+            session.Belongings.Learn(Engine.Definitions.RuneIds.ToHit);
+            session.Belongings.Learn(Engine.Definitions.RuneIds.ToDam);
+        }
+        var runes = new List<string>();
+        foreach (var rune in hero.Gear.Extras)
+        {
+            if (rune.MonsterFlag is { } flag && !foe.Monster.Race.Has(flag))
+                continue;
+            // A rune's dice are doubled on a critical hit, as the weapon's are.
+            var rolled = new Dice(rune.Dice * (critical ? 2 : 1), rune.Sides).Roll(Roller);
+            var dealt = DamageCalculator.ApplyDefenses(rolled, rune.Type, foe.Defenses);
+            if (dealt <= 0)
+                continue;
+            damage += dealt;
+            runes.Add($"{dealt} {(rune.MonsterFlag is null ? rune.Type.ToString().ToLowerInvariant() : "bane")}");
+            session.Belongings.Learn(rune.Rune);
+        }
+        var more = runes.Count > 0 ? $" ({string.Join(", ", runes)})" : "";
+        session.Say($"You {(critical ? "critically hit" : "hit")} {name} {roll}: {damage} {type.ToString().ToLowerInvariant()}{more}.");
         session.Publish(new StrikeEvent(hero.Position, foe.Monster.Position, true, check.Degree, damage));
         Hurt(foe, damage);
     }
@@ -85,6 +106,10 @@ internal sealed class Fight(DungeonSession session)
             var type = TypeOf(blow);
             var rolled = blow.Damage.Roll(session.Rng);
             var damage = rolled <= 0 ? 0 : DamageCalculator.Compute(rolled, 0, check.Degree, type, hero.Character.Defenses);
+            // Being hit shows the armour's potency; a resistance that took something off shows itself.
+            session.Belongings.Learn(Engine.Definitions.RuneIds.ToAc);
+            if (rolled > 0 && hero.Character.Defenses.Resistances.ContainsKey(type) && ResistRune(type) is { } resisted)
+                session.Belongings.Learn(resisted);
             var blocked = ShieldBlock(damage);
             damage -= blocked;
             var crit = check.Degree == DegreeOfSuccess.CriticalSuccess ? ", critically" : "";
@@ -100,6 +125,19 @@ internal sealed class Fight(DungeonSession session)
         }
     }
 
+    /// <summary>The rune of a worn item's resistance to an element, if one is worn.</summary>
+    private string? ResistRune(DamageType type)
+    {
+        var element = type switch
+        {
+            DamageType.Fire => "fire", DamageType.Cold => "cold", DamageType.Acid => "acid", DamageType.Electricity => "elec",
+            DamageType.Poison => "pois", _ => null,
+        };
+        return element is not null && session.Hero.Pack.Equipped.Any(i => i.Resists.Contains(element))
+            ? Engine.Definitions.RuneIds.Resist(element)
+            : null;
+    }
+
     /// <summary>
     /// Shield Block, the hero's reaction (one a round): a shield takes its hardness off a blow that hurts, more for a
     /// Bulwark. Returns how much it took off.
@@ -108,10 +146,10 @@ internal sealed class Fight(DungeonSession session)
     {
         var hero = session.Hero;
         if (damage <= 0 || !hero.Round.ReactionReady
-            || hero.Gear.In(Rules.Items.EquipSlot.OffHand) is not { Definition: { IsShield: true, Hardness: > 0 } shield })
+            || hero.Pack.InSlot(Engine.Definitions.EquipSlot.Shield) is not { } shield || session.ItemBridge.ShieldFor(shield) is not { } bridged)
             return 0;
         hero.Round.UseReaction();
-        return Math.Min(damage, shield.Hardness + hero.Character.BlockHardnessBonus);
+        return Math.Min(damage, bridged.Hardness + hero.Character.BlockHardnessBonus);
     }
 
     /// <summary>Damage to a monster: it wakes, may lose its nerve (Angband mon_take_hit), and dies below 0 HP.</summary>
@@ -212,6 +250,22 @@ internal sealed class Fight(DungeonSession session)
         };
         if (apply is null)
             return;
+        // A worn protection (free action, courage, sight, clarity, sustains, hold life) turns the effect aside.
+        var protection = blow.Effect switch
+        {
+            "paralyze" => "free_act", "terrify" => "fear", "blind" => "blind", "confuse" => "conf",
+            "lose_str" => "sust_str", "lose_dex" => "sust_dex", "lose_con" => "sust_con", "lose_int" => "sust_int", "lose_wis" => "sust_wis",
+            "exp_10" or "exp_20" or "exp_40" or "exp_80" => "hold_life",
+            _ => null,
+        };
+        if (protection is not null && session.Hero.Gear.Protects(protection))
+        {
+            session.Belongings.Learn(protection == "hold_life"
+                ? Engine.Definitions.RuneIds.Flag(Engine.Definitions.ItemFlags.HoldLife)
+                : Engine.Definitions.RuneIds.Resist(protection));
+            session.Say("You are unaffected!");
+            return;
+        }
         var check = Check.Roll(Roller, session.Hero.Character.Save(save).Total, foe.SaveDc);
         var degree = criticalHit ? Check.StepDown(check.Degree) : check.Degree;
         if (degree >= DegreeOfSuccess.Success)
