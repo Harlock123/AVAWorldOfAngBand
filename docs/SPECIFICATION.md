@@ -445,8 +445,8 @@ waits below.
 | The Oriel highlands (3) | Frostbitten Pass (11), Hollow Woods (12), Catacombs of Oriel (13), Bell Tower (14) | Saint Oriel's Rest (11) |
 | The Cinder country (4) | Ash Wastes (16), Lava Rivers (17), Wyrm's Nest (18), the Reliquary (19), the Cinder Throne (20) | Ember Gate (16) |
 
-- Fort Gallowmere's two exits become gates in Gallowmere's wall: the north gate to the Gallows Road, the east gate
-  to the Rotwater Fens. Gallowmere itself stays AVABand's generated town.
+- Fort Gallowmere's two exits become gates in Gallowmere's wall, where Ashen has them: the south gate to the Gallows
+  Road, the west gate to the Rotwater Fens. Gallowmere itself stays AVABand's generated town.
 - **Waystations** (Ironhold, Saint Oriel's Rest, Ember Gate) are small hand-made towns: a shrine, one trader each
   (Ironhold a smith, the Rest an apothecary, Ember Gate a quartermaster) and a Lantern Rift.
 - **The Reliquary** is the Lid seen from above: its deepest hall ends at the sealed mouth of the shaft. The Cinder
@@ -590,8 +590,9 @@ the Pathfinder name.
 | **M7: The province** | Ashen's world above the shaft | All 18 wild zones and 3 waystations, reached through Gallowmere's gates, with their creatures, caches, shrines, NPCs' lines and weather; kept per hero; the four tie-ins; bots clear each zone at its level |
 
 M7 comes in three parts:
-- **M7a:** fixed-map levels from Ashen's files, gates and exits, the three new tilesets, and the first two zones
-  (the Gallows Road and the Rotwater Fens);
+- **M7a** (done): fixed-map levels from Ashen's files, gates and exits, the three new tilesets, and the first two
+  zones (the Gallows Road and the Rotwater Fens). Outdoor zones are known from the moment the hero arrives, as in
+  Ashen; dark ones are explored as the dungeon is;
 - **M7b:** Ashen's creatures bridged, caches, shrines, persistence, and every zone and waystation;
 - **M7c:** NPCs and keepsakes, weather, the tie-ins, the rifts, and a province bot that walks each zone at its
   expected level.
