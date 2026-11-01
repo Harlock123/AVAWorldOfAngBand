@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Angband 4.2.5's game data as AVABand converted it, and the loader that turns it into engine definitions. -->
+  <PropertyGroup>
+    <RootNamespace>WorldOfAngBand.Data</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WorldOfAngBand.Engine\WorldOfAngBand.Engine.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Shipped as loose files so players can edit and mod them; they flow to every referencing project's output. -->
+    <Content Include="data\**\*.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

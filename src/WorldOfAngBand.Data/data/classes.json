@@ -1,0 +1,722 @@
+[
+  {
+    "id": "warrior",
+    "name": "Warrior",
+    "hitDie": 9,
+    "blows": 200,
+    "skills": {
+      "melee": 70,
+      "bow": 55,
+      "throw": 55,
+      "save": 18,
+      "stealth": 0,
+      "disarm": 25,
+      "device": 18,
+      "disarm_magic": 20,
+      "dig": 0,
+      "search": 10
+    },
+    "skillsPer10Levels": {
+      "melee": 45,
+      "bow": 45,
+      "throw": 45,
+      "save": 10,
+      "disarm": 15,
+      "device": 7,
+      "disarm_magic": 10,
+      "stealth": 0,
+      "dig": 0,
+      "search": 12
+    },
+    "stats": {
+      "str": 3,
+      "int": -2,
+      "wis": -2,
+      "dex": 2,
+      "con": 2
+    },
+    "startingKit": [
+      {
+        "kind": "ration_of_food",
+        "countMax": 3
+      },
+      {
+        "kind": "wooden_torch",
+        "countMax": 3,
+        "equip": true
+      },
+      {
+        "kind": "potion_of_berserk_strength"
+      },
+      {
+        "kind": "dagger",
+        "equip": true
+      },
+      {
+        "kind": "soft_leather_armour",
+        "equip": true
+      },
+      {
+        "kind": "scroll_of_word_of_recall",
+        "unlessOption": "birth_no_recall"
+      }
+    ],
+    "description": "A master of weapons and armour, relying on strength rather than magic.",
+    "flags": [
+      "SHIELD_BASH",
+      "BRAVERY_30"
+    ],
+    "titles": [
+      "Rookie",
+      "Soldier",
+      "Swordsman",
+      "Swashbuckler",
+      "Veteran",
+      "Myrmidon",
+      "Commando",
+      "Champion",
+      "Hero",
+      "Lord"
+    ]
+  },
+  {
+    "id": "mage",
+    "name": "Mage",
+    "blows": 100,
+    "realm": "arcane",
+    "firstSpellLevel": 1,
+    "skills": {
+      "melee": 35,
+      "bow": 20,
+      "throw": 20,
+      "save": 30,
+      "stealth": 2,
+      "disarm": 30,
+      "device": 36,
+      "disarm_magic": 35,
+      "dig": 0,
+      "search": 10
+    },
+    "skillsPer10Levels": {
+      "melee": 15,
+      "bow": 15,
+      "throw": 15,
+      "save": 9,
+      "disarm": 10,
+      "device": 13,
+      "disarm_magic": 12,
+      "stealth": 0,
+      "dig": 0,
+      "search": 12
+    },
+    "stats": {
+      "str": -3,
+      "int": 3,
+      "con": -2
+    },
+    "startingKit": [
+      {
+        "kind": "ration_of_food",
+        "countMax": 3
+      },
+      {
+        "kind": "wooden_torch",
+        "countMax": 3,
+        "equip": true
+      },
+      {
+        "kind": "rapier",
+        "equip": true
+      },
+      {
+        "kind": "scroll_of_word_of_recall",
+        "unlessOption": "birth_no_recall"
+      },
+      {
+        "kind": "first_spells"
+      }
+    ],
+    "description": "A student of arcane magic: frail, but able to blast foes from afar.",
+    "flags": [
+      "BEAM",
+      "ZERO_FAIL",
+      "CHOOSE_SPELLS"
+    ],
+    "titles": [
+      "Novice",
+      "Apprentice",
+      "Trickster",
+      "Illusionist",
+      "Spellbinder",
+      "Evoker",
+      "Conjurer",
+      "Warlock",
+      "Sorcerer",
+      "Arch-Mage"
+    ]
+  },
+  {
+    "id": "priest",
+    "name": "Priest",
+    "hitDie": 2,
+    "blows": 150,
+    "realm": "divine",
+    "firstSpellLevel": 1,
+    "skills": {
+      "melee": 45,
+      "bow": 35,
+      "throw": 35,
+      "save": 32,
+      "stealth": 2,
+      "disarm": 25,
+      "device": 30,
+      "disarm_magic": 25,
+      "dig": 0,
+      "search": 10
+    },
+    "skillsPer10Levels": {
+      "melee": 20,
+      "bow": 20,
+      "throw": 20,
+      "save": 12,
+      "disarm": 12,
+      "device": 10,
+      "disarm_magic": 12,
+      "stealth": 0,
+      "dig": 0,
+      "search": 14
+    },
+    "stats": {
+      "str": -1,
+      "int": -3,
+      "wis": 3,
+      "dex": -1,
+      "con": 1
+    },
+    "startingKit": [
+      {
+        "kind": "ration_of_food",
+        "countMax": 3
+      },
+      {
+        "kind": "wooden_torch",
+        "countMax": 3,
+        "equip": true
+      },
+      {
+        "kind": "mace",
+        "equip": true
+      },
+      {
+        "kind": "cure_serious_wounds",
+        "count": 2
+      },
+      {
+        "kind": "scroll_of_word_of_recall",
+        "unlessOption": "birth_no_recall"
+      },
+      {
+        "kind": "novices_handbook"
+      }
+    ],
+    "description": "A servant of the divine, gifted with healing and holy light.",
+    "flags": [
+      "BLESS_WEAPON",
+      "ZERO_FAIL"
+    ],
+    "titles": [
+      "Believer",
+      "Acolyte",
+      "Devotee",
+      "Adept",
+      "Evangelist",
+      "Priest",
+      "Elder",
+      "Prophet",
+      "Patriarch",
+      "High Priest"
+    ]
+  },
+  {
+    "id": "ranger",
+    "name": "Ranger",
+    "hitDie": 5,
+    "blows": 150,
+    "realm": "nature",
+    "firstSpellLevel": 3,
+    "skills": {
+      "melee": 60,
+      "bow": 72,
+      "throw": 66,
+      "save": 32,
+      "stealth": 3,
+      "disarm": 40,
+      "device": 28,
+      "disarm_magic": 30,
+      "dig": 0,
+      "search": 15
+    },
+    "skillsPer10Levels": {
+      "melee": 40,
+      "bow": 45,
+      "throw": 30,
+      "save": 10,
+      "disarm": 15,
+      "device": 10,
+      "disarm_magic": 10,
+      "stealth": 0,
+      "dig": 0,
+      "search": 15
+    },
+    "stats": {
+      "wis": 2,
+      "dex": 1,
+      "con": -1
+    },
+    "startingKit": [
+      {
+        "kind": "ration_of_food",
+        "countMax": 3
+      },
+      {
+        "kind": "wooden_torch",
+        "countMax": 3,
+        "equip": true
+      },
+      {
+        "kind": "main_gauche",
+        "equip": true
+      },
+      {
+        "kind": "short_bow",
+        "equip": true
+      },
+      {
+        "kind": "arrow",
+        "count": 15,
+        "countMax": 20
+      },
+      {
+        "kind": "scroll_of_word_of_recall",
+        "unlessOption": "birth_no_recall"
+      },
+      {
+        "kind": "lesser_charms"
+      }
+    ],
+    "description": "A hunter and archer of the wilds, with a little nature magic.",
+    "flags": [
+      "FAST_SHOT",
+      "CHOOSE_SPELLS"
+    ],
+    "titles": [
+      "Runner",
+      "Strider",
+      "Scout",
+      "Courser",
+      "Tracker",
+      "Guide",
+      "Explorer",
+      "Pathfinder",
+      "Ranger",
+      "Ranger Lord"
+    ]
+  },
+  {
+    "id": "druid",
+    "name": "Druid",
+    "hitDie": 2,
+    "blows": 100,
+    "realm": "nature",
+    "firstSpellLevel": 1,
+    "skills": {
+      "melee": 45,
+      "bow": 40,
+      "throw": 40,
+      "save": 30,
+      "stealth": 3,
+      "disarm": 30,
+      "device": 24,
+      "disarm_magic": 30,
+      "dig": 0,
+      "search": 12
+    },
+    "skillsPer10Levels": {
+      "melee": 20,
+      "bow": 30,
+      "throw": 30,
+      "save": 10,
+      "disarm": 10,
+      "device": 10,
+      "disarm_magic": 10,
+      "stealth": 0,
+      "dig": 0,
+      "search": 12
+    },
+    "stats": {
+      "str": -2,
+      "wis": 3,
+      "dex": -2
+    },
+    "startingKit": [
+      {
+        "kind": "ration_of_food",
+        "countMax": 3
+      },
+      {
+        "kind": "whip",
+        "equip": true
+      },
+      {
+        "kind": "wooden_torch",
+        "countMax": 3,
+        "equip": true
+      },
+      {
+        "kind": "scroll_of_word_of_recall",
+        "unlessOption": "birth_no_recall"
+      },
+      {
+        "kind": "lesser_charms"
+      }
+    ],
+    "description": "A keeper of the natural world who calls on storms, stone and living things.",
+    "flags": [
+      "ZERO_FAIL",
+      "CHARM",
+      "CHOOSE_SPELLS"
+    ],
+    "titles": [
+      "Wanderer",
+      "Tamer",
+      "Nurturer",
+      "Gardener",
+      "Forester",
+      "Creator",
+      "Earth Warder",
+      "Windrider",
+      "Stormwielder",
+      "High Mystic"
+    ]
+  },
+  {
+    "id": "rogue",
+    "name": "Rogue",
+    "hitDie": 4,
+    "blows": 150,
+    "realm": "arcane",
+    "firstSpellLevel": 5,
+    "skills": {
+      "melee": 35,
+      "bow": 66,
+      "throw": 72,
+      "save": 28,
+      "stealth": 3,
+      "disarm": 45,
+      "device": 32,
+      "disarm_magic": 45,
+      "dig": 0,
+      "search": 20
+    },
+    "skillsPer10Levels": {
+      "melee": 45,
+      "bow": 30,
+      "throw": 45,
+      "save": 10,
+      "stealth": 1,
+      "disarm": 20,
+      "device": 10,
+      "disarm_magic": 20,
+      "dig": 0,
+      "search": 16
+    },
+    "stats": {
+      "int": 1,
+      "wis": -3,
+      "dex": 3,
+      "con": -1
+    },
+    "flags": [
+      "STEAL",
+      "CHOOSE_SPELLS"
+    ],
+    "startingKit": [
+      {
+        "kind": "ration_of_food",
+        "countMax": 3
+      },
+      {
+        "kind": "wooden_torch",
+        "countMax": 3,
+        "equip": true
+      },
+      {
+        "kind": "dagger",
+        "equip": true
+      },
+      {
+        "kind": "soft_leather_armour",
+        "equip": true
+      },
+      {
+        "kind": "scroll_of_word_of_recall",
+        "unlessOption": "birth_no_recall"
+      },
+      {
+        "kind": "first_spells"
+      }
+    ],
+    "description": "A stealthy thief and trickster: deadly with thrown weapons and slings, a picker of locks and pockets, with a little arcane magic.",
+    "titles": [
+      "Vagabond",
+      "Cutpurse",
+      "Footpad",
+      "Robber",
+      "Burglar",
+      "Filcher",
+      "Sharper",
+      "Rogue",
+      "Thief",
+      "Master Thief"
+    ]
+  },
+  {
+    "id": "paladin",
+    "name": "Paladin",
+    "hitDie": 6,
+    "blows": 200,
+    "realm": "divine",
+    "firstSpellLevel": 1,
+    "skills": {
+      "melee": 65,
+      "bow": 50,
+      "throw": 50,
+      "save": 25,
+      "stealth": 0,
+      "disarm": 20,
+      "device": 24,
+      "disarm_magic": 20,
+      "dig": 0,
+      "search": 10
+    },
+    "skillsPer10Levels": {
+      "melee": 40,
+      "bow": 30,
+      "throw": 30,
+      "save": 11,
+      "disarm": 15,
+      "device": 10,
+      "disarm_magic": 10,
+      "stealth": 0,
+      "dig": 0,
+      "search": 12
+    },
+    "stats": {
+      "str": 1,
+      "int": -3,
+      "wis": 1,
+      "dex": -1,
+      "con": 2
+    },
+    "flags": [
+      "BLESS_WEAPON",
+      "SHIELD_BASH"
+    ],
+    "startingKit": [
+      {
+        "kind": "ration_of_food",
+        "countMax": 3
+      },
+      {
+        "kind": "wooden_torch",
+        "countMax": 3,
+        "equip": true
+      },
+      {
+        "kind": "main_gauche",
+        "equip": true
+      },
+      {
+        "kind": "scroll_of_protection_from_evil"
+      },
+      {
+        "kind": "scroll_of_word_of_recall",
+        "unlessOption": "birth_no_recall"
+      },
+      {
+        "kind": "novices_handbook"
+      }
+    ],
+    "description": "A holy warrior: nearly a warrior's equal in battle, with a few prayers of blessing and healing. Blessed and hafted weapons serve paladins best.",
+    "titles": [
+      "Gallant",
+      "Keeper",
+      "Protector",
+      "Defender",
+      "Warder",
+      "Knight",
+      "Guardian",
+      "Chevalier",
+      "Paladin",
+      "Paladin Lord"
+    ]
+  },
+  {
+    "id": "necromancer",
+    "name": "Necromancer",
+    "hitDie": 2,
+    "blows": 100,
+    "realm": "shadow",
+    "firstSpellLevel": 1,
+    "skills": {
+      "melee": 35,
+      "bow": 20,
+      "throw": 20,
+      "save": 30,
+      "stealth": 2,
+      "disarm": 30,
+      "device": 36,
+      "disarm_magic": 35,
+      "dig": 0,
+      "search": 10
+    },
+    "skillsPer10Levels": {
+      "melee": 25,
+      "bow": 15,
+      "throw": 15,
+      "save": 9,
+      "disarm": 10,
+      "device": 13,
+      "disarm_magic": 12,
+      "stealth": 0,
+      "dig": 0,
+      "search": 12
+    },
+    "stats": {
+      "str": -3,
+      "int": 3,
+      "con": -2
+    },
+    "flags": [
+      "UNLIGHT",
+      "ZERO_FAIL",
+      "CHOOSE_SPELLS",
+      "EVIL"
+    ],
+    "startingKit": [
+      {
+        "kind": "ration_of_food",
+        "countMax": 3
+      },
+      {
+        "kind": "main_gauche",
+        "equip": true
+      },
+      {
+        "kind": "scroll_of_word_of_recall",
+        "unlessOption": "birth_no_recall"
+      },
+      {
+        "kind": "into_the_shadows"
+      }
+    ],
+    "description": "A dark caster who shuns the light: sees without it, and performs rituals of nether and darkness that falter on lit ground.",
+    "titles": [
+      "Acolyte",
+      "Curser",
+      "Dark Student",
+      "Initiate",
+      "Slavemaster",
+      "Summoner",
+      "Controller",
+      "Commander",
+      "Dark Master",
+      "Night Lord"
+    ]
+  },
+  {
+    "id": "blackguard",
+    "name": "Blackguard",
+    "hitDie": 8,
+    "blows": 200,
+    "realm": "shadow",
+    "firstSpellLevel": 1,
+    "skills": {
+      "melee": 65,
+      "bow": 35,
+      "throw": 40,
+      "save": 18,
+      "stealth": -1,
+      "disarm": 20,
+      "device": 24,
+      "disarm_magic": 20,
+      "dig": 0,
+      "search": 8
+    },
+    "skillsPer10Levels": {
+      "melee": 40,
+      "bow": 15,
+      "throw": 30,
+      "save": 10,
+      "stealth": -1,
+      "disarm": 15,
+      "device": 10,
+      "disarm_magic": 10,
+      "dig": 0,
+      "search": 10
+    },
+    "stats": {
+      "str": 2,
+      "wis": -3,
+      "con": 2
+    },
+    "flags": [
+      "SHIELD_BASH",
+      "COMBAT_REGEN",
+      "IMPAIR_HP",
+      "CHOOSE_SPELLS"
+    ],
+    "startingKit": [
+      {
+        "kind": "into_the_shadows"
+      },
+      {
+        "kind": "ration_of_food",
+        "countMax": 3
+      },
+      {
+        "kind": "wooden_torch",
+        "countMax": 3,
+        "equip": true
+      },
+      {
+        "kind": "tulwar",
+        "equip": true
+      },
+      {
+        "kind": "leather_shield",
+        "equip": true
+      },
+      {
+        "kind": "scroll_of_word_of_recall",
+        "unlessOption": "birth_no_recall"
+      },
+      {
+        "kind": "cure_light_wounds"
+      }
+    ],
+    "description": "A brutal warrior fed by bloodshed: mana comes from fighting rather than rest, and fuels rituals of fury and fear. Heals slowly.",
+    "titles": [
+      "Rat",
+      "Bully",
+      "Thug",
+      "Ruffian",
+      "Brigand",
+      "Raider",
+      "Tormentor",
+      "Marauder",
+      "Destroyer",
+      "Tyrant"
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- The game itself: the session the hero plays in, built on the engine, and how its levels are dressed in Flare's art. -->
+  <PropertyGroup>
+    <RootNamespace>WorldOfAngBand.Game</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="WorldOfAngBand.Tests" />
+    <InternalsVisibleTo Include="WorldOfAngBand.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WorldOfAngBand.Engine\WorldOfAngBand.Engine.csproj" />
+    <ProjectReference Include="..\WorldOfAngBand.Data\WorldOfAngBand.Data.csproj" />
+  </ItemGroup>
+</Project>

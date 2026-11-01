@@ -1,0 +1,875 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using WorldOfAngBand.Engine.Definitions;
+using WorldOfAngBand.Engine.Generation;
+
+namespace WorldOfAngBand.Data;
+
+/// <summary>
+/// Loads game data from one or more directories. The first is the base game; each further
+/// directory is a mod layered on top: list entries replace base entries with the same id and new
+/// ids are appended, colours merge by name, and <c>town.json</c>/<c>constants.json</c> replace
+/// wholesale. Every problem found is reported together in one <see cref="GameDataException"/>.
+/// </summary>
+public static class DataLoader
+{
+    public const string TerrainFile = "terrain.json";
+    public const string TrapsFile = "traps.json";
+    public const string ChestTrapsFile = "chest_traps.json";
+    public const string QuestsFile = "quests.json";
+    public const string HistoriesFile = "histories.json";
+    public const string ShapesFile = "shapes.json";
+    public const string MonsterBasesFile = "monster_bases.json";
+    public const string PainFile = "pain.json";
+    public const string ObjectPropertiesFile = "object_properties.json";
+    public const string SlaysFile = "slays.json";
+    public const string BrandsFile = "brands.json";
+    public const string PlayerPropertiesFile = "player_properties.json";
+    public const string HintsFile = "hints.json";
+    /// <summary>Words the random artifact namer learns from (Angband names.txt, the Tolkien section).</summary>
+    public const string NamesFile = "names.json";
+    public const string ProfilesFile = "dungeon_profiles.json";
+    public const string TownFile = "town.json";
+    public const string ColorsFile = "colors.json";
+    public const string ConstantsFile = "constants.json";
+    public const string TemplatesFolder = "templates";
+    public const string VaultsFile = "vaults.json";
+    public const string RoomTemplatesFile = "room_templates.json";
+    public const string PitsFile = "pits.json";
+    public const string ElementsFile = "elements.json";
+    public const string TimedEffectsFile = "timed_effects.json";
+    public const string BlowMethodsFile = "blow_methods.json";
+    public const string BlowEffectsFile = "blow_effects.json";
+    public const string MonstersFile = "monsters.json";
+    public const string ObjectBasesFile = "object_bases.json";
+    public const string ObjectsFile = "objects.json";
+    public const string EgosFile = "egos.json";
+    public const string ArtifactsFile = "artifacts.json";
+    public const string CursesFile = "curses.json";
+    public const string SummonsFile = "summons.json";
+    public const string FlavorsFile = "flavors.json";
+    public const string StartingKitFile = "starting_kit.json";
+    public const string MonsterSpellsFile = "monster_spells.json";
+    public const string RealmsFile = "realms.json";
+    public const string ClassesFile = "classes.json";
+    public const string SpellsFile = "spells.json";
+    public const string RacesFile = "races.json";
+    public const string StoresFile = "stores.json";
+    /// <summary>
+    /// AVABand's own additions, each read beside the Angband file it extends and merged into the same
+    /// registry — kept apart so the drift check (which reads only Angband's file names) leaves them be.
+    /// </summary>
+    public const string AvaTerrainFile = "ava_terrain.json";
+    public const string AvaMonstersFile = "ava_monsters.json";
+    /// <summary>
+    /// AVABand's seasonal monsters : kept apart from the rest, so they
+    /// join the dungeon only for a character born in their event.
+    /// </summary>
+    public const string AvaSeasonalMonstersFile = "ava_seasonal_monsters.json";
+    public const string AvaObjectBasesFile = "ava_object_bases.json";
+    public const string AvaObjectsFile = "ava_objects.json";
+    public const string AvaVaultsFile = "ava_vaults.json";
+    public const string AvaQuestsFile = "ava_quests.json";
+    public const string AvaCursesFile = "ava_curses.json";
+    public const string AvaRacesFile = "ava_races.json";
+    public const string AvaEgosFile = "ava_egos.json";
+    /// <summary>AVABand's own artifacts (for its bracers, bags and the like), beside Angband's.</summary>
+    public const string AvaArtifactsFile = "ava_artifacts.json";
+    public const string AvaClassesFile = "ava_classes.json";
+
+    private static readonly JsonSerializerOptions Options = new()
+    {
+        PropertyNameCaseInsensitive = true,
+        ReadCommentHandling = JsonCommentHandling.Skip,
+        AllowTrailingCommas = true,
+        Converters = { new JsonStringEnumConverter(JsonNamingPolicy.SnakeCaseLower), new DiceJsonConverter() },
+    };
+
+    /// <summary>The <c>data</c> folder shipped next to the executable.</summary>
+    public static string DefaultDataDirectory => Path.Combine(AppContext.BaseDirectory, "data");
+
+    /// <summary>The per-user mods folder, <c>&lt;AppData&gt;/AVAWorldOfAngBand/mods</c> (it may not exist yet).</summary>
+    public static string UserModsRoot =>
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "AVAWorldOfAngBand", "mods");
+
+    /// <summary>Mod folders (each subfolder of <paramref name="root"/>, by default <see cref="UserModsRoot"/>), in name order.</summary>
+    public static IEnumerable<string> UserModDirectories(string? root = null)
+    {
+        root ??= UserModsRoot;
+        return Directory.Exists(root)
+            ? Directory.GetDirectories(root).Order(StringComparer.OrdinalIgnoreCase)
+            : [];
+    }
+
+    public static GameData LoadDefault(bool includeUserMods = true) =>
+        Load(includeUserMods ? [DefaultDataDirectory, .. UserModDirectories()] : [DefaultDataDirectory]);
+
+    /// <summary>
+    /// The game's data with the user's mods, skipping those switched off (Settings → Mods) and any
+    /// that fail to load; <paramref name="results"/> says what became of each mod folder.
+    /// </summary>
+    public static GameData LoadDefault(IEnumerable<string> disabledMods, out IReadOnlyList<ModLoadResult> results) =>
+        LoadWithMods(DefaultDataDirectory, [.. UserModDirectories()], disabledMods, out results);
+
+    /// <summary>
+    /// Loads <paramref name="baseDirectory"/> with each mod folder layered on in turn, skipping the ones
+    /// named in <paramref name="disabledMods"/> (by folder name, ignoring case). A mod that breaks the data
+    /// — bad JSON, an unknown colour, a monster that names a missing base — is left out and its errors
+    /// kept in its result, so one broken mod never stops AVABand from starting. (All the mods are tried
+    /// together first; only when that fails are they added one at a time to find the culprits, each
+    /// checked on top of the ones already accepted.) Throws only if the base data itself is broken.
+    /// </summary>
+    public static GameData LoadWithMods(string baseDirectory, IReadOnlyList<string> modDirectories,
+        IEnumerable<string>? disabledMods, out IReadOnlyList<ModLoadResult> results)
+    {
+        var disabled = new HashSet<string>(disabledMods ?? [], StringComparer.OrdinalIgnoreCase);
+        var outcome = modDirectories.Select(d => new ModLoadResult(ModName(d), d,
+            disabled.Contains(ModName(d)) ? ModLoadState.Disabled : ModLoadState.Loaded)).ToList();
+        var enabled = outcome.Where(r => r.State == ModLoadState.Loaded).Select(r => r.Directory).ToList();
+        results = outcome;
+        if (enabled.Count == 0) return Load([baseDirectory]);
+        try
+        {
+            return Load([baseDirectory, .. enabled]);
+        }
+        catch (GameDataException)
+        {
+            // Some mod is at fault: find which, one at a time.
+        }
+        var accepted = new List<string>();
+        GameData? data = null;
+        for (var i = 0; i < outcome.Count; i++)
+        {
+            if (outcome[i].State != ModLoadState.Loaded) continue;
+            try
+            {
+                data = Load([baseDirectory, .. accepted, outcome[i].Directory]);
+                accepted.Add(outcome[i].Directory);
+            }
+            catch (GameDataException ex)
+            {
+                outcome[i] = outcome[i] with { State = ModLoadState.Failed, Error = ex.Message };
+            }
+        }
+        return data ?? Load([baseDirectory]);
+    }
+
+    /// <summary>A mod's name: its folder's name.</summary>
+    public static string ModName(string directory) => Path.GetFileName(Path.TrimEndingDirectorySeparator(directory));
+
+    public static GameData Load(params IReadOnlyList<string> directories)
+    {
+        if (directories.Count == 0) throw new ArgumentException("At least one data directory is required.");
+        if (!Directory.Exists(directories[0]))
+            throw new GameDataException($"Data directory '{directories[0]}' does not exist.");
+
+        var errors = new List<string>();
+        var terrain = new Merged<TerrainJson>(t => t.Id);
+        var traps = new Merged<TrapJson>(t => t.Id);
+        var profiles = new Merged<DungeonProfileDef>(p => p.Id);
+        var vaults = new Merged<VaultDef>(t => t.Id);
+        var roomTemplates = new Merged<RoomTemplateDef>(t => t.Id);
+        var pits = new Merged<PitProfileDef>(t => t.Id);
+        var elements = new Merged<ElementDef>(e => e.Id);
+        var timedEffects = new Merged<TimedEffectDef>(t => t.Id);
+        var blowMethods = new Merged<BlowMethodDef>(m => m.Id);
+        var blowEffects = new Merged<BlowEffectDef>(e => e.Id);
+        var monsters = new Merged<MonsterJson>(m => m.Id);
+        var seasonalMonsters = new Merged<MonsterJson>(m => m.Id);
+        var monsterSpells = new Merged<MonsterSpellDef>(s => s.Id);
+        var realms = new Merged<RealmDef>(r => r.Id);
+        var classes = new Merged<ClassDef>(c => c.Id);
+        var spells = new Merged<SpellDef>(s => s.Id);
+        var races = new Merged<RaceDef>(r => r.Id);
+        var avaRaces = new List<AvaRaceJson>();
+        var avaClasses = new List<AvaClassJson>();
+        var stores = new Merged<StoreDef>(s => s.Id);
+        var objectBases = new Merged<ObjectBaseDef>(b => b.Id);
+        var objects = new Merged<ObjectKindDef>(o => o.Id);
+        var egos = new Merged<EgoItemDef>(e => e.Id);
+        var artifacts = new Merged<ArtifactDef>(a => a.Id);
+        var curses = new Merged<CurseDef>(c => c.Id);
+        var summons = new Merged<SummonDef>(s => s.Id);
+        var flavors = new Merged<FlavorGroupDef>(f => f.Id);
+        var chestTraps = new Merged<ChestTrapDef>(t => t.Id);
+        var quests = new Merged<QuestDef>(q => q.Id);
+        var avaQuests = new Merged<AvaQuestDef>(q => q.Id);
+        var histories = new Merged<HistoryChartDef>(h => h.Chart.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        var shapes = new Merged<ShapeDef>(s => s.Id);
+        var monsterBases = new Merged<MonsterBaseDef>(b => b.Id);
+        var pain = new Merged<PainDef>(p => p.Type.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        var objectProperties = new Merged<ObjectPropertyDef>(p => p.Type + ":" + p.Code);
+        var slayTypes = new Merged<SlayTypeDef>(s => s.Code);
+        var brandTypes = new Merged<BrandTypeDef>(b => b.Code);
+        var playerProperties = new Merged<PlayerPropertyDef>(p => p.Type + ":" + (p.Code ?? p.Name));
+        var hints = new List<string>();
+        List<StartItemDef>? startingKit = null;
+        var nameWords = new List<string>();
+        var colors = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        TownJson? town = null;
+        GameConstants? constants = null;
+
+        foreach (var dir in directories)
+        {
+            terrain.AddRange(Read<List<TerrainJson>>(dir, TerrainFile, errors));
+            terrain.AddRange(Read<List<TerrainJson>>(dir, AvaTerrainFile, errors));
+            traps.AddRange(Read<List<TrapJson>>(dir, TrapsFile, errors));
+            profiles.AddRange(Read<List<DungeonProfileDef>>(dir, ProfilesFile, errors));
+            elements.AddRange(Read<List<ElementDef>>(dir, ElementsFile, errors));
+            timedEffects.AddRange(Read<List<TimedEffectDef>>(dir, TimedEffectsFile, errors));
+            blowMethods.AddRange(Read<List<BlowMethodDef>>(dir, BlowMethodsFile, errors));
+            blowEffects.AddRange(Read<List<BlowEffectDef>>(dir, BlowEffectsFile, errors));
+            monsters.AddRange(Read<List<MonsterJson>>(dir, MonstersFile, errors));
+            monsters.AddRange(Read<List<MonsterJson>>(dir, AvaMonstersFile, errors));
+            seasonalMonsters.AddRange(Read<List<MonsterJson>>(dir, AvaSeasonalMonstersFile, errors));
+            monsterSpells.AddRange(Read<List<MonsterSpellDef>>(dir, MonsterSpellsFile, errors));
+            realms.AddRange(Read<List<RealmDef>>(dir, RealmsFile, errors));
+            classes.AddRange(Read<List<ClassDef>>(dir, ClassesFile, errors));
+            spells.AddRange(Read<List<SpellDef>>(dir, SpellsFile, errors));
+            races.AddRange(Read<List<RaceDef>>(dir, RacesFile, errors));
+            avaRaces.AddRange(Read<List<AvaRaceJson>>(dir, AvaRacesFile, errors) ?? []);
+            avaClasses.AddRange(Read<List<AvaClassJson>>(dir, AvaClassesFile, errors) ?? []);
+            stores.AddRange(Read<List<StoreDef>>(dir, StoresFile, errors));
+            objectBases.AddRange(Read<List<ObjectBaseDef>>(dir, ObjectBasesFile, errors));
+            objectBases.AddRange(Read<List<ObjectBaseDef>>(dir, AvaObjectBasesFile, errors));
+            objects.AddRange(Read<List<ObjectKindDef>>(dir, ObjectsFile, errors));
+            objects.AddRange(Read<List<ObjectKindDef>>(dir, AvaObjectsFile, errors));
+            egos.AddRange(Read<List<EgoItemDef>>(dir, EgosFile, errors));
+            egos.AddRange(Read<List<EgoItemDef>>(dir, AvaEgosFile, errors));
+            artifacts.AddRange(Read<List<ArtifactDef>>(dir, ArtifactsFile, errors));
+            artifacts.AddRange(Read<List<ArtifactDef>>(dir, AvaArtifactsFile, errors));
+            curses.AddRange(Read<List<CurseDef>>(dir, CursesFile, errors));
+            curses.AddRange(Read<List<CurseDef>>(dir, AvaCursesFile, errors));
+            summons.AddRange(Read<List<SummonDef>>(dir, SummonsFile, errors));
+            flavors.AddRange(Read<List<FlavorGroupDef>>(dir, FlavorsFile, errors));
+            chestTraps.AddRange(Read<List<ChestTrapDef>>(dir, ChestTrapsFile, errors));
+            quests.AddRange(Read<List<QuestDef>>(dir, QuestsFile, errors));
+            avaQuests.AddRange(Read<List<AvaQuestDef>>(dir, AvaQuestsFile, errors));
+            histories.AddRange(Read<List<HistoryChartDef>>(dir, HistoriesFile, errors));
+            shapes.AddRange(Read<List<ShapeDef>>(dir, ShapesFile, errors));
+            monsterBases.AddRange(Read<List<MonsterBaseDef>>(dir, MonsterBasesFile, errors));
+            pain.AddRange(Read<List<PainDef>>(dir, PainFile, errors));
+            objectProperties.AddRange(Read<List<ObjectPropertyDef>>(dir, ObjectPropertiesFile, errors));
+            slayTypes.AddRange(Read<List<SlayTypeDef>>(dir, SlaysFile, errors));
+            brandTypes.AddRange(Read<List<BrandTypeDef>>(dir, BrandsFile, errors));
+            playerProperties.AddRange(Read<List<PlayerPropertyDef>>(dir, PlayerPropertiesFile, errors));
+            hints.AddRange(Read<List<string>>(dir, HintsFile, errors) ?? []);
+            startingKit = Read<List<StartItemDef>>(dir, StartingKitFile, errors) ?? startingKit;
+            nameWords.AddRange(Read<List<string>>(dir, NamesFile, errors) ?? []);
+            town = Read<TownJson>(dir, TownFile, errors) ?? town;
+            constants = Read<GameConstants>(dir, ConstantsFile, errors) ?? constants;
+            foreach (var (name, hex) in Read<Dictionary<string, string>>(dir, ColorsFile, errors) ?? [])
+                colors[name] = hex;
+
+            var templateDir = Path.Combine(dir, TemplatesFolder);
+            vaults.AddRange(Read<List<VaultDef>>(templateDir, VaultsFile, errors));
+            vaults.AddRange(Read<List<VaultDef>>(templateDir, AvaVaultsFile, errors));
+            roomTemplates.AddRange(Read<List<RoomTemplateDef>>(templateDir, RoomTemplatesFile, errors));
+            pits.AddRange(Read<List<PitProfileDef>>(dir, PitsFile, errors));
+        }
+
+        if (town is null) errors.Add($"{TownFile} is missing.");
+        if (terrain.Items.Count == 0) errors.Add($"{TerrainFile} is missing or empty.");
+        if (errors.Count > 0) throw Failure(errors);
+
+        var terrainDefs = terrain.Items.Select(t => ToTerrain(t, colors, errors)).ToList();
+        var trapDefs = traps.Items.Select(t => ToTrap(t, colors, errors)).ToList();
+        CheckGenerationData(profiles.Items, vaults.Items, roomTemplates.Items, pits.Items, monsterBases.Items, objectBases.Items, errors);
+        var monsterDefs = monsters.Items.Select(m => ToMonster(m, colors, errors)).ToList();
+        var seasonalDefs = seasonalMonsters.Items.Select(m => ToMonster(m, colors, errors)).ToList();
+        foreach (var m in seasonalDefs.Where(m => monsterDefs.Any(x => x.Id == m.Id)))
+            errors.Add($"{AvaSeasonalMonstersFile}: monster '{m.Id}' is already one of the game's own.");
+        foreach (var m in seasonalDefs.Where(m => m.TileAs is { } tile && monsterDefs.All(x => x.Id != tile)))
+            errors.Add($"seasonal monster '{m.Id}' is drawn as unknown monster '{m.TileAs}'.");
+        List<MonsterRaceDef> everyMonster = [.. monsterDefs, .. seasonalDefs];
+        CheckCombatReferences(elements.Items, timedEffects.Items, blowMethods.Items, blowEffects.Items, everyMonster, errors);
+        CheckSpellReferences(monsterSpells.Items, everyMonster, elements.Items, timedEffects.Items, errors);
+        CheckSummons(summons.Items, monsterSpells.Items, monsterBases.Items, everyMonster, errors);
+        foreach (var el in elements.Items)
+        {
+            CheckColor(colors, el.Color, $"element '{el.Id}'", errors);
+            if (el.ResistedAs is { } r && elements.Items.All(x => x.Id != r))
+                errors.Add($"element '{el.Id}' is resisted as unknown element '{r}'.");
+        }
+        CheckMagicReferences(realms.Items, classes.Items, spells.Items, objects.Items, objectBases.Items, timedEffects.Items, errors);
+        var kindIds = objects.Items.Select(o => o.Id).ToHashSet();
+        var baseIds = objectBases.Items.Select(b => b.Id).ToHashSet();
+        foreach (var store in stores.Items)
+        {
+            if (town is not null && town.Shops.All(sh => sh.Id != store.Id)) errors.Add($"store '{store.Id}' has no shop in the town.");
+            foreach (var k in store.Staples.Concat(store.Stocked).Where(k => !kindIds.Contains(k)))
+                errors.Add($"store '{store.Id}' stocks unknown object '{k}'.");
+            foreach (var b in store.Buys.Concat(store.AvabandBuys).Where(b => !baseIds.Contains(b)))
+                errors.Add($"store '{store.Id}' buys unknown object base '{b}'.");
+            if (store.MinItems > store.MaxItems) errors.Add($"store '{store.Id}' has minItems above maxItems.");
+        }
+        foreach (var q in quests.Items)
+        {
+            if (monsterDefs.All(m => m.Id != q.Race)) errors.Add($"quest '{q.Id}' names unknown monster '{q.Race}'.");
+            if (q.Level < 1 || q.Level > (constants?.MaxDepth ?? 127)) errors.Add($"quest '{q.Id}' is on an impossible level {q.Level}.");
+        }
+        if (chestTraps.Items.Count > 30) errors.Add($"{ChestTrapsFile}: at most 30 chest traps (they are bits of one number).");
+        foreach (var b in monsterBases.Items.Where(b => b.Pain != 0 && pain.Items.All(p => p.Type != b.Pain)))
+            errors.Add($"monster base '{b.Id}' uses unknown pain type {b.Pain}.");
+        foreach (var p in pain.Items.Where(p => p.Messages.Count != 7))
+            errors.Add($"pain type {p.Type} has {p.Messages.Count} messages, not 7.");
+        var chartIds = histories.Items.Select(h => h.Chart).ToHashSet();
+        foreach (var r in races.Items.Where(r => r.History != 0 && !chartIds.Contains(r.History)))
+            errors.Add($"race '{r.Id}' starts its history at unknown chart {r.History}.");
+        foreach (var h in histories.Items)
+        foreach (var e in h.Entries.Where(e => e.Next != 0 && !chartIds.Contains(e.Next)))
+            errors.Add($"history chart {h.Chart} leads to unknown chart {e.Next}.");
+        foreach (var m in monsterDefs)
+        foreach (var k in m.Mimics.Where(k => !kindIds.Contains(k)))
+            errors.Add($"monster '{m.Id}' mimics unknown object '{k}'.");
+        // Angband 4.2.5's blow and armour-weight figures (class.txt) go onto the classes they name.
+        foreach (var ava in avaClasses)
+        {
+            if (classes.Items.FirstOrDefault(c => c.Id == ava.Id) is not { } cls)
+            {
+                errors.Add($"{AvaClassesFile}: unknown class '{ava.Id}'.");
+                continue;
+            }
+            (cls.MaxAttacks, cls.MinWeight, cls.StrengthMultiplier, cls.SpellWeight) = (ava.MaxAttacks, ava.MinWeight, ava.StrengthMultiplier, ava.SpellWeight);
+        }
+        // AVABand's racial abilities go onto the races they name (not in races.json: the drift check compares that).
+        foreach (var ava in avaRaces)
+        {
+            if (races.Items.FirstOrDefault(r => r.Id == ava.Id) is not { } race)
+            {
+                errors.Add($"{AvaRacesFile}: unknown race '{ava.Id}'.");
+                continue;
+            }
+            race.AvaAbilities.Clear();
+            race.AvaAbilities.AddRange(ava.Abilities);
+            race.AvaAbilityText = ava.Text;
+            race.AvaCarryPercent = ava.CarryPercent;
+        }
+        CheckItemReferences(objectBases.Items, objects.Items, egos.Items, artifacts.Items, curses.Items, flavors.Items,
+            startingKit ?? [], elements.Items, timedEffects.Items, colors, trapDefs, summons.Items, chestTraps.Items, errors);
+
+        TerrainRegistry? registry = null;
+        try
+        {
+            registry = new TerrainRegistry(terrainDefs);
+        }
+        catch (GameDataException ex)
+        {
+            errors.Add(ex.Message);
+        }
+
+        var shops = town!.Shops.Select(s => new ShopDef { Id = s.Id, Name = s.Name, Owner = s.Owner, IsHome = s.IsHome }).ToList();
+        foreach (var shop in town.Shops)
+            if (registry is not null && !registry.TryGet(shop.Terrain, out _))
+                errors.Add($"{TownFile}: shop '{shop.Id}' uses unknown terrain '{shop.Terrain}'.");
+
+        if (errors.Count > 0) throw Failure(errors);
+
+        var townDef = new TownDef
+        {
+            Width = town.Width,
+            Height = town.Height,
+            LotColumns = town.LotColumns,
+            LotRows = town.LotRows,
+            Rubble = town.Rubble,
+            Shops = town.Shops.Select(s => s.Terrain).ToList(),
+        };
+
+        var data = new GameData(registry!, trapDefs, profiles.Items, townDef, shops, colors,
+            constants ?? new GameConstants())
+        {
+            Mods = [.. directories.Skip(1).Select(ModName)],
+            Elements = elements.Items,
+            TimedEffects = timedEffects.Items,
+            BlowMethods = blowMethods.Items,
+            BlowEffects = blowEffects.Items,
+            Monsters = monsterDefs,
+            SeasonalMonsters = seasonalDefs,
+            MonsterSpells = monsterSpells.Items,
+            Realms = realms.Items,
+            Classes = classes.Items,
+            Multiclasses = [],
+            Spells = spells.Items,
+            Races = races.Items,
+            Stores = stores.Items,
+            ObjectBases = objectBases.Items,
+            Objects = objects.Items,
+            Egos = egos.Items,
+            Artifacts = artifacts.Items,
+            Curses = curses.Items,
+            Vaults = vaults.Items,
+            RoomTemplates = roomTemplates.Items,
+            Pits = pits.Items,
+            Summons = summons.Items,
+            Flavors = flavors.Items,
+            ChestTraps = chestTraps.Items,
+            Quests = quests.Items.OrderBy(q => q.Level).ToList(),
+            AvaQuests = avaQuests.Items,
+            Histories = histories.Items,
+            Pain = pain.Items,
+            ObjectProperties = objectProperties.Items,
+            SlayTypes = slayTypes.Items,
+            BrandTypes = brandTypes.Items,
+            PlayerProperties = playerProperties.Items,
+            Hints = hints,
+            Shapes = shapes.Items,
+            MonsterBases = monsterBases.Items,
+            NameWords = nameWords.Distinct(StringComparer.OrdinalIgnoreCase).ToList(),
+            StartingKit = startingKit ?? [],
+        };
+
+        try
+        {
+            _ = new DungeonGenerator(data); // validates generator and room-type references
+        }
+        catch (GameDataException ex)
+        {
+            throw Failure([ex.Message]);
+        }
+        return data;
+    }
+
+    private static GameDataException Failure(List<string> errors) =>
+        new("Game data is invalid:" + Environment.NewLine + string.Join(Environment.NewLine, errors.Select(e => "  - " + e)));
+
+    private static T? Read<T>(string dir, string file, List<string> errors) where T : class
+    {
+        var path = Path.Combine(dir, file);
+        if (!File.Exists(path)) return null;
+        try
+        {
+            using var stream = File.OpenRead(path);
+            return JsonSerializer.Deserialize<T>(stream, Options);
+        }
+        catch (JsonException ex)
+        {
+            errors.Add($"{path}: {ex.Message}");
+            return null;
+        }
+    }
+
+    private static TerrainDef ToTerrain(TerrainJson t, IReadOnlyDictionary<string, string> colors, List<string> errors)
+    {
+        CheckColor(colors, t.Color, $"terrain '{t.Id}'", errors);
+        return new TerrainDef
+        {
+            Id = t.Id,
+            Name = t.Name,
+            Glyph = ParseGlyph(t.Glyph, $"terrain '{t.Id}'", errors),
+            Color = t.Color,
+            Flags = ParseFlags(t.Flags, $"terrain '{t.Id}'", errors),
+            Priority = t.Priority,
+            Mimic = t.Mimic,
+            Shop = t.Shop,
+            DigDifficulty = t.DigDifficulty,
+            Description = t.Description ?? "",
+        };
+    }
+
+    private static TrapDef ToTrap(TrapJson t, IReadOnlyDictionary<string, string> colors, List<string> errors)
+    {
+        CheckColor(colors, t.Color, $"trap '{t.Id}'", errors);
+        return new TrapDef
+        {
+            Id = t.Id,
+            Name = t.Name,
+            Glyph = ParseGlyph(t.Glyph, $"trap '{t.Id}'", errors),
+            Color = t.Color,
+            MinDepth = t.MinDepth,
+            MaxDepth = t.MaxDepth,
+            Rarity = t.Rarity,
+            Flags = t.Flags ?? [],
+            Save = t.Save ?? [],
+            Visibility = t.Visibility ?? "0",
+            Effect = t.Effect ?? "",
+            Extra = t.Extra,
+            Message = t.Message,
+            MessageGood = t.MessageGood,
+            MessageBad = t.MessageBad,
+            MessageExtra = t.MessageExtra,
+            Description = t.Description ?? "",
+        };
+    }
+
+    /// <summary>
+    /// The generation data holds together: profiles name rooms the generator has, vaults and room
+    /// templates are rectangular in known symbols, pit themes name real monster bases.
+    /// </summary>
+    private static void CheckGenerationData(IReadOnlyList<DungeonProfileDef> profiles, IReadOnlyList<VaultDef> vaults,
+        IReadOnlyList<RoomTemplateDef> rooms, IReadOnlyList<PitProfileDef> pits, IReadOnlyList<MonsterBaseDef> bases,
+        IReadOnlyList<ObjectBaseDef> objectBases, List<string> errors)
+    {
+        foreach (var p in profiles)
+            foreach (var r in p.Rooms.Where(r => !WorldOfAngBand.Engine.Generation.DungeonGenerator.RoomNames.Contains(r.Name)))
+                errors.Add($"profile '{p.Id}' has unknown room '{r.Name}'.");
+        foreach (var name in new[] { "town", "classic" }.Where(n => profiles.All(p => p.Name != n)))
+            errors.Add($"{ProfilesFile}: the '{name}' profile is missing.");
+        // (AVABand's quest rooms add ( for the quest's feature, ) its monster and [ its item.)
+        const string vaultSymbols = " %#@*:`/;&+^<>1234567890~$]|=\"!?_-,.()[";
+        foreach (var v in vaults)
+        {
+            if (v.Rows.Count == 0 || v.Rows.Any(r => r.Length != v.Width)) errors.Add($"vault '{v.Id}' is not rectangular.");
+            foreach (var bad in v.Rows.SelectMany(r => r).Where(c => !vaultSymbols.Contains(c) && !char.IsAsciiLetter(c)).Distinct())
+                errors.Add($"vault '{v.Id}' uses unknown symbol '{bad}'.");
+        }
+        const string roomSymbols = " %#^+123456x()89[.";
+        var baseIds = objectBases.Select(b => b.Id).ToHashSet();
+        foreach (var r in rooms)
+        {
+            if (r.Rows.Count == 0 || r.Rows.Any(row => row.Length != r.Width)) errors.Add($"room template '{r.Id}' is not rectangular.");
+            foreach (var bad in r.Rows.SelectMany(row => row).Where(c => !roomSymbols.Contains(c)).Distinct())
+                errors.Add($"room template '{r.Id}' uses unknown symbol '{bad}'.");
+            if (r.Tval is { } t && !WorldOfAngBand.Engine.Generation.Tvals.Bases(t).All(baseIds.Contains))
+                errors.Add($"room template '{r.Id}' asks for unknown object kind '{t}'.");
+        }
+        var monsterBaseIds = bases.Select(b => b.Id).ToHashSet();
+        foreach (var pit in pits)
+            foreach (var b in pit.Bases.Where(b => !monsterBaseIds.Contains(b)))
+                errors.Add($"pit '{pit.Id}' names unknown monster base '{b}'.");
+    }
+
+    private static MonsterRaceDef ToMonster(MonsterJson m, IReadOnlyDictionary<string, string> colors, List<string> errors)
+    {
+        CheckColor(colors, m.Color, $"monster '{m.Id}'", errors);
+        return new MonsterRaceDef
+        {
+            Id = m.Id,
+            Name = m.Name,
+            Plural = m.Plural,
+            Glyph = ParseGlyph(m.Glyph, $"monster '{m.Id}'", errors),
+            Base = m.Base ?? "",
+            Color = m.Color,
+            Depth = m.Depth,
+            Rarity = Math.Max(1, m.Rarity),
+            Speed = m.Speed,
+            HitPoints = Math.Max(1, m.HitPoints),
+            Armour = m.Armour,
+            Sleep = m.Sleep,
+            Hearing = m.Hearing,
+            Smell = m.Smell,
+            SpellFrequency = m.SpellFrequency,
+            InnateFrequency = m.InnateFrequency,
+            SpellPower = m.SpellPower,
+            Spells = m.Spells ?? [],
+            Experience = m.Experience,
+            Blows = m.Blows ?? [],
+            Friends = m.Friends ?? [],
+            Flags = new HashSet<string>(m.Flags ?? [], StringComparer.Ordinal),
+            Mimics = m.Mimics ?? [],
+            Shapes = m.Shapes ?? [],
+            Description = m.Description ?? "",
+            TileAs = m.TileAs,
+        };
+    }
+
+    private static void CheckCombatReferences(IReadOnlyList<ElementDef> elements, IReadOnlyList<TimedEffectDef> timed,
+        IReadOnlyList<BlowMethodDef> methods, IReadOnlyList<BlowEffectDef> effects, IReadOnlyList<MonsterRaceDef> monsters,
+        List<string> errors)
+    {
+        var elementIds = elements.Select(e => e.Id).ToHashSet();
+        var timedIds = timed.Select(t => t.Id).ToHashSet();
+        var methodIds = methods.Select(m => m.Id).ToHashSet();
+        var effectIds = effects.Select(e => e.Id).ToHashSet();
+
+        foreach (var effect in effects)
+        {
+            if (effect.Element is { } el && !elementIds.Contains(el))
+                errors.Add($"blow effect '{effect.Id}' uses unknown element '{el}'.");
+        }
+        foreach (var monster in monsters)
+        {
+            foreach (var friend in monster.Friends)
+            {
+                if (friend.Race is { } r && !friend.IsSame && monsters.All(x => x.Id != r))
+                    errors.Add($"monster '{monster.Id}' is escorted by unknown race '{r}'.");
+                if (friend.Race is null && friend.Glyph is null)
+                    errors.Add($"monster '{monster.Id}' has an escort with neither a race nor a base symbol.");
+                if (friend.Chance is < 1 or > 100)
+                    errors.Add($"monster '{monster.Id}' has an escort chance outside 1-100.");
+            }
+            foreach (var blow in monster.Blows)
+            {
+                if (!methodIds.Contains(blow.Method))
+                    errors.Add($"monster '{monster.Id}' uses unknown blow method '{blow.Method}'.");
+                if (!effectIds.Contains(blow.Effect))
+                    errors.Add($"monster '{monster.Id}' uses unknown blow effect '{blow.Effect}'.");
+            }
+        }
+    }
+
+    /// <summary>
+    /// Summon kinds name real monster bases, flags and fallbacks, and every summoning spell names a
+    /// summon kind.
+    /// </summary>
+    private static void CheckSummons(IReadOnlyList<SummonDef> summons, IReadOnlyList<MonsterSpellDef> spells,
+        IReadOnlyList<MonsterBaseDef> bases, IReadOnlyList<MonsterRaceDef> monsters, List<string> errors)
+    {
+        var ids = summons.Select(s => s.Id).ToHashSet();
+        var baseIds = bases.Select(b => b.Id).ToHashSet();
+        var flags = monsters.SelectMany(m => m.Flags).ToHashSet();
+        foreach (var s in summons)
+        {
+            foreach (var b in s.Bases.Where(b => !baseIds.Contains(b))) errors.Add($"summon '{s.Id}' names unknown monster base '{b}'.");
+            if (s.RaceFlag is { } f && !flags.Contains(f)) errors.Add($"summon '{s.Id}' names a flag no monster has, '{f}'.");
+            if (s.Fallback is { } fb && !ids.Contains(fb)) errors.Add($"summon '{s.Id}' falls back on unknown summon '{fb}'.");
+        }
+        foreach (var sp in spells.Where(sp => sp.Kind == MonsterSpellKind.Summon))
+            if (sp.Summon is not { } t || !ids.Contains(t))
+                errors.Add($"monster spell '{sp.Id}' summons unknown kind '{sp.Summon}'.");
+        foreach (var m in monsters.Where(m => m.Base.Length > 0 && !baseIds.Contains(m.Base)))
+            errors.Add($"monster '{m.Id}' has unknown base '{m.Base}'.");
+    }
+
+    private static void CheckSpellReferences(IReadOnlyList<MonsterSpellDef> spells, IReadOnlyList<MonsterRaceDef> monsters,
+        IReadOnlyList<ElementDef> elements, IReadOnlyList<TimedEffectDef> timed, List<string> errors)
+    {
+        var ids = spells.Select(s => s.Id).ToHashSet();
+        foreach (var s in spells)
+        {
+            if (s.Element is { } e && elements.All(x => x.Id != e))
+                errors.Add($"monster spell '{s.Id}' uses unknown element '{e}'.");
+            if (s.Timed is { } t && timed.All(x => x.Id != t)) errors.Add($"monster spell '{s.Id}' uses unknown timed effect '{t}'.");
+        }
+        foreach (var m in monsters)
+        {
+            foreach (var spell in m.Spells.Where(sp => !ids.Contains(sp)))
+                errors.Add($"monster '{m.Id}' knows unknown spell '{spell}'.");
+            var known = m.Spells.Select(sp => spells.FirstOrDefault(s => s.Id == sp)).OfType<MonsterSpellDef>().ToList();
+            if (known.Any(s => !s.Innate) && m.SpellFrequency <= 0)
+                errors.Add($"monster '{m.Id}' has spells but no spellFrequency.");
+            if (known.Any(s => s.Innate) && m.InnateFrequency <= 0)
+                errors.Add($"monster '{m.Id}' has innate attacks but no innateFrequency.");
+        }
+    }
+
+    private static void CheckMagicReferences(IReadOnlyList<RealmDef> realms, IReadOnlyList<ClassDef> classes,
+        IReadOnlyList<SpellDef> spells, IReadOnlyList<ObjectKindDef> kinds, IReadOnlyList<ObjectBaseDef> bases,
+        IReadOnlyList<TimedEffectDef> timed, List<string> errors)
+    {
+        var realmIds = realms.ToDictionary(r => r.Id);
+        var classIds = classes.Select(c => c.Id).ToHashSet();
+        var kindById = kinds.ToDictionary(k => k.Id);
+
+        foreach (var r in realms.Where(r => bases.All(b => b.Id != r.BookBase)))
+            errors.Add($"realm '{r.Id}' uses unknown book base '{r.BookBase}'.");
+        foreach (var c in classes)
+        {
+            if (c.Realm is { } realm && !realmIds.ContainsKey(realm)) errors.Add($"class '{c.Id}' uses unknown realm '{realm}'.");
+            foreach (var k in c.StartingKit.Where(k => !kindById.ContainsKey(k.Kind)))
+                errors.Add($"class '{c.Id}' kit names unknown object '{k.Kind}'.");
+        }
+        foreach (var s in spells)
+        {
+            var owner = $"spell '{s.Id}'";
+            if (!realmIds.TryGetValue(s.Realm, out var realm)) errors.Add($"{owner} uses unknown realm '{s.Realm}'.");
+            if (!kindById.TryGetValue(s.Book, out var book)) errors.Add($"{owner} is in unknown book '{s.Book}'.");
+            else if (realm is not null && book.Base != realm.BookBase) errors.Add($"{owner}: book '{s.Book}' is not a {realm.Name} book.");
+            foreach (var cls in s.Classes.Keys.Where(k => !classIds.Contains(k))) errors.Add($"{owner} names unknown class '{cls}'.");
+        }
+    }
+
+    private static void CheckItemReferences(IReadOnlyList<ObjectBaseDef> bases, IReadOnlyList<ObjectKindDef> kinds,
+        IReadOnlyList<EgoItemDef> egos, IReadOnlyList<ArtifactDef> artifacts, IReadOnlyList<CurseDef> curses,
+        IReadOnlyList<FlavorGroupDef> flavors, IReadOnlyList<StartItemDef> kit, IReadOnlyList<ElementDef> elements,
+        IReadOnlyList<TimedEffectDef> timed, IReadOnlyDictionary<string, string> colors, IReadOnlyList<TrapDef> traps,
+        IReadOnlyList<SummonDef> summons, IReadOnlyList<ChestTrapDef> chestTraps, List<string> errors)
+    {
+        var baseIds = bases.ToDictionary(b => b.Id);
+        var kindIds = kinds.Select(k => k.Id).ToHashSet();
+        var curseIds = curses.Select(c => c.Id).ToHashSet();
+        var elementIds = elements.Select(e => e.Id).ToHashSet();
+
+        void CheckBrands(IEnumerable<BrandDef> brands, string owner)
+        {
+            foreach (var b in brands)
+                if (!elementIds.Contains(b.Element)) errors.Add($"{owner}: brand uses unknown element '{b.Element}'.");
+        }
+        void CheckCurses(IEnumerable<string> list, string owner)
+        {
+            foreach (var c in list)
+                if (!curseIds.Contains(c)) errors.Add($"{owner}: unknown curse '{c}'.");
+        }
+
+        foreach (var b in bases) CheckColor(colors, b.Color, $"object base '{b.Id}'", errors);
+        foreach (var k in kinds)
+        {
+            if (!baseIds.ContainsKey(k.Base)) errors.Add($"object '{k.Id}' has unknown base '{k.Base}'.");
+            CheckBrands(k.Brands, $"object '{k.Id}'");
+            CheckCurses(k.Curses, $"object '{k.Id}'");
+        }
+        foreach (var e in egos)
+        {
+            foreach (var b in e.Bases.Where(b => !baseIds.ContainsKey(b))) errors.Add($"ego '{e.Id}' names unknown base '{b}'.");
+            CheckBrands(e.Brands, $"ego '{e.Id}'");
+            CheckCurses(e.Curses, $"ego '{e.Id}'");
+        }
+        foreach (var a in artifacts)
+        {
+            if (!kindIds.Contains(a.Kind)) errors.Add($"artifact '{a.Id}' uses unknown object '{a.Kind}'.");
+            CheckBrands(a.Brands, $"artifact '{a.Id}'");
+        }
+        foreach (var s in kit.Where(s => !kindIds.Contains(s.Kind))) errors.Add($"starting kit names unknown object '{s.Kind}'.");
+
+        foreach (var group in flavors)
+        {
+            foreach (var f in group.Flavors) CheckColor(colors, f.Color, $"flavor '{group.Id}/{f.Name}'", errors);
+            var needed = kinds.Count(k => baseIds.TryGetValue(k.Base, out var b) && b.Flavor == group.Id && !k.IsSpecialArtifactKind);
+            foreach (var f in group.Fixed.Where(f => !kindIds.Contains(f.Kind))) errors.Add($"flavor group '{group.Id}' fixes a flavour for unknown object '{f.Kind}'.");
+            if (group.TitleWords.Count == 0 && needed > group.Flavors.Count)
+                errors.Add($"flavor group '{group.Id}' has {group.Flavors.Count} flavours for {needed} kinds.");
+        }
+        foreach (var b in bases.Where(b => b.Flavor is not null && flavors.All(f => f.Id != b.Flavor)))
+            errors.Add($"object base '{b.Id}' uses unknown flavour group '{b.Flavor}'.");
+    }
+
+    private static char ParseGlyph(string? glyph, string owner, List<string> errors)
+    {
+        if (glyph is { Length: 1 }) return glyph[0];
+        errors.Add($"{owner}: glyph must be exactly one character (got '{glyph}').");
+        return '?';
+    }
+
+    private static TerrainFlags ParseFlags(IEnumerable<string>? names, string owner, List<string> errors)
+    {
+        var flags = TerrainFlags.None;
+        foreach (var name in names ?? [])
+        {
+            if (Enum.TryParse<TerrainFlags>(name.Replace("_", ""), ignoreCase: true, out var flag)) flags |= flag;
+            else errors.Add($"{owner}: unknown flag '{name}'.");
+        }
+        return flags;
+    }
+
+    private static void CheckColor(IReadOnlyDictionary<string, string> colors, string color, string owner, List<string> errors)
+    {
+        if (!colors.ContainsKey(color)) errors.Add($"{owner}: unknown colour '{color}'.");
+    }
+
+    /// <summary>An entry of ava_classes.json: a class's blow and armour-weight figures from Angband 4.2.5.</summary>
+    private sealed class AvaClassJson
+    {
+        public string Id { get; init; } = "";
+        public int MaxAttacks { get; init; }
+        public int MinWeight { get; init; }
+        public int StrengthMultiplier { get; init; }
+        public int SpellWeight { get; init; }
+    }
+
+    /// <summary>An entry of ava_races.json: a race's AVABand abilities.</summary>
+    private sealed class AvaRaceJson
+    {
+        public string Id { get; init; } = "";
+        public List<string> Abilities { get; init; } = [];
+        public string Text { get; init; } = "";
+        public int CarryPercent { get; init; }
+    }
+
+    /// <summary>Id-keyed list where later additions replace earlier ones in place.</summary>
+    private sealed class Merged<T>(Func<T, string> key)
+    {
+        private readonly Dictionary<string, int> _index = new(StringComparer.Ordinal);
+        public List<T> Items { get; } = [];
+
+        public void AddRange(IEnumerable<T>? items)
+        {
+            foreach (var item in items ?? [])
+            {
+                var k = key(item);
+                if (_index.TryGetValue(k, out var i)) Items[i] = item;
+                else
+                {
+                    _index[k] = Items.Count;
+                    Items.Add(item);
+                }
+            }
+        }
+    }
+
+    // JSON shapes that differ from the engine definitions.
+
+    private sealed class TerrainJson
+    {
+        public required string Id { get; init; }
+        public required string Name { get; init; }
+        public string? Glyph { get; init; }
+        public string Color { get; init; } = "White";
+        public List<string>? Flags { get; init; }
+        public int Priority { get; init; }
+        public string? Mimic { get; init; }
+        public string? Shop { get; init; }
+        public int DigDifficulty { get; init; }
+        public string? Description { get; init; }
+    }
+
+    private sealed class TrapJson
+    {
+        public required string Id { get; init; }
+        public required string Name { get; init; }
+        public string? Glyph { get; init; } = "^";
+        public string Color { get; init; } = "White";
+        public int MinDepth { get; init; }
+        public int MaxDepth { get; init; } = 127;
+        public int Rarity { get; init; }
+        public List<string>? Flags { get; init; }
+        public List<string>? Save { get; init; }
+        public string? Visibility { get; init; }
+        public string? Effect { get; init; }
+        public string? Extra { get; init; }
+        public string? Message { get; init; }
+        public string? MessageGood { get; init; }
+        public string? MessageBad { get; init; }
+        public string? MessageExtra { get; init; }
+        public string? Description { get; init; }
+    }
+
+
+    private sealed class MonsterJson
+    {
+        public required string Id { get; init; }
+        public required string Name { get; init; }
+        public string? Plural { get; init; }
+        public string? Glyph { get; init; }
+        public string? Base { get; init; }
+        public string Color { get; init; } = "White";
+        public int Depth { get; init; }
+        public int Rarity { get; init; } = 1;
+        public int Speed { get; init; }
+        public int HitPoints { get; init; } = 1;
+        public int Armour { get; init; }
+        public int Sleep { get; init; }
+        public int Hearing { get; init; } = 20;
+        public int Smell { get; init; }
+        public int SpellFrequency { get; init; }
+        public int InnateFrequency { get; init; }
+        public int? SpellPower { get; init; }
+        public List<string>? Spells { get; init; }
+        public int Experience { get; init; }
+        public List<MonsterBlowDef>? Blows { get; init; }
+        public List<string>? Flags { get; init; }
+        public List<MonsterFriendDef>? Friends { get; init; }
+        public string? Description { get; init; }
+        public List<string>? Shapes { get; init; }
+        public List<string>? Mimics { get; init; }
+        /// <summary>The race whose tile it is drawn with, where a tileset has none of its own (AVABand's seasonal monsters).</summary>
+        public string? TileAs { get; init; }
+    }
+
+    private sealed class TownJson
+    {
+        public int Width { get; init; } = 66;
+        public int Height { get; init; } = 22;
+        public int LotColumns { get; init; } = 4;
+        public int LotRows { get; init; } = 2;
+        public string Rubble { get; init; } = "1d4";
+        public List<ShopJson> Shops { get; init; } = [];
+    }
+
+    private sealed class ShopJson
+    {
+        public required string Id { get; init; }
+        public required string Name { get; init; }
+        public required string Terrain { get; init; }
+        public string Owner { get; init; } = "";
+        public bool IsHome { get; init; }
+    }
+}

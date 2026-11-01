@@ -1,0 +1,171 @@
+[
+ {
+  "id": "sealed_door",
+  "name": "The Sealed Door",
+  "minLevel": 5,
+  "offer": "A dwarf at the end of the bar sets down his mug. \"There's a door of my people below the town, sealed since before your grandfather's grandfather was born, and treasure behind it. The key was lost to an orc captain, Durgash; he keeps his hall about {keyfeet} ft down. Take the key from him and the door at {doorfeet} ft is yours to open. I'm too old for it.\"",
+  "stages": {
+   "hunt": "Durgash the Keybearer holds the key to a sealed dwarven door. His hall is at {keyfeet} ft (level {keydepth}).",
+   "key": "You have the Rune-carved Key of Belegost. The sealed door is at {doorfeet} ft (level {doordepth}): walk into it to open it.",
+   "done": "You opened the sealed door with the Key of Belegost, and took what the dwarves left behind it."
+  }
+ },
+ {
+  "id": "burden",
+  "name": "The Burden",
+  "minLevel": 0,
+  "stages": {
+   "carry": "You carry the Seal of Angmar. It lends speed and strength, but once worn it will not come off, and it calls every evil thing near, worn or not. Only a dwarven forge can unmake it: there is one at {forgefeet} ft (level {forgedepth}). Step onto the forge to cast it in.",
+   "done": "You cast the Seal of Angmar into the dwarven forge, and were free of it."
+  }
+ },
+ {
+  "id": "broken_blade",
+  "name": "The Broken Blade",
+  "minLevel": 10,
+  "offer": "The smith from the Weapon Smiths is drinking alone. \"There was a sword once, a great one, broken in the old wars. Its pieces went down into the dark with the ones who broke it. Bring me all three, the hilt, the blade and the point, and I'll make it whole again, and give it whatever powers you've learned to call on. They were last seen at {feet1}, {feet2} and {feet3} ft.\"",
+  "stages": {
+   "gather": "Find the three shards of the Broken Blade: the hilt at {feet1} ft, the blade at {feet2} ft, the point at {feet3} ft. You have {found} of 3.",
+   "reforge": "You have all three shards of the Broken Blade. Take them to the Weapon Smiths (2) to be reforged.",
+   "done": "The Weapon Smiths reforged the Broken Blade, with the powers you chose for it."
+  }
+ },
+ {
+  "id": "consecration",
+  "name": "Consecration",
+  "minLevel": 15,
+  "offer": "A priest in a stained white robe leans close. \"Hathol, a lord of the old barrows, walks again at {feet} ft. He cannot be killed while his altar lies profaned: strike him down and he rises. Take this phial of the Water of Ulmo, pour it on his altar, and then he can die.\"",
+  "stages": {
+   "hallow": "Hathol, Lord of the Barrow, cannot die while his altar at {feet} ft (level {depth}) lies profaned. Step onto the altar and pour out the Water of Ulmo.",
+   "slay": "The altar is hallowed: Hathol, Lord of the Barrow, can die now. He is at {feet} ft (level {depth}).",
+   "done": "You hallowed Hathol's altar and put the Lord of the Barrow to rest."
+  }
+ },
+ {
+  "id": "letter",
+  "name": "The Letter",
+  "minLevel": 8,
+  "offer": "The innkeeper slides a sealed letter across the bar. \"A regular left this for the hermit who lives down below, {feet} ft or so. Pays well, he said, and asked that nobody read it. Will you take it?\"",
+  "stages": {
+   "deliver": "Take the sealed letter to the hermit at {feet} ft (level {depth}): step onto his door. You were asked not to read it.",
+   "opened": "You read the letter. It's from the owner of the Magic shop, asking the hermit for a poison to spoil the Alchemist's stock, so the town will have nowhere else to buy its potions. Deliver it anyway, show it to the Alchemist (5), or burn it.",
+   "delivered": "You gave the letter to the hermit. The Magic shop is grateful.",
+   "exposed": "You showed the letter to the Alchemist. The Alchemist is grateful, and the Magic shop knows what you did.",
+   "burned": "You burned the letter. Nobody will ever know what it said, or that you had it."
+  }
+ },
+ {
+  "id": "thief",
+  "name": "The Thief of the Black Market",
+  "minLevel": 9,
+  "offer": "The Black Market's keeper finds you, which is never a good sign. \"Someone has taken my strongbox. Pages of my ledger went with it, torn out and scattered; whoever finds them will know who did it. There are four who could have: Fengel the Fence, Nár the Red-Handed, Skarn Quickfingers and Ilse Shadowcloak. Only one of them has my box. Bring it back and my prices will be kinder to you.\"",
+  "stages": {
+   "hunt": "Find the torn pages of the Black Market's ledger (monsters carry them, above 1000 ft); each tells you something about the thief. One of four suspects has the strongbox: Fengel the Fence, Nár the Red-Handed, Skarn Quickfingers or Ilse Shadowcloak.",
+   "return": "You have the Black Market's strongbox. Take it back to the Black market (6).",
+   "done": "You returned the Black Market's strongbox; its prices are kinder to you now."
+  }
+ },
+ {
+  "id": "apprentice",
+  "name": "The Apprentice",
+  "minLevel": 12,
+  "offer": "The Alchemist himself is at the inn, which he never is. \"My apprentice went down after cave-moss for me, and a rockfall shut the way behind him. A dwarf heard him calling at {feet} ft. The things down there will have heard him too. Bring the boy home.\"",
+  "stages": {
+   "find": "The Alchemist's apprentice is trapped behind a rockfall at {feet} ft (level {depth}). Find him; step onto him to speak to him.",
+   "alone": "You showed the apprentice the way up and left him to find it alone. Whether he made it, the Alchemist (5) will know.",
+   "rescued": "You gave the apprentice your own Scroll of Word of Recall, and he read it and was gone. Tell the Alchemist (5).",
+   "done": "The Alchemist's apprentice is home, thanks to you. The Alchemist won't forget it.",
+   "lost": "The apprentice never came home. The Alchemist doesn't speak of it."
+  }
+ },
+ {
+  "id": "cartographer",
+  "name": "The Cartographer",
+  "minLevel": 6,
+  "offer": "A thin man with ink to the elbows is copying a map at the corner table. \"The Bookseller pays me for maps, and nobody ever maps the strange levels. I hear there's a cavern at {cavern_feet} ft, a labyrinth at {labyrinth_feet} ft, and one of the old mines at {moria_feet} ft. Map most of each, three quarters or more, and bring them to the Bookseller. I'll see you're paid.\"",
+  "stages": {
+   "map": "Map three quarters of a cavern (one is at {cavern_feet} ft), a labyrinth ({labyrinth_feet} ft) and one of the old mines ({moria_feet} ft), for the cartographer: {mapped} of 3 so far ({which}). Any cavern, labyrinth or old mines you come across counts, and magic mapping does too. Then go to the Bookseller (4).",
+   "deliver": "You have maps of a cavern, a labyrinth and the old mines. Take them to the Bookseller (4).",
+   "done": "The Bookseller has the cartographer's maps, and pays for good work."
+  }
+ },
+ {
+  "id": "warden",
+  "name": "The Warden's Fires",
+  "minLevel": 20,
+  "offer": "An old watchman grips your arm. \"There's a hall at {feet} ft where the wardens kept three fires burning, to keep the Shade of the Stair in its place. The fires went out, and it walks. No blade will touch it while they're cold. Take my taper: light all three, then you can put it down. It'll try to put them out again, mind.\"",
+  "stages": {
+   "light": "The Shade of the Stair walks in the Wardens' hall at {feet} ft (level {depth}), and nothing can harm it while the three fires are cold. Step onto each brazier with the Warden's Taper to light it: {lit} of 3 lit. It will try to put them out.",
+   "slay": "All three of the wardens' fires burn: the Shade of the Stair can be harmed now. It is at {feet} ft (level {depth}).",
+   "done": "You lit the wardens' fires and laid the Shade of the Stair to rest."
+  }
+ },
+ {
+  "id": "heart",
+  "name": "The Heart of the Mountain",
+  "minLevel": 30,
+  "offer": "A grey-bearded dwarf of the Iron Hills has taken the best seat by the fire, and nobody has argued. \"Skorvath the Cold-drake lies on a hoard at {feet} ft, and in it is the Heart of the Mountain, the jewel of Belegost, taken from my grandfather's grandfather. Kill the worm and bring the jewel home to us. Mind: it is a jewel dragons dream of. Keep it, and they'll know.\"",
+  "stages": {
+   "hunt": "Skorvath the Cold-drake lies on a hoard at {feet} ft (level {depth}), and the Heart of the Mountain is in it.",
+   "choose": "You have the Heart of the Mountain. Bring it to the dwarf at the Prancing Pony (9) — or keep it: worn, it would make you strong, and the dragons would come for it.",
+   "returned": "You gave the Heart of the Mountain back to the dwarves of the Iron Hills.",
+   "kept": "You kept the Heart of the Mountain. It is yours now — and the dragons can smell it."
+  }
+ },
+ {
+  "id": "watch",
+  "name": "The Last Watch",
+  "minLevel": 32,
+  "offer": "A ranger, grey with dust and three days without sleep, grips the table. \"We hold a watchtower at {feet} ft against an orc-host, and there are not enough of us. Hold it with us until the horns of the West answer, two hundred turns, or bring down Grishnag, their warchief, and they'll break.\"",
+  "stages": {
+   "hold": "Rangers hold a watchtower at {feet} ft (level {depth}) against an orc-host. Hold it with them: {held} of 200 turns there so far — or slay Grishnag the Warchief. War-bands come every thirty turns.",
+   "relieved": "You held the watchtower with the rangers until the host broke."
+  }
+ },
+ {
+  "id": "stone",
+  "name": "The Seeing Stone",
+  "minLevel": 38,
+  "offer": "A messenger in grey, a white star at his collar, speaks low. \"The White Council has word of a palantír in a drowned vault at {feet} ft, and of what keeps it. Bring it to me at the Bookseller's before the Eye finds it. And do not look into it. Or if you must, be quick.\"",
+  "stages": {
+   "seek": "A palantír lies in a sunken vault at {feet} ft (level {depth}), and something keeps it.",
+   "carry": "You have the palantír. Take it to the White Council's messenger at the Bookseller (4). Look into it (use it) to see the whole level and all that's on it — but the Eye may look back.",
+   "given": "You gave the palantír to the White Council's messenger.",
+   "keep": "You kept the palantír. It shows you much, and the Eye has seen you too."
+  }
+ },
+ {
+  "id": "chisel", "source": "The Arcane Artificer",
+  "name": "The Artificer's Chisel",
+  "minLevel": 0,
+  "offer": "SlatriBartSlow sets down his loupe. \"I had a workshop once, below — a good one, where the stone was quiet. Something came up out of the dark at {feet} ft (level {depth}) and I ran, and left my star-forged chisel on the bench. Without it every cut is a gamble. Bring it back, and I'll cut you a socket for nothing — and never slip on your gear again.\"",
+  "stages": {
+   "find": "SlatriBartSlow's star-forged chisel lies in his fallen workshop at {feet} ft (level {depth}). Find it.",
+   "found": "You have the star-forged chisel. Take it back to SlatriBartSlow at the Arcane Artificer (0) — or keep it, and one day cut a socket yourself, even into an artifact.",
+   "returned": "You brought SlatriBartSlow his chisel. He owes you a socket for nothing, and asks half for the rest — and his hand no longer slips.",
+   "kept": "You kept SlatriBartSlow's star-forged chisel. It has one cut left in it for you, into anything that would take a socket, even an artifact."
+  }
+ },
+ {
+  "id": "cellar",
+  "name": "The Frozen Cellar",
+  "minLevel": 5,
+  "offer": "The Alchemist's porter is drinking alone by the fire, his lips still blue. \"We kept the best stock in a cellar below, {feet} ft down, where it's cool. It's not cool now — it's frozen solid, and something that likes it so has moved in. There's a crate of the Alchemist's potions in there yet. Bring it out before the frost cracks every flask, and he'll give you his own bandolier: a padded belt that holds eight kinds of potion in one place, and keeps them from the cold.\"{warning}",
+  "stages": {
+   "find": "The Alchemist's crate of potions is in a frozen cellar at {feet} ft (level {depth}). Find it and bring it out.",
+   "found": "You have the Alchemist's crate. Take it to the Alchemy shop (5).",
+   "done": "You brought the Alchemist his crate, and carry his bandolier: your potions ride in it now, up to eight kinds in one pack slot, and safer from the cold."
+  }
+ },
+ {
+  "id": "library",
+  "name": "The Burning Library",
+  "minLevel": 8,
+  "offer": "A scribe with singed sleeves and a bandaged hand finds you at the bar. \"My master's library is below the town, {feet} ft down. Was, I should say: fire-drakes, or worse, came up through the floor. Three of his folios are still on the shelves, if they haven't burned. Bring them to the Bookseller and you'll have my master's scroll case: eight kinds of scroll in one place, and it's never let a page burn.\"{warning}",
+  "stages": {
+   "find": "Three folios are still on the shelves of a burning library at {feet} ft (level {depth}): {folios} of 3 found so far. Bring them to the Bookseller (4).",
+   "deliver": "You have all three folios. Take them to the Bookseller (4).",
+   "done": "You brought the scribe's folios to the Bookseller, and carry his master's scroll case: your scrolls ride in it now, up to eight kinds in one pack slot, and safer from fire and acid."
+  }
+ }
+]

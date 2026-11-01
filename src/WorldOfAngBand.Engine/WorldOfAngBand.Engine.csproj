@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- AVABand's Angband engine (level generation, sight, the turn scheduler, monsters' senses, items): no UI, no packages. -->
+  <PropertyGroup>
+    <RootNamespace>WorldOfAngBand.Engine</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="WorldOfAngBand.Tests" />
+  </ItemGroup>
+</Project>
