@@ -40,4 +40,15 @@ public class BalanceTests
     [InlineData(90, 20)]
     public void The_hero_is_expected_to_be_the_specs_level_at_a_depth(int depth, int level) =>
         Assert.Equal(level, Campaign.ExpectedLevel(depth));
+
+    [Theory]
+    [InlineData("drowned_chapel")]
+    [InlineData("hollow_woods")]
+    [InlineData("wyrms_nest")]
+    public void A_hero_of_a_zones_level_walks_it_pack_by_pack(string zone)
+    {
+        var results = Enumerable.Range(1, 2).Select(seed => Campaign.Province(TestData.Data, (ulong)seed, zone, 2000)).ToList();
+        Assert.True(results.Count(r => !r.Died) >= 1, string.Join("; ", results.Select(r => r.Died ? $"killed by {r.Killer}" : $"{r.Reached} packs left")));
+        Assert.Contains(results, r => !r.Died && r.Reached <= 3);
+    }
 }

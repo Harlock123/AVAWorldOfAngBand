@@ -6,5 +6,8 @@
   {"id": "zone_gate", "name": "way on", "description": "The road goes on from here.", "glyph": ">", "color": "Yellow", "priority": 25, "flags": ["Los", "Project", "Passable", "Permanent", "Interesting", "Easy"]},
   {"id": "zone_cache", "name": "cache", "description": "A chest someone hid out here, and never came back for.", "glyph": "~", "color": "Gold", "priority": 24, "flags": ["Los", "Project", "Permanent", "Interesting", "NoScent", "NoFlow"]},
   {"id": "zone_shrine", "name": "shrine", "description": "One of Ashur's old waystones. It is warm.", "glyph": "_", "color": "LightBlue", "priority": 24, "flags": ["Los", "Project", "Permanent", "Interesting", "Bright", "NoScent", "NoFlow"]},
-  {"id": "zone_shrine_spent", "name": "cold shrine", "description": "One of Ashur's old waystones. It has given what it will.", "glyph": "_", "color": "Slate", "priority": 24, "flags": ["Los", "Project", "Permanent", "Interesting", "NoScent", "NoFlow"]}
+  {"id": "zone_shrine_spent", "name": "cold shrine", "description": "One of Ashur's old waystones. It has given what it will.", "glyph": "_", "color": "Slate", "priority": 24, "flags": ["Los", "Project", "Permanent", "Interesting", "NoScent", "NoFlow"]},
+  {"id": "zone_npc", "name": "someone", "description": "Someone who stayed.", "glyph": "@", "color": "White", "priority": 26, "flags": ["Los", "Project", "Permanent", "Interesting", "NoScent", "NoFlow"]},
+  {"id": "zone_lore", "name": "something to read", "description": "Words someone left.", "glyph": "?", "color": "LightUmber", "priority": 24, "flags": ["Los", "Project", "Permanent", "Interesting", "NoScent", "NoFlow"]},
+  {"id": "zone_rift", "name": "Lantern Rift", "description": "A tear of blue light the Order's waystones keep open. Those who have touched one can step through it to another.", "glyph": "0", "color": "LightBlue", "priority": 26, "flags": ["Los", "Project", "Passable", "Permanent", "Interesting", "Bright", "Easy"]}
 ]

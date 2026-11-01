@@ -72,6 +72,9 @@ The code is **copied** from the two parent games, not linked, so neither has to 
     `ZoneMemory`. `AshenCreatures` gives AshenReliquary's creatures their numbers by pack level and rank; their races
     (`data/province/monsters.json`) and bridge entries are made by `tools/province/make_province_monsters.py` from
     `data/province/creatures.json` (edit the script, not its output). `Fight.AshenStrike` is how they hit and shoot.
+    `data/province/province.json` is this game's own: who stands ten years on and what they say, the tie-ins, and what
+    is left out; `dialogues.json` (AshenReliquary's) gives the readings. The session keeps the journal, the rifts and
+    the weather. `Bots/ProvinceBot` walks a zone pack by pack (`Campaign.Province`).
   - `Flare/`: AshenReliquary's parsers for Flare's tileset and animation files.
   - `Setting`: names in the Ashen setting, from `data/setting/ashen_names.json` and each mod's own (`Setting.UseMods`,
     set by the session from the data's mod folders), and the words random artifacts are named from.

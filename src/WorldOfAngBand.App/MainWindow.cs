@@ -94,8 +94,8 @@ public sealed class MainWindow : Window
             Classic.Tiles = value == ViewMode.Tiles;
             Content = value == ViewMode.Isometric ? View : Classic;
             Hud.KeysLine = value == ViewMode.Isometric
-                ? "Arrows/keypad: walk · 1–0: abilities · < >: stairs · g: pick up · i: pack · f: feats · R: rest · q: flask · click: travel · wheel: zoom · Ctrl+T: classic view · Ctrl+Q: quit"
-                : "Arrows/keypad: walk (up is north) · 1–0: abilities · < >: stairs · g: pick up · i: pack · f: feats · R: rest · q: flask · click: travel · Ctrl+T: next view · Ctrl+Q: quit";
+                ? "Arrows/keypad: walk · 1–0: abilities · < >: stairs · g: pick up · i: pack · f: feats · J: journal · R: rest · q: flask · click: travel · wheel: zoom · Ctrl+T: classic view · Ctrl+Q: quit"
+                : "Arrows/keypad: walk (up is north) · 1–0: abilities · < >: stairs · g: pick up · i: pack · f: feats · J: journal · R: rest · q: flask · click: travel · Ctrl+T: next view · Ctrl+Q: quit";
             Redraw();
         }
     }
@@ -190,6 +190,14 @@ public sealed class MainWindow : Window
             case ShrineEvent shrine:
                 Stop();
                 Dispatcher.UIThread.Post(() => OpenShrine(shrine));
+                break;
+            case ReadingEvent reading:
+                Stop();
+                Dispatcher.UIThread.Post(() => OpenReading(reading));
+                break;
+            case RiftEvent rift:
+                Stop();
+                Dispatcher.UIThread.Post(() => OpenRift(rift));
                 break;
             case LevelUpEvent when Session.Hero.Character.PendingLevels.Count > 0 && ShowDialogs:
                 Stop();
@@ -337,6 +345,10 @@ public sealed class MainWindow : Window
                 Stop();
                 OpenLevelUp();
                 return true;
+            case "J":
+                Stop();
+                OpenJournal();
+                return true;
         }
         return false;
     }
@@ -384,6 +396,33 @@ public sealed class MainWindow : Window
     public InventoryWindow OpenInventory()
     {
         var window = new InventoryWindow(Session, Do);
+        if (ShowDialogs)
+            _ = window.ShowDialog(this);
+        return window;
+    }
+
+    /// <summary>Something read in the province.</summary>
+    public ReadingWindow OpenReading(ReadingEvent reading)
+    {
+        var window = new ReadingWindow(reading.Title, [(reading.Title, reading.Where, reading.Text)]);
+        if (ShowDialogs)
+            _ = window.ShowDialog(this);
+        return window;
+    }
+
+    /// <summary>The journal (J): everything read and kept in the province.</summary>
+    public ReadingWindow OpenJournal()
+    {
+        var window = new ReadingWindow("Journal", Session.Journal.Select(e => (e.Title, e.Where, e.Text)).ToList());
+        if (ShowDialogs)
+            _ = window.ShowDialog(this);
+        return window;
+    }
+
+    /// <summary>A Lantern Rift.</summary>
+    public RiftWindow OpenRift(RiftEvent rift)
+    {
+        var window = new RiftWindow(rift, Do);
         if (ShowDialogs)
             _ = window.ShowDialog(this);
         return window;

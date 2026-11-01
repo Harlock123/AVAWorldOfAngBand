@@ -152,7 +152,7 @@ door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-t
   own, laid over them by id. A modded monster or item comes into the game through the mod's `bridge/monsters.json` and
   `bridge/items.json`, and its names through `ashen_names.json`. The Mods window shows what each adds and switches it
   off, and "Make an example mod" writes one to copy.
-- **The province** (the spec's section 7.4, milestone 7 under way). AshenReliquary's own Vardmoor lies outside
+- **The province** (the spec's section 7.4, milestone 7). AshenReliquary's own Vardmoor lies outside
   Gallowmere, ten years on: all 18 of its wild zones and its three waystations, from the Gallows Road (out of the south
   gate) and the Rotwater Fens (out of the west) to the Ash Wastes and the Cinder Throne.
   - Each zone is read from AshenReliquary's file and drawn as AshenReliquary drew it, in its own tileset (grassland,
@@ -163,6 +163,14 @@ door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-t
     blessings and gives one.
   - Ironhold has a smith, Saint Oriel's Rest an apothecary and Ember Gate a quartermaster.
   - Zones remember: a slain pack stays dead until the hero has been five levels down the shaft since.
+  - The people who stayed stand where AshenReliquary put them (Captain Thale in Ironhold, Abbess Ilse at Saint Oriel's,
+    Old Teodor on the Pass) and have their say ten years on. Notes, graves, pages and keepsakes read as AshenReliquary
+    wrote them, and go into the journal (`J`).
+  - Four of them carry something down to the story levels (a name from Sallow's hearth, Agnete's hymn, the words on
+    Edith Hadric's grave, a shard of the dam's first egg), each opening a third choice at its altar that Wren and the
+    epilogue know of. Speaking the oath's last words releases all Nine Unburied.
+  - Weather: ash storms halve sight on the Ash Wastes; the Frostbitten Pass's cold bites without a ward.
+  - The waystations' shrines are Lantern Rifts: touch one, and Gallowmere's rift takes you back to it.
 - **The balance bots** (the spec's M5). A hero made ready for a depth (the spec's level for it, runes, the protections
   Angband heroes have by then, potions) dives three levels from 5, 30, 60 and 90, and one made ready for the bottom
   goes down through Saint Ysmere and the Cinder. The tests hold them to it: most dives live, and a hero ready for the
@@ -176,6 +184,9 @@ as AshenReliquary drew it](docs/images/WorldOfAngBand-zone-drowned_chapel.png)
 
 ![The Frostbitten Pass: snow, frozen cliffs, a flagstone road and a cache among the rocks, in Oriel's snow
 tileset](docs/images/WorldOfAngBand-zone-frostbitten_pass.png)
+
+![Ironhold: flagstones, campfires and the forest's edge, with Captain Oswin Thale standing beside the
+hero](docs/images/WorldOfAngBand-ironhold.png)
 
 ![The birth window: a human priest, a Confessor, who heard it ended as Vessa's Legacy, The Lantern Rekindled, with the
 randarts option below](docs/images/WorldOfAngBand-birth.png)
@@ -216,6 +227,8 @@ classic views up is north, as in Angband.
 | `g` | Pick up what lies here (gold is picked up as you walk) |
 | `1` … `9`, `0` | Use an ability: on the monster under the pointer, or the nearest one in sight |
 | `f` | A new level's picks: feats and a skill increase |
+| `J` | The journal: what you have read and kept in the province |
+| Walk into someone, a note or a rift | They speak; it is read; you step through |
 | `i` | The pack: wear, take off, drink, read, activate or drop (Enter does what suits the item) |
 | `q` | Drink from a healing flask |
 | Click | Travel to a square you have seen, or strike a monster beside you |

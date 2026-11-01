@@ -62,17 +62,25 @@ public static class Story
     /// <summary>What the hero can do at a story level's altar, given what they have done so far.</summary>
     public static IReadOnlyList<StoryChoice> Choices(string id, IReadOnlyDictionary<string, string> flags, bool monsterAlive) => id switch
     {
-        "font" => [new("Seal the font with the Lantern's wax.", "sealed"), new("Fill a flask from it and quench your blade in it.", "taken")],
-        "library" => [new("Read the last chapters.", "read"), new("Leave them to the water.", "left")],
-        "oath" when monsterAlive => [new("Strike his name from the stone, and free him.", "freed"), new("Hold him to his oath, and fight him.", "fought")],
+        "font" => [new("Seal the font with the Lantern's wax.", "sealed"), new("Fill a flask from it and quench your blade in it.", "taken"),
+            .. Known(flags, "mire", monsterAlive, new("Call the Rot-Mother by the name from Sallow's hearth.", "named"))],
+        "library" => [new("Read the last chapters.", "read"), new("Leave them to the water.", "left"),
+            .. Known(flags, "choir", true, new("Sing Agnete's hymn over the drowned pages, and read them as they rise.", "sung"))],
+        "oath" when monsterAlive => [new("Strike his name from the stone, and free him.", "freed"), new("Hold him to his oath, and fight him.", "fought"),
+            .. Known(flags, "oath", true, new("Speak the oath's last words, from Edith Hadric's grave, and release all Nine.", "released"))],
         "oath" => [new("Break the stone.", "broken")],
-        "nest" when monsterAlive => [new("Let her go: she has her own quarrel with Saint Ysmere.", "spared"), new("Smash the egg.", "smashed")],
+        "nest" when monsterAlive => [new("Let her go: she has her own quarrel with Saint Ysmere.", "spared"), new("Smash the egg.", "smashed"),
+            .. Known(flags, "nest", true, new("Show her the shard of her first brood's egg.", "mourned"))],
         "nest" => [new("Smash the egg.", "smashed")],
-        "pyre" when monsterAlive && flags.GetValueOrDefault("library") == "read" =>
+        "pyre" when monsterAlive && flags.GetValueOrDefault("library") is "read" or "sung" =>
             [new("Tell her what the Library says: that the Order lied to her too.", "spared"), new("Fight her.", "fought")],
         "pyre" when monsterAlive => [new("Fight her.", "fought")],
         _ => [],
     };
+
+    /// <summary>A third choice, when the hero carried what it needs down from the province (a tie-in's flag, the spec's section 7.4).</summary>
+    private static StoryChoice[] Known(IReadOnlyDictionary<string, string> flags, string tieIn, bool possible, StoryChoice choice) =>
+        possible && flags.ContainsKey(DungeonSession.TieInFlag(tieIn)) ? [choice] : [];
 
     /// <summary>What Wren, keeper of the Lantern Archive, says: the next of the story's levels, and what she knows of it.</summary>
     public static string WrenSays(IReadOnlyDictionary<string, string> flags, int maxDepth)
@@ -80,6 +88,20 @@ public static class Story
         if (flags.ContainsKey("cinder"))
             return "Wren closes the last ledger. \"It's out. Whatever you choose to do now, you did that.\"";
         var next = Levels.FirstOrDefault(l => !flags.ContainsKey(l.Id) && l.Id != "cinder");
+        // What the hero brought down from the province, she knows what to make of.
+        var known = next?.Id switch
+        {
+            "font" when flags.ContainsKey(DungeonSession.TieInFlag("mire")) => " \"You found her old name? Then say it to her. Names were all she ever had.\"",
+            "library" when flags.ContainsKey(DungeonSession.TieInFlag("choir")) => " \"Agnete's hymn! Sing it to the water, and the pages will come up to you.\"",
+            "oath" when flags.ContainsKey(DungeonSession.TieInFlag("oath")) => " \"Edith's grave had the words? Then you can end it for all Nine, not only him.\"",
+            "nest" when flags.ContainsKey(DungeonSession.TieInFlag("nest")) => " \"A shard of her first egg. Show it to her. She'll understand you better than I would.\"",
+            _ => "",
+        };
+        return WrenNext(next, maxDepth) + known;
+    }
+
+    private static string WrenNext(StoryLevel? next, int maxDepth)
+    {
         return next?.Id switch
         {
             "font" => "Wren taps a map of the Lid. \"Something fouls the wells from below, about fifteen levels down. Sallow's work, or what's left of her.\"",
@@ -107,21 +129,31 @@ public static class Story
                 _ => "A wooden bird turns up on the Lantern Archive's sill. Wren keeps it on her desk.",
             },
         };
-        lines.Add(flags.GetValueOrDefault("font") == "sealed"
-            ? "The wells of Gallowmere run clear again by spring."
-            : "The wells of Gallowmere stay grey for a generation, and the healers grow rich.");
-        lines.Add(flags.GetValueOrDefault("library") == "read"
-            ? "Wren copies out the Library's last chapters, and the rekindled Order reads, at last, what the first Order did."
-            : "The Library's last chapters rot in the water, and the Order never learns what it was.");
+        lines.Add(flags.GetValueOrDefault("font") switch
+        {
+            "named" => "Called by the name she had before the mire, the Rot-Mother remembered it, and the wells of Gallowmere ran clear the next morning.",
+            "sealed" => "The wells of Gallowmere run clear again by spring.",
+            _ => "The wells of Gallowmere stay grey for a generation, and the healers grow rich.",
+        });
+        lines.Add(flags.GetValueOrDefault("library") switch
+        {
+            "sung" => "The drowned pages rose to Agnete's hymn; Wren copies them out, and Saint Oriel's sings the hymn again at every vespers.",
+            "read" => "Wren copies out the Library's last chapters, and the rekindled Order reads, at last, what the first Order did.",
+            _ => "The Library's last chapters rot in the water, and the Order never learns what it was.",
+        });
         lines.Add(flags.GetValueOrDefault("oath") switch
         {
+            "released" => "The oath's last words ended it for all of them: Ser Hadric and the Nine lie beside Edith Hadric in the Barrow Fields.",
             "freed" => "Ser Hadric's name is cut from the oath-stone, and the Nine Unburied lie down at last.",
             "fought" or "broken" => "The Oath Hall is quiet. Nobody goes there.",
             _ => "Somewhere below, an oath still holds nine dead knights to a forgotten war.",
         });
-        lines.Add(flags.GetValueOrDefault("nest") == "spared"
-            ? "The Cinderwyrm's dam was seen once more, over the Ember Peaks, flying north."
-            : "No drakes are seen over the Ember Peaks again.");
+        lines.Add(flags.GetValueOrDefault("nest") switch
+        {
+            "mourned" => "The Cinderwyrm's dam carried the shard home to her old nest. Some say the Wyrm's Nest is warm again.",
+            "spared" => "The Cinderwyrm's dam was seen once more, over the Ember Peaks, flying north.",
+            _ => "No drakes are seen over the Ember Peaks again.",
+        });
         lines.Add(flags.GetValueOrDefault("pyre") == "spared"
             ? "Saint Ysmere walks up out of the Pyre, blinking, and asks the date."
             : "Saint Ysmere's name is added to the Order's book, and struck through.");

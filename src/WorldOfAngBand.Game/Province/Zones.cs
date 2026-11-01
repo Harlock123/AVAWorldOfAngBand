@@ -38,7 +38,21 @@ public sealed record ZoneSpawn(int[] At, IReadOnlyList<PackMember> Pack, double 
 }
 
 /// <summary>A place in a zone: a shrine, a cache, an NPC or a keepsake.</summary>
-public sealed record ZonePlace(string Id, int[] At, string? Name = null, int Facing = 0, string? Kind = null, string? Title = null);
+public sealed record ZonePlace(string Id, int[] At, string? Name = null, int Facing = 0, string? Kind = null, string? Title = null,
+    IReadOnlyDictionary<string, string>? Look = null, bool Still = false, string? Dialogue = null, string? Action = null);
+
+/// <summary>A reading that carries something down to a story level: the flag it sets, and what the hero reads.</summary>
+public sealed record TieIn(string Flag, string Value, string Text);
+
+/// <summary>
+/// This game's own notes on the province ten years on (data/province/province.json): who still stands where and what
+/// they say ("zone/npc" ids), the readings that tie in to the story below, and the interactables whose turn in
+/// AshenReliquary's story is over.
+/// </summary>
+public sealed record ProvinceNotes(
+    IReadOnlyDictionary<string, string>? Npcs = null,
+    IReadOnlyDictionary<string, TieIn>? TieIns = null,
+    IReadOnlyList<string>? LeaveOut = null);
 
 /// <summary>
 /// A zone of the province (the spec's section 7.4): AshenReliquary's zone file, read as it is
@@ -91,12 +105,31 @@ public sealed class ProvinceMap
     private readonly Dictionary<string, ZoneDef> _zones;
 
     private readonly Dictionary<string, AshenCreature> _creatures;
+    private readonly Dictionary<string, string> _readings;
 
-    public ProvinceMap(IEnumerable<ZoneDef> zones, IEnumerable<AshenCreature>? creatures = null)
+    public ProvinceMap(IEnumerable<ZoneDef> zones, IEnumerable<AshenCreature>? creatures = null, ProvinceNotes? notes = null,
+        IReadOnlyDictionary<string, string>? readings = null)
     {
         _zones = zones.ToDictionary(z => z.Id);
         _creatures = (creatures ?? []).ToDictionary(c => c.Id);
+        Notes = notes ?? new ProvinceNotes();
+        _readings = new Dictionary<string, string>(readings ?? new Dictionary<string, string>());
     }
+
+    public ProvinceNotes Notes { get; }
+
+    /// <summary>What an NPC says ten years on, or null when they are gone.</summary>
+    public string? LineOf(string zoneId, string npcId) => Notes.Npcs?.GetValueOrDefault($"{zoneId}/{npcId}");
+
+    /// <summary>A reading's tie-in to the story below, if it has one.</summary>
+    public TieIn? TieInOf(string zoneId, string id) => Notes.TieIns?.GetValueOrDefault($"{zoneId}/{id}");
+
+    /// <summary>What a note, grave or page says: the first words of its AshenReliquary dialogue.</summary>
+    public string? Reading(string? dialogue) => dialogue is null ? null : _readings.GetValueOrDefault(dialogue);
+
+    /// <summary>Whether an interactable is still there ten years on (not one whose turn in AshenReliquary's story is over).</summary>
+    public bool Stands(ZonePlace place) =>
+        Notes.LeaveOut is not { } gone || !(gone.Contains(place.Id) || place.Action is { } action && gone.Contains(action));
 
     /// <summary>One of AshenReliquary's creatures (data/province/creatures.json), by its id there.</summary>
     public AshenCreature? Creature(string id) => _creatures.GetValueOrDefault(id);
@@ -134,7 +167,22 @@ public sealed class ProvinceMap
         List<AshenCreature> creatures;
         using (var stream = File.OpenRead(Path.Combine(root, "creatures.json")))
             creatures = JsonSerializer.Deserialize<List<AshenCreature>>(stream, options) ?? [];
-        return new ProvinceMap(zones.ToList(), creatures);
+        ProvinceNotes notes;
+        using (var stream = File.OpenRead(Path.Combine(root, "province.json")))
+            notes = JsonSerializer.Deserialize<ProvinceNotes>(stream, options) ?? new ProvinceNotes();
+        var readings = new Dictionary<string, string>();
+        using (var stream = File.OpenRead(Path.Combine(root, "dialogues.json")))
+        using (var doc = JsonDocument.Parse(stream))
+        {
+            foreach (var dialogue in doc.RootElement.EnumerateArray())
+            {
+                if (dialogue.TryGetProperty("id", out var id) && dialogue.TryGetProperty("start", out var start)
+                    && dialogue.TryGetProperty("nodes", out var nodes) && nodes.TryGetProperty(start.GetString()!, out var node)
+                    && node.TryGetProperty("text", out var text))
+                    readings[id.GetString()!] = text.GetString()!;
+            }
+        }
+        return new ProvinceMap(zones.ToList(), creatures, notes, readings);
     }
 
     /// <summary>

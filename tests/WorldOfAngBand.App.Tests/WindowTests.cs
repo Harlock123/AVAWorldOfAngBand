@@ -424,6 +424,31 @@ public class WindowTests
     }
 
     [AvaloniaFact]
+    public void The_people_of_a_waystation_stand_in_it_and_the_journal_keeps_what_was_read()
+    {
+        var window = Open(1403);
+        var game = window.Session;
+        game.EnterZone("ironhold", null);
+        foreach (var f in game.Foes.ToList())
+            game.Banish(f);
+        var thale = game.People.First(p => p.Name == "Captain Oswin Thale");
+        game.Hero.Position = game.Level.Neighbors(thale.At).First(game.Level.IsEmptyFloor);
+        game.Perform(new Hold());
+        Pump();
+        var frame = Capture(window, "WorldOfAngBand-ironhold");
+        Assert.True(DrawnShare(frame) > 0.3);
+        game.EnterZone("gallows_road", null);
+        var toy = Game.Province.ZoneBuilder.LevelAt(game.Province["gallows_road"]!.Interactables!.First(i => i.Id == "daughter_toy").At);
+        var beside = game.Level.Neighbors(toy).First(game.Level.IsPassable);
+        game.Hero.Position = beside;
+        game.Perform(new Walk(DirectionExtensions.FromOffset(toy.X - beside.X, toy.Y - beside.Y)));
+        var journal = window.OpenJournal();
+        Assert.Single(journal.Pages);
+        CaptureDialog(journal, "WorldOfAngBand-journal");
+        window.Close();
+    }
+
+    [AvaloniaFact]
     public void Things_lie_on_the_floor_and_are_named_under_the_pointer()
     {
         var window = OnFirstLevel(1234);

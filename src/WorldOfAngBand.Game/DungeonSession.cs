@@ -256,6 +256,7 @@ public sealed class DungeonSession : ITurnHandler
             UsePower power => (actions = Powers.Use(power.Id, power.Target)) > 0,
             ActivateItem activate => Effects.Activate(activate.Item, activate.Target),
             TakeBlessing blessing => UseShrine(blessing.ShrineId, blessing.Blessing),
+            StepThroughRift rift => RiftTravel(rift.Destination),
             ChooseLevel level => ChooseLevelPicks(level.Level, level.Choice),
             _ => throw new ArgumentOutOfRangeException(nameof(command), command, "Unknown command."),
         };
@@ -376,6 +377,9 @@ public sealed class DungeonSession : ITurnHandler
         Powers.Tick(tick);
         if (IsOver)
             return;
+        Weather(tick);
+        if (IsOver)
+            return;
         character.Conditions.Update(tick);
         foreach (var (type, amount) in character.Persistent.Update(tick, Roller))
         {
@@ -486,6 +490,11 @@ public sealed class DungeonSession : ITurnHandler
         }
         if (Visit(to))
             return true;
+        if (Zone is null && Depth == 0 && to == _townRift)
+        {
+            TouchRift(null);
+            return true;
+        }
         var terrain = Level.FeatureAt(to);
         if (terrain.Has(TerrainFlags.DoorClosed))
         {
@@ -579,8 +588,10 @@ public sealed class DungeonSession : ITurnHandler
             LevelsDown++;
         if (depth == 0)
         {
-            // Gallowmere's gates out to the province (the spec's section 7.4); back through one, the hero is beside it.
+            // Gallowmere's gates out to the province (the spec's section 7.4), and its Lantern Rift; back through a gate,
+            // the hero is beside it.
             PlaceTownGates();
+            PlaceTownRift();
             if (arriveAtGate is not null && _gates.TryGetValue(arriveAtGate, out var gate))
             {
                 Hero.Position = Level.Neighbors(gate).Where(Level.IsEmptyFloor).OrderBy(p => p.DistanceTo(new Loc(Level.Width / 2, Level.Height / 2))).FirstOrDefault(gate);
@@ -833,8 +844,36 @@ public sealed class DungeonSession : ITurnHandler
             var at = ZoneBuilder.LevelAt(shrine.At);
             if (!Level.InBounds(at))
                 continue;
-            Level.SetFeature(at, Data.Terrain[memory.ShrinesUsed.Contains(shrine.Id) ? "zone_shrine_spent" : "zone_shrine"].Index);
+            // A waystation's shrine is a Lantern Rift; the wild's are Ashur's waystones.
+            Level.SetFeature(at, Data.Terrain[zone.Town ? "zone_rift" : memory.ShrinesUsed.Contains(shrine.Id) ? "zone_shrine_spent" : "zone_shrine"].Index);
             _places[at] = shrine;
+        }
+        // The people who stayed, where AshenReliquary put them, and the traders at their stalls.
+        _people.Clear();
+        foreach (var npc in zone.Npcs ?? [])
+        {
+            var at = ZoneBuilder.LevelAt(npc.At);
+            if (!Level.InBounds(at) || Province.LineOf(zone.Id, npc.Id) is null)
+                continue;
+            Level.SetFeature(at, Data.Terrain["zone_npc"].Index);
+            _places[at] = npc;
+            _people.Add(new Person(at, npc.Name ?? "Someone", npc.Look ?? new Dictionary<string, string>(), npc.Facing));
+        }
+        foreach (var trader in zone.Vendors ?? [])
+        {
+            var at = ZoneBuilder.LevelAt(trader.At);
+            if (Level.InBounds(at) && WaystationTrader(zone.Id) is not null && trader == zone.Vendors![0])
+                _people.Add(new Person(at, trader.Name ?? "A trader", trader.Look ?? new Dictionary<string, string>(), trader.Facing));
+        }
+        // What can be read: notes, graves, pages, keepsakes.
+        foreach (var thing in zone.Interactables ?? [])
+        {
+            var at = ZoneBuilder.LevelAt(thing.At);
+            if (!Level.InBounds(at) || !Province.Stands(thing)
+                || (Province.Reading(thing.Dialogue) is null && Province.TieInOf(zone.Id, thing.Id) is null))
+                continue;
+            Level.SetFeature(at, Data.Terrain["zone_lore"].Index);
+            _places[at] = thing;
         }
         if (WaystationTrader(zone.Id) is { } store && zone.Vendors is [var vendor, ..])
         {
@@ -843,6 +882,22 @@ public sealed class DungeonSession : ITurnHandler
                 Level.SetFeature(at, shop.Index);
         }
     }
+
+    /// <summary>Someone standing in a zone: where, who, in what, facing which way (AshenReliquary's 0 to 7).</summary>
+    public sealed record Person(Loc At, string Name, IReadOnlyDictionary<string, string> Look, int Facing);
+
+    private readonly List<Person> _people = [];
+
+    /// <summary>The people standing in this zone (the view draws them).</summary>
+    public IReadOnlyList<Person> People => Zone is null ? [] : _people;
+
+    /// <summary>One thing the hero has read or kept: what, where, and what it said.</summary>
+    public sealed record JournalEntry(string Title, string Where, string Text);
+
+    private readonly List<JournalEntry> _journal = [];
+
+    /// <summary>The hero's journal: the notes, graves and keepsakes of the province they have read, in order.</summary>
+    public IReadOnlyList<JournalEntry> Journal => _journal;
 
     /// <summary>The one trader at each waystation.</summary>
     public static string? WaystationTrader(string zoneId) => zoneId switch
@@ -899,7 +954,105 @@ public sealed class DungeonSession : ITurnHandler
             Say("The shrine is cold. Ashur has given what it will here.");
             return true;
         }
+        if (terrain == "zone_npc" && Province.LineOf(zone.Id, place.Id) is { } line)
+        {
+            Say(place.Still ? line : $"{place.Name}{(string.IsNullOrEmpty(place.Title) ? "" : $", {place.Title}")}: {line}");
+            return true;
+        }
+        if (terrain == "zone_lore")
+        {
+            Read(zone, place);
+            return true;
+        }
+        if (terrain == "zone_rift")
+        {
+            TouchRift(zone.Id);
+            return true;
+        }
         return false;
+    }
+
+    /// <summary>
+    /// The hero reads something left in the province: it goes into the journal, and a tie-in sets its flag for the story
+    /// below (the spec's section 7.4: Sallow's hearth, Agnete's hymnal, Edith Hadric's grave, the cold egg).
+    /// </summary>
+    private void Read(ZoneDef zone, ZonePlace place)
+    {
+        var tieIn = Province.TieInOf(zone.Id, place.Id);
+        var text = tieIn is { } t && place.Action == "egg" ? t.Text
+            : string.Join(" ", new[] { Province.Reading(place.Dialogue), tieIn?.Text }.OfType<string>());
+        var title = place.Name ?? "Something written";
+        if (_journal.All(e => e.Title != title || e.Where != zone.Name))
+            _journal.Add(new JournalEntry(title, zone.Name, text));
+        if (tieIn is { } carried && _flags.TryAdd(TieInFlag(carried.Flag), carried.Value))
+            Say("You will want that, further down.");
+        Publish(new ReadingEvent(title, zone.Name, text));
+    }
+
+    /// <summary>The story flag a tie-in sets ("tie.mire").</summary>
+    public static string TieInFlag(string flag) => "tie." + flag;
+
+    // --- Lantern Rifts ---
+
+    private readonly HashSet<string> _rifts = [];
+
+    /// <summary>The waystations whose rift the hero has touched.</summary>
+    public IReadOnlySet<string> Rifts => _rifts;
+
+    /// <summary>Gallowmere's own rift, by the town's middle.</summary>
+    private void PlaceTownRift()
+    {
+        var middle = new Loc(Level.Width / 2, Level.Height / 2);
+        if (Level.AllLocs().Where(Level.IsEmptyFloor).OrderBy(p => p.DistanceTo(middle)).Select(p => (Loc?)p).FirstOrDefault() is { } at)
+        {
+            Level.SetFeature(at, Data.Terrain["zone_rift"].Index);
+            Level[at].Flags |= SquareFlags.Glow;
+            _townRift = at;
+        }
+    }
+
+    private Loc? _townRift;
+
+    /// <summary>A rift touched: a waystation's is learned; then the hero may step through to any other they know.</summary>
+    private void TouchRift(string? waystation)
+    {
+        if (waystation is not null && _rifts.Add(waystation))
+            Say($"The rift knows you now. From Gallowmere you can step through to {Province[waystation]?.Name}.");
+        var destinations = new List<string>();
+        if (waystation is not null)
+            destinations.Add(ProvinceMap.Gallowmere);
+        destinations.AddRange(_rifts.Where(r => r != waystation).Order());
+        if (destinations.Count == 0)
+        {
+            Say("The rift flickers. You know no other to step through to; touch a waystation's first.");
+            return;
+        }
+        Publish(new RiftEvent(destinations.Select(d => (d, d == ProvinceMap.Gallowmere ? "Gallowmere" : Province[d]?.Name ?? d)).ToList()));
+    }
+
+    /// <summary>Steps through a rift to Gallowmere or a known waystation. Takes the hero's turn.</summary>
+    private bool RiftTravel(string destination)
+    {
+        var here = Zone is { Town: true } zone ? zone.Id : Zone is null && Depth == 0 ? ProvinceMap.Gallowmere : null;
+        if (here is null || destination == here)
+            return false;
+        if (destination == ProvinceMap.Gallowmere)
+        {
+            Enter(0, StairArrival.None);
+            if (_townRift is { } rift)
+                Hero.Position = Level.Neighbors(rift).Where(Level.IsEmptyFloor).FirstOrDefault(rift);
+            Say("You step out of the rift into Gallowmere.");
+            return true;
+        }
+        if (!_rifts.Contains(destination) || Province[destination]?.Shrines is not [var shrine, ..])
+            return false;
+        EnterZone(destination, null);
+        var at = ZoneBuilder.LevelAt(shrine.At);
+        Hero.Position = Level.Neighbors(at).Where(Level.IsEmptyFloor).OrderBy(p => p.DistanceTo(Hero.Position)).FirstOrDefault(Hero.Position);
+        _insideGate = InsideGate();
+        UpdateView();
+        Say($"You step out of the rift at {Province[destination]!.Name}.");
+        return true;
     }
 
     /// <summary>Takes a shrine's blessing (one of those it offered). Takes the hero's turn.</summary>
@@ -913,6 +1066,55 @@ public sealed class DungeonSession : ITurnHandler
         Shrines.Bless(this, blessing);
         Level.SetFeature(ZoneBuilder.LevelAt(shrine.At), Data.Terrain["zone_shrine_spent"].Index);
         return true;
+    }
+
+    // --- Weather (the spec's section 7.4) ---
+
+    private double _weatherClock;
+
+    /// <summary>An ash storm is blowing (the Ash Wastes): sight is halved while it lasts.</summary>
+    public bool Storming { get; private set; }
+
+    /// <summary>How far the hero can see: Angband's sight, halved in an ash storm.</summary>
+    public int SightRadius => Storming ? Data.Constants.MaxSight / 2 : Data.Constants.MaxSight;
+
+    /// <summary>
+    /// A zone's weather as time passes: ash storms rise for 25 seconds in every minute on the Ash Wastes, and on the
+    /// Frostbitten Pass the cold calls for a Fortitude save each minute (DC 16 + the zone's level) or 1d6 cold (twice on a
+    /// critical failure; resistance to cold takes it off).
+    /// </summary>
+    private void Weather(double seconds)
+    {
+        if (Zone is not { } zone)
+        {
+            _weatherClock = 0;
+            Storming = false;
+            return;
+        }
+        var before = _weatherClock;
+        _weatherClock += seconds;
+        if (zone.AshStorms)
+        {
+            var storming = _weatherClock % 60 >= 35;
+            if (storming != Storming)
+            {
+                Storming = storming;
+                Say(storming ? "An ash storm rolls over you. You can barely see." : "The ash storm passes.");
+                UpdateView();
+            }
+        }
+        if (zone.Cold && (int)(_weatherClock / 60) > (int)(before / 60))
+        {
+            var c = Hero.Character;
+            var check = Rules.Rules.Check.Roll(Roller, c.Save(Rules.Rules.StatisticKind.Fortitude).Total, 16 + zone.Level);
+            if (check.Degree >= Rules.Rules.DegreeOfSuccess.Success)
+                return;
+            var rolled = new Rules.Rules.Dice(check.Degree == Rules.Rules.DegreeOfSuccess.CriticalFailure ? 2 : 1, 6).Roll(Roller);
+            var dealt = DamageCalculator.ApplyDefenses(rolled, DamageType.Cold, c.Defenses);
+            Say(dealt > 0 ? $"The cold bites: {dealt} cold." : "The cold bites, but your ward holds it off.");
+            if (dealt > 0)
+                HurtHero(dealt, "the cold of the Pass");
+        }
     }
 
     /// <summary>The gate whose reach the hero stands in, if any.</summary>
@@ -1075,6 +1277,16 @@ public sealed class DungeonSession : ITurnHandler
                 Hero.Boons.Add("resist:Poison");
                 Say("The wax hisses and holds. The grey water stops. (You resist poison.)");
                 break;
+            case ("font", "named"):
+                if (monster is not null)
+                {
+                    Say($"You say the name from Sallow's hearth. {Subject(monster.Monster)} stops, and remembers it, and runs away into the water like rain.");
+                    Banish(monster);
+                    _uniquesGone.Add(monster.Monster.Race.Id);
+                }
+                Hero.Boons.Add("resist:Poison");
+                Say("The font runs clear. (You resist poison.)");
+                break;
             case ("font", "taken"):
                 if (Hero.Pack.Weapon is { } weapon && weapon.Brands.All(b => b.Element != "pois"))
                 {
@@ -1088,6 +1300,12 @@ public sealed class DungeonSession : ITurnHandler
                 Say("The first Order did not burn Ashur once. They burned him every year, and Ysmere was the one who lit the pyre, "
                     + "and they never told her what she was burning. (Your mind is clearer for knowing.)");
                 break;
+            case ("library", "sung"):
+                Hero.Boons.Add("conf");
+                Hero.Boons.Add("fear");
+                Say("At Agnete's hymn the drowned pages rise to the surface, one by one, and you read them dry. The first Order "
+                    + "burned Ashur every year, and Ysmere lit the pyre, and never knew. (Your mind is clearer, and fear can't find you.)");
+                break;
             case ("library", "left"):
                 Say("The pages sink. Whatever they said is the water's now.");
                 break;
@@ -1098,6 +1316,19 @@ public sealed class DungeonSession : ITurnHandler
                     Banish(monster);
                     _uniquesGone.Add(monster.Monster.Race.Id);
                 }
+                Hero.Boons.Add("hold_life");
+                Say("(Your life holds fast against draining.)");
+                break;
+            case ("oath", "released"):
+                if (monster is not null)
+                {
+                    Say($"You speak the words from Edith Hadric's grave. {Subject(monster.Monster)} kneels, and is ash, and so, somewhere below, are the Nine.");
+                    Banish(monster);
+                    _uniquesGone.Add(monster.Monster.Race.Id);
+                }
+                // The Nine Unburied are released with him: none of them is met again.
+                foreach (var race in Data.Monsters.Where(m => m.IsUnique && Bridge.NameOf(m).Contains("of the Nine", StringComparison.Ordinal)))
+                    _uniquesGone.Add(race.Id);
                 Hero.Boons.Add("hold_life");
                 Say("(Your life holds fast against draining.)");
                 break;
@@ -1120,6 +1351,16 @@ public sealed class DungeonSession : ITurnHandler
                     Banish(monster);
                     _uniquesGone.Add(monster.Monster.Race.Id);
                 }
+                break;
+            case ("nest", "mourned"):
+                if (monster is not null)
+                {
+                    Say($"{Subject(monster.Monster)} lowers her head to the shard of her first egg, a long time. Then she takes it, and goes home.");
+                    Banish(monster);
+                    _uniquesGone.Add(monster.Monster.Race.Id);
+                }
+                Hero.Boons.Add("resist:Fire");
+                Say("(The heat of the deep touches you less.)");
                 break;
             case ("nest", "smashed"):
                 Say("The egg breaks. Something in the dark screams.");
@@ -1563,7 +1804,7 @@ public sealed class DungeonSession : ITurnHandler
     private void UpdateView()
     {
         var lights = Hero.LightRadius > 0 ? [new LightSource(Hero.Position, Hero.LightRadius)] : Array.Empty<LightSource>();
-        _vision.Update(Level, Known, Hero.Position, Data.Constants.MaxSight, lights,
+        _vision.Update(Level, Known, Hero.Position, SightRadius, lights,
             Hero.Character.Conditions.Has(ConditionKind.Blinded));
         foreach (var p in _vision.Viewed)
             if (Level[p].Has(SquareFlags.Seen))

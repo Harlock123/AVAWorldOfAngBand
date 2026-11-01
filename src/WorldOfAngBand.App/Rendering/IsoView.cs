@@ -257,6 +257,16 @@ public sealed class IsoView : Control
             var (mx, my) = State.DrawnAt(f.Monster.Id, f.Monster.Position);
             Add(mx + my, mx, () => DrawFoe(canvas, session, f, ToScreen(mx, my)));
         }
+        // The people who stayed in the province, standing where AshenReliquary put them (its facings are Flare's).
+        foreach (var person in session.People)
+        {
+            if (!session.Known.IsKnown(person.At))
+                continue;
+            var who = person;
+            var memory = Remembered(session.Level, who.At);
+            Add(who.At.X + who.At.Y + 1.0, who.At.X, () => DrawDoll(canvas, Appearance.For(who.Look), who.Facing & 7, ("stance", State.Time),
+                ToScreen(who.At.X + 0.5, who.At.Y + 0.5), 1f, PaintFor(Tint.None, memory)));
+        }
         // What lies on the floor, as the hero last saw it: flat on the ground, under everyone standing there.
         for (var y = y0; y <= y1; y++)
         for (var x = x0; x <= x1; x++)

@@ -1,0 +1,3872 @@
+[
+  {
+    "id": "fort_brask",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "act1.brask": "truth"
+        }
+      },
+      {
+        "node": "again",
+        "requires": {
+          "act1.brask": "lied"
+        }
+      },
+      {
+        "node": "again_caught",
+        "requires": {
+          "act1.brask": "caught"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "\"Halt. The gate's open for the living, not for gallows-meat. You've a rope burn on your neck, stranger. Speak your business at Fort Gallowmere.\"",
+        "choices": [
+          {
+            "text": "\"The rope broke. I don't know why. I need somewhere to rest.\"",
+            "to": "truth"
+          },
+          {
+            "text": "\"I'm a pilgrim. I was robbed on the road.\"",
+            "check": {
+              "skill": "Deception",
+              "dc": 15,
+              "success": "believed",
+              "failure": "caught"
+            }
+          },
+          {
+            "text": "Say nothing and walk past him."
+          }
+        ]
+      },
+      "truth": {
+        "text": "Brask studies you a long moment. \"Broke, did it. The Lantern priests used to say the dead don't take a second hanging.\" He steps aside. \"Keep your blade sheathed in the yard. Wenna sells, the shrine heals, and nobody asks twice.\"",
+        "effects": [
+          {
+            "flag": "act1.brask",
+            "value": "truth"
+          },
+          {
+            "journal": {
+              "id": "act1_fort",
+              "title": "Fort Gallowmere",
+              "kind": "main",
+              "text": "I reached Fort Gallowmere, a refugee camp behind a palisade at the end of the Gallows Road. Sergeant Brask let me in after I told him the truth: the noose broke, and I don't know why."
+            }
+          }
+        ]
+      },
+      "believed": {
+        "text": "\"Pilgrim.\" He snorts, but waves you through. \"Plenty of those lately. The shrine's in the yard; pray at it if it helps.\"",
+        "effects": [
+          {
+            "flag": "act1.brask",
+            "value": "lied"
+          },
+          {
+            "journal": {
+              "id": "act1_fort",
+              "title": "Fort Gallowmere",
+              "kind": "main",
+              "text": "I reached Fort Gallowmere, a refugee camp behind a palisade at the end of the Gallows Road. I told Sergeant Brask I was a robbed pilgrim, and he believed me."
+            }
+          }
+        ]
+      },
+      "caught": {
+        "text": "\"Pilgrims don't wear hemp necklaces.\" His hand rests on his sword, then falls away. \"Hanged or not, the road's worse than you. Get in, and stay where I can see you.\"",
+        "effects": [
+          {
+            "flag": "act1.brask",
+            "value": "caught"
+          },
+          {
+            "journal": {
+              "id": "act1_fort",
+              "title": "Fort Gallowmere",
+              "kind": "main",
+              "text": "I reached Fort Gallowmere, a refugee camp behind a palisade at the end of the Gallows Road. Sergeant Brask saw through my lie about being a pilgrim, but let me in all the same."
+            }
+          }
+        ]
+      },
+      "again": {
+        "text": "\"Still breathing, I see. Mind the yard.\"",
+        "choices": [
+          {
+            "text": "\"What news?\"",
+            "to": "news"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "again_caught": {
+        "text": "Brask watches you without a word, thumb on his sword's pommel.",
+        "choices": [
+          {
+            "text": "\"What news, sergeant?\"",
+            "to": "news"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "news": {
+        "text": "\"Dead walk the fens to the south-west, and the wells taste of rot. Folk say a witch is behind it. Folk say a lot of things.\""
+      }
+    }
+  },
+  {
+    "id": "fort_notice",
+    "start": "start",
+    "openings": [
+      {
+        "node": "seen",
+        "requires": {
+          "act1.notice": "seen"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A notice board by the road, plastered with pleas for the missing and bills for lost cattle.",
+        "choices": [
+          {
+            "text": "Look closer.",
+            "requires": {
+              "act1.notice": ""
+            },
+            "check": {
+              "skill": "Perception",
+              "dc": 14,
+              "success": "spotted",
+              "failure": "missed"
+            }
+          },
+          {
+            "text": "Leave it."
+          }
+        ]
+      },
+      "spotted": {
+        "text": "Under the newer notices someone has scratched into the wood: THE FERRY STILL RUNS. ASK FOR THE OLD MAN.",
+        "effects": [
+          {
+            "flag": "act1.notice",
+            "value": "seen"
+          },
+          {
+            "xp": 20
+          },
+          {
+            "journal": {
+              "id": "act1_ferry_hint",
+              "title": "A scratched message",
+              "kind": "side",
+              "text": "Someone scratched a message into the notice board at Fort Gallowmere: \"The ferry still runs. Ask for the old man.\""
+            }
+          }
+        ]
+      },
+      "missed": {
+        "text": "Grief and cattle, nothing more that you can make out.",
+        "effects": [
+          {
+            "flag": "act1.notice",
+            "value": "missed"
+          }
+        ]
+      },
+      "seen": {
+        "text": "The scratched words are still there under the notices: THE FERRY STILL RUNS. ASK FOR THE OLD MAN."
+      }
+    }
+  },
+  {
+    "id": "fort_ysolde",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "act1.ysolde": "met"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A woman in a stained apron grinds something bitter in a mortar. \"Another one walking in off the road. Sit if you're bleeding, stand if you're not. I'm Ysolde. I set bones and boil roots, and lately I bury more than I heal.\"",
+        "effects": [
+          {
+            "flag": "act1.ysolde",
+            "value": "met"
+          }
+        ],
+        "choices": [
+          {
+            "text": "\"I found this under Mother Sallow's hearth. Maren's letter said you'd know what to do.\"",
+            "requires": {
+              "act1.relic": "carried"
+            },
+            "to": "relic"
+          },
+          {
+            "text": "\"Did you know Maren, the well-keeper's daughter?\"",
+            "requires": {
+              "act1.letter": "found",
+              "act1.ysolde_maren": ""
+            },
+            "to": "maren"
+          },
+          {
+            "text": "\"What's killing them?\"",
+            "to": "wells"
+          },
+          {
+            "text": "\"How do you know herbs out here?\"",
+            "to": "herbs"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "wells": {
+        "text": "\"The water. The wells taste of rot since the dead came up out of the fens, and those who drink it sicken: black veins, fever, then the long sleep. Boiling doesn't help. Whatever's in it isn't natural.\"",
+        "choices": [
+          {
+            "text": "\"Could it be cured?\"",
+            "to": "cure"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "cure": {
+        "text": "She looks at you a long moment. \"If I knew what poisoned it, perhaps. Find me the source and I'll find you the cure. Until then, I boil roots.\""
+      },
+      "herbs": {
+        "text": "\"My mother kept the physic garden at the Lantern chapel, before the Order fell. I learned the names before I learned to read. Much good it does me now.\""
+      },
+      "again": {
+        "text": "\"Still on your feet. Good. Drink nothing from the wells.\"",
+        "choices": [
+          {
+            "text": "\"I found this under Mother Sallow's hearth. Maren's letter said you'd know what to do.\"",
+            "requires": {
+              "act1.relic": "carried"
+            },
+            "to": "relic"
+          },
+          {
+            "text": "\"Did you know Maren, the well-keeper's daughter?\"",
+            "requires": {
+              "act1.letter": "found",
+              "act1.ysolde_maren": ""
+            },
+            "to": "maren"
+          },
+          {
+            "text": "\"Tell me again about the wells.\"",
+            "to": "wells"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "maren": {
+        "text": "Her hands stop on the pestle. \"Maren. She went out after the black water a month back. I told her not to.\" She goes back to grinding, harder.",
+        "effects": [
+          {
+            "flag": "act1.ysolde_maren",
+            "value": "asked"
+          }
+        ]
+      },
+      "relic": {
+        "text": "Ysolde turns the ember over in her stained hands. \"Gods. It's the rot's own heart. Break it and the witch is gone for good. Or leave it with me, and I can draw a cure out of it for every sick soul in this fort.\"",
+        "choices": [
+          {
+            "text": "\"Make your cure.\"",
+            "to": "cured",
+            "effects": [
+              {
+                "takeItem": "cinder_relic"
+              },
+              {
+                "flag": "act1.relic",
+                "value": "given"
+              },
+              {
+                "flag": "act1.sallow_relic",
+                "value": "cured"
+              },
+              {
+                "xp": 160
+              },
+              {
+                "item": "ysoldes_phial"
+              },
+              {
+                "journal": {
+                  "id": "act1_well",
+                  "title": "The Well-Keeper's Daughter",
+                  "kind": "side",
+                  "text": "I gave Sallow's Cinder Relic to Ysolde, as Maren wanted. She drew a cure out of it, and the fever is breaking in the fort. Whatever is left of Sallow in it, Ysolde keeps."
+                }
+              }
+            ]
+          },
+          {
+            "text": "\"No. It should be destroyed.\"",
+            "to": "burned",
+            "effects": [
+              {
+                "takeItem": "cinder_relic"
+              },
+              {
+                "flag": "act1.relic",
+                "value": "given"
+              },
+              {
+                "flag": "act1.sallow_relic",
+                "value": "destroyed"
+              },
+              {
+                "xp": 160
+              },
+              {
+                "boon": "ember_breaker"
+              },
+              {
+                "journal": {
+                  "id": "act1_well",
+                  "title": "The Well-Keeper's Daughter",
+                  "kind": "side",
+                  "text": "I brought Sallow's Cinder Relic to Ysolde, but had it destroyed. It burned in her fire with a sound like screaming. Sallow is gone for good; the fort's sick will have to wait for another cure."
+                }
+              }
+            ]
+          },
+          {
+            "text": "\"Not yet.\""
+          }
+        ]
+      },
+      "cured": {
+        "text": "It takes her three days. The fever breaks in the camp, one cot at a time. She presses a stoppered phial into your hand. \"For you. What's left over.\""
+      },
+      "burned": {
+        "text": "She nods slowly, and drops it into her fire. It screams. When it is ash she says nothing for a long while."
+      }
+    }
+  },
+  {
+    "id": "fort_coll",
+    "start": "start",
+    "openings": [
+      {
+        "node": "friend",
+        "requires": {
+          "act1.ferry": "brothers"
+        }
+      },
+      {
+        "node": "spurned",
+        "requires": {
+          "act1.ferry": "lantern"
+        }
+      },
+      {
+        "node": "again",
+        "requires": {
+          "act1.coll": "met"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "An old man sits on an upturned boat hull, mending a net he'll never cast. \"Coll. I ran the ferry across the Rot for forty years. Nobody crosses now. The river's thick as soup and things walk under it.\"",
+        "effects": [
+          {
+            "flag": "act1.coll",
+            "value": "met"
+          }
+        ],
+        "choices": [
+          {
+            "text": "\"Someone scratched a message on the notice board: the ferry still runs.\"",
+            "requires": {
+              "act1.notice": "seen"
+            },
+            "to": "message"
+          },
+          {
+            "text": "\"Where does the river go?\"",
+            "to": "river"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "message": {
+        "text": "His hands stop on the net. \"Does it now.\" He doesn't look up. \"Boards say all sorts. Some folk would pay well to cross the Rot by night, and some folk would rather nobody did. Ask me again when you've a reason to trust me, or I you.\"",
+        "effects": [
+          {
+            "flag": "act1.coll_message",
+            "value": "asked"
+          }
+        ]
+      },
+      "river": {
+        "text": "\"South-west, through the Rotwater Fens and on to the Mire. The old chapel's out there too, half under water. Nobody goes now, and those who do don't come back the same.\""
+      },
+      "again": {
+        "text": "Coll nods without looking up from his net.",
+        "choices": [
+          {
+            "text": "\"I've reason to trust you now. What do you need?\"",
+            "requires": {
+              "act1.coll_message": "asked",
+              "act1.ferry": ""
+            },
+            "to": "job"
+          },
+          {
+            "text": "\"The drowned village is clear.\"",
+            "requires": {
+              "act1.ferry": "job",
+              "act1.village": "cleared"
+            },
+            "to": "brothers"
+          },
+          {
+            "text": "\"About that message on the board...\"",
+            "requires": {
+              "act1.notice": "seen",
+              "act1.coll_message": ""
+            },
+            "to": "message"
+          },
+          {
+            "text": "\"Where does the river go?\"",
+            "to": "river"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "job": {
+        "text": "Coll sets down his net. \"The Brothers of the Ferry run what the fort can't buy: medicine, salt, letters. Cultists squat in the drowned village on the Fens causeway, and no boat gets past their camp. Clear it, and the Brothers will want to know you.\"",
+        "effects": [
+          {
+            "flag": "act1.ferry",
+            "value": "job"
+          },
+          {
+            "journal": {
+              "id": "act1_ferry",
+              "title": "Brothers of the Ferry",
+              "kind": "side",
+              "text": "Old Coll runs with the Brothers of the Ferry, smugglers on the Rotwater. He wants the cult camp in the Fens' drowned village cleared so their boats can pass."
+            }
+          }
+        ]
+      },
+      "brothers": {
+        "text": "\"Clear? Then the boats run tonight.\" He studies you a long moment. \"The Brothers look after their own. Will you be one of them?\"",
+        "choices": [
+          {
+            "text": "\"I'm with the Brothers.\"",
+            "to": "joined",
+            "effects": [
+              {
+                "flag": "act1.ferry",
+                "value": "brothers"
+              },
+              {
+                "xp": 160
+              },
+              {
+                "gold": 120
+              },
+              {
+                "item": "ferrymans_knot"
+              },
+              {
+                "journal": {
+                  "id": "act1_ferry",
+                  "title": "Brothers of the Ferry",
+                  "kind": "side",
+                  "text": "I cleared the cult camp in the drowned village and threw in with the Brothers of the Ferry. Their boats run the Rotwater again, and Coll gave me the Brothers' knot."
+                }
+              }
+            ]
+          },
+          {
+            "text": "\"I'll think on it.\""
+          }
+        ]
+      },
+      "joined": {
+        "text": "\"Then wear this, and any boat on the Rotwater will carry you.\" He presses a ring of tarred rope into your hand."
+      },
+      "friend": {
+        "text": "Coll grins over his net. \"The boats are running. Mind the cult's friends on the water.\""
+      },
+      "spurned": {
+        "text": "Coll won't look at you. \"Lantern's dog. We've nothing to say.\""
+      }
+    }
+  },
+  {
+    "id": "fort_altar",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "A weathered Lantern altar, its glass long broken. Kneeling here, you feel the choices of your road loosen, as if they could be made again.",
+        "choices": [
+          {
+            "text": "Let go of what I have chosen, and choose again (free, once this act).",
+            "requires": {
+              "act1.respec": ""
+            },
+            "effects": [
+              {
+                "respec": true
+              },
+              {
+                "flag": "act1.respec",
+                "value": "used"
+              }
+            ]
+          },
+          {
+            "text": "Let go of what I have chosen, and choose again ({cost} gold).",
+            "requires": {
+              "act1.respec": "used"
+            },
+            "effects": [
+              {
+                "payPerLevel": 20
+              },
+              {
+                "respec": true
+              }
+            ]
+          },
+          {
+            "text": "Rise and leave."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "chapel_lantern",
+    "start": "start",
+    "openings": [
+      {
+        "node": "taken",
+        "requires": {
+          "act1.lantern": "taken"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "On a lectern by the door stands a hooded lantern of the Lantern Order, its glass whole and its wick trimmed, as if someone meant to come back for it.",
+        "choices": [
+          {
+            "text": "Light it and take it.",
+            "to": "lit",
+            "effects": [
+              {
+                "item": "pilgrims_lantern"
+              },
+              {
+                "flag": "act1.lantern",
+                "value": "taken"
+              }
+            ]
+          },
+          {
+            "text": "Leave it."
+          }
+        ]
+      },
+      "lit": {
+        "text": "The flame takes. The dark draws back a few paces, and the nave's far pillars swim up out of it."
+      },
+      "taken": {
+        "text": "An empty lectern. The lantern is yours now."
+      }
+    }
+  },
+  {
+    "id": "fort_well",
+    "start": "start",
+    "openings": [
+      {
+        "node": "read",
+        "requires": {
+          "act1.letter": "found"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "An old well in the corner of the yard, its rope cut through. Far down, a scrap of something pale is caught on the stones.",
+        "choices": [
+          {
+            "text": "Climb down for it.",
+            "check": {
+              "skill": "Athletics",
+              "dc": 14,
+              "success": "letter",
+              "failure": "slip"
+            }
+          },
+          {
+            "text": "Leave it."
+          }
+        ]
+      },
+      "slip": {
+        "text": "Your hands find nothing but slime, and you haul yourself back up, scraped and wet. You could try again."
+      },
+      "letter": {
+        "text": "A letter, blotted with old blood, in a careful hand: \"If you find this, I went after the black water. It comes from the witch in the mire, Mother Sallow. Folk say she keeps an ember of something old under her hearth, and that it is the cure and the curse both. If I don't come back, take it to Ysolde. She'll know. Maren, the well-keeper's daughter.\"",
+        "effects": [
+          {
+            "flag": "act1.letter",
+            "value": "found"
+          },
+          {
+            "xp": 20
+          },
+          {
+            "journal": {
+              "id": "act1_well",
+              "title": "The Well-Keeper's Daughter",
+              "kind": "side",
+              "text": "In the Gallowmere well I found a letter from Maren, the well-keeper's daughter. She followed the black water to Mother Sallow, who she says keeps an ember of something old under her hearth: the cure and the curse both. She wanted it taken to Ysolde."
+            }
+          }
+        ]
+      },
+      "read": {
+        "text": "The well, its rope cut. Maren's letter is in your pack."
+      }
+    }
+  },
+  {
+    "id": "mire_hearth",
+    "start": "start",
+    "openings": [
+      {
+        "node": "cold",
+        "requires": {
+          "act1.sallow_relic": "cured"
+        }
+      },
+      {
+        "node": "cold",
+        "requires": {
+          "act1.sallow_relic": "destroyed"
+        }
+      },
+      {
+        "node": "empty",
+        "requires": {
+          "act1.relic": "carried"
+        }
+      },
+      {
+        "node": "guarded",
+        "requires": {
+          "act1.sallow": ""
+        }
+      }
+    ],
+    "nodes": {
+      "guarded": {
+        "text": "A ring of black hearthstones beside the witch's hut. Mother Sallow's eyes are on you: not while she lives."
+      },
+      "start": {
+        "text": "A ring of black hearthstones beside the witch's hut, still warm though no fire burns.",
+        "choices": [
+          {
+            "text": "Lift the hearthstone Maren wrote of.",
+            "requires": {
+              "act1.letter": "found"
+            },
+            "to": "relic"
+          },
+          {
+            "text": "Search the hearth.",
+            "requires": {
+              "act1.letter": ""
+            },
+            "check": {
+              "skill": "Perception",
+              "dc": 18,
+              "success": "relic",
+              "failure": "nothing"
+            }
+          },
+          {
+            "text": "Leave it."
+          }
+        ]
+      },
+      "nothing": {
+        "text": "Ash and bones of small things. Nothing you can find."
+      },
+      "relic": {
+        "text": "Under the stone, wrapped in a girl's grey shawl, lies an ember that will not cool: Sallow's Cinder Relic. It beats like a heart. Whatever Sallow was, some of it is still in here.",
+        "choices": [
+          {
+            "text": "Smash it on the hearthstone.",
+            "to": "smashed",
+            "effects": [
+              {
+                "flag": "act1.sallow_relic",
+                "value": "destroyed"
+              },
+              {
+                "xp": 160
+              },
+              {
+                "boon": "ember_breaker"
+              },
+              {
+                "journal": {
+                  "id": "act1_well",
+                  "title": "The Well-Keeper's Daughter",
+                  "kind": "side",
+                  "text": "Under Mother Sallow's hearth, wrapped in Maren's shawl, I found the witch's Cinder Relic, and smashed it. Whatever of Sallow was in it is gone for good. Maren did not come back."
+                }
+              }
+            ]
+          },
+          {
+            "text": "Wrap it again and take it to Ysolde.",
+            "to": "taken",
+            "effects": [
+              {
+                "item": "cinder_relic"
+              },
+              {
+                "flag": "act1.relic",
+                "value": "carried"
+              },
+              {
+                "journal": {
+                  "id": "act1_well",
+                  "title": "The Well-Keeper's Daughter",
+                  "kind": "side",
+                  "text": "Under Mother Sallow's hearth, wrapped in Maren's shawl, I found the witch's Cinder Relic. I am taking it to Ysolde in the fort, as Maren wanted."
+                }
+              }
+            ]
+          },
+          {
+            "text": "Leave it where it lies."
+          }
+        ]
+      },
+      "smashed": {
+        "text": "It cracks like a skull. Something far away screams, and is still."
+      },
+      "taken": {
+        "text": "It is warm through the shawl, and it beats against your side."
+      },
+      "empty": {
+        "text": "The hearthstone lies where you left it. The hollow beneath is empty."
+      },
+      "cold": {
+        "text": "Cold black stones. Nothing beats beneath them now."
+      }
+    }
+  },
+  {
+    "id": "fort_anselm",
+    "start": "start",
+    "openings": [
+      {
+        "node": "blessed",
+        "requires": {
+          "act1.ferry": "lantern"
+        }
+      },
+      {
+        "node": "cold",
+        "requires": {
+          "act1.ferry": "brothers"
+        }
+      },
+      {
+        "node": "again",
+        "requires": {
+          "act1.anselm": "met"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A grey-robed man kneels before the Lantern altar's broken glass. \"Brother Anselm, of what is left of the Order of the Pale Lantern. Which is me.\"",
+        "effects": [
+          {
+            "flag": "act1.anselm",
+            "value": "met"
+          }
+        ],
+        "choices": [
+          {
+            "text": "\"Old Coll wants me to clear a cult camp for the Brothers of the Ferry.\"",
+            "requires": {
+              "act1.ferry": "job"
+            },
+            "to": "warning"
+          },
+          {
+            "text": "\"The cult camp is cleared. Tell me about the Brothers.\"",
+            "requires": {
+              "act1.ferry": "job",
+              "act1.village": "cleared"
+            },
+            "to": "choose"
+          },
+          {
+            "text": "\"What happened to the Order?\"",
+            "to": "order"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "again": {
+        "text": "Anselm looks up from his prayers. \"Ashbound.\"",
+        "choices": [
+          {
+            "text": "\"Old Coll wants me to clear a cult camp for the Brothers of the Ferry.\"",
+            "requires": {
+              "act1.ferry": "job"
+            },
+            "to": "warning"
+          },
+          {
+            "text": "\"The cult camp is cleared. Tell me about the Brothers.\"",
+            "requires": {
+              "act1.ferry": "job",
+              "act1.village": "cleared"
+            },
+            "to": "choose"
+          },
+          {
+            "text": "\"What happened to the Order?\"",
+            "to": "order"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "order": {
+        "text": "\"We guarded the Reliquary for three hundred years. Then the ash came up out of it, and the dead with it, and we found we had been guarding a door, not a tomb. The rest is graves.\""
+      },
+      "warning": {
+        "text": "\"The Brothers carry medicine, yes. They also carry relic-ash to the cult's censers, and take the cult's silver for it. Clear the camp by all means. Then come and tell me where their boats put in, and the Order will see it stopped.\""
+      },
+      "choose": {
+        "text": "\"Where do they land? Tell me, and the ash stops flowing.\"",
+        "choices": [
+          {
+            "text": "Tell him where the Brothers land.",
+            "to": "blessed_now",
+            "effects": [
+              {
+                "flag": "act1.ferry",
+                "value": "lantern"
+              },
+              {
+                "xp": 160
+              },
+              {
+                "boon": "lantern_ward"
+              },
+              {
+                "journal": {
+                  "id": "act1_ferry",
+                  "title": "Brothers of the Ferry",
+                  "kind": "side",
+                  "text": "I cleared the cult camp in the drowned village, then told Brother Anselm, the last of the Lantern Order, where the Brothers of the Ferry land their boats. Their trade in relic-ash is over, and Coll will not forgive it."
+                }
+              }
+            ]
+          },
+          {
+            "text": "Say nothing."
+          }
+        ]
+      },
+      "blessed_now": {
+        "text": "He lays a cold hand on your brow and says words in the Order's old tongue. \"The Lantern keeps you, ashbound. Even you.\""
+      },
+      "blessed": {
+        "text": "\"The Brothers' boats burn on the Rotwater. The Lantern thanks you.\""
+      },
+      "cold": {
+        "text": "Anselm turns back to the altar. \"You chose the smugglers. I hope their silver is warm.\""
+      }
+    }
+  },
+  {
+    "id": "gallows_scarecrow",
+    "start": "first",
+    "openings": [
+      {
+        "node": "freed",
+        "requires": {
+          "act1.scarecrow": "freed"
+        }
+      },
+      {
+        "node": "gone",
+        "requires": {
+          "act1.scarecrow": "taken"
+        }
+      },
+      {
+        "node": "weeps",
+        "requires": {
+          "act1.scarecrow": "2",
+          "act1.chapel": "cleared"
+        }
+      },
+      {
+        "node": "quiet",
+        "requires": {
+          "act1.scarecrow": "2"
+        }
+      },
+      {
+        "node": "second",
+        "requires": {
+          "act1.scarecrow": "1"
+        }
+      }
+    ],
+    "nodes": {
+      "first": {
+        "text": "A scarecrow of sacking and straw on a leaning pole. Its button eyes are wet, though it hasn't rained.",
+        "effects": [
+          {
+            "flag": "act1.scarecrow",
+            "value": "1"
+          }
+        ]
+      },
+      "second": {
+        "text": "You look again. In the straw, a sound like a held breath.",
+        "effects": [
+          {
+            "flag": "act1.scarecrow",
+            "value": "2"
+          }
+        ]
+      },
+      "quiet": {
+        "text": "Only straw. Whatever stirred in it has gone still, as if it were waiting for something to be done."
+      },
+      "weeps": {
+        "text": "The scarecrow weeps: real tears, from button eyes. A voice like wind in dry stalks: \"The Lantern bound me here to watch the dead walk the road. The chapel is cleansed; my watch is over. Let me go... or take the stone that binds me, and I am nothing.\"",
+        "choices": [
+          {
+            "text": "Let it go.",
+            "to": "released",
+            "effects": [
+              {
+                "flag": "act1.scarecrow",
+                "value": "freed"
+              },
+              {
+                "xp": 160
+              },
+              {
+                "boon": "scarecrows_peace"
+              },
+              {
+                "journal": {
+                  "id": "act1_scarecrow",
+                  "title": "The Scarecrow Who Wept",
+                  "kind": "side",
+                  "text": "A scarecrow at the ruined farmstead on Gallows Road wept once the Drowned Chapel was cleansed: a spirit the Lantern Order bound there to watch the dead. I let it go."
+                }
+              }
+            ]
+          },
+          {
+            "text": "Take the soul-gem.",
+            "to": "gem",
+            "effects": [
+              {
+                "flag": "act1.scarecrow",
+                "value": "taken"
+              },
+              {
+                "xp": 160
+              },
+              {
+                "item": "weeping_soulgem"
+              },
+              {
+                "journal": {
+                  "id": "act1_scarecrow",
+                  "title": "The Scarecrow Who Wept",
+                  "kind": "side",
+                  "text": "A scarecrow at the ruined farmstead on Gallows Road wept once the Drowned Chapel was cleansed: a spirit the Lantern Order bound there to watch the dead. I took the soul-gem that bound it."
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "released": {
+        "text": "The straw sighs and settles. Something brushes past you, light as a moth, and is gone up the road."
+      },
+      "gem": {
+        "text": "You dig the pale stone out of the straw. The scarecrow sags on its pole. The stone is wet, and stays wet."
+      },
+      "freed": {
+        "text": "Empty sacking on a pole. The button eyes are dry."
+      },
+      "gone": {
+        "text": "The scarecrow hangs slack. Nothing waits in it now."
+      }
+    }
+  },
+  {
+    "id": "ossuary_confession",
+    "start": "start",
+    "openings": [
+      {
+        "node": "read",
+        "requires": {
+          "act1.confession": "read"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A lectern of black oak at the foot of the sarcophagus. On it lies a book bound in a prior's grey, its last pages written in a hand that shakes.",
+        "choices": [
+          {
+            "text": "Read the last pages.",
+            "to": "confession",
+            "effects": [
+              {
+                "flag": "act1.confession",
+                "value": "read"
+              },
+              {
+                "xp": 40
+              },
+              {
+                "journal": {
+                  "id": "act1_prior_confession",
+                  "title": "The Prior's confession",
+                  "kind": "side",
+                  "text": "In the ossuary under the Drowned Chapel, Prior Aldous Venn of the Pale Lantern confessed it: when the ash-fever came up the river he barred the sick inside the chapel and opened the sluices on them. A herb-girl in a grey shawl was among them. She did not drown."
+                }
+              }
+            ]
+          },
+          {
+            "text": "Leave it closed."
+          }
+        ]
+      },
+      "confession": {
+        "text": "\"The fever came up the Rotwater with the ash. I barred the doors on the sick and opened the sluices, and told the Order it was God's own flood. The herb-girl screamed the longest. She wore a grey shawl. When the water went down she was not among the dead. Lantern forgive me, I hear her singing in the reeds.\""
+      },
+      "read": {
+        "text": "The Prior's book lies open where you left it. The last line is only her name, written over and over: Sallow."
+      }
+    }
+  },
+  {
+    "id": "ironhold_thale",
+    "start": "start",
+    "openings": [
+      {
+        "node": "mirella_brought",
+        "requires": {
+          "act2.faction": "guard",
+          "act2.thale_mirella": ""
+        }
+      },
+      {
+        "node": "mirella_joined",
+        "requires": {
+          "act2.faction": "outlaws",
+          "act2.thale_mirella": ""
+        }
+      },
+      {
+        "node": "again",
+        "requires": {
+          "act2.thale": "met"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A knight in dented plate stands inside the gate, a dozen tired spearmen at his back. \"Captain Oswin Thale, Ironhold Guard. You came up the March? Through Hadric's legion?\" His eyes go to the rope scar on your neck. \"Whatever you are, you're the first thing up that road in a month that wasn't dead.\"",
+        "effects": [
+          {
+            "flag": "act2.thale",
+            "value": "met"
+          },
+          {
+            "journal": {
+              "id": "act2_ironhold",
+              "title": "Ironhold",
+              "kind": "main",
+              "text": "I reached Ironhold, the last city of the Iron March. Ser Hadric the Unburied, the second Herald, besieges it with the dead of a war the province forgot. Captain Oswin Thale of the Ironhold Guard holds the walls."
+            }
+          }
+        ],
+        "choices": [
+          {
+            "text": "\"Centurion Varro is dead. His line before your gate is broken.\"",
+            "requires": {
+              "act2.varro": "slain",
+              "act2.thale_reward": ""
+            },
+            "to": "thanks"
+          },
+          {
+            "text": "\"Who is Hadric?\"",
+            "to": "hadric"
+          },
+          {
+            "text": "\"What does the Guard need?\"",
+            "to": "need"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "hadric": {
+        "text": "\"Knight-commander of the Iron Legion, three hundred years dead. The Order buried his legion in the Barrow Fields north of the city after the war, with every honour. Now they've stood up out of the mounds and he marches them back on the city they died for.\" Thale's jaw tightens. \"He wants in. I don't know why.\""
+      },
+      "need": {
+        "text": "\"Hadric's centurions hold the March. One of them, Varro, sits on the siege line before our outer gate: no cart gets in or out while he stands. Break him, and I'll owe you more than thanks.\"",
+        "effects": [
+          {
+            "journal": {
+              "id": "act2_varro",
+              "title": "The siege line",
+              "kind": "side",
+              "text": "Captain Thale wants Centurion Varro dead. Varro holds Hadric's siege line before Ironhold's outer gate, at the north end of the Iron March."
+            }
+          }
+        ],
+        "choices": [
+          {
+            "text": "\"Centurion Varro is dead. His line before your gate is broken.\"",
+            "requires": {
+              "act2.varro": "slain",
+              "act2.thale_reward": ""
+            },
+            "to": "thanks"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "thanks": {
+        "text": "Thale lets out a breath he seems to have held for a month. \"Varro. Then the carts can come up the March again, and the Guard can stop counting arrows.\" He presses a heavy purse into your hand. \"From the city. Hilde at the forge will want to see you. Sable too, if you've the stomach for him.\"",
+        "effects": [
+          {
+            "flag": "act2.thale_reward",
+            "value": "given"
+          },
+          {
+            "xp": 400
+          },
+          {
+            "gold": 300
+          },
+          {
+            "journal": {
+              "id": "act2_varro",
+              "title": "The siege line",
+              "kind": "side",
+              "text": "I broke Centurion Varro's siege line before Ironhold's outer gate. Captain Thale paid me from the city's purse."
+            }
+          }
+        ]
+      },
+      "again": {
+        "text": "Thale nods. \"Still standing. Good.\"",
+        "choices": [
+          {
+            "text": "\"Centurion Varro is dead. His line before your gate is broken.\"",
+            "requires": {
+              "act2.varro": "slain",
+              "act2.thale_reward": ""
+            },
+            "to": "thanks"
+          },
+          {
+            "text": "\"Who is Hadric?\"",
+            "to": "hadric"
+          },
+          {
+            "text": "\"What news?\"",
+            "to": "news"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "news": {
+        "text": "\"The dead come up out of the Barrow Fields every night, beyond the north gate. With Varro gone the Guard will open it for you, but no one else. Hadric's legion lies buried out there, and his old barracks under it.\""
+      },
+      "mirella_brought": {
+        "text": "Thale is waiting at the gate when Mirella walks in on her own feet. He hears her out, all of it, the grain and the graves, and when she is done he is quiet a long time. \"She'll stand trial,\" he says at last. \"A fair one. And you'll take this. Every captain of the Guard has sworn on it for two hundred years. I'd rather it went to someone who brought a thief in alive.\"",
+        "effects": [
+          {
+            "flag": "act2.thale_mirella",
+            "value": "given"
+          },
+          {
+            "flag": "act2.thale",
+            "value": "met"
+          },
+          {
+            "xp": 500
+          },
+          {
+            "gold": 300
+          },
+          {
+            "item": "ironhold_oathblade"
+          },
+          {
+            "journal": {
+              "id": "act2_mirella",
+              "title": "The Outlaw Queen",
+              "kind": "side",
+              "text": "I brought Red Mirella to Captain Thale alive. She will stand a fair trial, and Thale gave me the Guard's Oathblade for it. The Ironhold Guard stands with me now."
+            }
+          }
+        ],
+        "choices": [
+          {
+            "text": "\"Centurion Varro is dead. His line before your gate is broken.\"",
+            "requires": {
+              "act2.varro": "slain",
+              "act2.thale_reward": ""
+            },
+            "to": "thanks"
+          },
+          {
+            "text": "\"Who is Hadric?\"",
+            "to": "hadric"
+          },
+          {
+            "text": "\"What news?\"",
+            "to": "news"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "mirella_joined": {
+        "text": "Thale's eyes go to the red-fletched bow on your back, and his face closes. \"So it's true. You ran with Mirella.\" He steps back to let you through. \"The Guard will hold its walls. Don't ask it for anything more.\"",
+        "effects": [
+          {
+            "flag": "act2.thale_mirella",
+            "value": "cold"
+          },
+          {
+            "flag": "act2.thale",
+            "value": "met"
+          }
+        ],
+        "choices": [
+          {
+            "text": "\"Centurion Varro is dead. His line before your gate is broken.\"",
+            "requires": {
+              "act2.varro": "slain",
+              "act2.thale_reward": ""
+            },
+            "to": "thanks"
+          },
+          {
+            "text": "\"Who is Hadric?\"",
+            "to": "hadric"
+          },
+          {
+            "text": "\"What news?\"",
+            "to": "news"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ironhold_pell",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "act2.pell": "met"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "An old man copies names from a crumbling roll onto fresh vellum. \"Pell. I keep the founders' rolls. Somebody should, now the founders' heirs are all up on the walls.\"",
+        "effects": [
+          {
+            "flag": "act2.pell",
+            "value": "met"
+          }
+        ],
+        "choices": [
+          {
+            "text": "\"Who founded Ironhold?\"",
+            "to": "founders"
+          },
+          {
+            "text": "\"What are you copying?\"",
+            "to": "rolls"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "founders": {
+        "text": "\"Knights of the Pale Lantern, after the war against Ashur.\" He nods at the three stone figures. \"These three held the road to the Reliquary. The Order gave them this land and asked one thing in return: that Ironhold's gates never open to anyone who comes down from Mount Cindral.\" He frowns at his pen. \"An odd thing to ask of a city.\""
+      },
+      "rolls": {
+        "text": "\"The muster of the Iron Legion, the year it was buried. Hadric's name stands first. Somebody scratched it out, long ago.\" He turns the roll to the light. \"And somebody else wrote it back in.\"",
+        "effects": [
+          {
+            "flag": "act2.rolls",
+            "value": "read"
+          }
+        ]
+      },
+      "again": {
+        "text": "Pell looks up from the rolls. \"Back again?\"",
+        "choices": [
+          {
+            "text": "\"Who founded Ironhold?\"",
+            "to": "founders"
+          },
+          {
+            "text": "\"What are you copying?\"",
+            "to": "rolls"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ironhold_altar",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "A founders' altar of dressed stone, a lantern's iron cage set in it, cold. Kneeling here, you feel the choices of your road loosen, as if they could be made again.",
+        "choices": [
+          {
+            "text": "Let go of what I have chosen, and choose again (free, once this act).",
+            "requires": {
+              "act2.respec": ""
+            },
+            "effects": [
+              {
+                "respec": true
+              },
+              {
+                "flag": "act2.respec",
+                "value": "used"
+              }
+            ]
+          },
+          {
+            "text": "Let go of what I have chosen, and choose again ({cost} gold).",
+            "requires": {
+              "act2.respec": "used"
+            },
+            "effects": [
+              {
+                "payPerLevel": 20
+              },
+              {
+                "respec": true
+              }
+            ]
+          },
+          {
+            "text": "Rise and leave."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "march_poster",
+    "start": "start",
+    "openings": [
+      {
+        "node": "seen",
+        "requires": {
+          "act2.poster": "seen"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A wanted poster nailed to a post by the road, weathered pale: RED MIRELLA, OUTLAW. FOR THEFT FROM THE CITY STORES, ARSON AT THE TOLL BRIDGE AND THE MURDER OF A SERGEANT OF THE GUARD. 200 CROWNS, ALIVE. Under it, in charcoal: SHE FEEDS THE REFUGEES. THE GUARD DOESN'T.",
+        "effects": [
+          {
+            "flag": "act2.poster",
+            "value": "seen"
+          },
+          {
+            "xp": 60
+          },
+          {
+            "journal": {
+              "id": "act2_mirella",
+              "title": "The Outlaw Queen",
+              "kind": "side",
+              "text": "Wanted posters along the Iron March name Red Mirella, an outlaw, for theft from Ironhold's stores and the murder of a Guard sergeant. Under one, someone has written that she feeds the refugees and the Guard doesn't."
+            }
+          }
+        ]
+      },
+      "seen": {
+        "text": "The poster still hangs there: RED MIRELLA, 200 CROWNS, ALIVE. SHE FEEDS THE REFUGEES."
+      }
+    }
+  },
+  {
+    "id": "march_spring",
+    "start": "start",
+    "openings": [
+      {
+        "node": "taken",
+        "requires": {
+          "act2.part_spring": "found"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "Under the watchtower's fallen stones, something glints: a coiled brass mainspring, as long as your forearm and still wound tight. The legion's crossbows use nothing like it.",
+        "effects": [
+          {
+            "flag": "act2.part_spring",
+            "value": "found"
+          },
+          {
+            "item": "confessor_mainspring"
+          },
+          {
+            "xp": 80
+          },
+          {
+            "journal": {
+              "id": "act2_confessor",
+              "title": "The Clockwork Confessor",
+              "kind": "side",
+              "text": "I have found parts of some great brass clockwork: a mainspring, a governor cog stamped with the Lantern's sign, a speaking-grille. Whatever they came out of, it was made by the Order, and it was made to listen. Archivist Pell keeps the founders' corner in Ironhold; he may know what they belong to."
+            }
+          }
+        ]
+      },
+      "taken": {
+        "text": "Only rubble now, where the mainspring lay."
+      }
+    }
+  },
+  {
+    "id": "barrow_cog",
+    "start": "start",
+    "openings": [
+      {
+        "node": "taken",
+        "requires": {
+          "act2.part_cog": "found"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "Among the hounds' bones lies a toothed brass wheel stamped with the Pale Lantern. It turns as smoothly as if it were oiled yesterday.",
+        "effects": [
+          {
+            "flag": "act2.part_cog",
+            "value": "found"
+          },
+          {
+            "item": "confessor_governor"
+          },
+          {
+            "xp": 80
+          },
+          {
+            "journal": {
+              "id": "act2_confessor",
+              "title": "The Clockwork Confessor",
+              "kind": "side",
+              "text": "I have found parts of some great brass clockwork: a mainspring, a governor cog stamped with the Lantern's sign, a speaking-grille. Whatever they came out of, it was made by the Order, and it was made to listen. Archivist Pell keeps the founders' corner in Ironhold; he may know what they belong to."
+            }
+          }
+        ]
+      },
+      "taken": {
+        "text": "Bones, and the print in the earth where the cog lay."
+      }
+    }
+  },
+  {
+    "id": "barracks_grille",
+    "start": "start",
+    "openings": [
+      {
+        "node": "taken",
+        "requires": {
+          "act2.part_grille": "found"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "In a crate of the quartermaster's brass, wrapped in oilcloth, lies a face-plate pierced like a confessional screen. Behind it a tiny bellows and a reed: a voice, waiting for breath.",
+        "effects": [
+          {
+            "flag": "act2.part_grille",
+            "value": "found"
+          },
+          {
+            "item": "confessor_grille"
+          },
+          {
+            "xp": 80
+          },
+          {
+            "journal": {
+              "id": "act2_confessor",
+              "title": "The Clockwork Confessor",
+              "kind": "side",
+              "text": "I have found parts of some great brass clockwork: a mainspring, a governor cog stamped with the Lantern's sign, a speaking-grille. Whatever they came out of, it was made by the Order, and it was made to listen. Archivist Pell keeps the founders' corner in Ironhold; he may know what they belong to."
+            }
+          }
+        ]
+      },
+      "taken": {
+        "text": "The crate is empty but for straw."
+      }
+    }
+  },
+  {
+    "id": "ironhold_confessor",
+    "start": "start",
+    "openings": [
+      {
+        "node": "speaks",
+        "requires": {
+          "act2.confessor": "repaired"
+        }
+      },
+      {
+        "node": "stripped",
+        "requires": {
+          "act2.confessor": "scrapped"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A brass automaton in a confessor's stole sits slumped in the founders' corner, its chest open and empty, its face a blank plate. Pell looks up from his rolls: \"The Clockwork Confessor. The Order built it to hear the Iron Legion's confessions before they marched. It stopped the night Hadric fell, and nobody has known how to wake it since.\" Three things are missing from it: a mainspring, a governor cog and a speaking-grille.",
+        "effects": [
+          {
+            "journal": {
+              "id": "act2_confessor",
+              "title": "The Clockwork Confessor",
+              "kind": "side",
+              "text": "In Ironhold's founders' corner sits the Clockwork Confessor, a brass automaton the Order built to hear the Iron Legion's confessions. It stopped the night Hadric fell. It is missing its mainspring, its governor cog and its speaking-grille."
+            }
+          }
+        ],
+        "choices": [
+          {
+            "text": "Fit the parts and try to wind it. (Crafting)",
+            "requires": {
+              "act2.part_spring": "found",
+              "act2.part_cog": "found",
+              "act2.part_grille": "found"
+            },
+            "check": {
+              "skill": "Crafting",
+              "dc": 22,
+              "success": "repaired",
+              "failure": "jammed"
+            }
+          },
+          {
+            "text": "Strip it for its brass and gears instead.",
+            "requires": {
+              "act2.part_spring": "found",
+              "act2.part_cog": "found",
+              "act2.part_grille": "found"
+            },
+            "to": "scrap"
+          },
+          {
+            "text": "Leave it."
+          }
+        ]
+      },
+      "jammed": {
+        "text": "The spring slips its catch with a crack like a whip and unwinds itself across the bench. Nothing broken, but nothing wound either. It will take a steadier hand, or another try."
+      },
+      "scrap": {
+        "text": "Pell watches you take up the tools and says nothing. Gears, brass, a heart of fine springs: Hilde could do a great deal with it.",
+        "choices": [
+          {
+            "text": "Strip it.",
+            "to": "scrapped"
+          },
+          {
+            "text": "No. Leave it be."
+          }
+        ]
+      },
+      "scrapped": {
+        "text": "It comes apart easily, as if it had been waiting to. You leave the empty stole folded on the bench.",
+        "effects": [
+          {
+            "takeItem": "confessor_mainspring"
+          },
+          {
+            "takeItem": "confessor_governor"
+          },
+          {
+            "takeItem": "confessor_grille"
+          },
+          {
+            "flag": "act2.confessor",
+            "value": "scrapped"
+          },
+          {
+            "dust": 60,
+            "fragments": 15
+          },
+          {
+            "gold": 150
+          },
+          {
+            "xp": 500
+          },
+          {
+            "journal": {
+              "id": "act2_confessor",
+              "title": "The Clockwork Confessor",
+              "kind": "side",
+              "text": "I stripped the Clockwork Confessor for parts: brass, gears and fine springs enough for a great deal of crafting. Its stole lies folded on the bench in Ironhold."
+            }
+          }
+        ]
+      },
+      "repaired": {
+        "text": "The mainspring bites, the governor catches, and somewhere in the brass chest a bellows draws breath. The face-plate turns to you. \"Kneel, soldier. Say it, and be light.\" The voice is a reed and a whisper. \"I have heard three hundred years of nothing. Before that, I heard the Iron Legion. I heard Ser Hadric.\"",
+        "effects": [
+          {
+            "takeItem": "confessor_mainspring"
+          },
+          {
+            "takeItem": "confessor_governor"
+          },
+          {
+            "takeItem": "confessor_grille"
+          },
+          {
+            "flag": "act2.confessor",
+            "value": "repaired"
+          },
+          {
+            "xp": 600
+          },
+          {
+            "boon": "confessors_absolution"
+          },
+          {
+            "journal": {
+              "id": "act2_confessor",
+              "title": "The Clockwork Confessor",
+              "kind": "side",
+              "text": "I mended the Clockwork Confessor. It speaks again, in a voice like a reed, and it remembers the Iron Legion's last confessions, Ser Hadric's among them."
+            }
+          }
+        ],
+        "choices": [
+          {
+            "text": "\"What did Hadric confess?\"",
+            "to": "hadric"
+          },
+          {
+            "text": "Rise."
+          }
+        ]
+      },
+      "speaks": {
+        "text": "The Confessor's face-plate turns to you. \"Kneel, and be light.\"",
+        "choices": [
+          {
+            "text": "\"What did Hadric confess?\"",
+            "to": "hadric"
+          },
+          {
+            "text": "\"What did the founders confess?\"",
+            "to": "founders"
+          },
+          {
+            "text": "Rise."
+          }
+        ]
+      },
+      "hadric": {
+        "text": "\"He was not ashamed of the war. He was ashamed of the vault. The Order sent the legion to guard a road to Mount Cindral, and at the end of the road was a god they had killed. Hadric said: we were not guarding the world from it. We were guarding them from what they did.\"",
+        "choices": [
+          {
+            "text": "\"What did the founders confess?\"",
+            "to": "founders"
+          },
+          {
+            "text": "Rise."
+          }
+        ]
+      },
+      "founders": {
+        "text": "\"That they held the god down while the Lantern put out its light. That they were paid in land for it. That they built this city's gates to keep the mountain's road shut, and called it piety.\" The bellows sighs. \"Confessions are sealed. But the dead have no seal, and neither have I.\"",
+        "effects": [
+          {
+            "flag": "act2.revelation",
+            "value": "heard"
+          }
+        ]
+      },
+      "stripped": {
+        "text": "Only the Confessor's stole remains on the bench, folded."
+      }
+    }
+  },
+  {
+    "id": "barracks_tomb",
+    "start": "start",
+    "openings": [
+      {
+        "node": "empty",
+        "requires": {
+          "act2.oath": "found"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "Ser Hadric's tomb. The lid has been pushed aside from within, and the stone shelf is empty but for a journal and a greatsword laid where his hands would have been. The last page of the journal is in a careful hand: \"The Order asks me to hold the road to the mountain until the end of days. I swore to hold Ironhold's gate and come home to Edith. If I cannot do both, let the sword go back to her, and let her keep me.\"",
+        "effects": [
+          {
+            "flag": "act2.oath",
+            "value": "found"
+          },
+          {
+            "item": "hadrics_oath_sword"
+          },
+          {
+            "xp": 200
+          },
+          {
+            "journal": {
+              "id": "act2_oath",
+              "title": "Hadric's Oath",
+              "kind": "side",
+              "text": "In the Old Barracks' crypt, Ser Hadric's tomb lies open and empty. His journal asks that his sword go back to his wife, Edith. I have the sword. Her grave should be in the Barrow Fields; or the sword could be broken, and the oath with it."
+            }
+          }
+        ]
+      },
+      "empty": {
+        "text": "The tomb lies open and empty."
+      }
+    }
+  },
+  {
+    "id": "barrow_edith",
+    "start": "start",
+    "openings": [
+      {
+        "node": "returned",
+        "requires": {
+          "act2.hadric_relic": "returned"
+        }
+      },
+      {
+        "node": "broken",
+        "requires": {
+          "act2.hadric_relic": "broken"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A plain stone under a black yew: EDITH HADRIC. SHE KEPT THE HEARTH. The grass round it is untouched; the dead of the fields do not come here.",
+        "choices": [
+          {
+            "text": "Lay Hadric's sword on her grave.",
+            "requires": {
+              "act2.oath": "found",
+              "act2.hadric_relic": ""
+            },
+            "to": "return"
+          },
+          {
+            "text": "Break the sword across her headstone.",
+            "requires": {
+              "act2.oath": "found",
+              "act2.hadric_relic": ""
+            },
+            "to": "break"
+          },
+          {
+            "text": "Leave her in peace."
+          }
+        ]
+      },
+      "return": {
+        "text": "You lay the greatsword along the grave. For a moment the wind drops, and somewhere north, on the walls, something very old stops pacing.",
+        "effects": [
+          {
+            "takeItem": "hadrics_oath_sword"
+          },
+          {
+            "flag": "act2.hadric_relic",
+            "value": "returned"
+          },
+          {
+            "xp": 500
+          },
+          {
+            "boon": "widows_vigil"
+          },
+          {
+            "journal": {
+              "id": "act2_oath",
+              "title": "Hadric's Oath",
+              "kind": "side",
+              "text": "I laid Ser Hadric's sword on Edith's grave, as his journal asked. Whatever holds him to the walls now, it is not that oath."
+            }
+          }
+        ]
+      },
+      "break": {
+        "text": "The blade rings once against the stone and snaps. The oath goes out of the steel like heat; what is left in your hands is lighter, and hungrier.",
+        "effects": [
+          {
+            "takeItem": "hadrics_oath_sword"
+          },
+          {
+            "flag": "act2.hadric_relic",
+            "value": "broken"
+          },
+          {
+            "xp": 500
+          },
+          {
+            "item": "hadrics_severed_oath"
+          },
+          {
+            "journal": {
+              "id": "act2_oath",
+              "title": "Hadric's Oath",
+              "kind": "side",
+              "text": "I broke Ser Hadric's sword across his wife's headstone. The oath is gone from it, and the blade that is left holds nothing back."
+            }
+          }
+        ]
+      },
+      "returned": {
+        "text": "Hadric's sword lies along Edith's grave, rusting gently in the grass."
+      },
+      "broken": {
+        "text": "A crack runs down Edith's headstone where the sword broke against it."
+      }
+    }
+  },
+  {
+    "id": "siege_mirella",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "A woman in a red hood sits on the gatehouse stair with a longbow across her knees, and doesn't get up. \"The gallows-bird who broke Varro. My people watched you come up the March.\" She looks you over. \"The Guard want my head for feeding the refugees out of the city's stores. Thale wants a hanging, to make Ironhold feel safe while the dead sit on its walls. So. What do you want, Ashbound?\"",
+        "effects": [
+          {
+            "journal": {
+              "id": "act2_mirella",
+              "title": "The Outlaw Queen",
+              "kind": "side",
+              "text": "I found Red Mirella in the ruined gatehouse below the Siege Walls. The Guard want her hanged for feeding the refugees from Ironhold's stores. She is waiting to see whose side I am on."
+            }
+          }
+        ],
+        "choices": [
+          {
+            "text": "\"Come back to Ironhold and answer for it. Nobody else needs to bleed.\" (Diplomacy)",
+            "check": {
+              "skill": "Diplomacy",
+              "dc": 26,
+              "success": "surrenders",
+              "failure": "slips"
+            }
+          },
+          {
+            "text": "\"Come quietly, or I drag you.\" (Intimidation)",
+            "check": {
+              "skill": "Intimidation",
+              "dc": 26,
+              "success": "surrenders",
+              "failure": "slips"
+            }
+          },
+          {
+            "text": "\"I'll stand with you. The Guard can count their own sacks.\"",
+            "to": "join"
+          },
+          {
+            "text": "Leave her be, for now."
+          }
+        ]
+      },
+      "surrenders": {
+        "text": "Mirella looks at you a long moment, then unstrings her bow. \"Fine. But I walk in on my own feet, and Thale hears what I did with his grain.\" Her outlaws melt into the ruins without a word.",
+        "effects": [
+          {
+            "flag": "act2.faction",
+            "value": "guard"
+          },
+          {
+            "xp": 500
+          },
+          {
+            "journal": {
+              "id": "act2_mirella",
+              "title": "The Outlaw Queen",
+              "kind": "side",
+              "text": "Red Mirella gave herself up to me, to answer to the Ironhold Guard. She asked only that Captain Thale hear what she did with the city's grain. Her outlaws scattered into the ruins."
+            }
+          }
+        ]
+      },
+      "slips": {
+        "text": "\"No.\" She is on her feet and through the back of the gatehouse before you can move, and the ruins swallow her. A voice comes back out of the dark: \"Ask me nicer next time, Ashbound. If there is one.\"",
+        "effects": [
+          {
+            "flag": "act2.faction",
+            "value": "none"
+          },
+          {
+            "xp": 200
+          },
+          {
+            "journal": {
+              "id": "act2_mirella",
+              "title": "The Outlaw Queen",
+              "kind": "side",
+              "text": "Red Mirella slipped away from me in the ruins below the Siege Walls. Neither the Guard nor I will see her again soon."
+            }
+          }
+        ]
+      },
+      "join": {
+        "text": "Mirella grins and stands. \"Then take this. It never missed for me; let's see what it does for you.\" She presses her bow into your hands. \"When the Herald falls, the March feeds the refugees, not the Guard's cellars. My people will remember who stood with them.\"",
+        "effects": [
+          {
+            "flag": "act2.faction",
+            "value": "outlaws"
+          },
+          {
+            "xp": 500
+          },
+          {
+            "item": "mirellas_draw"
+          },
+          {
+            "journal": {
+              "id": "act2_mirella",
+              "title": "The Outlaw Queen",
+              "kind": "side",
+              "text": "I threw in with Red Mirella and her outlaws. She gave me her own bow. When the Herald falls, she means to feed the March's refugees, and the Guard will not thank me for it."
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ironhold_hale",
+    "start": "start",
+    "openings": [
+      {
+        "node": "saved",
+        "requires": {
+          "act2.refugees": "saved"
+        }
+      },
+      {
+        "node": "lost",
+        "requires": {
+          "act2.refugees": "lost"
+        }
+      },
+      {
+        "node": "cure",
+        "requires": {
+          "act1.sallow_relic": "cured"
+        }
+      },
+      {
+        "node": "nocure",
+        "requires": {
+          "act1.sallow_relic": "destroyed"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A nurse in a stained grey habit moves between the refugee tents. \"Rot-fever. They brought it up the March from the Mire, and it's in the water now. If anyone had a cure from Sallow's own rot... but nobody does.\""
+      },
+      "cure": {
+        "text": "Sister Hale stops you with a hand on your arm. \"You came up from the Mire? Then this is yours.\" She holds up a stoppered vial. \"Ysolde's cure, from the fort. Old Coll's boats ran it upriver with a letter: made from Sallow's own relic, it says, and the one who brought her the relic deserves the thanks. Half the yard is standing today because of it.\"",
+        "effects": [
+          {
+            "flag": "act2.refugees",
+            "value": "saved"
+          },
+          {
+            "xp": 400
+          },
+          {
+            "journal": {
+              "id": "act1_well",
+              "title": "The Well-Keeper's Daughter",
+              "kind": "side",
+              "text": "Ysolde made a cure of Sallow's Cinder Relic, and it reached Ironhold up the March. Sister Hale says half the refugees' yard is standing because of it."
+            }
+          }
+        ]
+      },
+      "nocure": {
+        "text": "\"Rot-fever,\" Sister Hale says. \"They say Sallow's relic was broken in the Mire, and good riddance to it. But it was the one thing that might have made a cure.\" She looks at the tents. \"We bury two a day.\"",
+        "effects": [
+          {
+            "flag": "act2.refugees",
+            "value": "lost"
+          },
+          {
+            "journal": {
+              "id": "act1_well",
+              "title": "The Well-Keeper's Daughter",
+              "kind": "side",
+              "text": "In Ironhold the refugees are dying of rot-fever. Sister Hale says Sallow's relic, the one I broke, might have made a cure."
+            }
+          }
+        ]
+      },
+      "saved": {
+        "text": "\"They're mending,\" Sister Hale says. \"Thanks to you, and to Ysolde.\""
+      },
+      "lost": {
+        "text": "Sister Hale doesn't look up from the cot she is kneeling by."
+      }
+    }
+  },
+  {
+    "id": "oriel_ilse",
+    "start": "start",
+    "openings": [
+      {
+        "node": "after_choir",
+        "requires": {
+          "act3.choir": "slain"
+        }
+      },
+      {
+        "node": "again",
+        "requires": {
+          "act3.ilse": "met"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "An old woman in white sits very straight by the cold brazier, her hands folded on a crook. \"You came up the pass from the Iron March. Then Hadric is dead.\" She closes her eyes a moment. \"Good. He was a decent man once. I am Ilse, abbess of this house, for what that is worth now that our bells do not ring.\"",
+        "effects": [
+          {
+            "flag": "act3.ilse",
+            "value": "met"
+          },
+          {
+            "journal": {
+              "id": "act3_rest",
+              "title": "Saint Oriel's Rest",
+              "kind": "main",
+              "text": "Past the broken walls the road climbed the Frostbitten Pass into the frozen cliffs, to the Rest of the Monastery of Saint Oriel. Abbess Ilse keeps it. The bells have not rung since three of her sisters went up the Bell Tower to pray when the ash fell, and came down singing: the Choir of Whispers, the third Herald."
+            }
+          }
+        ],
+        "choices": [
+          {
+            "text": "\"Why don't the bells ring?\"",
+            "to": "choir"
+          },
+          {
+            "text": "\"What does the house need?\"",
+            "to": "need"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "choir": {
+        "text": "\"Three sisters of this house went up the Bell Tower to pray when the ash first fell on the cliffs. They came down singing.\" Her knuckles whiten on the crook. \"They call themselves the Choir now. When they sing, my brothers walk out into the snow at night, smiling, and do not come back. One of them is my sister. The youngest.\""
+      },
+      "need": {
+        "text": "\"The north door opens on the cliff stair to the Hollow Woods, and the woods are full of things that are not there when you look twice. Under them lie our catacombs, and from the catacombs the old stair climbs to the Bell Tower.\" She looks at the rope scar on your neck, then at your chest, as if she could see what is in it. \"When the Choir came down they burned our library, and the wind took the pages over the mountain. And you will want to be careful what you carry up there. The Choir listens for things like you.\""
+      },
+      "again": {
+        "text": "Abbess Ilse inclines her head.",
+        "choices": [
+          {
+            "text": "\"Tell me of the Choir again.\"",
+            "to": "choir"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "after_choir": {
+        "text": "Abbess Ilse is standing at the window when you come in, and does not turn. \"I heard the bells,\" she says. \"Nobody rang them. They rang anyway, three times, when you were up there.\" Her shoulders shake once and are still. \"Was it quick? For Cille?\" She does not wait for an answer. \"Thank you. The Choir sang of a heart in the mountain, and the man who wants it. Mount Cindral lies over the cliffs. You know the way now.\"",
+        "effects": [
+          {
+            "journal": {
+              "id": "act3_rest",
+              "title": "Saint Oriel's Rest",
+              "kind": "main",
+              "text": "The Choir of Whispers is silent and the bells of Saint Oriel's Rest rang again. Abbess Ilse grieves for her sister Cille. The Choir sang of a heart in the mountain and the master who wants it: the road over the cliffs leads to Mount Cindral."
+            }
+          }
+        ],
+        "choices": [
+          {
+            "text": "Leave."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "oriel_caddoc",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "act3.caddoc": "met"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A lean monk in a patched habit is scrubbing the cloister flags on his knees, though they are already clean. \"Caddoc. Brother Caddoc, they still call me.\" He doesn't stop scrubbing. \"I came up from the Mire years ago with a great deal to atone for. You'll be going north, through the woods. I know them; I kept the hermitage there before the Choir. I'll go ahead and wait for you.\" He hesitates. \"There's something I should tell you first. Not here.\"",
+        "effects": [
+          {
+            "flag": "act3.caddoc",
+            "value": "met"
+          },
+          {
+            "journal": {
+              "id": "act3_penitent",
+              "title": "The Penitent",
+              "kind": "side",
+              "text": "Brother Caddoc, a penitent at Saint Oriel's Rest, has gone ahead of me into the Hollow Woods, to his old hermitage. He says there is something he should confess to me first, but not at the Rest."
+            }
+          }
+        ]
+      },
+      "again": {
+        "text": "Caddoc looks up from the flagstones. \"The hermitage, in the woods. I'll be there. And I'll tell you. I swear it.\""
+      }
+    }
+  },
+  {
+    "id": "oriel_altar",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "A cloister altar of grey stone, a silver bell set in it, silent. Kneeling here, you feel the choices of your road loosen, as if they could be made again.",
+        "choices": [
+          {
+            "text": "Let go of what I have chosen, and choose again (free, once this act).",
+            "requires": {
+              "act3.respec": ""
+            },
+            "effects": [
+              {
+                "respec": true
+              },
+              {
+                "flag": "act3.respec",
+                "value": "used"
+              }
+            ]
+          },
+          {
+            "text": "Let go of what I have chosen, and choose again ({cost} gold).",
+            "requires": {
+              "act3.respec": "used"
+            },
+            "effects": [
+              {
+                "payPerLevel": 20
+              },
+              {
+                "respec": true
+              }
+            ]
+          },
+          {
+            "text": "Rise and leave."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "pass_hermit",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "act3.teodor": "met"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "An old man in three coats sits over a fire no bigger than a hat, feeding it one twig at a time. \"Sit, sit. Not too close; it's mine.\" He squints at you. \"Teodor. I keep the ledge. Forty winters. The pass kills the ones who keep walking, you know. Walk from fire to fire, and when the white comes down the mountain, stop at the nearest and wait it out.\"",
+        "effects": [
+          {
+            "flag": "act3.teodor",
+            "value": "met"
+          }
+        ],
+        "choices": [
+          {
+            "text": "\"What are the things on the road?\"",
+            "to": "things"
+          },
+          {
+            "text": "\"Have you seen pages blowing about? Burned ones.\"",
+            "to": "pages"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "things": {
+        "text": "\"The crawlers came up out of the ice-falls when the ash fell. The horned ones were the Order's, once; they kept the stair for the monks, and now they keep it from everybody. The pale ones are drowned pilgrims, frozen on the road. Fire, friend. All of them hate fire.\""
+      },
+      "pages": {
+        "text": "\"Oh, aye. The wind brought them down from the monastery the night the bells stopped. Black at the edges, and the writing's still warm to the touch, if you'll believe it. I left them where they fell. Seemed wrong to burn them twice.\" He nods up the road. \"One by the horned ones' stair. One near here.\""
+      },
+      "again": {
+        "text": "Teodor feeds his fire another twig. \"Fire to fire, friend.\"",
+        "choices": [
+          {
+            "text": "\"Tell me about the things on the road again.\"",
+            "to": "things"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "library_page_1",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "act3.page.1": "read"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A page of a chronicle, its edges burned black, held down by a stone. Page one of the Chronicle of Saint Oriel: \"...in the year the rivers burned, a shepherd named Ashur went up into the fire on the mountain to bring down his flock, and walked out of it with the fire in his chest. The grass came up green behind him in the ash...\" The rest is burned away.",
+        "effects": [
+          {
+            "flag": "act3.page.1",
+            "value": "read"
+          },
+          {
+            "xp": 150
+          }
+        ]
+      },
+      "again": {
+        "text": "Page one of the Chronicle of Saint Oriel. \"...in the year the rivers burned, a shepherd named Ashur went up into the fire on the mountain to bring down his flock, and walked out of it with the fire in his chest. The grass came up green behind him in the ash...\" The rest is burned away."
+      }
+    }
+  },
+  {
+    "id": "library_page_2",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "act3.page.2": "read"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A page of a chronicle, its edges burned black, held down by a stone. Page two of the Chronicle of Saint Oriel: \"...where he walked the dead fields greened and the sick rose up. They called him the Renewer, and he let them, because he was young and it pleased him. He was never a god, Oriel wrote. He was a man carrying a thing too large for him...\"",
+        "effects": [
+          {
+            "flag": "act3.page.2",
+            "value": "read"
+          },
+          {
+            "xp": 150
+          }
+        ]
+      },
+      "again": {
+        "text": "Page two of the Chronicle of Saint Oriel. \"...where he walked the dead fields greened and the sick rose up. They called him the Renewer, and he let them, because he was young and it pleased him. He was never a god, Oriel wrote. He was a man carrying a thing too large for him...\""
+      }
+    }
+  },
+  {
+    "id": "library_page_3",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "act3.page.3": "read"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A page of a chronicle, its edges burned black, held down by a stone. Page three of the Chronicle of Saint Oriel: \"...every hundred years the fire burned through him. He died in it, and rose from his own ash a young man again, and remembered less each time. In the fourth burning he forgot his mother's name. In the sixth, his own...\"",
+        "effects": [
+          {
+            "flag": "act3.page.3",
+            "value": "read"
+          },
+          {
+            "xp": 150
+          }
+        ]
+      },
+      "again": {
+        "text": "Page three of the Chronicle of Saint Oriel. \"...every hundred years the fire burned through him. He died in it, and rose from his own ash a young man again, and remembered less each time. In the fourth burning he forgot his mother's name. In the sixth, his own...\""
+      }
+    }
+  },
+  {
+    "id": "library_page_4",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "act3.page.4": "read"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A page of a chronicle, its edges burned black, held down by a stone. Page four of the Chronicle of Saint Oriel: \"...and so the Order of the Pale Lantern was founded, to keep his ashes safe between the burnings, that he might rise. We were his wardens, not his jailers. Let whoever reads this remember that...\"",
+        "effects": [
+          {
+            "flag": "act3.page.4",
+            "value": "read"
+          },
+          {
+            "xp": 150
+          }
+        ]
+      },
+      "again": {
+        "text": "Page four of the Chronicle of Saint Oriel. \"...and so the Order of the Pale Lantern was founded, to keep his ashes safe between the burnings, that he might rise. We were his wardens, not his jailers. Let whoever reads this remember that...\""
+      }
+    }
+  },
+  {
+    "id": "library_page_5",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "act3.page.5": "read"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A page of a chronicle, its edges burned black, held down by a stone. Page five of the Chronicle of Saint Oriel: \"...in the ninth burning he did not rise clean. He rose screaming, and the fire would not go back into him. It ran down the mountain for a year. The High Lector of that day ruled that he must not be let rise again...\"",
+        "effects": [
+          {
+            "flag": "act3.page.5",
+            "value": "read"
+          },
+          {
+            "xp": 150
+          }
+        ]
+      },
+      "again": {
+        "text": "Page five of the Chronicle of Saint Oriel. \"...in the ninth burning he did not rise clean. He rose screaming, and the fire would not go back into him. It ran down the mountain for a year. The High Lector of that day ruled that he must not be let rise again...\""
+      }
+    }
+  },
+  {
+    "id": "library_page_6",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "act3.page.6": "read"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A page of a chronicle, its edges burned black, held down by a stone. Page six of the Chronicle of Saint Oriel: \"...they did not kill a god. They killed a man who had carried the world's fire for nine hundred years, because he could not carry it any longer and no one would take it from him. They put the fire in a reliquary, with his bones, and called it a victory...\"",
+        "effects": [
+          {
+            "flag": "act3.page.6",
+            "value": "read"
+          },
+          {
+            "xp": 150
+          }
+        ]
+      },
+      "again": {
+        "text": "Page six of the Chronicle of Saint Oriel. \"...they did not kill a god. They killed a man who had carried the world's fire for nine hundred years, because he could not carry it any longer and no one would take it from him. They put the fire in a reliquary, with his bones, and called it a victory...\""
+      }
+    }
+  },
+  {
+    "id": "library_page_7",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "act3.page.7": "read"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A page of a chronicle, its edges burned black, held down by a stone. Page seven of the Chronicle of Saint Oriel: \"...Saint Oriel believed the fire could be carried again, by one willing to take it into their own chest as he did, and burn as he burned. The High Lector ordered this chronicle burned, so that no one would ever try.\" Below, in a newer hand: \"They did not burn it well enough. - I.\"",
+        "effects": [
+          {
+            "flag": "act3.page.7",
+            "value": "read"
+          },
+          {
+            "xp": 150
+          }
+        ]
+      },
+      "again": {
+        "text": "Page seven of the Chronicle of Saint Oriel. \"...Saint Oriel believed the fire could be carried again, by one willing to take it into their own chest as he did, and burn as he burned. The High Lector ordered this chronicle burned, so that no one would ever try.\" Below, in a newer hand: \"They did not burn it well enough. - I.\""
+      }
+    }
+  },
+  {
+    "id": "woods_caddoc",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "act3.caddoc_woods": "met"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "Brother Caddoc is sweeping snow off the hermitage step. \"You came. Good.\" He leans on the broom. \"Mind the woods. The stalkers you'll hear before you see, if you see them at all; stand still and look, or let them come to you. And the walkers among the stones are mostly not there. Trust your eyes less than your gut.\" He looks north. \"The catacombs are past the hanging grove. I'll tell you there. It's where it happened.\"",
+        "effects": [
+          {
+            "flag": "act3.caddoc_woods",
+            "value": "met"
+          },
+          {
+            "journal": {
+              "id": "act3_penitent",
+              "title": "The Penitent",
+              "kind": "side",
+              "text": "I found Brother Caddoc at his old hermitage in the Hollow Woods. He will make his confession in the Catacombs of Oriel, beyond the woods: \"where it happened\"."
+            }
+          }
+        ]
+      },
+      "again": {
+        "text": "\"The catacombs,\" Caddoc says. \"Past the hanging grove. I'll go ahead.\""
+      }
+    }
+  },
+  {
+    "id": "catacombs_caddoc",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "Brother Caddoc kneels in the last of the penitents' cells, facing the wall. He speaks without turning. \"Fifteen years ago I was a novice here, and I had a fine voice. A man came up the pass in a lector's grey and taught me a hymn. He said it was older than the Order. I taught it to three sisters who sang in the Bell Tower.\" His shoulders shake. \"That hymn is the one they sing now. I opened the door the Choir came through. Then I ran to the Mire, and I sang it for Mother Sallow too.\"",
+        "choices": [
+          {
+            "text": "\"You're not telling me all of it.\" (Perception)",
+            "check": {
+              "skill": "Perception",
+              "dc": 31,
+              "success": "all_of_it",
+              "failure": "that_is_all"
+            }
+          },
+          {
+            "text": "\"You came back to put it right. I forgive you, Caddoc.\"",
+            "to": "forgive"
+          },
+          {
+            "text": "\"Get out of my sight. Go, and don't follow me.\"",
+            "to": "banish"
+          }
+        ]
+      },
+      "all_of_it": {
+        "text": "Caddoc is quiet a long time. \"I still hear them,\" he says at last. \"When I sleep. They ask me to come up the tower and sing the last verse with them. I don't know what I'll do when we're standing under it. That is the truth, all of it.\"",
+        "choices": [
+          {
+            "text": "\"Then I'll be there to stop you. I forgive you.\"",
+            "to": "forgive"
+          },
+          {
+            "text": "\"Then I can't have you near me. Go.\"",
+            "to": "banish"
+          }
+        ]
+      },
+      "that_is_all": {
+        "text": "\"That's all of it,\" Caddoc says, and does not look at you.",
+        "choices": [
+          {
+            "text": "\"I forgive you, Caddoc.\"",
+            "to": "forgive"
+          },
+          {
+            "text": "\"Get out of my sight. Go, and don't follow me.\"",
+            "to": "banish"
+          }
+        ]
+      },
+      "forgive": {
+        "text": "Caddoc turns. His face is wet. \"Then I'll stand with you under the tower, and I'll sing them something else.\" He presses your hand between his. \"Go up the stair when it's clear. I'll go back to the Rest and pray that I'm worth it.\"",
+        "effects": [
+          {
+            "flag": "act3.penitent",
+            "value": "forgiven"
+          },
+          {
+            "xp": 900
+          },
+          {
+            "boon": "penitents_grace"
+          },
+          {
+            "journal": {
+              "id": "act3_penitent",
+              "title": "The Penitent",
+              "kind": "side",
+              "text": "In the Catacombs of Oriel Brother Caddoc confessed that he taught the Choir their hymn, fifteen years ago, from a lector in grey. I forgave him. He has gone back to the Rest, and means to stand with me under the Bell Tower."
+            }
+          }
+        ]
+      },
+      "banish": {
+        "text": "Caddoc gets up slowly, and goes past you without a word. At the end of the corridor he stops. \"They'll take me in, you know. They always said they would.\" Then he is gone into the dark.",
+        "effects": [
+          {
+            "flag": "act3.penitent",
+            "value": "banished"
+          },
+          {
+            "xp": 900
+          },
+          {
+            "journal": {
+              "id": "act3_penitent",
+              "title": "The Penitent",
+              "kind": "side",
+              "text": "In the Catacombs of Oriel Brother Caddoc confessed that he taught the Choir their hymn, fifteen years ago, from a lector in grey. I sent him away. He said the Choir would take him in."
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "oriel_caddoc_forgiven",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "Caddoc is scrubbing the flags again, but he is humming under his breath, and the tune is not the Choir's. \"When you go up the tower, I'll be on the stair behind you.\""
+      }
+    }
+  },
+  {
+    "id": "tower_note_agnete",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "A hymnal on a shelf above a narrow cot, its margins full of a careful hand. \"Agnete takes the low part. Mother Abbess says her voice is the tarn under the ice, and gave her a candle of blue wax for her vigils, the colour of it.\""
+      },
+      "unsolved": {
+        "text": "A hymnal on a shelf above a narrow cot, its margins full of a careful hand. \"Agnete takes the low part. Mother Abbess says her voice is the tarn under the ice, and gave her a candle of blue wax for her vigils, the colour of it.\"",
+        "effects": [
+          {
+            "journal": {
+              "id": "act3_candles",
+              "title": "Three Candles",
+              "kind": "side",
+              "text": "In the Bell Tower's chapel three candles burn that will not go out, on a stand for each of the three sisters, and not one of them on its own. The sisters' cells say what colour each one's candle was. A brass snuffer lies by the chapel door: snuffing them would be quicker."
+            }
+          }
+        ]
+      }
+    },
+    "openings": [
+      {
+        "node": "unsolved",
+        "requires": {
+          "act3.candles": ""
+        }
+      }
+    ]
+  },
+  {
+    "id": "tower_note_brigid",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "A hymnal, swollen with damp, a dried sprig pressed between its pages. \"Brigid's candle is green, for the moss on the spring stones. She says it is the only thing that grows up here that the snow cannot kill.\""
+      },
+      "unsolved": {
+        "text": "A hymnal, swollen with damp, a dried sprig pressed between its pages. \"Brigid's candle is green, for the moss on the spring stones. She says it is the only thing that grows up here that the snow cannot kill.\"",
+        "effects": [
+          {
+            "journal": {
+              "id": "act3_candles",
+              "title": "Three Candles",
+              "kind": "side",
+              "text": "In the Bell Tower's chapel three candles burn that will not go out, on a stand for each of the three sisters, and not one of them on its own. The sisters' cells say what colour each one's candle was. A brass snuffer lies by the chapel door: snuffing them would be quicker."
+            }
+          }
+        ]
+      }
+    },
+    "openings": [
+      {
+        "node": "unsolved",
+        "requires": {
+          "act3.candles": ""
+        }
+      }
+    ]
+  },
+  {
+    "id": "tower_note_cille",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "A hymnal with a child's drawing of a bell inside its cover. \"Cille, our youngest, has the high part, and a candle of gold for the morning. Her sister Ilse calls her 'little bell'.\""
+      },
+      "unsolved": {
+        "text": "A hymnal with a child's drawing of a bell inside its cover. \"Cille, our youngest, has the high part, and a candle of gold for the morning. Her sister Ilse calls her 'little bell'.\"",
+        "effects": [
+          {
+            "journal": {
+              "id": "act3_candles",
+              "title": "Three Candles",
+              "kind": "side",
+              "text": "In the Bell Tower's chapel three candles burn that will not go out, on a stand for each of the three sisters, and not one of them on its own. The sisters' cells say what colour each one's candle was. A brass snuffer lies by the chapel door: snuffing them would be quicker."
+            }
+          }
+        ]
+      }
+    },
+    "openings": [
+      {
+        "node": "unsolved",
+        "requires": {
+          "act3.candles": ""
+        }
+      }
+    ]
+  },
+  {
+    "id": "tower_snuffer",
+    "start": "start",
+    "openings": [
+      {
+        "node": "rekindled",
+        "requires": {
+          "act3.candles": "rekindled"
+        }
+      },
+      {
+        "node": "cold",
+        "requires": {
+          "act3.candles": "snuffed"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A brass snuffer on a long chain hangs by the chapel door, green with age. Across the chapel the three candles burn on, each on its stand, each flame as still as if it were painted.",
+        "choices": [
+          {
+            "text": "Snuff out all three candles.",
+            "to": "snuff"
+          },
+          {
+            "text": "Leave them burning."
+          }
+        ]
+      },
+      "snuff": {
+        "text": "The flames fight the snuffer like living things, and one by one they go out. For a moment you hear three voices cry out far above you; then only the wind. The wax is cold at once, as if it had never burned.",
+        "effects": [
+          {
+            "flag": "act3.candles",
+            "value": "snuffed"
+          },
+          {
+            "xp": 450
+          },
+          {
+            "journal": {
+              "id": "act3_candles",
+              "title": "Three Candles",
+              "kind": "side",
+              "text": "In the Bell Tower's chapel I snuffed out the three candles that would not go out. Three voices cried out far above me. Whatever held the sisters to their candles is weaker now; I doubt it is gone."
+            }
+          }
+        ]
+      },
+      "rekindled": {
+        "text": "The three candles burn white and still, each on her own sister's stand. The snuffer hangs untouched."
+      },
+      "cold": {
+        "text": "The three candles stand cold. Nothing will light them again."
+      }
+    }
+  },
+  {
+    "id": "tower_caddoc",
+    "start": "start",
+    "openings": [
+      {
+        "node": "after",
+        "requires": {
+          "act3.choir": "slain"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "Brother Caddoc waits at the foot of the stair with his staff across his knees. \"I said I would stand with you under the tower.\" He looks up into the dark, where the singing is. \"They will sing the last verse when they are losing. When they do, listen for me. I know a hymn of my own now.\""
+      },
+      "after": {
+        "text": "Caddoc is weeping and smiling at once. \"I heard them stop. I heard Cille stop.\" He gets up stiffly. \"I'll go down and tell the abbess. Someone should hear it from a friend.\""
+      }
+    }
+  },
+  {
+    "id": "ember_corwen",
+    "start": "start",
+    "openings": [
+      {
+        "node": "egg",
+        "requires": {
+          "act4.egg": "taken"
+        }
+      },
+      {
+        "node": "after_wyrm",
+        "requires": {
+          "act4.vorthrax": "slain"
+        }
+      },
+      {
+        "node": "again",
+        "requires": {
+          "act4.corwen": "met"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A tall woman in soot-black plate turns from the map she has pinned to the table with a knife. A pale lantern is worked in silver on her breastplate, scratched almost away. \"A rope scar, and the Choir's silence on the wind behind you. Then you are the one Abbess Ilse wrote of.\" She looks at your chest a long moment. \"I am Corwen, Warden of what is left of the Order of the Pale Lantern. Forty knights, a forge and a beacon we dare not light. Welcome to the Ember Gate.\"",
+        "effects": [
+          {
+            "flag": "act4.corwen",
+            "value": "met"
+          },
+          {
+            "journal": {
+              "id": "act4_camp",
+              "title": "The Ember Gate",
+              "kind": "main",
+              "text": "Over the cliffs from the Bell Tower, the road came down to the ash plain under Mount Cindral, where the last knights of the Order of the Pale Lantern hold a burned chapter-house: the Ember Gate camp. Warden Corwen keeps it. Vorthrax the Cinderwyrm, the fourth Herald, nests in the mountain above the Ember Gate, and below the gate lies the Reliquary, where the Order kept Ashur's bones."
+            }
+          }
+        ],
+        "choices": [
+          {
+            "text": "\"What lies up the mountain?\"",
+            "to": "wyrm"
+          },
+          {
+            "text": "\"Tell me about the beacon.\"",
+            "to": "beacon"
+          },
+          {
+            "text": "\"Why do you look at my chest like that?\"",
+            "to": "heart"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "wyrm": {
+        "text": "\"Vorthrax. A drake that has eaten nothing but Ashur's ash for three years, and grown on it until the mountain is his nest. He sleeps above the Ember Gate, and the gate is the only way down into the Reliquary.\" She taps the map: ash, then three red lines, then a black mouth in the mountain. \"The wastes first, then the lava rivers, then the nest. The Prophet's Inquisitors go up and down that road as if they own it. They do.\"",
+        "choices": [
+          {
+            "text": "\"Tell me about the beacon.\"",
+            "to": "beacon"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "beacon": {
+        "text": "\"On the tower in the corner. Light it, and every knight of the Order left alive between here and the sea will see it and come: there are more of us than forty, scattered. The Prophet will see it too, and know where we are.\" She shrugs. \"Keep it dark, and we stay forty, and quiet. The Order built this mountain's halls; we know ways in that the Inquisitors have never found. It is your fight. You choose.\"",
+        "choices": [
+          {
+            "text": "\"What lies up the mountain?\"",
+            "to": "wyrm"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "heart": {
+        "text": "\"Because Ilse wrote that something is in it, and I can feel it from here, like standing near a forge.\" She does not look away. \"The Order killed a god in this mountain. We kept his bones under it for three hundred years. Then a High Lector of ours, Malachar Vane, broke the seals and took them down to the Throne. Whatever is in your chest, he wants it. So be careful how close you let him get.\"",
+        "choices": [
+          {
+            "text": "\"Tell me about the beacon.\"",
+            "to": "beacon"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "again": {
+        "text": "Warden Corwen looks up from her map. \"Still breathing. Good.\"",
+        "choices": [
+          {
+            "text": "\"Tell me of the mountain again.\"",
+            "to": "wyrm"
+          },
+          {
+            "text": "\"Tell me about the beacon.\"",
+            "to": "beacon"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "egg": {
+        "text": "Corwen's eyes go to the black egg under your arm, and stay there. \"That is his. Vorthrax's.\" She breathes out slowly. \"Brannoc's forge is hot enough to hatch it. Or the anvil is hard enough to end it. Whatever comes out of that shell will be loyal to the first warm thing it sees, if it is young enough. That would be you.\"",
+        "choices": [
+          {
+            "text": "Lay it in Brannoc's forge, and wait.",
+            "to": "hatched"
+          },
+          {
+            "text": "\"Not yet.\""
+          }
+        ]
+      },
+      "hatched": {
+        "text": "The egg cracks in the coals with a sound like a bell, and a drake no longer than your arm climbs out, black and glowing at the seams, and shakes the ash off its wings. It looks at the forge, at Brannoc, at Corwen; then it looks at you, and climbs your leg and settles on your shoulder, hot as a kettle. \"Well,\" says Corwen. \"There is one Herald's get that will not grow up to burn us.\"",
+        "effects": [
+          {
+            "takeItem": "wyrm_egg"
+          },
+          {
+            "flag": "act4.egg",
+            "value": "hatched"
+          },
+          {
+            "boon": "drakeling"
+          },
+          {
+            "xp": 1200
+          },
+          {
+            "journal": {
+              "id": "act4_egg",
+              "title": "The Wyrm's Egg",
+              "kind": "side",
+              "text": "I took Vorthrax's egg from his nest and hatched it in the forge at the Ember Gate. The drakeling follows me now, and fights for me. Corwen thinks it will not grow up to burn us. I hope she is right; I hope its father never learns of it."
+            }
+          }
+        ],
+        "choices": [
+          {
+            "text": "Leave."
+          }
+        ]
+      },
+      "after_wyrm": {
+        "text": "Corwen is on the tower when you come back down the road, watching the mountain. The red light at its top has gone out. \"Forty knights have watched that light for three years,\" she says, without turning. \"I thought I would feel more than tired.\" She comes down the stair and grips your arm. \"The Reliquary is open. The Prophet is under it, at the Throne, and he has been waiting for you the whole time. Go when you are ready. Not before.\"",
+        "effects": [
+          {
+            "journal": {
+              "id": "act4_camp",
+              "title": "The Ember Gate",
+              "kind": "main",
+              "text": "Vorthrax the Cinderwyrm is dead and the Ember Gate is open. Below it the Reliquary goes down to the Cinder Throne, where Malachar Vane waits for what is in my chest. Warden Corwen says to go when I am ready, and not before."
+            }
+          }
+        ],
+        "choices": [
+          {
+            "text": "\"Tell me about the beacon.\"",
+            "to": "beacon"
+          },
+          {
+            "text": "Leave."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ember_altar",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "A stone altar under a hooded lantern, scorched black. Kneeling here, you feel the choices of your road loosen, as if they could be made again.",
+        "choices": [
+          {
+            "text": "Let go of what I have chosen, and choose again (free, once this act).",
+            "requires": {
+              "act4.respec": ""
+            },
+            "effects": [
+              {
+                "respec": true
+              },
+              {
+                "flag": "act4.respec",
+                "value": "used"
+              }
+            ]
+          },
+          {
+            "text": "Let go of what I have chosen, and choose again ({cost} gold).",
+            "requires": {
+              "act4.respec": "used"
+            },
+            "effects": [
+              {
+                "payPerLevel": 20
+              },
+              {
+                "respec": true
+              }
+            ]
+          },
+          {
+            "text": "Rise and leave."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ember_beacon",
+    "start": "start",
+    "openings": [
+      {
+        "node": "lit",
+        "requires": {
+          "act4.beacon": "lit"
+        }
+      },
+      {
+        "node": "dark",
+        "requires": {
+          "act4.beacon": "dark"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "The Order's beacon: a great iron basket on the tower's top, stacked with pitch-soaked wood and old bones, and a jar of the Pale Lantern's oil beside it. One spark and it would be seen from the sea.",
+        "choices": [
+          {
+            "text": "Light the beacon. Call the Order.",
+            "to": "light"
+          },
+          {
+            "text": "Keep it dark. Go quietly.",
+            "to": "keep"
+          },
+          {
+            "text": "Leave it for now."
+          }
+        ]
+      },
+      "light": {
+        "text": "The oil catches with a white flame, not red, and the pyre goes up pale as moonlight. Far off along the mountains, first one and then another pale light answers. Below you the knights are shouting; Corwen is not. She is looking north, at the mountain, where a red light has opened like an eye.",
+        "effects": [
+          {
+            "flag": "act4.beacon",
+            "value": "lit"
+          },
+          {
+            "boon": "last_lantern"
+          },
+          {
+            "xp": 1200
+          },
+          {
+            "journal": {
+              "id": "act4_lantern",
+              "title": "The Last Lantern",
+              "kind": "side",
+              "text": "I lit the Order's beacon at the Ember Gate. Lights answered along the mountains: the last knights of the Pale Lantern are coming. Corwen says they will go ahead of me into the Reliquary. The Prophet saw it too."
+            }
+          }
+        ]
+      },
+      "keep": {
+        "text": "You leave the oil in its jar. Corwen, watching from the stair, nods once. \"Then we go the old way. The Order built the Reliquary; there is a passage the Inquisitors have never found, round their muster hall. When you are inside, look for a ward on the west wall of the Hall of Vigil. It will know us.\"",
+        "effects": [
+          {
+            "flag": "act4.beacon",
+            "value": "dark"
+          },
+          {
+            "boon": "the_quiet_way"
+          },
+          {
+            "xp": 1200
+          },
+          {
+            "journal": {
+              "id": "act4_lantern",
+              "title": "The Last Lantern",
+              "kind": "side",
+              "text": "I kept the Order's beacon dark. Corwen will not call the scattered knights; instead she told me of the Order's old stealth way in the Reliquary, a passage round the Inquisitors' muster, behind a ward on the west wall of the Hall of Vigil."
+            }
+          }
+        ]
+      },
+      "lit": {
+        "text": "The beacon burns white on the tower, and the answering lights burn along the mountains."
+      },
+      "dark": {
+        "text": "The beacon stands cold. The knights keep their voices low."
+      }
+    }
+  },
+  {
+    "id": "wastes_patrol_note",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "A letter in a dead knight's glove, the ink run with sweat. \"Edda: the storms come every hour now. In the ash you cannot see your own hand, and they cannot see you either, which is the only mercy. Stay close to the braziers, the Warden says; the Inquisitors' captains keep their packs tight and fight like one beast, and when a captain falls the rest lose heart. Kill the captain. I would like to tell you we did.\"",
+        "effects": [
+          {
+            "flag": "act4.patrol",
+            "value": "read"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "rivers_foundry_ledger",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "A ledger in the Order's hand, its last pages in another: neat, small, cold. \"Received of the foundry: forty chains, cold-forged, Ashur's ash in the iron. To be sent down to the Throne for the binding. The vessel is not yet come. The Prophet is patient. Feed the wyrm.\"",
+        "effects": [
+          {
+            "flag": "act4.ledger",
+            "value": "read"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "nest_vigil_orders",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "Orders pinned to a rock with a dagger, in the same neat hand. \"To the Vigil. The vessel will come up the rivers. Do not kill it. Let it reach the gate; let the wyrm try it. If it is strong enough to pass the wyrm, it is strong enough for what the Prophet intends. Report its coming to the Throne. M.V.\"",
+        "effects": [
+          {
+            "flag": "act4.orders",
+            "value": "read"
+          },
+          {
+            "journal": {
+              "id": "act4_camp",
+              "title": "The Ember Gate",
+              "kind": "main",
+              "text": "Over the cliffs from the Bell Tower, the road came down to the ash plain under Mount Cindral, where the last knights of the Order of the Pale Lantern hold a burned chapter-house: the Ember Gate camp. Warden Corwen keeps it. Vorthrax the Cinderwyrm, the fourth Herald, nests in the mountain above the Ember Gate, and below the gate lies the Reliquary, where the Order kept Ashur's bones. In the Wyrm's Nest I found the Prophet's orders to his Inquisitors, signed M.V.: they are to let me reach the gate. He wants me to come."
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "nest_egg",
+    "start": "start",
+    "openings": [
+      {
+        "node": "gone",
+        "requires": {
+          "act4.egg": "taken"
+        }
+      },
+      {
+        "node": "gone",
+        "requires": {
+          "act4.egg": "hatched"
+        }
+      },
+      {
+        "node": "smashed",
+        "requires": {
+          "act4.egg": "smashed"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "In a bed of embers lies an egg the size of a knight's helm, black and glossy and too hot to look at for long. Something inside it knocks, twice, and is still. It is Vorthrax's. If the Prophet would bring his Heralds back, this is a way to bring back the wyrm.",
+        "choices": [
+          {
+            "text": "Smash it.",
+            "to": "smash"
+          },
+          {
+            "text": "Wrap it in your cloak and take it.",
+            "to": "take"
+          },
+          {
+            "text": "Leave it."
+          }
+        ]
+      },
+      "smash": {
+        "text": "The shell is like iron, and then it is not. What runs out of it hisses on the embers and is still. Somewhere above you in the mountain, something very large wakes, and roars, and does not stop for a long time.",
+        "effects": [
+          {
+            "flag": "act4.egg",
+            "value": "smashed"
+          },
+          {
+            "boon": "wyrmbane"
+          },
+          {
+            "xp": 1200
+          },
+          {
+            "journal": {
+              "id": "act4_egg",
+              "title": "The Wyrm's Egg",
+              "kind": "side",
+              "text": "I smashed Vorthrax's egg in its nest. If the Prophet meant to bring the wyrm back from it, he cannot now. Vorthrax knows. The whole mountain heard him."
+            }
+          }
+        ]
+      },
+      "take": {
+        "text": "Even through the cloak it burns. It knocks again, against your ribs this time, as if it knows the warmth there.",
+        "effects": [
+          {
+            "flag": "act4.egg",
+            "value": "taken"
+          },
+          {
+            "item": "wyrm_egg"
+          },
+          {
+            "journal": {
+              "id": "act4_egg",
+              "title": "The Wyrm's Egg",
+              "kind": "side",
+              "text": "I took Vorthrax's egg from his nest. It knocks against my ribs. Warden Corwen's forge at the Ember Gate would be warm enough to hatch it, and its anvil hard enough to end it."
+            }
+          }
+        ]
+      },
+      "gone": {
+        "text": "The bed of embers is empty where the egg lay."
+      },
+      "smashed": {
+        "text": "Black shell and a dark stain on the embers. Nothing knocks."
+      }
+    }
+  },
+  {
+    "id": "reliquary_aldren",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "A knight in soot-black plate leans on his sword among dead Inquisitors, breathing hard. \"Ser Aldren, of the Last Lantern. We saw the beacon from the coast road, and came in by the gate behind you. This hall is ours.\" He nods south, where the passage goes down. \"Below are their muster and the vaults. Something walks in the vaults with the faces of the Heralds you killed. We heard them. We did not go in.\"",
+        "effects": [
+          {
+            "flag": "act4.aldren",
+            "value": "met"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "reliquary_biers",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "Three stone biers under a dome black with old smoke. The middle one is longer than any man. Its seals lie broken on the floor, the Order's lantern cut in each, and the bones are gone: taken down the stair beyond, toward the Throne. Ash lies on the empty stone in the shape of what lay there, and it is warm.",
+        "effects": [
+          {
+            "flag": "act4.biers",
+            "value": "seen"
+          },
+          {
+            "journal": {
+              "id": "act4_reliquary",
+              "title": "The Reliquary",
+              "kind": "main",
+              "text": "Under the Ember Gate I came down through the Reliquary, past the Echoes of the Heralds I killed, to the Order's empty biers. Ashur's bones are gone, carried down the stair to the Cinder Throne, where Malachar Vane waits for what is in my chest."
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "cinder_throne_seat",
+    "start": "start",
+    "openings": [
+      {
+        "node": "spared",
+        "requires": {
+          "act5.malachar": "spared"
+        }
+      },
+      {
+        "node": "empty",
+        "requires": {
+          "act5.malachar": "slain"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A throne cut from one block of black glass, too big for any man, its back carved with the Pale Lantern turned upside down. Behind it the god's bones are heaped up into something like a body, and the gap in its chest is the shape of the shard in yours. Malachar Vane stands between you and it."
+      },
+      "empty": {
+        "text": "The Throne stands empty, and the bones behind it are cold. The shard in your chest is not: it pulls toward them, gently, like a tide. Whatever is decided here, you will decide it.",
+        "choices": [
+          {
+            "text": "Break the Ember Heart on the Throne. (It will kill you.)",
+            "to": "destroy"
+          },
+          {
+            "text": "Take the god into yourself, as Ashur once did, and carry him.",
+            "to": "bind",
+            "requires": {
+              "act5.bind": "open"
+            }
+          },
+          {
+            "text": "Take the god into yourself...",
+            "to": "bind_closed",
+            "requires": {
+              "act5.bind": ""
+            }
+          },
+          {
+            "text": "Sit on the Throne.",
+            "to": "claim"
+          },
+          {
+            "text": "Let Malachar take the Heart, and carry it down into the fire.",
+            "to": "mercy",
+            "requires": {
+              "act5.malachar": "spared"
+            }
+          },
+          {
+            "text": "Not yet."
+          }
+        ]
+      },
+      "spared": {
+        "text": "The Throne stands empty, and the bones behind it are cold. Malachar sits on its step with Wren's wooden bird in his hands, and watches you without hope or fear. The shard in your chest pulls toward the bones, gently, like a tide. Whatever is decided here, you will decide it.",
+        "choices": [
+          {
+            "text": "Break the Ember Heart on the Throne. (It will kill you.)",
+            "to": "destroy"
+          },
+          {
+            "text": "Take the god into yourself, as Ashur once did, and carry him.",
+            "to": "bind",
+            "requires": {
+              "act5.bind": "open"
+            }
+          },
+          {
+            "text": "Take the god into yourself...",
+            "to": "bind_closed",
+            "requires": {
+              "act5.bind": ""
+            }
+          },
+          {
+            "text": "Sit on the Throne.",
+            "to": "claim"
+          },
+          {
+            "text": "Let Malachar take the Heart, and carry it down into the fire.",
+            "to": "mercy",
+            "requires": {
+              "act5.malachar": "spared"
+            }
+          },
+          {
+            "text": "Not yet."
+          }
+        ]
+      },
+      "destroy": {
+        "text": "You close your hand round the shard in your chest. It comes when you call it, hot as a coal and lighter than you thought. One blow on the black glass would end the god. It would end you too: the Heart is all that has kept you alive since the gallows.",
+        "choices": [
+          {
+            "text": "Do it.",
+            "effects": [
+              {
+                "ending": "destroy"
+              }
+            ]
+          },
+          {
+            "text": "Not yet.",
+            "to": "back"
+          }
+        ]
+      },
+      "bind": {
+        "text": "You remember the Chronicle: a shepherd who took the mountain's fire into his chest and carried it for nine hundred years, dying and rising, until he could carry it no longer. You could take it up as he did, and carry it on. It would never be put down.",
+        "choices": [
+          {
+            "text": "Do it.",
+            "effects": [
+              {
+                "ending": "bind"
+              }
+            ]
+          },
+          {
+            "text": "Not yet.",
+            "to": "back"
+          }
+        ]
+      },
+      "bind_closed": {
+        "text": "You reach for the god as the Chronicle says Ashur did, and it does not come. You do not know enough of what he was, or of what you are: the whole Chronicle of Saint Oriel, read in the Library of Ash, and the stories of the road (at least three of them) seen through. (Bind needs both.)",
+        "choices": [
+          {
+            "text": "Step back.",
+            "to": "back"
+          }
+        ]
+      },
+      "claim": {
+        "text": "The Throne is too big for any man, and it fits you exactly. Sit, and the god's body will stand up around you, and the Taint will be yours to give and to take away. Malachar wanted to ask the god for something. You would not have to ask.",
+        "choices": [
+          {
+            "text": "Do it.",
+            "effects": [
+              {
+                "ending": "claim"
+              }
+            ]
+          },
+          {
+            "text": "Not yet.",
+            "to": "back"
+          }
+        ]
+      },
+      "mercy": {
+        "text": "\"Give it to me,\" Malachar says, without getting up. \"It will come to me if you let it. I have carried worse down that mountain.\" He looks at the fire below the glass. \"She would have liked to see it go out.\"",
+        "choices": [
+          {
+            "text": "Do it.",
+            "effects": [
+              {
+                "ending": "mercy"
+              }
+            ]
+          },
+          {
+            "text": "Not yet.",
+            "to": "back"
+          }
+        ]
+      },
+      "back": {
+        "text": "The bones are cold. The shard is warm. There is no hurry, now.",
+        "choices": [
+          {
+            "text": "Break the Ember Heart on the Throne. (It will kill you.)",
+            "to": "destroy"
+          },
+          {
+            "text": "Take the god into yourself, as Ashur once did, and carry him.",
+            "to": "bind",
+            "requires": {
+              "act5.bind": "open"
+            }
+          },
+          {
+            "text": "Take the god into yourself...",
+            "to": "bind_closed",
+            "requires": {
+              "act5.bind": ""
+            }
+          },
+          {
+            "text": "Sit on the Throne.",
+            "to": "claim"
+          },
+          {
+            "text": "Let Malachar take the Heart, and carry it down into the fire.",
+            "to": "mercy",
+            "requires": {
+              "act5.malachar": "spared"
+            }
+          },
+          {
+            "text": "Not yet."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "daughter_toy",
+    "start": "start",
+    "openings": [
+      {
+        "node": "gone",
+        "requires": {
+          "daughter.toy": "carried"
+        }
+      },
+      {
+        "node": "gone",
+        "requires": {
+          "daughter.toy": "shown"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "In the ash of a burnt-out tent, half buried, a little bird whittled from pale wood, a lantern painted on each wing. An old woman by the fire watches you pick it up. \"That's Wren Vane's. Was. The lantern priest's girl, years back, before he went up the mountain and came down calling himself a prophet. She took the grey rot the summer the well went bad. He carried her north to find a cure, and he never brought her back.\" She looks away. \"Nobody here will take it. Nobody wants his luck.\"",
+        "choices": [
+          {
+            "text": "Take the bird.",
+            "to": "take"
+          },
+          {
+            "text": "Leave it in the ash."
+          }
+        ]
+      },
+      "take": {
+        "text": "It is lighter than it looks. WREN is cut under its tail, in a child's careful letters.",
+        "effects": [
+          {
+            "flag": "daughter.toy",
+            "value": "carried"
+          },
+          {
+            "item": "lantern_bird"
+          },
+          {
+            "journal": {
+              "id": "daughter_toy",
+              "title": "Malachar's Daughter: the lantern-bird",
+              "kind": "side",
+              "text": "In the refugee camp at Fort Gallowmere I found a child's toy, a lantern-bird carved from pale wood. It was Wren Vane's: Malachar Vane's daughter, before he was the Ashen Prophet. She took the grey rot; he carried her north to find a cure, and never brought her back."
+            }
+          }
+        ]
+      },
+      "gone": {
+        "text": "Only ash, where the tent stood."
+      }
+    }
+  },
+  {
+    "id": "daughter_ironhold",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "daughter.ironhold": "found"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A ledger left out in the rain by the refugee yard's well, its last pages still legible. In a physician's hand: \"Brother Malachar Vane, of Gallowmere, with his daughter Wren, nine years. The grey rot, advanced. Refused at the gate by order of the Lantern: no plague past the wall.\" Under it, in another hand, pressed so hard the nib tore the page: \"She is NINE.\"",
+        "effects": [
+          {
+            "flag": "daughter.ironhold",
+            "value": "found"
+          },
+          {
+            "journal": {
+              "id": "daughter_ironhold",
+              "title": "Malachar's Daughter: Ironhold",
+              "kind": "side",
+              "text": "In Ironhold, a physicians' ledger: the city turned Malachar and Wren away at the gate, by order of the Lantern. No plague past the wall. She was nine."
+            }
+          }
+        ]
+      },
+      "again": {
+        "text": "You have read it already. You remember every word."
+      }
+    }
+  },
+  {
+    "id": "daughter_oriel",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "daughter.oriel": "found"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "The cloister's hospice register lies open on its stand by the well, as if someone had come back to read it. \"Wren Vane, nine. The grey rot. Given to the Lantern's mercy.\" In the margin someone has written, and someone else has tried to scrape away: \"He begged us to try the fire in the mountain. We would not. It is forbidden.\"",
+        "effects": [
+          {
+            "flag": "daughter.oriel",
+            "value": "found"
+          },
+          {
+            "journal": {
+              "id": "daughter_oriel",
+              "title": "Malachar's Daughter: Saint Oriel's Rest",
+              "kind": "side",
+              "text": "At Saint Oriel's Rest, the hospice register: the sisters gave Wren to 'the Lantern's mercy'. Malachar begged them to try the mountain's fire, and they would not."
+            }
+          }
+        ]
+      },
+      "again": {
+        "text": "You have read it already. You remember every word."
+      }
+    }
+  },
+  {
+    "id": "daughter_ember_gate",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "daughter.ember_gate": "found"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A grave no longer than your arm, under the beacon, marked by a stone with a lantern scratched on it. Someone has kept it clear of ash. On the stone: WREN. And below, newer, cut deep: I WILL BRING YOU BACK.",
+        "effects": [
+          {
+            "flag": "daughter.ember_gate",
+            "value": "found"
+          },
+          {
+            "journal": {
+              "id": "daughter_ember_gate",
+              "title": "Malachar's Daughter: the Ember Gate camp",
+              "kind": "side",
+              "text": "At the Ember Gate, under the Order's beacon, a child's grave: WREN. Below, cut newer and deeper: I WILL BRING YOU BACK."
+            }
+          }
+        ]
+      },
+      "again": {
+        "text": "You have read it already. You remember every word."
+      }
+    }
+  },
+  {
+    "id": "daughter_journal",
+    "start": "start",
+    "openings": [
+      {
+        "node": "again",
+        "requires": {
+          "daughter.journal": "found"
+        }
+      }
+    ],
+    "nodes": {
+      "start": {
+        "text": "A journal left open on an empty bier, the writing neat at first and then not. \"The god's body is nearly whole. When it stands, it will owe me one thing, and I will ask for her. The Heart is the last piece. The one who carries it will understand, I think. They were dead too, once, on the gallows.\" The last page is a child's drawing of a bird, folded small, kept for years.",
+        "effects": [
+          {
+            "flag": "daughter.journal",
+            "value": "found"
+          },
+          {
+            "journal": {
+              "id": "daughter_journal",
+              "title": "Malachar's Daughter: the Sanctum",
+              "kind": "side",
+              "text": "In the Reliquary's Sanctum, Malachar's journal: he is building Ashur a body so that the god, standing, will give him back his daughter. The Ember Heart in my chest is the last piece."
+            }
+          }
+        ]
+      },
+      "again": {
+        "text": "You have read it already. You remember every word."
+      }
+    }
+  },
+  {
+    "id": "malachar_parley",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "Malachar's hand stops a finger's breadth from your chest. He is not looking at the Heart. He is looking at the little wooden bird at your belt. \"Where did you get that?\" The fire round him gutters. \"Where did you get that?\"",
+        "choices": [
+          {
+            "text": "Hold out the lantern-bird. \"You know what she would say.\"",
+            "to": "moved",
+            "requires": {
+              "daughter.memories": "4"
+            }
+          },
+          {
+            "text": "Hold out the lantern-bird. \"Ironhold shut its gate on her. Oriel let her die. Her grave says you'll bring her back. Will this?\"",
+            "requires": {
+              "daughter.memories": "3"
+            },
+            "check": {
+              "skill": "Diplomacy",
+              "dc": 32,
+              "success": "moved",
+              "failure": "refused"
+            }
+          },
+          {
+            "text": "Hold out the lantern-bird. \"Wren wouldn't want a god for a father.\"",
+            "requires": {
+              "daughter.memories": "2"
+            },
+            "check": {
+              "skill": "Diplomacy",
+              "dc": 36,
+              "success": "moved",
+              "failure": "refused"
+            }
+          },
+          {
+            "text": "Hold out the lantern-bird. \"It's Wren's. She'd want it back from you, not from him.\"",
+            "requires": {
+              "daughter.memories": "1"
+            },
+            "check": {
+              "skill": "Diplomacy",
+              "dc": 40,
+              "success": "moved",
+              "failure": "refused"
+            }
+          },
+          {
+            "text": "Hold out the lantern-bird. \"Is this what you're building him for?\"",
+            "requires": {
+              "daughter.memories": "0"
+            },
+            "check": {
+              "skill": "Diplomacy",
+              "dc": 44,
+              "success": "moved",
+              "failure": "refused"
+            }
+          },
+          {
+            "text": "Say nothing, and raise your weapon."
+          }
+        ]
+      },
+      "moved": {
+        "text": "He takes the bird from your hand as if it might break, and turns it over, and finds the letters under its tail with his thumb. For a long moment the only sound is the lava. \"She carved the wings too thin,\" he says. \"I told her they'd snap.\" Behind him the god's bones go dark, one by one, like lamps put out down a long hall. Malachar Vane sits down on the step of his Throne, the bird in both hands, and does not get up.",
+        "effects": [
+          {
+            "takeItem": "lantern_bird"
+          },
+          {
+            "flag": "daughter.toy",
+            "value": "shown"
+          },
+          {
+            "flag": "act5.parley",
+            "value": "spared"
+          },
+          {
+            "xp": 4000
+          },
+          {
+            "journal": {
+              "id": "act5_throne",
+              "title": "The Cinder Throne",
+              "kind": "main",
+              "text": "Under the Reliquary, in a cavern of black glass, Malachar Vane was building Ashur a body out of his own bones, to ask the god, once it stood, for his daughter back. I showed him Wren's lantern-bird. He put down the fire. He kneels by the Throne now, and the bones behind it are dark. The Heart is still mine."
+            }
+          },
+          {
+            "spare": true
+          }
+        ]
+      },
+      "refused": {
+        "text": "He closes his hand round the bird and takes it, and for a moment you think you have reached him. Then he puts it inside his robe, over his heart. \"She is in the fire now,\" he says. \"She is waiting. And you are the last thing between us.\" He reaches for the Heart.",
+        "effects": [
+          {
+            "takeItem": "lantern_bird"
+          },
+          {
+            "flag": "daughter.toy",
+            "value": "shown"
+          },
+          {
+            "flag": "act5.parley",
+            "value": "refused"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "malachar_spared",
+    "start": "start",
+    "nodes": {
+      "start": {
+        "text": "Malachar sits on the step of the Throne with Wren's bird in his hands. He does not look up. \"Whatever you mean to do with it,\" he says, \"do it. I am done asking gods for things.\""
+      }
+    }
+  }
+]

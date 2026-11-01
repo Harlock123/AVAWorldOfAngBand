@@ -98,4 +98,20 @@ public static class Campaign
             bot.Step();
         return new CampaignResult(Story.YsmereDepth, game.Hero.MaxDepth, game.IsOver, game.Won, game.Death?.Killer);
     }
+
+    /// <summary>
+    /// A province zone walked (the spec's M7c): a hero made ready for the depth the zone stands for, there from its start,
+    /// walking it pack by pack. How many packs it had left to go to when it stopped is <c>Reached</c>.
+    /// </summary>
+    public static CampaignResult Province(Engine.Definitions.GameData data, ulong seed, string zoneId, int maxTurns = 3000)
+    {
+        var game = new DungeonSession(data, seed);
+        var zone = game.Province[zoneId] ?? throw new ArgumentException($"No zone '{zoneId}'.", nameof(zoneId));
+        Prepare(game, Game.Province.ProvinceMap.DepthFor(zone.Level));
+        game.EnterZone(zoneId, null);
+        var bot = new ProvinceBot(game);
+        for (var i = 0; i < maxTurns && !game.IsOver && game.Zone?.Id == zoneId && bot.PacksLeft > 0; i++)
+            bot.Step();
+        return new CampaignResult(zone.Level, bot.PacksLeft, game.IsOver, false, game.Death?.Killer);
+    }
 }

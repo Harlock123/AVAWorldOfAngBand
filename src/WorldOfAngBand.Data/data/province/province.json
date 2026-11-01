@@ -1,0 +1,23 @@
+{
+ "_comment": "What AVAWorldOfAngBand makes of AshenReliquary's province ten years on (the spec's section 7.4). zones/, creatures.json and dialogues.json are AshenReliquary's, copied unchanged; this file is this game's own. npcs: who still stands where AshenReliquary put them, and what they say now (an NPC with no line here is gone). tieIns: readings that carry something down to the story levels, with the flag they set. leaveOut: interactables whose turn in AshenReliquary's story is over.",
+ "npcs": {
+  "gallows_road/scarecrow": "The scarecrow still stands, its coat rotted to threads. Someone has hung a little lantern from its arm, and keeps it lit.",
+  "frostbitten_pass/hermit": "\"Ten winters since the Throne, and still they come up my road with that look. Go down if you must. The mountain keeps no one who comes back up the wrong way.\"",
+  "ironhold/thale": "\"Ironhold held, Lantern-sworn. It held when the Legion marched and it held when the fire came. Bring me word from below and you'll eat at my table.\"",
+  "ironhold/confessor": "The Clockwork Confessor turns its brass face to you, and a slip of paper curls out of its grille: FORGIVEN. It has said nothing else in ten years.",
+  "ironhold/hale": "\"Half my cots were empty this spring. The other half are full of people who went down your shaft and came back wrong. Mind yourself down there.\"",
+  "ironhold/pell": "\"The founders' rolls have a page for the Ashbound now. I keep it blank. Nobody in Ironhold agrees on how it ended.\"",
+  "reliquary/aldren": "\"I've kept the Lid ten years. The seal holds from above. It's what scratches at it from below that keeps me awake.\"",
+  "saint_oriels_rest/ilse": "\"The bells rang again the spring after the Throne, and they have not been quiet since. If you go down, Lantern-sworn, we will ring them for you.\"",
+  "saint_oriels_rest/caddoc_back": "\"I sang for the Choir once. I sing for the abbey now, badly. Sister Agnete's hymnal is still in the Bell Tower, if anyone dares fetch it.\"",
+  "siege_walls/mirella": "\"The Outlaw Queen, they called me. Now I keep a toll with a crown of rust. Pay me in news from below and I'll call it square.\"",
+  "ember_gate/corwen": "\"The last lantern still burns at the Gate. I mean to be the one who puts it out, the day there's nothing left for it to keep away.\""
+ },
+ "tieIns": {
+  "sallows_mire/sallows_hearth": {"flag": "mire", "value": "name", "text": "Under the ash of the hearth, scratched into the stone in a girl's hand, is a name: the one Mother Sallow had before the mire. You remember it."},
+  "bell_tower/agnete_hymnal": {"flag": "choir", "value": "hymn", "text": "On the last page Sister Agnete wrote out the Choir's first hymn, the one they sang before the candles. You learn it by heart."},
+  "barrow_fields/ediths_grave": {"flag": "oath", "value": "words", "text": "Under Edith Hadric's name the mason cut the last words of her husband's oath: the words that end it. You remember them."},
+  "wyrms_nest/egg": {"flag": "nest", "value": "shard", "text": "In the cold heart of the old nest lies an egg, long dead and cracked: the dam's first brood. You take a shard of its shell."}
+ },
+ "leaveOut": ["candle", "beacon", "stash", "snuffer", "throne", "biers"]
+}

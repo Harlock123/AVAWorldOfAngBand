@@ -49,3 +49,6 @@ public sealed record ActivateItem(WorldOfAngBand.Engine.Items.Item Item, Loc? Ta
 
 /// <summary>Take one of the blessings a shrine offered (<see cref="ShrineEvent"/>).</summary>
 public sealed record TakeBlessing(string ShrineId, string Blessing) : GameCommand;
+
+/// <summary>Step through a Lantern Rift to Gallowmere or a waystation whose rift the hero has touched.</summary>
+public sealed record StepThroughRift(string Destination) : GameCommand;

@@ -596,8 +596,17 @@ M7 comes in three parts:
 - **M7b** (done): Ashen's creatures bridged, caches, shrines, persistence, and every zone and waystation. Packs
   that hang on Ashen's story flags stand down with its Heralds; a creature strikes or shoots once a turn, its own dice at
   its rank's share;
-- **M7c:** NPCs and keepsakes, weather, the tie-ins, the rifts, and a province bot that walks each zone at its
+- **M7c** (done): NPCs and keepsakes, weather, the tie-ins, the rifts, and a province bot that walks each zone at its
   expected level.
+
+M7 as built:
+- The NPCs who stand ten years on are those the province notes give a line (eleven of them, the copies of a person
+  for each turn of Ashen's story left out); readings are Ashen's own words.
+- A waystation's shrine is its Lantern Rift; the wild's shrines give blessings.
+- Speaking the oath's last words (the Barrow Fields tie-in) releases all Nine Unburied, so none is met below.
+- Ashen's creature tricks (kiting, summoning, reviving, rallying) are not carried over.
+- The province bot survives about 85% of zone walks at the expected level. The Barrow Fields (69 creatures, wights
+  casting cold) is the hardest zone.
 
 M6 as built: the Priest, Druid and Blackguard come with AshenReliquary's ability system played one action at a time,
 which makes its Fighter, Champion, Rogue and Wizard playable too. The Ranger, Necromancer and Gunslinger wait for

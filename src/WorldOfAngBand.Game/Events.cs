@@ -53,3 +53,9 @@ public sealed record MythicTierEvent(int Tier) : IGameEvent;
 
 /// <summary>The hero came to a shrine: the three blessings Ashur's whim offers (ids from <see cref="Province.Shrines"/>).</summary>
 public sealed record ShrineEvent(string ShrineId, string Name, IReadOnlyList<string> Blessings) : IGameEvent;
+
+/// <summary>The hero read something in the province (it is in the journal now).</summary>
+public sealed record ReadingEvent(string Title, string Where, string Text) : IGameEvent;
+
+/// <summary>The hero touched a Lantern Rift: where they can step through to (zone ids, with their names; "fort_gallowmere" is the town).</summary>
+public sealed record RiftEvent(IReadOnlyList<(string Id, string Name)> Destinations) : IGameEvent;
