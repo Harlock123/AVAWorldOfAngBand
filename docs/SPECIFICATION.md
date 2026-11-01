@@ -538,6 +538,82 @@ with its level dressing. The classic views draw zones with AVABand's surface til
 - **Input:** AVABand's rebindable keys, Angband keymaps, gamepad, click-to-travel and auto-explore. Clicking a
   monster attacks it; Shift-click looks.
 
+### 8.1 Sound and music (M8)
+
+The game is silent until M8. Both parents already have sound on the same OpenAL layer, so M8 brings theirs together
+and adds nothing new to the libraries.
+
+**What comes over.**
+
+| From | What | Licence |
+| --- | --- | --- |
+| AVABand `Angband.Audio` | The OpenAL Soft engine (Silk.NET), Ogg and MP3 decoders, loudness, failure handling, the mixing-period fix for virtual machines (`OpenAlConfig`), `SoundPack` and `SoundDirector` | GPL-2 |
+| AshenReliquary `AudioDirector` | Distance and screen-position panning, the repeat guard, the combat hold and the ability-ready tick | MIT |
+| AVABand's CC0 dungeon music | 15 tracks: the title ("The Pits of Angband"), town (2), town at night (2), dungeon (7), deep (5), boss (1) | CC0 |
+| AshenReliquary's music | Kevin MacLeod's and Alexandr Zhelanov's: title, explore (2), combat (2), boss | CC BY 4.0 |
+| AVABand's ambience | 11 loops: town by day and night, the dungeon shallow, deep and abyss, cavern, labyrinth, lair, Moria-style mines, fortress, gauntlet | CC0 |
+| AshenReliquary's ambience | The road loop | CC0 |
+| Dubtrain's Angband sounds | 149 effects named by Angband's message types: hits by degree, every breath and summons, monster blows, doors, stairs, stores, statuses | CC BY 4.0 |
+| AshenReliquary's effects | 49 groups: swings, hits and crits, blocks, wards, element bursts, gold, pickups by material, potions, chests, shrines, level-up, death, footsteps, and creature voices (zombie, skeleton, wolf, crawler, cultist, crone) | CC0 and CC BY 3.0, per file |
+
+They ship as a sound pack folder, `audio/`, beside the executable as `tilesets/` does: about 57 MB, in each
+platform's archive. `audio/soundpack.json` is AVABand's pack format: effects keyed by event name, music by mood, a
+volume per event, and the licence per file. A mod may bring its own pack (section 6's layering, by key).
+
+**Music, by where the hero is.** One mood plays at a time and crossfades to the next:
+
+| Where | Music | Ambience |
+| --- | --- | --- |
+| The birth window and the book of the dead | "The Pits of Angband" (AVABand's title) | none |
+| Gallowmere and the waystations | AVABand's town tracks | town by day |
+| Province zones, outdoors | Ashen's explore tracks | Ashen's road; the fens, the pass and the wastes by tileset (below) |
+| Province zones, indoors and dark (chapel, ossuary, barracks, catacombs, bell tower, reliquary) | AVABand's dungeon tracks | dungeon, shallow |
+| The shaft, depth 1–30 | AVABand's dungeon tracks | dungeon, shallow; cavern, labyrinth and the rest by the level's profile, as in AVABand |
+| The shaft, depth 31–100 | AVABand's deep tracks | dungeon, deep (abyss below 60) |
+| Fighting: a monster hunting the hero in view | Ashen's combat tracks, held ten game turns after the last one leaves view | as before, quieter |
+| A great foe in view: a unique, a story keeper, Saint Ysmere, the Cinder | Ashen's boss track, then AVABand's | as before, quieter |
+| The epilogue | Ashen's title | none |
+
+Province ambience by tileset: grassland the road loop, the Iron March's the fortress loop, Oriel's snow the cavern
+wind, the cinder caves the lair loop. A zone may name its own in `data/province/province.json`.
+
+**Effects, from the game's events.** `SoundDirector` listens to `Published` and nothing else, so the session never
+knows about sound. Where the game has no event yet for something worth hearing, M8 adds one; the view's own events
+stay the view's.
+
+- **The hero's Strikes** are Ashen's: a swing on a miss, a hit, a crit on a critical success, and a block when Shield
+  Block takes damage. Abilities sound by kind: Ashen's ignition, force bolt and impact for spell attacks, element
+  bursts for blasts by their damage type, the ward sounds for wards and auras.
+- **Monsters' blows** are Dubtrain's by Angband blow method (MON_BITE, MON_CLAW, MON_CRUSH, MON_STING and the rest).
+  Their spells are Dubtrain's by spell (BR_FIRE, SUM_UNDEAD, SHRIEK, TELEPORT...). A creature's voice when it appears
+  and dies is Ashen's by monster base: zombies, skeletons, dogs as the wolf, insects and spiders as the crawler,
+  casting people as the cultist, hags and witches as the crone. Angband's monsters with none are silent.
+- **Kills** are Dubtrain's KILL, KILL_UNIQUE and KILL_KING (a story keeper).
+- **Things:** Ashen's gold, pickups by material (cloth, metal, jewel) and potions; Dubtrain's WIELD, ZAP_ROD and
+  ACT_ARTIFACT; Ashen's rare-drop when an artifact or ego lands.
+- **Places:** Dubtrain's doors, stairs and stores; Ashen's chest (a cache), shrine (a blessing or a rift), level-up
+  and zone-complete (the last pack of a zone falls). A reading turns a page (Ashen's inventory sound).
+- **The hero:** Ashen's hero-hurt by how much is lost; Dubtrain's statuses as conditions start and end (BLIND,
+  POISONED, AFRAID, PARALYZED, SLOW, STUN, RECOVER); HITPOINT_WARN below a quarter; Second Breath its own sound; death
+  Ashen's.
+- **Footsteps:** Ashen's, one per step, quiet, and only outdoors and in town, where the turn rate is slow enough.
+- **Ready:** an ability with a cooldown of 5 seconds or more ticks when it comes ready, as in Ashen.
+
+**Placement.** An effect at a square is panned by where that square is on screen and quieter with distance from the
+hero, as in Ashen. Only what the hero sees, or hears by Angband's noise (section 7.1), is played: a breath out of
+sight is a distant rumble, a blow behind a wall is nothing. The repeat guard keeps a pack's blows in one turn from
+playing as one loud note.
+
+**Determinism.** Sound picks its variants with its own random generator, never `GameRandom`, so a seed and its
+commands make the same game with sound on or off.
+
+**Options.** A Sound window (`Ctrl+O`): master, music, effects and ambience volumes; music, effects and ambience each
+on or off; and AVABand's mixing period (Automatic, which uses 4096 frames in a virtual machine, or Normal, Large,
+Extra large). They are kept in `settings.json`. `Ctrl+M` mutes and unmutes everything.
+
+**Failure.** No audio device, no OpenAL, or a bad file is never an error: the game plays silently and says so once
+in the message log (AVABand's `AudioFailure`). The tests and CI run with a recording engine and never open a device.
+
 ## 9. Architecture
 
 The new repo **copies** code from both games rather than linking to them. Both parents keep changing, and neither
@@ -556,7 +632,7 @@ src/
                              data/pf2/      AshenReliquary's ancestries, classes, feats, abilities, items
                              data/bridge/   section 6
                              data/setting/  names, lore, story levels, dialogue
-  WorldOfAngBand.Audio/    the shared OpenAL layer, with AVABand's SoundDirector
+  WorldOfAngBand.Audio/    the shared OpenAL layer, with AVABand's SoundDirector (M8; section 8.1)
   WorldOfAngBand.Input/    from AVABand
   WorldOfAngBand.App/      Avalonia: AshenReliquary's WorldView, SpriteCache, HUD and panels;
                              AVABand's knowledge, birth and graveyard windows and its classic map views
@@ -586,8 +662,8 @@ the Pathfinder name.
 | **M4: The whole bestiary** | Coverage | Every monster, spell and element bridged; all names renamed and checked; sprite families and the paper fallback |
 | **M5: To the Cinder** | The whole game | All profiles, vaults and pits; the five story levels; Saint Ysmere and the Cinder of Ashur; mythic tiers; bots clear it |
 | **M6: Breadth** | Polish | Priest, Druid and Blackguard; challenges; randarts; mods; Legacy from an AVAAshenReliquary save |
-
 | **M7: The province** | Ashen's world above the shaft | All 18 wild zones and 3 waystations, reached through Gallowmere's gates, with their creatures, caches, shrines, NPCs' lines and weather; kept per hero; the four tie-ins; bots clear each zone at its level |
+| **M8: Sound** | Both games' audio as one | Music by place, fight and great foe; ambience by zone, profile and depth; effects for every event worth hearing, placed on screen; the Sound window; silent and unbroken with no device; credits per file |
 
 M7 comes in three parts:
 - **M7a** (done): fixed-map levels from Ashen's files, gates and exits, the three new tilesets, and the first two
@@ -598,6 +674,12 @@ M7 comes in three parts:
   its rank's share;
 - **M7c** (done): NPCs and keepsakes, weather, the tie-ins, the rifts, and a province bot that walks each zone at its
   expected level.
+
+M8 comes in two parts:
+- **M8a**: the audio project copied from AVABand, the sound pack beside the executable with its credits, the music
+  and ambience by place (town, zone, depth and profile), and the Sound window;
+- **M8b**: the effects for every event, with the events the session lacks; placement by screen and distance;
+  hearing by noise; the combat and great-foe music; footsteps and the ready tick.
 
 M7 as built:
 - The NPCs who stand ten years on are those the province notes give a line (eleven of them, the copies of a person
