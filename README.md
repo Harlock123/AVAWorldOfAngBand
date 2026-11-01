@@ -6,8 +6,9 @@ hero, rules, art and story. Ten years after the Cinder Throne, the Reliquary und
 lid: below it a shaft goes down a hundred levels, to where the Order of the Pale Lantern first burned Ashur. You go
 down it as one of the Lantern-sworn, with no Ember Heart. When you die, you stay dead.
 
-**Status: milestone 7 ("The province").** The whole game is there, from Gallowmere to the Cinder of Ashur at
-depth 100, and AshenReliquary's province lies outside the town's gates, ten years on. Levels are generated as Angband 4.2.5 generates them and drawn isometrically in Flare's art. The hero is a
+**Status: milestone 8 ("Sound"), first part done.** The whole game is there, from Gallowmere to the Cinder of Ashur
+at depth 100, and AshenReliquary's province lies outside the town's gates, ten years on. Music and ambience play by
+place; sound effects come next. Levels are generated as Angband 4.2.5 generates them and drawn isometrically in Flare's art. The hero is a
 Pathfinder 2e character on AshenReliquary's rules, one of seven classes with their abilities and feats, fighting turn
 by turn on Angband's energy system. All of Angband's
 monsters are in, with their 91 spells and innate attacks in Pathfinder's terms, and every name Angband takes from
@@ -172,6 +173,15 @@ door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-t
     epilogue know of. Speaking the oath's last words releases all Nine Unburied.
   - Weather: ash storms halve sight on the Ash Wastes; the Frostbitten Pass's cold bites without a ward.
   - The waystations' shrines are Lantern Rifts: touch one, and Gallowmere's rift takes you back to it.
+- **Music and ambience** (the spec's section 8.1, milestone 8). Both parents' sound, as one:
+  - AVABand's town music in Gallowmere and the waystations, its dungeon music down to depth 30 and its deep music
+    below, and "The Pits of Angband" at birth and in the book of the dead;
+  - AshenReliquary's exploring music in the province's open zones, and its title theme for the epilogue;
+  - ambience under it: the town's morning, the fens' crickets, Ironhold's halls, the wind on the Pass and the Ash
+    Wastes, and the dungeon's by its layout and depth (caverns, labyrinths, the deep, the abyss).
+  The Sound window (`Ctrl+O`) sets the volumes, turns each part on or off and sets the mixing period (extra large in
+  a virtual machine, so it doesn't stutter); `Ctrl+M` mutes. With no sound device the game plays on and says why.
+  A mod can bring its own `audio/soundpack.json`, laid over the game's by key.
 - **The balance bots** (the spec's M5). A hero made ready for a depth (the spec's level for it, runes, the protections
   Angband heroes have by then, potions) dives three levels from 5, 30, 60 and 90, and one made ready for the bottom
   goes down through Saint Ysmere and the Cinder. The tests hold them to it: most dives live, and a hero ready for the
@@ -200,6 +210,9 @@ randarts option below](docs/images/WorldOfAngBand-birth.png)
 
 ![A new level's picks: a wizard at level 2 choosing a class feat (Cantrip Expansion: Ray of Frost) and a skill feat
 (Quick Lockpick), each with what it does beneath](docs/images/WorldOfAngBand-levelup.png)
+
+![The Sound window: all sound on, the master, music, effects and ambience volumes with each part's switch, and the
+audio buffer at extra large, smoothest in virtual machines](docs/images/WorldOfAngBand-sound.png)
 
 ![This week's challenge: Lean Times, everyone going down as an elf champion; and today's dungeon, a human
 wizard](docs/images/WorldOfAngBand-challenges.png)
@@ -306,10 +319,12 @@ classic views up is north, as in Angband.
 | `Enter` / `Escape` after the Cinder | Lay down the lantern / go on deeper |
 | `Escape` | Stop travelling or resting |
 | `Ctrl+T` | Isometric, letters, tiles |
+| `Ctrl+O` | The Sound window: volumes, each part on or off, the mixing period |
+| `Ctrl+M` | Mute, and back |
 | `Ctrl+Q` | Leave the game (asked first: there is no saving yet) |
 | Mouse wheel | Zoom |
 
-`--seed N` on the command line plays game N again.
+`--seed N` on the command line plays game N again; `--mute` starts it silent.
 
 ## Download
 
@@ -325,7 +340,9 @@ dotnet test AVAWorldOfAngBand.slnx
 dotnet run --project src/WorldOfAngBand.App
 ```
 
-.NET 10 (see `global.json`). `WORLDOFANGBAND_SHOTS=docs/images dotnet test` redraws the pictures above. See
+.NET 10 (see `global.json`). `WORLDOFANGBAND_SHOTS=docs/images dotnet test` redraws the pictures above.
+`python3 tools/audio/make_audio_pack.py` makes the sound pack again from AVABand and AVAAshenReliquary checked out
+beside this repository. See
 [AGENTS.md](AGENTS.md) for how the code is put together.
 
 ## Licences and credits
@@ -341,5 +358,16 @@ dotnet run --project src/WorldOfAngBand.App
   - The classic tiles, and monsters with no Flare sprite yet, are the
     [Dungeon Crawl Stone Soup tiles](https://opengameart.org/content/dungeon-crawl-32x32-tiles) (CC0), as AVABand ships
     them (`src/WorldOfAngBand.App/tilesets/dcss`).
+- **The sound** (`src/WorldOfAngBand.App/audio`, about 53 MB) comes from the two parent games, each file's source
+  and licence in `audio/CREDITS.md`:
+  - music: AVABand's CC0 tracks from OpenGameArt (RandomMind, JaggedStone, yd, Paul Wortmann, HaelDB, TinyWorlds,
+    Spring Spring, Eponasoft, The Oracle, Juhani Junkala, cynicmusic) and its own two themes; AshenReliquary's by
+    Kevin MacLeod (incompetech.com) and Alexandr Zhelanov (CC BY 4.0);
+  - ambience: AVABand's CC0 loops (Kresiek The Furry, Wolfgang_, JaggedStone, gmason, bretbernhoft, Luke.RUSTLTD) and
+    its own;
+  - effects: Dubtrain's Angband sounds (CC BY 4.0), and AshenReliquary's from artisticdude, Kenney, StarNinjas (CC0)
+    and Little Robot Sound Factory (CC BY 3.0);
+  - OpenAL Soft (LGPL-2.0-or-later) mixes it; the Windows x64 and x86 builds ship its official binaries
+    (`src/WorldOfAngBand.Audio/native`).
 - **The rules** are Pathfinder 2e's, under the ORC licence, as AshenReliquary's code builds them. The Pathfinder name, setting and trademarks are
   not used.

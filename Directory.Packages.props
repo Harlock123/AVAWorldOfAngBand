@@ -11,6 +11,11 @@
     <PackageVersion Include="Avalonia.Headless.XUnit" Version="$(AvaloniaVersion)" />
     <!-- SkiaSharp version matches the one Avalonia.Skia 12.1.4 depends on. -->
     <PackageVersion Include="SkiaSharp" Version="3.119.4" />
+    <!-- Sound: OpenAL Soft mixes every effect (the same audio layer as AVABand and AVAAshenReliquary). -->
+    <PackageVersion Include="Silk.NET.OpenAL" Version="2.23.0" />
+    <PackageVersion Include="Silk.NET.OpenAL.Soft.Native" Version="1.23.1" />
+    <PackageVersion Include="NVorbis" Version="0.10.5" />
+    <PackageVersion Include="NLayer" Version="1.16.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageVersion Include="xunit.v3" Version="3.2.2" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.4" />

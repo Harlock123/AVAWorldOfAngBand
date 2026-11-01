@@ -3,6 +3,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Styling;
 using Avalonia.Themes.Fluent;
 using WorldOfAngBand.App.Services;
+using WorldOfAngBand.Audio;
 using WorldOfAngBand.Data;
 using WorldOfAngBand.Game;
 
@@ -28,6 +29,17 @@ public sealed class App : Application
             var settings = AppSettings.Read();
             var data = DataLoader.LoadDefault(settings.DisabledMods, out var mods);
             var window = new MainWindow(new DungeonSession(data, seed)) { Settings = settings, ModsLoaded = mods };
+            // Sound (the spec's section 8.1): OpenAL with the mixing period chosen (extra large in a virtual machine), and
+            // the sound pack with the mods' laid over it; "--mute" stays silent. With no device the game plays on silently.
+            var engine = args.Contains("--mute")
+                ? new NullAudioEngine()
+                : OpenAlAudioEngine.CreateOrSilent(AudioBuffer.PeriodFrames(settings.Sound.Buffer, VirtualMachine.Detect()));
+            var problems = new List<string>();
+            var director = new SoundDirector(engine, SoundPack.LoadWithMods(SoundPack.DefaultDirectory, data.ModDirectories, problems));
+            director.Apply(settings.Sound);
+            window.Sound = director;
+            foreach (var problem in problems)
+                window.State.Note(problem);
             // A new hero to begin with (closed without choosing, the default Lantern-sworn goes down).
             window.Opened += (_, _) => window.OpenBirth(seed);
             desktop.MainWindow = window;

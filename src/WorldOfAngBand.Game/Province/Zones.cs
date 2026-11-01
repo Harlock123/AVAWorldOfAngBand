@@ -52,7 +52,11 @@ public sealed record TieIn(string Flag, string Value, string Text);
 public sealed record ProvinceNotes(
     IReadOnlyDictionary<string, string>? Npcs = null,
     IReadOnlyDictionary<string, TieIn>? TieIns = null,
-    IReadOnlyList<string>? LeaveOut = null);
+    IReadOnlyList<string>? LeaveOut = null,
+    IReadOnlyDictionary<string, ZoneSound>? Sound = null);
+
+/// <summary>A zone's own music mood or ambience loop, in place of what its look gives it (the spec's section 8.1).</summary>
+public sealed record ZoneSound(string? Music = null, string? Ambience = null);
 
 /// <summary>
 /// A zone of the province (the spec's section 7.4): AshenReliquary's zone file, read as it is

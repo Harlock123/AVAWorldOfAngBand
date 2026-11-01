@@ -78,6 +78,12 @@ The code is **copied** from the two parent games, not linked, so neither has to 
   - `Flare/`: AshenReliquary's parsers for Flare's tileset and animation files.
   - `Setting`: names in the Ashen setting, from `data/setting/ashen_names.json` and each mod's own (`Setting.UseMods`,
     set by the session from the data's mod folders), and the words random artifacts are named from.
+- `src/WorldOfAngBand.Audio/`: sound and music (the spec's section 8.1). The OpenAL layer the AVA games share
+  (AshenReliquary's copy: `OpenAlAudioEngine`, the decoders, `AudioBuffer` and `OpenAlConfig` for the mixing period,
+  `AudioFailure`; `native/` holds OpenAL Soft for Windows x64 and x86, swapped in by `Directory.Build.targets`).
+  `SoundPack` reads `audio/soundpack.json` and lays mods' packs over it by key. `Soundscape` says what mood and
+  ambience a place has; `SoundDirector` plays them, following the window's `Update` each frame. It reads the session
+  and never changes it.
 - `src/WorldOfAngBand.App/`: Avalonia, built in code with no XAML.
   - `Rendering/ViewState`: what the views show besides the game, followed from its events: messages, slides,
     swings, floating numbers, the slain.
@@ -86,14 +92,17 @@ The code is **copied** from the two parent games, not linked, so neither has to 
   - `Rendering/ClassicView`: AVABand's letters and tiles from above.
   - `Rendering/HudPainter`: the HUD, the death screen and the epilogue, over either view.
   - `Services/Graveyard`: the book of the dead (`graveyard.json`); `Services/ChallengeBoard` the challenge tries
-    (`challenges.json`); `Services/AppSettings` the mods switched off (`settings.json`); `Services/AshenLegacy` reads
+    (`challenges.json`); `Services/AppSettings` the mods switched off and the sound settings (`settings.json`); `Services/AshenLegacy` reads
     AVAAshenReliquary's saves for a Legacy, and never writes them.
   - `Windows/InventoryWindow`, `Windows/StoreWindow` and `Windows/StoryWindow`: the pack, the shops and a story
     level's altar. `Windows/BirthWindow`, `LevelUpWindow`, `ChallengeWindow` and `ModsWindow`: a new hero, a level's
     feats, the challenges, and the mods.
   - `Rendering/ItemArt`: Flare's loot sprites (or DCSS tiles) for things on the floor.
   - `MainWindow`: keys, clicks, travel and rest.
-  - `Assets/Flare` holds the embedded art; `tilesets/dcss` (AVABand's DCSS tiles) ships beside the executable.
+  - `Assets/Flare` holds the embedded art; `tilesets/dcss` (AVABand's DCSS tiles) and `audio/` (the sound pack) ship
+    beside the executable. `audio/` is made by `tools/audio/make_audio_pack.py` from AVABand and AVAAshenReliquary
+    checked out beside this repository: edit the script, not its output.
+  - `Windows/SoundWindow`: the volumes, switches and mixing period (`Ctrl+O`), kept in `settings.json`.
 - `tests/WorldOfAngBand.Tests/` (the engine and the game) and `tests/WorldOfAngBand.App.Tests/` (the window, headless,
   with real Skia drawing). `BalanceTests` runs the campaign bots and takes about a minute.
 
@@ -136,6 +145,13 @@ The code is **copied** from the two parent games, not linked, so neither has to 
   (`CreatureBridge.Load`, `ItemBridge.Load`, `Setting`), as its data files do (`DataLoader`).
 - **Warnings are errors** (`TreatWarningsAsErrors`), nullable reference types are on, and every change comes with
   tests.
+- **Sound never touches the game.** `SoundDirector` picks with its own `Random`, never `GameRandom`, and only reads
+  the session, so a seed and its commands make the same game with sound on or off. Tests use a recording or silent
+  `IAudioEngine` and never open a device.
+- **Every sound is credited.** `SoundTests` fails on a file in `audio/` that `soundpack.json` doesn't list with its
+  source and licence, and on a listed file the pack never plays.
+- **Tests never write the player's files.** A test that changes settings sets `MainWindow.SettingsPath` (and the
+  graveyard and challenge board paths) to a temporary folder first.
 
 ## CI and releases
 

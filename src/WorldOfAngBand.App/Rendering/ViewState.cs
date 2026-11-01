@@ -84,6 +84,9 @@ public sealed class ViewState
 
     public IReadOnlyList<(string Text, double At)> Messages => _messages;
 
+    /// <summary>A line in the message log from the window itself, not the game (why the game is silent).</summary>
+    public void Note(string text) => _messages.Add((text, Time));
+
     public IReadOnlyList<FloatingText> Floats => _floats;
 
     public IReadOnlyList<Corpse> Corpses => _corpses;

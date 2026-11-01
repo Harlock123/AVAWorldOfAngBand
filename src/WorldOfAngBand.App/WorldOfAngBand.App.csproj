@@ -28,6 +28,9 @@
     <!-- AVABand's DCSS tiles (CC0), read through their manifest from beside the executable: the classic tile view, and
          the paper fallback for monsters with no Flare sprite. -->
     <Content Include="tilesets\**" CopyToOutputDirectory="PreserveNewest" />
+    <!-- The sound pack (the spec's section 8.1), made by tools/audio/make_audio_pack.py: music, ambience and effects
+         from AVABand and AVAAshenReliquary, each file's source and licence in audio/CREDITS.md. -->
+    <Content Include="audio\**" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,5 +44,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WorldOfAngBand.Game\WorldOfAngBand.Game.csproj" />
+    <ProjectReference Include="..\WorldOfAngBand.Audio\WorldOfAngBand.Audio.csproj" />
   </ItemGroup>
 </Project>

@@ -7,6 +7,7 @@ using SkiaSharp;
 using WorldOfAngBand.App.Rendering;
 using WorldOfAngBand.App.Services;
 using WorldOfAngBand.App.Windows;
+using WorldOfAngBand.Audio;
 using WorldOfAngBand.Engine.Geometry;
 using WorldOfAngBand.Game;
 
@@ -67,7 +68,11 @@ public sealed class MainWindow : Window
         // whenever the last one has been drawn.
         _frames = new DispatcherTimer(TimeSpan.FromMilliseconds(16), DispatcherPriority.Render, (_, _) => Tick());
         _frames.Start();
-        Closed += (_, _) => _frames.Stop();
+        Closed += (_, _) =>
+        {
+            _frames.Stop();
+            Sound.Dispose();
+        };
     }
 
     public ViewState State { get; }
@@ -94,8 +99,8 @@ public sealed class MainWindow : Window
             Classic.Tiles = value == ViewMode.Tiles;
             Content = value == ViewMode.Isometric ? View : Classic;
             Hud.KeysLine = value == ViewMode.Isometric
-                ? "Arrows/keypad: walk · 1–0: abilities · < >: stairs · g: pick up · i: pack · f: feats · J: journal · R: rest · q: flask · click: travel · wheel: zoom · Ctrl+T: classic view · Ctrl+Q: quit"
-                : "Arrows/keypad: walk (up is north) · 1–0: abilities · < >: stairs · g: pick up · i: pack · f: feats · J: journal · R: rest · q: flask · click: travel · Ctrl+T: next view · Ctrl+Q: quit";
+                ? "Arrows/keypad: walk · 1–0: abilities · < >: stairs · g: pick up · i: pack · f: feats · J: journal · R: rest · q: flask · click: travel · wheel: zoom · Ctrl+T: classic view · Ctrl+O: sound · Ctrl+Q: quit"
+                : "Arrows/keypad: walk (up is north) · 1–0: abilities · < >: stairs · g: pick up · i: pack · f: feats · J: journal · R: rest · q: flask · click: travel · Ctrl+T: next view · Ctrl+O: sound · Ctrl+Q: quit";
             Redraw();
         }
     }
@@ -117,6 +122,44 @@ public sealed class MainWindow : Window
     }
 
     private Birth? _lastBirth;
+
+    /// <summary>What plays (the spec's section 8.1): silent until the app gives it OpenAL and the sound pack.</summary>
+    public SoundDirector Sound
+    {
+        get => field;
+        set
+        {
+            field = value;
+            if (value.Engine is NullAudioEngine { Reason: { } reason })
+                State.Note(reason);
+        }
+    } = new(new NullAudioEngine(), SoundPack.None);
+
+    /// <summary>What the music follows: the birth window and the book of the dead have the title's, the epilogue its own.</summary>
+    public SoundScreen Screen =>
+        _birthOpen || Session.IsOver ? SoundScreen.Title
+        : Session.Won && State.ShowEpilogue ? SoundScreen.Epilogue
+        : SoundScreen.Game;
+
+    private bool _birthOpen;
+
+    /// <summary>The Sound window (Ctrl+O): volumes, switches and the mixing period, kept in settings.json.</summary>
+    public SoundWindow OpenSound()
+    {
+        var window = new SoundWindow(Sound, Settings, SettingsPath);
+        if (ShowDialogs)
+            _ = window.ShowDialog(this);
+        return window;
+    }
+
+    /// <summary>Ctrl+M: everything silent, or back as it was.</summary>
+    public void ToggleMute()
+    {
+        Settings.Sound = Settings.Sound with { Muted = !Settings.Sound.Muted };
+        Sound.Apply(Settings.Sound);
+        Settings.Save(SettingsPath);
+        State.Note(Settings.Sound.Muted ? "Sound off (Ctrl+M to turn it on)." : "Sound on.");
+    }
 
     /// <summary>The player's settings (the mods switched off).</summary>
     public AppSettings Settings { get; set; } = new();
@@ -161,6 +204,8 @@ public sealed class MainWindow : Window
     public BirthWindow OpenBirth(ulong? seed = null)
     {
         var window = new BirthWindow(Session.Content, AshenLegacy.Read(LegacyFolder), _lastBirth);
+        _birthOpen = true;
+        window.Closed += (_, _) => _birthOpen = false;
         window.Chosen += birth => NewGame(seed, birth);
         window.ChallengesWanted += () => OpenChallenges();
         window.ModsWanted += () => OpenMods();
@@ -262,6 +307,13 @@ public sealed class MainWindow : Window
                 case Key.Q:
                     Stop();
                     OpenQuit();
+                    return true;
+                case Key.O:
+                    Stop();
+                    OpenSound();
+                    return true;
+                case Key.M:
+                    ToggleMute();
                     return true;
                 default:
                     return false;
@@ -536,6 +588,7 @@ public sealed class MainWindow : Window
     /// <summary>One frame: the next step of a journey or a rest, if the last has been drawn, and a redraw.</summary>
     public void Tick()
     {
+        Sound.Update(Session, Screen);
         if (!State.Sliding && !Session.IsOver)
         {
             if (_travel.Count > 0)

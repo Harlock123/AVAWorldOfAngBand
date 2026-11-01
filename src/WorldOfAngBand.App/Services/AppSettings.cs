@@ -3,8 +3,8 @@ using System.Text.Json;
 namespace WorldOfAngBand.App.Services;
 
 /// <summary>
-/// The player's settings, kept in settings.json beside the Order's book: for now the mods switched off. A file that
-/// can't be read starts from the defaults.
+/// The player's settings, kept in settings.json beside the Order's book: the mods switched off and the Sound window's
+/// settings. A file that can't be read starts from the defaults.
 /// </summary>
 public sealed class AppSettings
 {
@@ -14,6 +14,9 @@ public sealed class AppSettings
 
     /// <summary>Mods (by folder name) left out of the game.</summary>
     public List<string> DisabledMods { get; set; } = [];
+
+    /// <summary>Volumes, switches and the mixing period (the spec's section 8.1).</summary>
+    public Audio.SoundSettings Sound { get; set; } = new();
 
     public static AppSettings Read(string? path = null)
     {

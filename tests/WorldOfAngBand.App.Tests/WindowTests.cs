@@ -368,6 +368,66 @@ public class WindowTests
         window.Close();
     }
 
+    /// <summary>An engine that says it has a device, and plays nothing.</summary>
+    private sealed class Playing : WorldOfAngBand.Audio.NullAudioEngine
+    {
+        public override bool IsAvailable => true;
+    }
+
+    [AvaloniaFact]
+    public void The_music_follows_the_screen_and_ctrl_m_and_the_sound_window_change_it()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "worldofangband-tests", Guid.NewGuid().ToString("N"));
+        var window = Open();
+        // Never the player's own settings.json.
+        window.SettingsPath = Path.Combine(root, "settings.json");
+        var engine = new Playing();
+        window.Sound = new WorldOfAngBand.Audio.SoundDirector(engine, WorldOfAngBand.Audio.SoundPack.Load(WorldOfAngBand.Audio.SoundPack.DefaultDirectory));
+        var birth = window.OpenBirth();
+        birth.Show();
+        window.Tick();
+        Assert.Equal("title", window.Sound.Mood);
+        birth.Close();
+        Pump();
+        window.Tick();
+        Assert.Equal("town", window.Sound.Mood);
+        Assert.NotNull(engine.CurrentMusic);
+
+        Assert.True(window.Press(Key.M, KeyModifiers.Control));
+        Assert.True(AppSettings.Read(window.SettingsPath).Sound.Muted);
+        Assert.Null(engine.CurrentMusic);
+        Assert.Contains(window.State.Messages, m => m.Text.StartsWith("Sound off", StringComparison.Ordinal));
+        Assert.True(window.Press(Key.M, KeyModifiers.Control));
+        window.Tick();
+        Assert.NotNull(engine.CurrentMusic);
+
+        Assert.True(window.Press(Key.O, KeyModifiers.Control));
+        var sound = window.OpenSound();
+        sound.SetVolume("Music", 20);
+        sound.Switch("Ambience", false);
+        sound.PickBuffer(WorldOfAngBand.Audio.AudioBuffer.ExtraLarge);
+        var saved = AppSettings.Read(window.SettingsPath).Sound;
+        Assert.Equal(0.2f, saved.Music, 3);
+        Assert.False(saved.AmbienceOn);
+        Assert.Equal(WorldOfAngBand.Audio.AudioBuffer.ExtraLarge, saved.Buffer);
+        window.Tick();
+        Assert.Null(engine.CurrentAmbience);
+        CaptureDialog(sound, "WorldOfAngBand-sound");
+        window.Close();
+    }
+
+    [AvaloniaFact]
+    public void With_no_sound_device_the_game_plays_on_and_says_why_once()
+    {
+        var window = Open();
+        window.Sound = new WorldOfAngBand.Audio.SoundDirector(new WorldOfAngBand.Audio.NullAudioEngine(WorldOfAngBand.Audio.AudioFailure.NoDevice),
+            WorldOfAngBand.Audio.SoundPack.None);
+        Assert.Single(window.State.Messages, m => m.Text == WorldOfAngBand.Audio.AudioFailure.NoDevice);
+        window.Tick();
+        Assert.True(window.Press(Key.NumPad5));
+        window.Close();
+    }
+
     [AvaloniaFact]
     public void Ctrl_q_asks_before_leaving_and_staying_keeps_the_game()
     {

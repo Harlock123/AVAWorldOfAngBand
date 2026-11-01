@@ -1,5 +1,5 @@
 {
- "_comment": "What AVAWorldOfAngBand makes of AshenReliquary's province ten years on (the spec's section 7.4). zones/, creatures.json and dialogues.json are AshenReliquary's, copied unchanged; this file is this game's own. npcs: who still stands where AshenReliquary put them, and what they say now (an NPC with no line here is gone). tieIns: readings that carry something down to the story levels, with the flag they set. leaveOut: interactables whose turn in AshenReliquary's story is over.",
+ "_comment": "What AVAWorldOfAngBand makes of AshenReliquary's province ten years on (the spec's section 7.4). zones/, creatures.json and dialogues.json are AshenReliquary's, copied unchanged; this file is this game's own. npcs: who still stands where AshenReliquary put them, and what they say now (an NPC with no line here is gone). tieIns: readings that carry something down to the story levels, with the flag they set. leaveOut: interactables whose turn in AshenReliquary's story is over. sound: a zone's own music mood or ambience loop (the spec's section 8.1).",
  "npcs": {
   "gallows_road/scarecrow": "The scarecrow still stands, its coat rotted to threads. Someone has hung a little lantern from its arm, and keeps it lit.",
   "frostbitten_pass/hermit": "\"Ten winters since the Throne, and still they come up my road with that look. Go down if you must. The mountain keeps no one who comes back up the wrong way.\"",
@@ -19,5 +19,9 @@
   "barrow_fields/ediths_grave": {"flag": "oath", "value": "words", "text": "Under Edith Hadric's name the mason cut the last words of her husband's oath: the words that end it. You remember them."},
   "wyrms_nest/egg": {"flag": "nest", "value": "shard", "text": "In the cold heart of the old nest lies an egg, long dead and cracked: the dam's first brood. You take a shard of its shell."}
  },
- "leaveOut": ["candle", "beacon", "stash", "snuffer", "throne", "biers"]
+ "leaveOut": ["candle", "beacon", "stash", "snuffer", "throne", "biers"],
+ "sound": {
+  "rotwater_fens": {"ambience": "town-night"},
+  "sallows_mire": {"ambience": "town-night"}
+ }
 }

@@ -15,5 +15,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\WorldOfAngBand.Game\WorldOfAngBand.Game.csproj" />
+    <ProjectReference Include="..\..\src\WorldOfAngBand.Audio\WorldOfAngBand.Audio.csproj" />
   </ItemGroup>
 </Project>

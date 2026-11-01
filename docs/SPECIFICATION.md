@@ -547,35 +547,38 @@ and adds nothing new to the libraries.
 
 | From | What | Licence |
 | --- | --- | --- |
-| AVABand `Angband.Audio` | The OpenAL Soft engine (Silk.NET), Ogg and MP3 decoders, loudness, failure handling, the mixing-period fix for virtual machines (`OpenAlConfig`), `SoundPack` and `SoundDirector` | GPL-2 |
+| The OpenAL layer both games share | AshenReliquary's copy (it pans, and has the extra-large mixing period): the OpenAL Soft engine (Silk.NET), Ogg and MP3 decoders, loudness, failure handling, the period fix for virtual machines (`OpenAlConfig`); AVABand's `SoundPack` and the shape of its `SoundDirector` | GPL-2 and MIT |
 | AshenReliquary `AudioDirector` | Distance and screen-position panning, the repeat guard, the combat hold and the ability-ready tick | MIT |
-| AVABand's CC0 dungeon music | 15 tracks: the title ("The Pits of Angband"), town (2), town at night (2), dungeon (7), deep (5), boss (1) | CC0 |
+| AVABand's CC0 dungeon music | 16 tracks: the title ("The Pits of Angband"), town (2), dungeon (7), deep (5), boss (1); its two night tracks stay out, as this game has no night | CC0 |
 | AshenReliquary's music | Kevin MacLeod's and Alexandr Zhelanov's: title, explore (2), combat (2), boss | CC BY 4.0 |
 | AVABand's ambience | 11 loops: town by day and night, the dungeon shallow, deep and abyss, cavern, labyrinth, lair, Moria-style mines, fortress, gauntlet | CC0 |
-| AshenReliquary's ambience | The road loop | CC0 |
+| AshenReliquary's ambience | Its road loop is JaggedStone's dungeon loop again, so it is not copied twice | CC0 |
 | Dubtrain's Angband sounds | 149 effects named by Angband's message types: hits by degree, every breath and summons, monster blows, doors, stairs, stores, statuses | CC BY 4.0 |
-| AshenReliquary's effects | 49 groups: swings, hits and crits, blocks, wards, element bursts, gold, pickups by material, potions, chests, shrines, level-up, death, footsteps, and creature voices (zombie, skeleton, wolf, crawler, cultist, crone) | CC0 and CC BY 3.0, per file |
+| AshenReliquary's effects | 45 groups (its guns' four stay out): swings, hits and crits, blocks, wards, element bursts, gold, pickups by material, potions, chests, shrines, level-up, death, footsteps, and creature voices (zombie, skeleton, wolf, crawler, cultist, crone) | CC0 and CC BY 3.0, per file |
 
-They ship as a sound pack folder, `audio/`, beside the executable as `tilesets/` does: about 57 MB, in each
-platform's archive. `audio/soundpack.json` is AVABand's pack format: effects keyed by event name, music by mood, a
-volume per event, and the licence per file. A mod may bring its own pack (section 6's layering, by key).
+They ship as a sound pack folder, `audio/`, beside the executable as `tilesets/` does: about 53 MB (339
+files), in each platform's archive. `audio/soundpack.json` is AVABand's pack format with ambience added: effects keyed by event name, music by
+mood, ambience loops by name, a volume per event, and the source and licence of every file (`audio/CREDITS.md` lists
+them). `tools/audio/make_audio_pack.py` makes it from the two parents' repositories. A mod may bring its own pack (section 6's layering, by key).
 
 **Music, by where the hero is.** One mood plays at a time and crossfades to the next:
 
 | Where | Music | Ambience |
 | --- | --- | --- |
 | The birth window and the book of the dead | "The Pits of Angband" (AVABand's title) | none |
-| Gallowmere and the waystations | AVABand's town tracks | town by day |
-| Province zones, outdoors | Ashen's explore tracks | Ashen's road; the fens, the pass and the wastes by tileset (below) |
-| Province zones, indoors and dark (chapel, ossuary, barracks, catacombs, bell tower, reliquary) | AVABand's dungeon tracks | dungeon, shallow |
+| Gallowmere and the waystations | AVABand's town tracks | Gallowmere the town by day; a waystation by its tileset (below) |
+| Province zones, outdoors | Ashen's explore tracks | by tileset (below) |
+| Province zones, indoors: darkness 0.85 or more (chapel, ossuary, barracks, catacombs, bell tower, the Reliquary, the Wyrm's Nest, the Cinder Throne) | AVABand's dungeon tracks | dungeon, shallow; the cinder caves the lair |
 | The shaft, depth 1–30 | AVABand's dungeon tracks | dungeon, shallow; cavern, labyrinth and the rest by the level's profile, as in AVABand |
-| The shaft, depth 31–100 | AVABand's deep tracks | dungeon, deep (abyss below 60) |
+| The shaft, depth 31 and below | AVABand's deep tracks | dungeon, deep to 60, the abyss below |
 | Fighting: a monster hunting the hero in view | Ashen's combat tracks, held ten game turns after the last one leaves view | as before, quieter |
 | A great foe in view: a unique, a story keeper, Saint Ysmere, the Cinder | Ashen's boss track, then AVABand's | as before, quieter |
 | The epilogue | Ashen's title | none |
 
-Province ambience by tileset: grassland the road loop, the Iron March's the fortress loop, Oriel's snow the cavern
-wind, the cinder caves the lair loop. A zone may name its own in `data/province/province.json`.
+Province ambience by tileset: grassland the morning loop (birds), the Iron March's the fortress (wind in halls, a
+forge-hammer), Oriel's snow the wind, the cinder country the gusting wind of the gauntlet. A zone may name its own
+mood or loop in `data/province/province.json` (`sound`): the Rotwater Fens and Sallow's Mire have the night's
+crickets.
 
 **Effects, from the game's events.** `SoundDirector` listens to `Published` and nothing else, so the session never
 knows about sound. Where the game has no event yet for something worth hearing, M8 adds one; the view's own events
@@ -676,10 +679,15 @@ M7 comes in three parts:
   expected level.
 
 M8 comes in two parts:
-- **M8a**: the audio project copied from AVABand, the sound pack beside the executable with its credits, the music
+- **M8a** (done): the audio project copied from AVABand, the sound pack beside the executable with its credits, the music
   and ambience by place (town, zone, depth and profile), and the Sound window;
 - **M8b**: the effects for every event, with the events the session lacks; placement by screen and distance;
   hearing by noise; the combat and great-foe music; footsteps and the ready tick.
+
+M8a as built: the music and ambience follow the screen and the place each frame and change only when the mood or
+loop does; a mood plays a track at a time from its playlist, never the same one twice running. Sound names are
+case-sensitive, since Dubtrain's DEATH and Ashen's death are different sounds. A pack that fails its check is left
+out and says why in the message log.
 
 M7 as built:
 - The NPCs who stand ten years on are those the province notes give a line (eleven of them, the copies of a person
