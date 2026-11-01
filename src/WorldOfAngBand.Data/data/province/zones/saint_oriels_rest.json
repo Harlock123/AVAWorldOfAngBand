@@ -1,0 +1,552 @@
+{
+ "id": "saint_oriels_rest",
+ "name": "Saint Oriel's Rest",
+ "level": 11,
+ "act": 3,
+ "revision": 1,
+ "tileset": "tileset_oriel",
+ "town": true,
+ "tagline": "The bells have not rung since the Choir began to sing.",
+ "rows": [
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCC===CCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCC===CCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCC===CCCCCCCCCCCCCCCCCCCC",
+  "CT........,..........===..............,...CC",
+  "CT.......,...........===.,...T............TC",
+  "CC......RWWWWWWWWWWWQGGGQWWWWWWWWWWR......CT",
+  "CC.....,Wff_fffffffBff=ffBffff_ffffW......TC",
+  "CT......Wf========================fW,.....CC",
+  "TC......Wf=ff_ffffffff=f_ffffPfPf=fW......CT",
+  "CCT...,.W_=fXXXfffffff=ffffffffff=fWT..,..CT",
+  "TC......Wf=fXHXfffffff=fff_ffPfPf=fW...T..TC",
+  "CC......Wf=fXXXf_fffff=fffff_ffff=_W......CT",
+  "CT.,....Wf=ffffffff__f=ffff_fffff=fW.T....CC",
+  "CC......Wf=ffff_ffffff=ff_fffffff=fW...T..CC",
+  "CT......Wf=fffffffffff=f__ffff_f_=fW......CC",
+  "CC...T..Wf=fff_ff_Sfff=ff_wffff__=fW......TT",
+  "TT......Wf=__ff_fffff_=ffffffffff=fW......CC",
+  "CT....,TWf=f_fffffffff=f__ff_ffff=fW.,..,.CT",
+  "CC.T....Wf=ffff__fffff=ffff_f_f_f=fW......TC",
+  "TC......Wf=fffffffffff=fffff_ff_f=fW...T..CT",
+  "TC......W_=_ffffffffff=ffff_fffff=fW,.....CC",
+  "CC.....,Wf=fffffffff__=ffffffff_f=_W......TC",
+  "CC......Wf=_ffZffZffff=ffffZffZff=fW......CC",
+  "CC...,..W_========================fW....,.CT",
+  "CC....T.W_ffffffff_Bff=ffBfffffffffW......CC",
+  "CT..,,..RWWWWWWWWWWWQ===QWWWWWWWWWWRT.,..TCC",
+  "CCT..T...T..........-===-.,...............CC",
+  "CC.......,..........-===-.................CC",
+  "CT..................-===-.........T,......CC",
+  "CC...tX...,......T..-===-......tX.....,...CC",
+  "CC...XX.c...........-===-......XX.c.......CC",
+  "CC.......,.....,....-===-..............T..TC",
+  "CC........tX........-===-...........tX....CC",
+  "CC........XX........-===-........,..XX.,..CC",
+  "CCT.....T.,..T..,...-===-T.............,..TT",
+  "CC.,,........Tkk....-===-....a............TC",
+  "CC..................-===-TT...............CT",
+  "CC,.................-===-...T.,.......T...TC",
+  "TC..................-===-.................CC",
+  "CT................,.-===-T................CT",
+  "TC.,.....,.......TT,-===-....,.,..........CC"
+ ],
+ "legend": {
+  ".": {
+   "ground": "grass"
+  },
+  ",": {
+   "ground": "grass",
+   "objects": [
+    112,
+    113,
+    116,
+    117,
+    120,
+    121,
+    124,
+    125
+   ]
+  },
+  "=": {
+   "ground": "path",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  "-": {
+   "ground": "path_edge"
+  },
+  "f": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  "_": {
+   "ground": "grass",
+   "tiles": [
+    1074,
+    1075,
+    1076,
+    1077,
+    1078
+   ]
+  },
+  "C": {
+   "ground": "grass",
+   "objects": [
+    48,
+    49,
+    52,
+    53,
+    56,
+    60,
+    64,
+    68
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "T": {
+   "ground": "grass",
+   "objects": [
+    244,
+    245,
+    246,
+    247
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "W": {
+   "ground": "grass",
+   "objects": [
+    1223,
+    1224,
+    1225,
+    1226,
+    1227,
+    1228,
+    1229
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "R": {
+   "ground": "grass",
+   "objects": [
+    1185,
+    1186
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "Q": {
+   "ground": "grass",
+   "objects": [
+    1230
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "P": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1223,
+    1226,
+    1228
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "G": {
+   "ground": "path",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1362,
+    1365
+   ],
+   "blocks": true
+  },
+  "H": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    744
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "X": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "blocks": true
+  },
+  "Z": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1241,
+    1242,
+    1243,
+    1244
+   ],
+   "blocks": true
+  },
+  "B": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    102
+   ],
+   "blocks": true,
+   "light": 4.0
+  },
+  "w": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1289
+   ],
+   "blocks": true
+  },
+  "S": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    265
+   ]
+  },
+  "t": {
+   "ground": "grass",
+   "objects": [
+    72,
+    75
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "c": {
+   "ground": "grass",
+   "objects": [
+    102
+   ],
+   "blocks": true,
+   "light": 3.5
+  },
+  "k": {
+   "ground": "grass",
+   "objects": [
+    96,
+    97,
+    98,
+    99
+   ],
+   "blocks": true
+  },
+  "a": {
+   "ground": "grass",
+   "objects": [
+    540,
+    541
+   ],
+   "blocks": true
+  }
+ },
+ "playerStart": [
+  22,
+  36
+ ],
+ "spawns": [],
+ "shrines": [
+  {
+   "id": "cloister_shrine",
+   "name": "The Cloister Shrine",
+   "at": [
+    18,
+    16
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "ilse",
+   "name": "Abbess Ilse",
+   "title": "Abbess of Saint Oriel",
+   "at": [
+    24,
+    10
+   ],
+   "facing": 2,
+   "portrait": "flare/female09",
+   "dialogue": "oriel_ilse",
+   "look": {
+    "head": "mage_hood",
+    "chest": "mage_vest",
+    "hands": "mage_sleeves",
+    "legs": "mage_skirt",
+    "feet": "mage_boots",
+    "main": "greatstaff"
+   }
+  },
+  {
+   "id": "caddoc",
+   "name": "Brother Caddoc",
+   "title": "Penitent",
+   "at": [
+    16,
+    21
+   ],
+   "facing": 3,
+   "portrait": "flare/male10",
+   "dialogue": "oriel_caddoc",
+   "requires": {
+    "act3.caddoc": ""
+   },
+   "look": {
+    "head": "leather_hood",
+    "chest": "mage_vest",
+    "hands": "cloth_gloves",
+    "legs": "cloth_pants",
+    "feet": "cloth_sandals",
+    "main": "staff"
+   }
+  },
+  {
+   "id": "caddoc_back",
+   "name": "Brother Caddoc",
+   "title": "Penitent",
+   "at": [
+    16,
+    21
+   ],
+   "facing": 3,
+   "portrait": "flare/male10",
+   "dialogue": "oriel_caddoc_forgiven",
+   "requires": {
+    "act3.penitent": "forgiven"
+   },
+   "look": {
+    "head": "leather_hood",
+    "chest": "mage_vest",
+    "hands": "cloth_gloves",
+    "legs": "cloth_pants",
+    "feet": "cloth_sandals",
+    "main": "staff"
+   }
+  }
+ ],
+ "interactables": [
+  {
+   "id": "stash",
+   "name": "Stash",
+   "at": [
+    19,
+    19
+   ],
+   "tile": 1264,
+   "action": "stash"
+  },
+  {
+   "id": "altar",
+   "name": "Cloister altar",
+   "at": [
+    26,
+    9
+   ],
+   "tile": 1293,
+   "dialogue": "oriel_altar"
+  },
+  {
+   "id": "daughter_oriel",
+   "name": "The hospice register",
+   "at": [
+    28,
+    17
+   ],
+   "dialogue": "daughter_oriel",
+   "action": "keepsake",
+   "blocks": false
+  }
+ ],
+ "vendors": [
+  {
+   "id": "halvard",
+   "name": "Halvard",
+   "title": "Smith",
+   "at": [
+    31,
+    21
+   ],
+   "facing": 5,
+   "stockSize": 12,
+   "sells": [
+    "weapons",
+    "firearms",
+    "armour"
+   ],
+   "runework": true,
+   "greeting": "Cold steel's the only kind up here. I can etch it, and I can strip the runes off your old one.",
+   "look": {
+    "head": "chain_coif",
+    "chest": "leather_chest",
+    "hands": "leather_gloves",
+    "legs": "leather_pants",
+    "feet": "leather_boots",
+    "main": "war_hammer"
+   }
+  },
+  {
+   "id": "mora",
+   "name": "Sister Mora",
+   "title": "Cellarer",
+   "at": [
+    12,
+    21
+   ],
+   "facing": 6,
+   "stockSize": 12,
+   "greeting": "Bread, salt, bombs and blessings. The pass takes all four.",
+   "supplies": [
+    "alchemists_fire",
+    "frost_vial",
+    "bottled_lightning",
+    "acid_flask",
+    "antidote",
+    "incendiary_round",
+    "silver_round",
+    "black_powder",
+    "lead_shot",
+    "gun_parts"
+   ],
+   "look": {
+    "head": "mage_hood",
+    "chest": "mage_vest",
+    "hands": "cloth_gloves",
+    "legs": "mage_skirt",
+    "feet": "cloth_sandals",
+    "main": "rod"
+   }
+  }
+ ],
+ "exits": [
+  {
+   "id": "south_road",
+   "label": "The Frostbitten Pass",
+   "at": [
+    22,
+    40
+   ],
+   "radius": 1.5,
+   "to": "frostbitten_pass",
+   "toExit": "rest",
+   "arrive": [
+    22,
+    36
+   ]
+  },
+  {
+   "id": "north_door",
+   "label": "The Hollow Woods",
+   "at": [
+    22,
+    7
+   ],
+   "radius": 1.5,
+   "to": "hollow_woods",
+   "toExit": "rest",
+   "arrive": [
+    22,
+    9
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1194 @@
+{
+ "id": "rotwater_fens",
+ "name": "The Rotwater Fens",
+ "level": 2,
+ "revision": 1,
+ "tileset": "tileset_grassland",
+ "tagline": "Black water, and the reek of rot.",
+ "xpScale": 0.6,
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT-===-TTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT-===-TTTTTTT",
+  "TT~wwww~%~~%~~~~wwww~~~~~~~%%~%~~~~~~~~~%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~,...,D,..,..-===-...~~TT",
+  "TT%~%~%~~~~~~wwwwwww~%%~~~DD~~wwww%~~~~%~~D%%~~%~~%~~~~~~...~~%~%%~~~~~..,..........-===-ff%~~TT",
+  "TT~%~~%~~wwwwwwwwwww~~%~~~%~~~wwww~~%~%~w%~D%~%~~~~~%~~,......~%%%DD~~~...,.~~%....-===-.~.~~%TT",
+  "TT~~~~~~~%%~~~wwwwww~~~~~~%~~~wwww~~~~~~~~~%%.~%%~~%...,.TTT....~~~~~~.....~~%~....-===-..%%~~TT",
+  "TT,.~%~~~~~~D~D~~www~~~~~%~~~~~ww~~%~~~~~~%~~..~~%~,....T,,D.,..,.~~~..,T,.~~~..,.-===.....~~~TT",
+  "TT..D...~~~~~~~~%Dww~~~~~~~~%~~~~~~~~~~~DD~~~~D~~~~.T,DD,.T,D.,DDD..,.,D.,.%~~..,-===-.....%~~TT",
+  "TT.T..,,....D..~~~www~~~D~~%~~%~~~~~.,~~%~%~~~~%~~D,,T..,.,T.D.T,...,,TT..~~~%....===-...,.%%DTT",
+  "TT,T.TTTTT,T,...~~%wwwww~~~~~~~~~~%..,,.....~~~~~~..,.,T.DTT..,.,.w..,.D.,~~~~.S.-==-......~,,TT",
+  "TT.T.T,TTT..,.,,~~%~~~~~~~D~D~~~%~~~...........~~~.,DT,.T,T.,,.wwwwwww..,.%~%~,..-==-...,..~,.TT",
+  "TTDTT.T..,......~~~~~%~~~%~~~~~~~%~~~~~~.,.....~%~..DT..TTT,,.wwwwwwwww...~~~~~..-==-.....%~.,TT",
+  "TTT..D..~~%.D.,.,,~~~~~~~~%D~~~~~~~~%~~%~,D.,,.~~~%.DD..D.TT.wwwwwwwwwww.,~~~~%%.-===-.,.~b~..TT",
+  "TTTDT..~%~~~.,,...,.~~D~~~%~~D~.~~~~~~~~~,,...,~~~%..D,TTDDD,.wwwwwwwww.,..~~%~~--===-.~~~.b.~TT",
+  "TTT...,~~%~~......,,.~~~~~~~~~~.,~~~~~~~,,,.....%~~,,,..T,,D.,,wwwwwww,...%~~%--=====-~~~~~~%~TT",
+  "TTTTDTD.~~~~.........~~~~~~~%~~..~%~%~~~D..,.,D.~~~.,T.T.T..,,,...w..,,.T.~~~--=====.-~~~~~~~%TT",
+  "TTT...,,%~~D.T,T......D,.~~%~~~~~~~%D~~......,,..D......,..,..TD.,.,..TT..~~-=====--~~%~~%~~~.TT",
+  "TT,TT.,..~~D..D..,..,.T.,.~%~~~~~D%~~~....,..T.T,....~~~~,...,TTD.,T.T....%-====-.~~%~~~~~D~~,TT",
+  "TT.D.T...~~.,.TT..,.,D.TD,~~~~~~~%~~.D,.....T.TT,...~~~%%~%,..,D.DDT.T...~-====.~~~~wwww~~~%~,TT",
+  "TTTDTD..,%.DT.,T,..,T,...,D~~~~~~~.D.......DD......~~%~~%~%~~...TTT.D.,...====-%~~%D~wwww%~~~~TT",
+  "TT.,D.DD,....TT..,..DTT.DD...~~~%~.,..,,..,.,D.T.~%~~~~~~~~~~~..,T.......-===-~~~~~~~~~~www~~~TT",
+  "TTT.D,TT..DD,.TT.,,T..T.T,....,~~..,...,...TD....~~~~wwww.,.D~%..D.D..,,-===-~%~~~~~~~D~wwww~%TT",
+  "TT,,TTTD.....,T.,.,T,TT..,.....~D.....D.~%.TDDT.%~~~wwww...,,~~~...,.,..-==.-~~%%%~~~~~~wwww~%TT",
+  "TTTT,TTD.,,...,,..,.D,,D.TT,,...~..,,..~%~..D,..~~%~www,.XXX..~~.,.,...-===.~~~~%%~~~~~~~www~~TT",
+  "TT.TT.TT,D.,,,,..,,.,.T.TT.,..........,~~~...,T,~~~~www..XHX..%...D..,,.===-%%~~~~~~~~~~~ww~~~TT",
+  "TT.T...TT,.,,,.,.D...DDT.,....,,,..,,,.~D~.,,..~~~~~~~w..XXX....,,D.,.,-==.~~%~~~~~~~~~~~~~~%~TT",
+  "TTT,,%,.TTD,,%~...DD..,...,.,...,,D%~~~%~~~~~~~~~~~D~~~~,.....TT.....-.===-.,,...~~%%~~~~~~~%~TT",
+  "TTT.~~~,.,.,.~~.,TDT,.~~~~~D,......~%~~~~~~~~~~~%~~%%~~~%.......%---=====....T.,.,.~~%~~~%~~~~TT",
+  "TT..~~~.DTT..~%.,..,,~~~~~~.....,...~%~~%~~%~D~%~~~~~~~~~~~%....-========-~,.T,TD...~~%~~~,.~~TT",
+  "TT.,,~,.TD..,%~~.,..~~~~~~,...T.T,D.,...~~~D~~~~~%~~~~~D~~~%,--========--.....DTD..,~~~~~....~TT",
+  "TT~.,,.,.D,..~%~~~~~~%~~%.,,DTTT,...,T...~~~~~%~~~~~~~~~~~..-=====-.--.......,.D....~~~~D..,.~TT",
+  "TT~,D...TTT..~%%~~~~~~~~%.,...DD..D.TT,..~~~~~%%~..,~~~~,...====-..%....,,.......T,.%~~~~..,.,TT",
+  "TT~....TDT.,.~~~%~%~~~%~~.,.TTT.,..T,.,,.D%~~~~%~..D.~%~..-====-.~~..D..T.D,r...rTD.,~~%.....,TT",
+  "TT~...,,.D,.D.~%~~%~~~~~~~...T.DT.TDTT,.,~~~ww~~~~~.~~~..-====.,~TDTT,D.T,T....,..,,.,~~.....,TT",
+  "TT~...D.......,~~~~~~~~~D~~.,T.D,.T,,..,.....ww%~~~~~~.,-====-...TDD.,..TTT.......DT..D,.,,...TT",
+  "TTD...,,,,...,,.%~~~wwww~~~,.DT.D.T.TDD,......w~~~~~%~.-====.~%~,..T.T,D.TT...........,,..,...TT",
+  "TT..,,..,.,,..,.~~~~wwwww~~...T.T,...T......,,~~~~~~%~--===.~D%~~.,..TT.....r...rTDT....,,,...TT",
+  "TT..D...,..,,,,.~~~~wwww%~~%.DTTDD.TTT,.......~%~~~.-.====..~~D~%~....D.TTTTT.....D..,...~D,..TT",
+  "TT,DT.D..,..D...~~~~~%ww~~%%..,..DT...T,......~%%~-.=====...%~~~%~~..,.....,,,,.~~~~...,.,..,.TT",
+  "TT.T.T....,...,.~~~~D~~~%~~~~.....DD,....,,,...%-.=====---..~%~~~~~~~~.,D,.~~D~~~~~D~~~~......TT",
+  "TTD.,T....,,,...~%%D~D~~~~~%~~~~,,,...,,.......-=====-..,.D.,~~~~~~~~~~~%~~~~~~~~~~%~%~%...,..TT",
+  "TT...TT....,,...%~~~~~~~~~~~~~~.....,.DT.DTT.--====-.~....,.~D~~~%~~~~%~~~~D%~~www~~~~~~~....~TT",
+  "TT...T...,.,,,,,~~~~~~~~~~~~~.,,....DD,D.T.,--====-.~~~~,,...~~~~~~~~~%~%~~~wwwwwww~~~~~~%~~~%TT",
+  "TTT.TT...~~......%~~Dwwww~~~%.D.TTT....,T,~-.===-..,,~%~.,.,,~~%~~~~~~~~~D~wwwwwww~~~~~~~~%~~~TT",
+  "TTTTTD.,~~~.,..,.~~D~wwww~~~.,.DDTT...,.....===--.DD,%~~D.,,...~~~~~~~~~~%wwwwwwwD~~~~~~~%~~~~TT",
+  "TT.TT..,~~D,.,.,.~~~~wwww~~~.T,TD.T..,,.,-.===--.TDD,~~~~..,....~~~~~~~~~~wwwwww~~~~~~~~~%~~%~TT",
+  "TTTT.T..~~%......~~~~wwww~~~..TD,,.,..,,.-===--.,,TD.~%~,.,.....~~~~~~~%~~~wwwww%~~D~%~~~~~~~~TT",
+  "TT.T.....,.,..,.~~~~%www%~~~D.DDDT.,,..--===.-...DDT,,...T,.,,..~~~~~~~~~~~wwww~~~~~~~~~~~~~~~TT",
+  "TT.,.......,.,..~~D~~~~~~~%~~,,...D,..--===--..TT...D...,.T,.,,~D%~~~~~~~%~~~%%%~~~~%~~~%~~~~%TT",
+  "TT.,......,,...%%%~~~~~~~~~~~~..,...,..===--.,..,D.TD,D..T,T...~~~~~%~~~~~~%~%~~~%~~~~%~~~~~%~TT",
+  "TT........,....~~%~~~%~~~~~~~~~%~D%~--===--..,....T.T.DTTTT,T..~~~DD%~~~~~~~~~~~~~D~D~~~~~~~~~TT",
+  "TT.,....,..,,~~%~~~~~~~~%~%~%~~~~~~--===.-~~~%..,,DT..DTT.,TT..~~~~~~~~~~~~%~~~~D~~~D%~~~~~~D~TT",
+  "TT.,~~%....~~~~~~..~~~~~~~~~~~~~~~..===--~%~~~~~.TTTTD..T.,...,~~~~~~~~%~~~D~~~%~~~~~~%%~~~~~~TT",
+  "TT,~~~~~~%~~~~~~~...~~~~~D~~%~~~~..===--%%~~~~%%,TT.T.DTT,TDT,.~~~~~~%~~~%~~...~~~~~~~~~~~~%~~TT",
+  "TTD~%%~~~~~~~~~~~.,,~~~~~~~D~~D~.-===..~~~~~~%%~.,.,.D.T.T,...,~~~~~~~~~~~~.,.,~~~~~.,..~~~%~%TT",
+  "TT.~~~~~~~~%~~~~~,,.~~~~~D%~~~~~.===--~~~~~%~~~~.DDD,,D..TDTD..~~~~~~%~~~~~...,~%~~~~..,~~~~~~TT",
+  "TT,..,.~~~~~~~~~~~~~...........-===-.....~~~D~~~.T.,T..TD.,T,.~~~~www~~~~~~...,~%D~~~~~~D...,.TT",
+  "TT,,....~~~....~~~~~..........-==XXX.....~~~~~%...TD.,......~D~~~Dwww~~~~~...,.~~~~~~~~~~.,...TT",
+  "TT~,..D.%D~,..D.~%%~...XXX....-==XHX.....~....,..D...TDD..~~~~D~~wwww~%~...,,..,%%%~~~~~~.,,,.TT",
+  "TT~...,.~~~..,,.~%~~...XHX...-===XXX..............,TT.TD,.~~~~~DD~www~~~..DD...,~~~~~~~~%.D.,,TT",
+  "TT~,..,~~~~~.,..~~~~...XXX...-===-...............,...,T..%~~~~~~~~ww~~~D.........~~~~~~~%~..~~TT",
+  "TT~D..%~~~%~....~~~~........--==-..........~%~~~,,,,..~~%~~~~~%~~~~~~D~%...,,,.,.,,~~~~~~~~~~~TT",
+  "TT%~~~~~~~~~.,.,.~%~........-===...........~~~~%....%~~~~~~~~~~~~~%~~~~~...,.........,.~~~~~~~TT",
+  "TT~~D~~~~~~~....,~~~.x.......==-.........,.~~~~~...~~~~~~~~%D~~D~~%~~~%..,,..,,...D.,..~~~~~~~TT",
+  "TT~~~~%~~~~~,...D~~~.......x-==-......tX..,~~~~~~.%~~~ww~~~~~~~~~~~~~~~.,.,...D.....D..~~~~~~wTT",
+  "TT~~%~~~~~~%~..~~~~~........===-......XX...~~%D~D~%~~~ww~~~%%~~~~~~%~%,..,.TT.T,T,,..D~~~~%~~wTT",
+  "TT~~~~~~~~~~~~~~%~%D.......-==c..........~~D%~~~~~~D~~~~~D~~~D~%~~~.......TTTT.TT...~~~~~~%~wwTT",
+  "TT%~~~~...,%D%%D~%%%.......-==-..........~~~~~~~~%~%~~%~~~~%~~~~~~..,.,D.,.TTT,.,..~~%~%~~~wwwTT",
+  "TT~%~~,.....~~~~~~~~..XXX.-===-.....tX...~~~~~%~~%~~~~%~~%~~~~~~~%..,,.,.,,DDT.T.,,%~~~~~~~~wwTT",
+  "TT~~~...,,..~D~~~~~~..XHX.-===-.....XX...~D~~~~~~~%DD~~~~~~~~%~~~~.,,.,.......D....~D~~%%%~%~~TT",
+  "TT~%.D..D..,~~~~~~~~..XXX.-===-..........~~.......~~%%~D~~%D~%~%~~D....%~%~~~~..,,.~~~~~~~~~~~TT",
+  "TT~.,,....,,%~~~%~~~.......-==...........%..D.TTT.,..D.,~~~~~~~..,.D..~~~~~~~~~~~..~~~~%~%~~~~TT",
+  "TT.,...D....~~D~~~~~.......-===-.x.......~,D.,,T,D,,,...,~~~~........~~~~%%~%~~~~~~~%~~~~~~~D.TT",
+  "TT.,,...T,,D~~~~~~~~........===..........%,T.,TT.,..T..D,,.~.,..,~~~~~~~~~%~~~~~~~~~,...,%~~..TT",
+  "TT..,,.,,.,.~~%~~%~..........===-........~DD,T,TDTD........,...%~~~~D~~~%~~~~~~~~~~....D.,~,.TTT",
+  "TT,TT...,...~~~~..,.....DTD,,-==--~...~~%~.,DD,,T.D,..~...T.,.%~~~D~~~~D~~~~~%~~~D~.,.TT......TT",
+  "TTT.TD,,....~~~~D,..,.,.,,D.,-===-%.S.~~~~~DDD.TD,...~~~.TTD..~%~~~~%~~~~~~~~~~~~~~.,.T....,,.TT",
+  "TTDT,TT.....~....,......,....~-==.-...%~~~D,..TT.D..D~D%.D....~%~~~~~D~~~~~D~~~~~~~..,.D..,.TTTT",
+  "TT.DT....,,.,.w,..DT......,..%.====--~~~D~.,.TDD......~...,,,~~~D~D~~D~%~%~~~~~~~~~~.,...,,,TTTT",
+  "TTT,D,,...,,wwwww..D.....,~%~~--=====--~~~..,.......,.,....~~~~~%~~~~~~~~~~~%%~~~~~%~D..,....TTT",
+  "TTD,DT...~..wwwww...,,,,~~~~~%.-.======-..,,~~~~~~~.,...,D~%~~~~~~~~~%~~~%~~~~~~%D~D~~~~D...,.TT",
+  "TTTT,.,,~..wwwwwww,...~~%D~~~~,,~--=====.,.~~~~~~~%~.,,.%D~~~%~~~~D%~~~~~~~%..~%~~~~~~~~~,,,..TT",
+  "TT,..,,.~,,wwwwwww.,~~~%~~~%~~,.....-====-~~~%~~~~~~.,..~~~~%~%%~~~~~~~~~~,...,~~~~~~~~~~~....TT",
+  "TT.....DD,.wwwwwww,.~~~~%~~~~.,TD...~.===-~%~~~~~~%~.,..~~~~~~~~~~~,.D.,,.T.TDT.~%~~~~~~~~%~~.TT",
+  "TTD~,,....wwwwwwwww.~~%~~~~D~,..TD...,.===-~~~~~~~..,..,~~%~D~,.,,.D.,T.,DT,D.T..,~~~~~~~~~%~.TT",
+  "TT~~D....,.wwwwwww..~~D~%~~%.,,D..DDD..===-~~~~~~~.,....D~~..........TDDTT,T,,TTT..~~~~~~ww~~.TT",
+  "TT~~%~~...,wwwwwww.,~~~~D~~~,..DT.DTD.~.==.~wD~~~~~...,%~~~..,...,T..T.TDD,.,TT.D..~D~~%www~~~TT",
+  "TT%~~~~~..,wwwwwww.,w~~~~~~~...T..D.TD,-===.~~~~~~~~~~~~~D~...T,TTD,.,,TT.DTD.TT..,~~~~wwwww~~TT",
+  "TT~~~~%D.D..wwwww,.wwwww~~~~%.,TDTDD..,-===.~~D%~~~~~~~~D~~..,TD.,TT.T.TDT,...TTT...~~~wwwww%~TT",
+  "TTwwww~~~..,wwwww..wwwwww~~%~....DD.,TT.-==--~~~~%%~~~~~~~%~..TD..DT..,.D..,T.TT,TDD~~~~wwww%DTT",
+  "TTwwww~~~..,.,w..,~wwwwww~~~~..DT.T.TDT.-===--~%~~~~~~~~~~~~,TD.T,.DTTD.T..TTD.DT...%~~~www~~%TT",
+  "TTwwwwD~~,,~~..,~~D~wwww~~~~~...TTT.....--===-.~~~~~~~%~~~~~.T,TT..T,DDT.T..TD.,TDT.~~~~~~~D~~TT",
+  "TT~ww~D~~,.,~~%~~~%~~~~~~~~~..,,.TD,.,--======-.%~~~~~~~~~%..T.,T.T,T..D.TT..T.T,,.,~~~~~~~~D~TT",
+  "TT~~~~~~~~.,..~%~%~~~~D~%~%~...,T..,--=====.===--~~~~~~~~D.,TTTTT.....T,....DT.D..D~~D~~%~D~~~TT",
+  "TT~~~%D~%%..,,.~~~~~~~%~~~~..T.D.T..-====..--===--~%~%~%~~.,D.TD...,D.T...DT.,TT,..~%%%~~.,,D~TT",
+  "TT%D~%~~%~......~~~~~~~%~~D..,T.T.-.====.%~~~-====....~~~~..TT.T.....TT,.DT.,TTT.T..%~~~~.,..~TT",
+  "TT%%~~~~~~...T..~~D~~~~%~%...D.T,-====.-%.w~%~-=======.-.--,.TTDTDTD..DT.,TT.DDTTTD.~%D~.,,..~TT",
+  "TT~~~~~~~~..T.T.,~~~~~~~~.,D,,..-====-~~%ww~~~~-==========.-..TDTDTDDD,...TTD.T....T,~~%..,.~~TT",
+  "TT~~%~~~~~..TDD..~~~%D~~%..,T...====-.~~~~~~%~~~--.=========--..TTDT,TTTDTD.TTD,.DDT.,,.,...~~TT",
+  "TT~D~~~~~~,,D..D,~~~~~~~~,DT..-====-,,~~%~~~~%%~~..---...=====--~.,..DDT,.,TT,.,T.,DT,,....~~~TT",
+  "TT~~~%~~~%~..TT..%~~~%~~~...--====-...~~~~~~%~~~~~~~~~~~~--=====--..,D,T,.,T..T.DD,........~~~TT",
+  "TT~~~~~~~~%.TT.T.D~D~~~~~...-====-~%T.D~~~~~~~~~~~~~~~~%~~.-=====...TTTT,.DTTT,T...,....,..~~~TT",
+  "TT~~~~D~~~~....D....~~~~....===-....D..%%~~~~~~~~~~~~www~~~~.-====.-..TD,T.DT,.T...x.,...,~~~%TT",
+  "TT~~%~~~~~~~,..,.,.DD~%~~~-===...,...,..~~%~%~~~~D~~wwwww~~~...-===-~,TD.DT,D.........,..,~%%.TT",
+  "TT~~~~~D~D~%.....~~%~~~~%.====-~%D..,,.,..~~~%~~~~~~wwwww~%~~.~~.===-..TDT.DDTTD..........~%~.TT",
+  "TT~~~%%~.....,.D~~~%%D~~.====-~~~D~%...,.,.~~~~~.,~~~wwww~~%~...-===-.....T..D.,......x...~~~,TT",
+  "TT~~~~~.......~~~~~~~~~-====-~~~~~~~~~~~....D~D,.D.~~wwww~%~~.S..-===......T.T....x......~~~~,TT",
+  "TT~~~~.........%~~~~~~-.===-~~~~~~~~D~~%~..,..D.T..~~~ww~~~%~....-===.,T.DD.TD...........%%%%.TT",
+  "TT~%~~.,..g...,~~~w~~..===-~~wwwwwww~~~~,....,,..D.~~~~~~~~~%~~D..-===..T........T.......~~~~.TT",
+  "TT~%~~.,..,.....~~w~~-===.~.wwwwwwww~~%~..,,,.w..,.~~~ww%~~~%~~~~~.===....,....TDT,.D,..,%~~~,TT",
+  "TT~~%~~..,........~~.===-~.wwwwwww~%~~~~.,.wwwwwww..~wwww~~~~~%~%~~-====.....TT.,.DT.T,,..~~~.TT",
+  "TT~~~~~%.....~~%....-===.~wwwwww~~~~~~~~.,wwwwwwwww,.wwww~~~~~~~~%%~-====-.,DD,.TD..TT..,..~~~TT",
+  "TT~%~~%~~wwwwww~~~.-===.~~~ww%~~~~~~...~.wwwwwwwwwww.wwww~~~~~~~~~D%~-===-~TTT.T.TD,D.D.....~~TT",
+  "TTD~~~~D~wwwwww~~~~-==.%~~ww~~~~~~~~..~.,wwwwwwwwwww..www~~~~~~~~~~~%-===..TD.DTT.TTTTD......%TT",
+  "TT~~~~~~~www~~%~D~.===-~~wwww%~%~~~~%.~.wwwwwwwwwwwww.w~~~~~%~~~~~..-===-..T,T,.TDD,T,,......,TT",
+  "TT~~~~~~D~~~~~~%%~.==.-.wwwww~~~~~~~~~,.wwwwwwwwwwwww..~~~~~~~~~.,.,.===.,TT.TD,.,.......T..,.TT",
+  "TT~~~~~~~~~%~~~~~..==..wwwwwww~%%~~~~~..wwwwwwwwwwwww,.~DD..,....T...==..T.D,.,.~~%.....TT.D,.TT",
+  "TT~%~~%~~~~~~%~~~-===-%wwwwwww~~%~~~~~..wwwwwwwwwwwww,,..,......T.~-===.~T.,...~D~~~.,.,.TTT,.TT",
+  "TT~~~~~~~~%~~~%~~-==-..wwwwww%~~%~~~D~.wwwwwwwwwwwwwww,........TT..-===.,..,..~~~~~~,,..,DDT.DTT",
+  "TT~~~~~D~~~~~~~~-===..wwwww~D~~~~~~%~~,,wwwwwwwwwwwww,.~~~....D.DT..===-....~~~~D~~~..,.DTDD.,TT",
+  "TT~~~~~~~~%~~D%~.==.-~~~~%~~~~wwwwwwww.,wwwwwwwwwwwww,,~~~%...,..,.-===.....~~%~~~~,.......,..TT",
+  "TT%~~~~~~~~%~~%~-=--~~~~~~%~~~wwwwwwww..wwwwwwwwwwwww.,~~%~%.,.DT.~.===-.,.~~~D~~~..,...D,,,D.TT",
+  "TT%~~~~~~~~~~~~~---.%~~~~~%DD~wwwwwwwww.wwwwwwwwwwwww.~~~~~~~....D~-===-.,%~~~%~~........,..,.TT",
+  "TT%~D~~~D~%~~%~~---.~~~D~~~~%~wwwwwww~%..wwwwwwwwwww..D~~~~~.,D.T...-==-..~~~~~~.....tX...,...TT",
+  "TT~~~~~~~~~~D~~~-...-~~~~~%%~~wwww%D~~~%.wwwwwwwwwww.%~~~~~.D....,...==-.~%..........XX..,T.,.TT",
+  "TT~~~~%~..~~~~~~-...=.~w~~~~~~www%~~~%~~.,wwwwwwwww..~%~~~,..~%~.....==-....~~~~........,T.T.,TT",
+  "TT~~%~,.,,.%D~%%~-.==--~~~~~~~wwww~~~~D~%,,wwwwwww,.D~~~D~~.~D~%~~,..==-~~~~~%~~~.,......TDT.,TT",
+  "TT~~....TT..%~~~D%-===-%~~~~%~wwww%%~~%~~~..,.w....~%~%~~~~~~D~~~~.--==-~~~~~D~~%~..,,..T,.T,~TT",
+  "TTD~,,.T.TT.~~~~~%.-===.~~~~~~wwww~~~~~~~~~w,.,,.~~%~~~%~%~~~~~~~~.-===-~~%~~~~~D~D~.....DD..~TT",
+  "TT......T.,,,~~.,D.-===----.~..~www~~%%%~~wwwwwwwwwwwwwwww%~~~~~~--===--%~.....~~~~..,,.TD..,DTT",
+  "TT......T,T,..,...T.-=======-.--~ww~~~%~~~wwwwwwwwwwwwwwwwwwD~%.--===-.~~~.....D~~~...TTD,,D.~TT",
+  "TT..,...D..T...,..,~-.=====--.-...w~~~DD~wwwwwwwwwwwwwwwwwwww~%-.===--~~~~,,.,.~~~~....D,,,..~TT",
+  "TT...,D.D..TT.,.T.TT.~--==---.--=.%w~%~wwwwwwwwwwwwwwwwwwwwww~--===--%~%~~....,~%D~.D.T.TTT..%TT",
+  "TT...,.T.....,.T.TT,....--..-.-==...wwwwwwww~%%wwwwwwwwwwwww~.-===--~~~~~~~.,D,~~~.,.TTTDDT.,~TT",
+  "TT,%~%.DT,.DD..TT,T...D.,.,~~~-===-~wwwwwww~%%~~~~~%~~%%~ww..-===-.%~%~~~~~~~~~~D~..D.,D...T..TT",
+  "TT.~~~.TD..DT,...D.T.T,D..,~~~~.==...wwwwww~~~~%~D~%~~~~~~%--===--~..~%~~~~~~~~~%~.,DT,..DD,..TT",
+  "TT,~~~..T,DTTT.D,..DT.TT,..~D~~-===-~~%~ww%%~~~~~~~~%%~D~~-.===.-~...~~~~~~~~~~%DD..D..T.TT.,DTT",
+  "TT.%~,.,TDTT.T,TT.TT,DDT.DD.~~~~-==--~%~~~~~~~~%%~%~~...~-.===-..,....~~~%~~~~~~~~..DD.DT.TT,.TT",
+  "TT.~~..,T.DTTT,....DDTD.DT....,.-===--~~~~~~~~~D~~%~,.,,--===--...,..,.,.~~~~~~~~~,,.T.DDD.,,,TT",
+  "TT.~,,,,DT.DTT.,....,.,...T......-===..~~~~~~D~~~~~.,---====--..D,....,...~~%%%~%~.,D..DDTD.,.TT",
+  "TT~~....TD......T.,,...TDTT...T,%--===-...........-.-======.-.,...D,,..T,.D%~~~~D~.,TT.D.TT..,TT",
+  "TT~~..T....T.DT,,....T...D,.,...T~.-=--...........========-..TT,,,,....DD.~~%~%~~~~..T.,.DTD.,TT",
+  "TT~~..T.DTDDTTDTT...,DTTD.....,TTD.-----+r.....-===r+==..-.,.,,,D.T...,T..%~~~~~%~~.,...,T.,.~TT",
+  "TT~.,..DT.,.T....,,....,...~~.,,.TT~-.-.-......=====---,..TDTT.TTT.......~~~~www~~D,.D,TTD,.,~TT",
+  "TT%..TTDT.DT.TTDT..,.....,~~%D,,.TT.---.-----.====--...TD..DTD.TT...,....~%~~www~%~~..,...TT,DTT",
+  "TT~....DT,T.TTT.T..,.,.,..~%~...,DTT.--=========--.....TT..TT,T.DTT.....,~~~~~~~~~~~.T,TT.T.T~TT",
+  "TT%...T.TT.DD.T.,.........,.,.,...D....=======A-.......TTT.DDTDTD.T.....,~~~~~~~~~~~..D,TT.T,,TT",
+  "TT~.TTT....T,TDD.,.D%~~~~.,D,.,D...DT..-r=====--....r...D..TDT.......,.,.~~~~~~~~~~,.,,.DTT.T.TT",
+  "TT.,TD.+.+.T,.T,T,.~~~~~~...,,DD..,D~.-====.--.........,...,.D..,.......,~~~~~~~~~~..,.TTT.,.,TT",
+  "TT,.T.....,.T.TT..~~~~~~~%.T.D..,.DT.-====.-...........%,.,T.......~~~,...~~~~~~%~~....,TD.T..TT",
+  "TT,....+....,....~D%~~D~~~.T.,....T.-====-.............~%%.,,.~~~~~~%~~D,.~~~~,...,.......,.,.TT",
+  "TT,D.,......,~~~~~~~~~w~~~.,..,.,...-===.+r.......r+...%~~~D~D~~~~~~~~%~~D~~....D..,,..~~%~~~~TT",
+  "TT...,...+.~~~~~D~~%~~ww~D~,.,.,,D%-===................w~~~D~%~~~~%~%~~~D~~,.,,.,,....%~~~%~~~TT",
+  "TTD.,D,.....~~~~~~~~~~ww~~~......~.-==--.~~~www~~~~DDwwwww~~~D~~~~%~~~%~~%,,,..TDT,,,D%%%www~DTT",
+  "TT...~~..,...~~~%~~~Dwww~~~.,..,.-.===-,.~~~www~~~~~~wwwwww~~~~~~~~~~~~~~~,..,...T...,~~~www~~TT",
+  "TTD..~~D~~D..%~~~~%%~wwww~~~~-.-======-.~~D~%~~~~~~~~wwwww~~~~~%~~~~~~~~~..,,.,......,~~%~~%D~TT",
+  "TTT.,~~~~~~~..~~~~~wwwwww~~.-========-~~%%~~~~%~~ww~~~~~~~~~~%%...D...~D~,,,D,T..~~~~.D~~~~D~%TT",
+  "TT,.~~~~~~%~...~~~wwwwww~..========--.~~~~~~~%~~~www~~~~D~~%~~.......,.~~~,,DTT.~%~~~~D~~~~%~~TT",
+  "TT,.~~~%~~~~~..~~~wwwwww.-=====-S--~~~~~~~~~~~~%%ww~~%~~~~~~~D..T....D,%~~.DD..,~%D~%~D~~~%~~~TT",
+  "TT...~~~~~~%,,..~~~~www.-====--...,~~~~~~~~~~D~~~ww~~~%~D~~~~,.....T.,.~~~.,..,~~~%~~~D~~~~~~~TT",
+  "TT.....,,....,..~~~~~w...===.~.~.~~~~~D~~~~~~~~~wwwDD~~~~~~~~D,..DDTT...~~~....~~~~~~~%D~www%~TT",
+  "TT............,..~%~~.~-===.~~~~~~~~~~~~%~~~%~~~www~%~~~~~~~~.D.,.D.,T.,.%~%~~%~~~~~~wwwwwwww%TT",
+  "TTD.,,.,D..DT..,..~~---===-~~%~~~~D~~~~~~~~D~wwwww~~~~~~~~~D...,.T.DDT.,.~~%~~~%%~~%wwwwwwwww~TT",
+  "TT.......,,.,,,...--======-~%~~~~~~~~~~~D~~~~%~%w~~~~~~~%~~..,.,TTTT,T..%~~~~~~~~~~~wwwwwwwwwwTT",
+  "TT.........,..,~.========-~~~~~~%~~~w~~~~~~~~~~~~~~D~%~%~~...,D..,,DT.D.~~~~~~~~~~%~%wwwwwwwwwTT",
+  "TT..D,..,,...~~.======..-.~~~~~~D~~%w~~~~~~~~~~~~~~~~~~~~...,TDT.T.....~~~%~%~~~~~~%~~DwwwwwwwTT",
+  "TT,.TT........-====---~%.~~D~~~~~~~~~%~~D~~%~D~~~~~~~~..,,...TD.,D,,..%~~~~%~~~~~~%~~~~~wwwwwwTT",
+  "TT............-===-...wwww%~~~%~%~~~~~~~%~~~~~~~~~~~~,,,D.,,,TT.D.D...~~%~%~~~~~~~~~~~~~wwwww~TT",
+  "TTD..D.......-===-...wwwww~%~~%~%~~~%~~~~~~~~~~~~~~~~........TDD,,,TT..D~~~~~~~%~~~~~~~~wwwww~TT",
+  "TT~~~~.......-==-....wwwwwwww%~~%~DD~~~~%D~~~~~~~~~~~,...~~~..D.T,DD....%~~~..~%~~~~~~wwwwww%DTT",
+  "TT~~%%......-===.....wwwwwwwww%~~~~~~%~~wwD~~~~~~~~~~..,~~~%.TD.T....T..,...,.~%~~Dwwwwwwww%~%TT",
+  "TTD~~~......-==--....~wwwwwwww~~~~~~~%D~w~~~~~~%~~~~...,~%~~..T,DT.T,T.........~~~~~wwwwwww~~~TT",
+  "TT~~~~.......==-.....wwwwwwwww%~~~~~~~~D~~~~~~~~~~%~.,...~~%.DTTTTT,.TT.D.,....~~~~~Dwwww~D~~%TT",
+  "TT~~%~.......---.....wwwwwwwww~~~~~~~~~~~%%~%~~~~~~~~..D.....DDT.....T,TTT.,D...~~~~~~~~%~~~%,TT",
+  "TT~~~~...............wwwwww~~~~~~~~~~%%~w~~~~~~~~~%%~~..,,..TD.TT.,D..D.T,.T.D,..~~%~~~~~~~%,.TT",
+  "TTD~~~...............wwwww~%~%~ww~~~~%~~w~%D.,,~~~%~%~~,.,.TTTDT.TD..T,T,,TT,..,.~%~~%~~~~~~,TTT",
+  "TT~D%~...............wwwwwD%~~%ww~~~~~~%~~%~..D%~~~~~~~,...D,.T.,,.,.TD,..,..TTT,.~~~~~~~~~%,,TT",
+  "TT~~FFFFFPGGGPFFFFFFFFwwww~~~~~ww~D~~~~~~~%~~.,~%%~~~~~~,.,.T,T.DTDDD..TT.D....D.~%~%~~~~D~~,TTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "legend": {
+  ".": {
+   "ground": "grass"
+  },
+  ",": {
+   "ground": "grass",
+   "objects": [
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127
+   ]
+  },
+  "=": {
+   "ground": "path"
+  },
+  "-": {
+   "ground": "path_edge"
+  },
+  "~": {
+   "ground": "bog"
+  },
+  "%": {
+   "ground": "bog",
+   "objects": [
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127
+   ]
+  },
+  "w": {
+   "ground": "water"
+  },
+  "T": {
+   "ground": "grass",
+   "objects": [
+    248,
+    249,
+    250,
+    251
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "D": {
+   "ground": "grass",
+   "objects": [
+    244,
+    245,
+    246,
+    247
+   ],
+   "blocks": true
+  },
+  "r": {
+   "ground": "grass",
+   "objects": [
+    128,
+    129,
+    130,
+    131
+   ],
+   "blocks": true
+  },
+  "+": {
+   "ground": "grass",
+   "objects": [
+    140,
+    141,
+    142,
+    143
+   ],
+   "blocks": true
+  },
+  "f": {
+   "ground": "grass",
+   "objects": [
+    105,
+    106,
+    109,
+    110
+   ],
+   "blocks": true
+  },
+  "b": {
+   "ground": "bog",
+   "objects": [
+    170,
+    171
+   ],
+   "blocks": true
+  },
+  "c": {
+   "ground": "grass",
+   "objects": [
+    102
+   ],
+   "blocks": true
+  },
+  "t": {
+   "ground": "grass",
+   "objects": [
+    72,
+    75
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "x": {
+   "ground": "grass",
+   "objects": [
+    96,
+    97,
+    98,
+    99,
+    100,
+    101
+   ],
+   "blocks": true
+  },
+  "g": {
+   "ground": "grass",
+   "objects": [
+    138
+   ],
+   "blocks": true
+  },
+  "A": {
+   "ground": "grass",
+   "objects": [
+    142
+   ],
+   "blocks": true
+  },
+  "S": {
+   "ground": "grass",
+   "objects": [
+    265
+   ]
+  },
+  "H": {
+   "ground": "grass",
+   "objects": [
+    296
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "X": {
+   "ground": "grass",
+   "blocks": true
+  },
+  "G": {
+   "ground": "path",
+   "objects": [
+    104,
+    107
+   ],
+   "blocks": true,
+   "stack": true
+  },
+  "P": {
+   "ground": "grass",
+   "objects": [
+    132
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "F": {
+   "ground": "grass",
+   "objects": [
+    107
+   ],
+   "blocks": true
+  }
+ },
+ "playerStart": [
+  84,
+  6
+ ],
+ "spawns": [
+  {
+   "at": [
+    78,
+    16
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "plague_crawler",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "plague_crawler",
+     "rank": "Minion",
+     "count": 3
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    70,
+    16
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "fen_zombie",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    70,
+    28
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "drowned_dead",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "fen_zombie",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    58,
+    27
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cultist",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    55,
+    36
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "plague_crawler",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "plague_crawler",
+     "rank": "Minion",
+     "count": 3
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    78,
+    31
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "bog_witch",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "fen_zombie",
+     "rank": "Minion",
+     "count": 3
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    45,
+    45
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "drowned_dead",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    44,
+    38
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "plague_crawler",
+     "rank": "Normal",
+     "count": 3
+    },
+    {
+     "creature": "plague_crawler",
+     "rank": "Minion",
+     "count": 2
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    38,
+    50
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cultist",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "cult_chanter",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    26,
+    62
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cultist",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    34,
+    67
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cultist",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "vengeful"
+     ]
+    },
+    {
+     "creature": "cultist",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 2,
+   "flag": "act1.village",
+   "value": "cleared"
+  },
+  {
+   "at": [
+    24,
+    72
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "plague_crawler",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "plague_crawler",
+     "rank": "Minion",
+     "count": 3
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    42,
+    84
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "drowned_dead",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "bone_archer",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    42,
+    92
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "plague_crawler",
+     "rank": "Normal",
+     "count": 3
+    },
+    {
+     "creature": "plague_crawler",
+     "rank": "Minion",
+     "count": 3
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    36,
+    96
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "bog_witch",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "fen_zombie",
+     "rank": "Minion",
+     "count": 4
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    31,
+    102
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "plague_crawler",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "plague_crawler",
+     "rank": "Minion",
+     "count": 3
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    11,
+    106
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "drowned_dead",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    20,
+    114
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "fen_zombie",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    16,
+    124
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "plague_crawler",
+     "rank": "Normal",
+     "count": 3
+    },
+    {
+     "creature": "plague_crawler",
+     "rank": "Minion",
+     "count": 3
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    28,
+    131
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "bog_witch",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "drowned_dead",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    50,
+    97
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cultist",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "cult_chanter",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    64,
+    104
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "bone_archer",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "drowned_dead",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    84,
+    106
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cultist",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    66,
+    108
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "plague_crawler",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "plague_crawler",
+     "rank": "Minion",
+     "count": 3
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    83,
+    126
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cultist",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "hasted"
+     ]
+    },
+    {
+     "creature": "cultist",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    71,
+    125
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cult_chanter",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "fen_zombie",
+     "rank": "Minion",
+     "count": 3
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    63,
+    134
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "grave_knight",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "drowned_dead",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    54,
+    139
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cultist",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "cult_chanter",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 3
+  },
+  {
+   "at": [
+    46,
+    148
+   ],
+   "radius": 2.5,
+   "pack": [
+    {
+     "creature": "cultist",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "vengeful"
+     ]
+    },
+    {
+     "creature": "cultist",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "cult_chanter",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    38,
+    151
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "plague_crawler",
+     "rank": "Normal",
+     "count": 3
+    },
+    {
+     "creature": "plague_crawler",
+     "rank": "Minion",
+     "count": 3
+    }
+   ],
+   "level": 3
+  },
+  {
+   "at": [
+    9,
+    149
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "drowned_dead",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 3
+  },
+  {
+   "at": [
+    24,
+    160
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "grave_knight",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "shielded"
+     ]
+    },
+    {
+     "creature": "drowned_dead",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 2
+  },
+  {
+   "at": [
+    11,
+    171
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cultist",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "cult_chanter",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 3
+  }
+ ],
+ "shrines": [
+  {
+   "id": "landing_shrine",
+   "name": "The Landing Shrine",
+   "at": [
+    79,
+    9
+   ]
+  },
+  {
+   "id": "village_shrine",
+   "name": "The Drowned Village Shrine",
+   "at": [
+    36,
+    76
+   ]
+  },
+  {
+   "id": "dyke_shrine",
+   "name": "The Old Dyke Shrine",
+   "at": [
+    62,
+    106
+   ]
+  },
+  {
+   "id": "chapel_shrine",
+   "name": "The Chapel Road Shrine",
+   "at": [
+    32,
+    158
+   ]
+  }
+ ],
+ "exits": [
+  {
+   "id": "fort",
+   "label": "Fort Gallowmere",
+   "at": [
+    86,
+    1
+   ],
+   "radius": 1.5,
+   "to": "fort_gallowmere",
+   "toExit": "west_gate",
+   "arrive": [
+    86,
+    5
+   ]
+  },
+  {
+   "id": "chapel",
+   "label": "The Drowned Chapel",
+   "at": [
+    11,
+    175
+   ],
+   "radius": 2.0,
+   "to": "drowned_chapel",
+   "toExit": "fens",
+   "arrive": [
+    14,
+    171
+   ]
+  }
+ ],
+ "caches": [
+  {
+   "id": "landing",
+   "at": [
+    88,
+    9
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "reed_hut",
+   "at": [
+    60,
+    23
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "lantern_islet",
+   "at": [
+    79,
+    36
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "eel_traps",
+   "at": [
+    43,
+    37
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "cult_camp",
+   "at": [
+    38,
+    66
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "gibbet",
+   "at": [
+    11,
+    110
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "smugglers",
+   "at": [
+    85,
+    104
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "peat_camp",
+   "at": [
+    83,
+    125
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "rot_altar",
+   "at": [
+    46,
+    149
+   ],
+   "kind": "Reliquary",
+   "facing": 0
+  },
+  {
+   "id": "drowned_graves",
+   "at": [
+    8,
+    151
+   ],
+   "kind": "Cache",
+   "facing": 1
+  }
+ ]
+}

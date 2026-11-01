@@ -380,6 +380,28 @@ public class WindowTests
     }
 
     [AvaloniaFact]
+    public void Gallowmeres_gates_open_onto_ashens_zones_drawn_as_ashen_drew_them()
+    {
+        var window = Open(1401);
+        var game = window.Session;
+        foreach (var (gate, zone, shot) in new[] { ("gate", "gallows_road", "WorldOfAngBand-gallows-road"), ("west_gate", "rotwater_fens", "WorldOfAngBand-fens") })
+        {
+            game.JumpTo(0);
+            var at = game.Gates[gate];
+            var beside = game.Level.Neighbors(at).First(game.Level.IsPassable);
+            game.Hero.Position = beside;
+            game.Perform(new Walk(DirectionExtensions.FromOffset(at.X - beside.X, at.Y - beside.Y)));
+            Assert.Equal(zone, game.Zone?.Id);
+            foreach (var f in game.Foes.ToList())
+                game.Banish(f);
+            Pump();
+            var frame = Capture(window, shot);
+            Assert.True(DrawnShare(frame) > 0.4);
+        }
+        window.Close();
+    }
+
+    [AvaloniaFact]
     public void Things_lie_on_the_floor_and_are_named_under_the_pointer()
     {
         var window = OnFirstLevel(1234);

@@ -1,0 +1,7 @@
+[
+  {"id": "zone_wall", "name": "rock", "description": "Rock, wall or thicket: no way through, and no seeing past.", "glyph": "#", "color": "Slate", "priority": 10, "flags": ["Wall", "Rock", "Permanent", "NoScent", "NoFlow"]},
+  {"id": "zone_obstacle", "name": "obstacle", "description": "Something in the way, low enough to see over: a cart, a fence, a gravestone.", "glyph": ":", "color": "Umber", "priority": 9, "flags": ["Los", "Project", "Permanent", "NoScent", "NoFlow"]},
+  {"id": "zone_water", "name": "deep water", "description": "Black water, too deep to wade.", "glyph": "~", "color": "Blue", "priority": 9, "flags": ["Los", "Project", "Permanent", "NoScent", "NoFlow"]},
+  {"id": "zone_lava", "name": "lava", "description": "The mountain's blood, running.", "glyph": "~", "color": "Red", "priority": 9, "flags": ["Los", "Project", "Permanent", "Fiery", "Bright", "NoScent", "NoFlow"]},
+  {"id": "zone_gate", "name": "way on", "description": "The road goes on from here.", "glyph": ">", "color": "Yellow", "priority": 25, "flags": ["Los", "Project", "Passable", "Permanent", "Interesting", "Easy"]}
+]

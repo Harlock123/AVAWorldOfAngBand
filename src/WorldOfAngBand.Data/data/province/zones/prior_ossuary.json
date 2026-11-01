@@ -1,0 +1,811 @@
+{
+ "id": "prior_ossuary",
+ "name": "The Prior's Ossuary",
+ "level": 4,
+ "revision": 1,
+ "tileset": "tileset_dungeon",
+ "tagline": "The Order buried its shame with its dead.",
+ "darkness": 0.95,
+ "heroLight": 4.5,
+ "xpScale": 0.6,
+ "rows": [
+  "########################################################",
+  "########################################################",
+  "#####################DAaiAAeAAAeAA######################",
+  "#####################j,.,.......,.M#####################",
+  "#####################B.........,..M#####################",
+  "#####################B,.Z......Z.,M#####################",
+  "#####################B.....,.,.,..M#####################",
+  "#####################B.....,......M#####################",
+  "#####################B......,,S...M#####################",
+  "#####################b.....,.,..k.M#####################",
+  "#####################B,...,....,..M#####################",
+  "######################LLLB..,.OLLLN#####################",
+  "#########################B...,M#########################",
+  "#########################f....M#########################",
+  "#####DAaAiAgAAAAAAaAAgAAAC....AAAAAAAAgAaAAeeAAAAA######",
+  "#####B..u,.u,.u,.u..u..u..u..u..u..u,.u,.u..u..u..M#####",
+  "#####B,......,,..,....,...,,.....,,......,.,.,....M#####",
+  "#####f..,.....,........,........,.....,....,,.,...M#####",
+  "#####B........I,..,..,I,.........I,,..,..I,....,,.M#####",
+  "#####j...,q,..,...,.,..,...................,......M#####",
+  "#####B........I.......I....,.....I.,..,..I..q.....M#####",
+  "#####b..,...............,..,...........,.,.,....,,M#####",
+  "#####B..u..,..u,,..,u.....u.....u.....u....,u..,,.M#####",
+  "#####j...,OLLLLLLLLLLLLLB,.,.,.OLLLLLLLLLLLLLB.,,.M#####",
+  "#####B..,.M#############f...,,.M#############b.,,.M#####",
+  "#####B.,..M#############n,,....M#############j.q..M#####",
+  "#####B....MDA###########bs,.,,sM#############f....M#####",
+  "#####B...,MjqM##########B.,.,,.M#############f....M#####",
+  "#####j.,..M#LN##########B......M#############B....M#####",
+  "#####B.,.,M#############h......M#############B...,M#####",
+  "#####B....M#############Bs..,.sM###DAaAeemAAAC....AeAA##",
+  "#####f.,..M#############B...,.,M###h.....,.........,..M#",
+  "#####b.,.,M#############B,.....M###B.......,,.,..,,..,M#",
+  "#####B....M#############B......M###h,.Z.......,...,Z..M#",
+  "##DAAC....gAAAAgAamAAAm#Bs,...sM###B....,..,.,,,....,,M#",
+  "##j,....,..,...,.......MB...,..M###B.....,,.........,.M#",
+  "##B.......,.....q.,,...Mj......M###B.....,R..R.,R.,...M#",
+  "##b....q,,.....,...,...Mb,,,..,M###b,,........,,.,,...M#",
+  "##B....~~~~~~~~.~~~~...Mns..,.sM###B,........,.,......M#",
+  "##f..~~~~.~~~~~~...q.,,MB..,...M###B,.Z,....,.,....Z..M#",
+  "##B..~~.~,~~~~~~~~~~~..Mn,.....M###B.k.,.,.......,..k.M#",
+  "##B..~~~~~~~~q~~.~~~~,,MB....,.M###n...,,...,....,.,,,M#",
+  "##B..~~~~~~~~~.~~~~~.,.MBs...,sM####LLLB..,.OLLLLLLLLLN#",
+  "##n.,~.~~~~~~~~~~~~~~..MB....,.M#######f...,M###########",
+  "##B..~~~~~.~~~~~..~~..,AC.,....AAaieAeAC,..,ae##########",
+  "##B..~~..~~~~.~~.~~~~...,.............,...,..,M#########",
+  "##B.,~~.~q~~~~~~~.~.~........,.,.............,M#########",
+  "##h,,~~~.~~~Z~~~~~~~~.....,..,,.,,,q,,..,..Z..M#########",
+  "##b.........,.......,........,.,.,.....,,.,...M#########",
+  "###LLLLLLB~,~~~~.~.,,..,.,..S..,,..,,,,..,,...M#########",
+  "#########n.~~~.~~~,.....q..,,.,....,..........M#########",
+  "#########b,~~~~~~~...,......,..,......,.......M#########",
+  "#########B.~..~~~~..,u.........,..u,..,,q,,...M#########",
+  "#########h~~~~~~,.,......,...,...,,....,..,...M#########",
+  "#########f~.~~~.~.,,.....,..........,,.,...,,.M#########",
+  "##########LLLLLLLLLLLLLLf......OLLLLLLLLLLLLLLN#########",
+  "########################B......M########################",
+  "########################h......M########################",
+  "###############DAiaAAmgAC......mgAigAiAA################",
+  "###############B.....,..,,.,.....,.....,M###############",
+  "###############n,.u...,..,,..,.....,,u..M###############",
+  "###############B...Z...........,.,..Z...M###############",
+  "###############B...,.,..,,..,....,.,.,.,M###############",
+  "###############b...........,............M###############",
+  "###############B.,......,.......,.....,,M###############",
+  "###############B..,.,....,..,...,.,..,..M###############",
+  "###############f..,.~....RR,.RR,.,,..,,.M###############",
+  "###############B..~.~.~...,..,,,........M###############",
+  "###############f..~~~.~.,........,.q.,..M###############",
+  "###############B.,.~,~,....YX.....,.,..,M###############",
+  "###############B..~.q......,,....,..,...M###############",
+  "###############B,.u.~.~,............,u..M###############",
+  "###############B,............,...,......M###############",
+  "################LLLLLLLLLLLLLLLLLLLLLLLLN###############",
+  "########################################################",
+  "########################################################"
+ ],
+ "legend": {
+  ".": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  ",": {
+   "ground": "floor",
+   "tiles": [
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47
+   ]
+  },
+  "~": {
+   "ground": "bog",
+   "tiles": [
+    16,
+    17,
+    18,
+    19,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47
+   ]
+  },
+  "#": {
+   "ground": "none",
+   "blocks": true,
+   "blocksSight": true
+  },
+  "A": {
+   "ground": "none",
+   "objects": [
+    65,
+    69,
+    97
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "B": {
+   "ground": "none",
+   "objects": [
+    64,
+    68,
+    96
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "a": {
+   "ground": "none",
+   "objects": [
+    103
+   ],
+   "blocks": true,
+   "blocksSight": true,
+   "light": 3.5
+  },
+  "b": {
+   "ground": "none",
+   "objects": [
+    102
+   ],
+   "blocks": true,
+   "blocksSight": true,
+   "light": 3.5
+  },
+  "e": {
+   "ground": "none",
+   "objects": [
+    107
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "f": {
+   "ground": "none",
+   "objects": [
+    106
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "g": {
+   "ground": "none",
+   "objects": [
+    101
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "h": {
+   "ground": "none",
+   "objects": [
+    100
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "i": {
+   "ground": "none",
+   "objects": [
+    99
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "j": {
+   "ground": "none",
+   "objects": [
+    98
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "m": {
+   "ground": "none",
+   "objects": [
+    105
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "n": {
+   "ground": "none",
+   "objects": [
+    104
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "C": {
+   "ground": "none",
+   "objects": [
+    73
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "D": {
+   "ground": "none",
+   "objects": [
+    74
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "L": {
+   "ground": "none",
+   "objects": [
+    80
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "M": {
+   "ground": "none",
+   "objects": [
+    81
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "N": {
+   "ground": "none",
+   "objects": [
+    88
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "O": {
+   "ground": "none",
+   "objects": [
+    89
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "I": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    110,
+    111
+   ],
+   "blocks": true
+  },
+  "Z": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    167
+   ],
+   "blocks": true,
+   "light": 4.5
+  },
+  "R": {
+   "ground": "floor",
+   "tiles": [
+    60,
+    61,
+    62,
+    63
+   ],
+   "objects": [
+    60,
+    61,
+    62,
+    63
+   ],
+   "blocks": false,
+   "light": 1.4,
+   "lightColor": "#7f9cff"
+  },
+  "Y": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    134
+   ],
+   "blocks": true
+  },
+  "X": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [],
+   "blocks": true
+  },
+  "s": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    128,
+    129,
+    130,
+    131
+   ],
+   "blocks": true
+  },
+  "u": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127
+   ],
+   "blocks": true
+  },
+  "q": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183
+   ],
+   "blocks": false
+  },
+  "k": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    146,
+    147,
+    162,
+    163
+   ],
+   "blocks": true
+  },
+  "S": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    265
+   ],
+   "blocks": false,
+   "light": 3.5,
+   "lightColor": "#6ea8ff"
+  }
+ },
+ "playerStart": [
+  27,
+  7
+ ],
+ "spawns": [
+  {
+   "at": [
+    14,
+    18
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "drowned_dead",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 4
+  },
+  {
+   "at": [
+    27,
+    19
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "bone_archer",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "drowned_dead",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 4
+  },
+  {
+   "at": [
+    40,
+    18
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "grave_knight",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "hasted"
+     ]
+    },
+    {
+     "creature": "drowned_dead",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 4
+  },
+  {
+   "at": [
+    8,
+    29
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "fen_zombie",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 4
+  },
+  {
+   "at": [
+    11,
+    40
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "plague_crawler",
+     "rank": "Normal",
+     "count": 4
+    }
+   ],
+   "level": 4
+  },
+  {
+   "at": [
+    17,
+    44
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "fen_zombie",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "tainted"
+     ]
+    },
+    {
+     "creature": "fen_zombie",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 4
+  },
+  {
+   "at": [
+    47,
+    26
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "cultist",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "cult_chanter",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 4
+  },
+  {
+   "at": [
+    48,
+    38
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "cultist",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "shielded"
+     ]
+    },
+    {
+     "creature": "cultist",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "cult_chanter",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 4
+  },
+  {
+   "at": [
+    27,
+    33
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "bone_archer",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "drowned_dead",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 4
+  },
+  {
+   "at": [
+    19,
+    50
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "bog_witch",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "fen_zombie",
+     "rank": "Minion",
+     "count": 4
+    }
+   ],
+   "level": 4
+  },
+  {
+   "at": [
+    36,
+    49
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "grave_knight",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 4
+  },
+  {
+   "at": [
+    42,
+    52
+   ],
+   "radius": 0,
+   "pack": [
+    {
+     "creature": "cursed_grave",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 4
+  },
+  {
+   "at": [
+    27,
+    64
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "drowned_prior",
+     "rank": "Elite",
+     "count": 1,
+     "affixes": [
+      "shielded"
+     ]
+    },
+    {
+     "creature": "drowned_dead",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "bone_archer",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 3,
+   "flag": "act1.prior",
+   "value": "slain"
+  }
+ ],
+ "shrines": [
+  {
+   "id": "ossuary_shrine",
+   "name": "The Ossuary Stair",
+   "at": [
+    30,
+    8
+   ]
+  },
+  {
+   "id": "lower_hall_shrine",
+   "name": "The Lower Hall Shrine",
+   "at": [
+    28,
+    49
+   ]
+  }
+ ],
+ "interactables": [
+  {
+   "id": "prior_confession",
+   "name": "The Prior's lectern",
+   "at": [
+    23,
+    68
+   ],
+   "tile": 148,
+   "dialogue": "ossuary_confession"
+  }
+ ],
+ "exits": [
+  {
+   "id": "chapel",
+   "label": "The Drowned Chapel",
+   "at": [
+    27,
+    4
+   ],
+   "radius": 1.5,
+   "to": "drowned_chapel",
+   "toExit": "ossuary",
+   "arrive": [
+    27,
+    7
+   ]
+  }
+ ],
+ "caches": [
+  {
+   "id": "gallery",
+   "at": [
+    7,
+    17
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "charnel",
+   "at": [
+    4,
+    36
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "vault",
+   "at": [
+    45,
+    33
+   ],
+   "kind": "Reliquary",
+   "facing": 1
+  },
+  {
+   "id": "lower_hall",
+   "at": [
+    44,
+    53
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "tomb",
+   "at": [
+    33,
+    69
+   ],
+   "kind": "Cache",
+   "facing": 1
+  }
+ ]
+}

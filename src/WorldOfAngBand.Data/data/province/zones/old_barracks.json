@@ -1,0 +1,957 @@
+{
+ "id": "old_barracks",
+ "name": "The Old Barracks",
+ "level": 8,
+ "act": 2,
+ "revision": 1,
+ "xpScale": 0.5,
+ "tileset": "tileset_dungeon",
+ "tagline": "The legion's beds are still made.",
+ "darkness": 0.92,
+ "heroLight": 4.5,
+ "rows": [
+  "############################################################",
+  "############################################################",
+  "#######################DAAaAAHAAmAaA########################",
+  "#######################B,.,.......,.M#######################",
+  "#######################B.........,..M#######################",
+  "#######################B,.Z......Z..M#######################",
+  "#######################B.....,.,.,..M#######################",
+  "#######################b.....,......M#######################",
+  "#######################B........S...M#######################",
+  "#######################n.....,.,....M#######################",
+  "#######################B,...,....,..M#######################",
+  "########################LLLb..,.OLLLN#######################",
+  "###########################B...,M###########################",
+  "###########################n....M###########################",
+  "###############DAeAAAAameAeC....AAeAAgaAAeAe################",
+  "#DeeAgAaeA#####b...,..,................,....M##DmgAAgAgaAg##",
+  "#B....,...M####B.k,..,..........,......,,.k,M##B.....,....M#",
+  "#b.d.d,d..M####B..Z.,...,,.....,,........Z.,M##B..,...,.,.M#",
+  "#B,,......M####B....I.......,........,.I....M##B.,...,,...M#",
+  "#f.,..,..,M####B..,..........,..,...........M##f..t..,t.,,M#",
+  "#B...q,..,M####B,,..,..,.,.........,.,..,..,M##B...,......M#",
+  "#B...,..,.AeAaAC,....,.....,.,..,.....,..,..AaAC..,.,.....M#",
+  "#B,........,..,,....I............,.....I....,....,.,,....,M#",
+  "#B....,..........................,.......,.....,.,t...t...M#",
+  "#B..............,.............,.................,.,.......M#",
+  "#b..,..,..OLLLLB..,..............,.,.,....,.OLLh..,.q.....M#",
+  "#n,.....q.M####B....I,...,,..,.........I....M##B,,...,....M#",
+  "#n.,...,..M####B.........,....,.......,..,..M##B,.t.,,t,.,M#",
+  "#B...,....M####B.......,.q...,.,.....,......M##B....,,.,,.M#",
+  "#B.d,d.d..M####h.............,..,...,.......M##B...,,..,..M#",
+  "#B,..,..,,M####B....I..........,.......I.,,.M##B,.,,......M#",
+  "##LLB,..OLN####b....,...,.............,....,M##b..........M#",
+  "####h.,.M######B.........,..........,.,,....M##f,.....,..,M#",
+  "#DAAC...eaAAAe##LLLLLLLLLLLB....OLLLLLLLLLLLN##DAagC...eAaN#",
+  "#B..,.........M############B....M##############B.........,M#",
+  "#B.d..d..d,.d.M############b....M##############B.kk....,k.M#",
+  "#B......,,..,,M############B,...M##############B......,,,.M#",
+  "#f............M############B....M##############B.,...,....M#",
+  "#B........,q..M############f....M##############B,...,.....M#",
+  "#h......,.....M############f..,.M##############b....,.....M#",
+  "#B....,.......M####DgAeAagAC,...aAAAAAAA#######B,.....,..,M#",
+  "#b..,,.,..,,..M####B.......,............M######h.k...,..k.M#",
+  "#B,,.........,M####B.s.,..,...,..,....s.M######B..,.....,.M#",
+  "#B.d..d..d..d.M####b,..,S.,.,..,..,.....M##DeAegAgeaAgAAAAN#",
+  "#B..,..,,....,M####B..Z.......,......Z.,AAAC..,,.........,M#",
+  "##LDgaAAggAAeaN####B.,.......,..,...,,,,.......,...,,,,.k.M#",
+  "###B...,......aAgAAC...q.,,.......,..,,..,..,.k..,k.,.k...M#",
+  "###n.....,............,,,..,,................,...,...,,...M#",
+  "###f.........,,,..,.,........,,.,....,..OLLB.,Z.,......,..M#",
+  "###B......,........,.s......,,........s,M##f..,......,....M#",
+  "###B..u.,..u..OLLLLB......,..,......,...M##B......,....Z.,M#",
+  "###b,,..,.,...M#####LLLLLLLb..,.OLLLLLLLN##b,...,.........M#",
+  "###B.,..,...,.M############B....M##########n.....q........M#",
+  "###B,..,....,.M############B....M##########n..............M#",
+  "###B....q.,,.,M############B....M##########B.,..,..,.....,M#",
+  "###B.,.,...,,.M############n...,M##########h.....,,.....,.M#",
+  "###f..u.,..u..M############B..,.M##########B.,k..,k....,,,M#",
+  "###B,..,,,....M############f,...M##########B.k...,......k.M#",
+  "###f......,...M############B....M##########B...,.,........M#",
+  "####LLLLLLLLLLN############b....M###########LLLLLLLLLLLLLLN#",
+  "###############DAmAAaAAgAeAC,.,.AAAAaAAAAAAe################",
+  "###############f.,..,........,,.......,...,.M###############",
+  "###############B.s..,,........S...,,..,...s.M###############",
+  "###############b...Z.......,...........,Z...M###############",
+  "###############B.......,........,...........M###############",
+  "###############B...u,.u..u,......u.,u..u.,..M###############",
+  "###############B.....,..,,,,..,.,..,........M###############",
+  "###############B,.........,.,.q....,..,..,..M###############",
+  "###############B,..........,,...,..,...,....M###############",
+  "###############n,,.u..u..u....,,.u..u..u,...M###############",
+  "###############f.,.............,.,.,.....,..M###############",
+  "###############b,........,.,....,.......,...M###############",
+  "###############B...,.....,...XX.....q.,...,.M###############",
+  "###############h..............,...........,.M###############",
+  "###############B...Z,.......,.........,.Z...M###############",
+  "###############B.s,...,....,......,,.....,s.M###############",
+  "###############B,.,.....,..,....,...........M###############",
+  "################LLLLLLLLLLLLLLLLLLLLLLLLLLLLN###############",
+  "############################################################",
+  "############################################################"
+ ],
+ "legend": {
+  ".": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  ",": {
+   "ground": "floor",
+   "tiles": [
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47
+   ]
+  },
+  "#": {
+   "ground": "none",
+   "blocks": true,
+   "blocksSight": true
+  },
+  "A": {
+   "ground": "none",
+   "objects": [
+    65,
+    69,
+    97
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "B": {
+   "ground": "none",
+   "objects": [
+    64,
+    68,
+    96
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "a": {
+   "ground": "none",
+   "objects": [
+    103
+   ],
+   "blocks": true,
+   "blocksSight": true,
+   "light": 3.5
+  },
+  "b": {
+   "ground": "none",
+   "objects": [
+    102
+   ],
+   "blocks": true,
+   "blocksSight": true,
+   "light": 3.5
+  },
+  "e": {
+   "ground": "none",
+   "objects": [
+    107
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "f": {
+   "ground": "none",
+   "objects": [
+    106
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "g": {
+   "ground": "none",
+   "objects": [
+    101
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "h": {
+   "ground": "none",
+   "objects": [
+    100
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "m": {
+   "ground": "none",
+   "objects": [
+    105
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "n": {
+   "ground": "none",
+   "objects": [
+    104
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "C": {
+   "ground": "none",
+   "objects": [
+    73
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "D": {
+   "ground": "none",
+   "objects": [
+    74
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "L": {
+   "ground": "none",
+   "objects": [
+    80
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "M": {
+   "ground": "none",
+   "objects": [
+    81
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "N": {
+   "ground": "none",
+   "objects": [
+    88
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "O": {
+   "ground": "none",
+   "objects": [
+    89
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "H": {
+   "ground": "none",
+   "objects": [
+    285
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "I": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    110,
+    111
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "d": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    202,
+    203,
+    204,
+    205
+   ],
+   "blocks": true
+  },
+  "t": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    136,
+    137
+   ],
+   "blocks": true
+  },
+  "k": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    146,
+    147,
+    162,
+    163
+   ],
+   "blocks": true
+  },
+  "s": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    128,
+    129,
+    130,
+    131
+   ],
+   "blocks": true
+  },
+  "u": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    194,
+    197,
+    199,
+    200
+   ],
+   "blocks": true
+  },
+  "X": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [],
+   "blocks": true
+  },
+  "Z": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    167
+   ],
+   "blocks": true,
+   "light": 4.5
+  },
+  "q": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183
+   ],
+   "blocks": false
+  },
+  "S": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    265
+   ],
+   "blocks": false,
+   "light": 3.5
+  }
+ },
+ "playerStart": [
+  29,
+  6
+ ],
+ "spawns": [
+  {
+   "at": [
+    24,
+    20
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    35,
+    24
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "barrow_legionary",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    30,
+    30
+   ],
+   "radius": 1.2,
+   "pack": [
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    5,
+    22
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "barrow_dead",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    7,
+    39
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "barrow_dead",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "barrow_legionary",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    52,
+    22
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "barrow_legionary",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "barrow_wight",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    53,
+    38
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "legionary",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "shielded"
+     ]
+    },
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    30,
+    46
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "barrow_knight",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "barrow_legionary",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 9
+  },
+  {
+   "at": [
+    35,
+    43
+   ],
+   "radius": 1.2,
+   "pack": [
+    {
+     "creature": "barrow_wight",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 9
+  },
+  {
+   "at": [
+    48,
+    49
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 9
+  },
+  {
+   "at": [
+    52,
+    53
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "quartermaster_corvin",
+     "rank": "Champion",
+     "count": 1
+    },
+    {
+     "creature": "barrow_legionary",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 9
+  },
+  {
+   "at": [
+    8,
+    52
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "barrow_wight",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "barrow_dead",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 9
+  },
+  {
+   "at": [
+    22,
+    64
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "barrow_knight",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "barrow_legionary",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 9
+  },
+  {
+   "at": [
+    37,
+    64
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "barrow_wight",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "barrow_dead",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 9
+  },
+  {
+   "at": [
+    29,
+    74
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "barrow_knight",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "vengeful"
+     ]
+    },
+    {
+     "creature": "barrow_knight",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 9
+  }
+ ],
+ "shrines": [
+  {
+   "id": "stair_hall_shrine",
+   "name": "The Stair Hall Shrine",
+   "at": [
+    32,
+    8
+   ]
+  },
+  {
+   "id": "officers_shrine",
+   "name": "The Officers' Shrine",
+   "at": [
+    24,
+    43
+   ]
+  },
+  {
+   "id": "officers_crypt_shrine",
+   "name": "The Officers' Crypt Shrine",
+   "at": [
+    30,
+    62
+   ]
+  }
+ ],
+ "exits": [
+  {
+   "id": "stair",
+   "label": "The Barrow Fields",
+   "at": [
+    29,
+    3
+   ],
+   "radius": 1.5,
+   "to": "barrow_fields",
+   "toExit": "barracks",
+   "arrive": [
+    29,
+    6
+   ]
+  }
+ ],
+ "caches": [
+  {
+   "id": "west_dormitory",
+   "at": [
+    3,
+    23
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "south_dormitory",
+   "at": [
+    12,
+    40
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "kitchen",
+   "at": [
+    55,
+    38
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "west_vault",
+   "at": [
+    5,
+    57
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "armoury",
+   "at": [
+    55,
+    54
+   ],
+   "kind": "Reliquary",
+   "facing": 1
+  },
+  {
+   "id": "crypt",
+   "at": [
+    41,
+    69
+   ],
+   "kind": "Cache",
+   "facing": 1
+  }
+ ],
+ "traps": [
+  {
+   "id": "stair_passage",
+   "at": [
+    29,
+    12
+   ],
+   "kind": "spikes"
+  },
+  {
+   "id": "west_door",
+   "at": [
+    12,
+    23
+   ],
+   "kind": "spikes"
+  },
+  {
+   "id": "mess_door",
+   "at": [
+    45,
+    23
+   ],
+   "kind": "spikes"
+  },
+  {
+   "id": "drill_south",
+   "at": [
+    30,
+    35
+   ],
+   "kind": "spikes"
+  },
+  {
+   "id": "drill_south_2",
+   "at": [
+    29,
+    38
+   ],
+   "kind": "flame"
+  },
+  {
+   "id": "officers",
+   "at": [
+    31,
+    45
+   ],
+   "kind": "spikes"
+  },
+  {
+   "id": "armoury_door",
+   "at": [
+    41,
+    46
+   ],
+   "kind": "flame"
+  },
+  {
+   "id": "vault_door",
+   "at": [
+    16,
+    48
+   ],
+   "kind": "poison"
+  },
+  {
+   "id": "vault",
+   "at": [
+    9,
+    53
+   ],
+   "kind": "poison"
+  },
+  {
+   "id": "descent_1",
+   "at": [
+    29,
+    53
+   ],
+   "kind": "spikes"
+  },
+  {
+   "id": "descent_2",
+   "at": [
+    30,
+    55
+   ],
+   "kind": "flame"
+  },
+  {
+   "id": "descent_3",
+   "at": [
+    28,
+    57
+   ],
+   "kind": "spikes"
+  },
+  {
+   "id": "descent_4",
+   "at": [
+    31,
+    59
+   ],
+   "kind": "flame"
+  },
+  {
+   "id": "crypt_west",
+   "at": [
+    24,
+    67
+   ],
+   "kind": "flame"
+  },
+  {
+   "id": "crypt_east",
+   "at": [
+    35,
+    67
+   ],
+   "kind": "spikes"
+  },
+  {
+   "id": "crypt_tomb",
+   "at": [
+    29,
+    70
+   ],
+   "kind": "poison"
+  }
+ ],
+ "interactables": [
+  {
+   "id": "hadrics_tomb",
+   "name": "Ser Hadric's tomb",
+   "at": [
+    29,
+    72
+   ],
+   "tile": 194,
+   "dialogue": "barracks_tomb"
+  },
+  {
+   "id": "speaking_grille",
+   "name": "A broken crate of brass",
+   "at": [
+    53,
+    51
+   ],
+   "tile": 163,
+   "dialogue": "barracks_grille"
+  }
+ ]
+}

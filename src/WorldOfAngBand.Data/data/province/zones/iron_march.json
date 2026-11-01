@@ -1,0 +1,1060 @@
+{
+ "id": "iron_march",
+ "name": "The Iron March",
+ "level": 6,
+ "act": 2,
+ "revision": 1,
+ "xpScale": 0.75,
+ "tileset": "tileset_ironhold",
+ "tagline": "The dead of a forgotten war still march.",
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTWWWWWWWWWWWWWWWWWWWWWWWWWWWWWQ===QWWWWWWWWWWWWWWWWWWWWWWWWWWTT",
+  "TT.,TO.T..O,OO.O.T...............-==-..............TT....DTT.TTT",
+  "TT.........OOOTDD.T....,..........===-............,.,..DT....TTT",
+  "TT.D..TDT,T.TO.T..T...............-==-................TT.TTD.OTT",
+  "TT,..DO.T.OOD...T..T...............===-............,...DO..T,.TT",
+  "TTOTT.T..TD,D.OT..,..,...B..........==...B........,....OTD...OTT",
+  "TT.OOT.O...TO,..OTO.T...............===-...................O..TT",
+  "TTT....D.OD.TO.TT..O,................==-........,.........ODODTT",
+  "TT.TOO...D....T..OOB,................===.......B............DTTT",
+  "TTT.T.O.TOOT.O..OOT.OD...............===..................,ODOTT",
+  "TT..TDTT..O..TD..O.OTO...............-==-..............,...O.TTT",
+  "TT,.TO.,.T..TT..TT...D................==-..............OOTD..OTT",
+  "TT...TO.O..OTTTTDDTD.................-==-...............OD.D.TTT",
+  "TTTTT..O.TT..D...TOO.......kkukuuuu..-==-.uukuuukk.....OT...OOTT",
+  "TTO.O..T..DTOT.TOODO,O................===..............T.TT.TTTT",
+  "TT,O....T,.T.TD..TTO.................-===...........,..O..O..TTT",
+  "TTO.OT.OTTT...O.,O.......,...........-==.....,......,...T.OOO.TT",
+  "TTT.TOOO...TD.T...OT,O................==................TT.O.TTT",
+  "TT..OO.,DO.TT.OO,O.OTT.......,........==-..............T.,T...TT",
+  "TTO.OT...O......TDT.OO...............-==...............D.O.O..TT",
+  "TT.DO.OTTO.O.O.OTO.TO..,.............-==..................,.,.TT",
+  "TT..,..O,.T.D,O...TTO....uuuuuuuukuu.===-kuuuukkukkk....TTT..TTT",
+  "TT..T.OOT.....O..T..OO..............-===-.................TOT.TT",
+  "TTTT.D..T.T.OD..O,TT........,........===..............TTTO,.OOTT",
+  "TTTOOD.O.T..TT.T.T..................-==-...............T.T,...TT",
+  "TTTOO.T....D..TT.T.,................-==-..............OTT.,.O.TT",
+  "TT.D.OOT.DTTTTO...O.................-==...............TO.OT.,.TT",
+  "TTTOTTTT..O..TDDO..........,........-==-......,........T...D..TT",
+  "TT.D..TTO..TOO.OTO,T,...............===...............D,..DD.TTT",
+  "TTO..DT...TOTT.O..T................-===...............,T.O..DOTT",
+  "TT.TOO.O..O...O,DTT,.,.............-===........,.....DODTO.OO.TT",
+  "TT,TDOO,TDTTTT..D.OOO.,D.,.DT...,...===..,.......DD..TT,O..OOTTT",
+  "TTT.O.TO.O..T.....TTD.O.,..........-==........O...OODDT.OOT..OTT",
+  "TT.OT..TO.D,.D..TO...TO.OT.TOO,....-==......T.....OT..DT..DT.TTT",
+  "TTT.T..,TTTT.O.ODOOO..O.O...,.......==-..............TTTO.TTDOTT",
+  "TTO.O..D....TOTT..TT,O.,OT....D....-==-.......O..TTT.O.T.,...TTT",
+  "TTODTO.O.T..T..T.T..D.T.T...........==-..........T..T.TOD..T..TT",
+  "TT.OT...O.T..TOOT....O..ODOOT.......===...,....,O.T.OTO..O.,..TT",
+  "TT.O.TT.TT.T.TT.T.TT..O.TT.,.,......===........T.TTO.TT.O.OD.,TT",
+  "TTTTT..T.,.TTTO...T..OO.O..T........===......T.,O..T.O.TO.DO.TTT",
+  "TTT......OO.TOT.T..DT...T..,.T.....-===............TD..T......TT",
+  "TT..T.....TTOTTDTTO....ODD,.....,.,-===...u,,..OOTOTOOOO....TTTT",
+  "TTD..DT.O.ODOOO.....T.TO..,........-===........T.T....O...OTT.TT",
+  "TTT,.TD.T....TTT.DT...T,.....T.....-===.,.......TTOO.T.TTTTDT.TT",
+  "TTO..OT...OD..O.OT.TTT.O...........-===.....OO.......O,O.T,OTOTT",
+  "TT.T.....T..T.TT.TOOTTO.,T..T.......===-.,..,..,..T.,...OOTTTTTT",
+  "TTO...D,O.TT.,TO.T...D.T,O.T.......-===.....,.,,O.TO.O.....OT.TT",
+  "TT,.OD..TOTT.TOTOTTDT..TTTT.D.T..S.-==...........OT.DOD..TO.T.TT",
+  "TT..T..DO..O.OOO...DTOOT.,T........-==-.........,.OT.T,.,..TTDTT",
+  "TT.TO...O.T.,TT.T...TT.O,.TO.......-==-.........O..OTO,T..O.T.TT",
+  "TTO.T.TDTO..OTOOD.TD,...O.,O........==............OOODTD..OOO.TT",
+  "TT....T.T.TD.DT.DD...T,..T....,...-===-.......TO.TT...D..DT...TT",
+  "TT....TT...TT...TO.O..TD...D,...,..==-.......T...O..,,.O.O,...TT",
+  "TTTT.TT,O..O.O......,D.T.OD..u....-==.....T...O..T.,.TTTDO..O,TT",
+  "TT..T...TO.O.O...TTT.TT...........===..........O..O.TO.O.T....TT",
+  "TT....TT.T.T.OTT.T,T...OT...T....-==-......T.......TOD...D..TTTT",
+  "TT...OT.OO.T....................-===-.....,DD,.....TOT...OTTT.TT",
+  "TTOOT..D.OT..OT.......O.........-==-.......T..,......O..O,.,..TT",
+  "TTOO,....DDDTO.OT,.T....D......-===-.,...,....,Y,...OT..DO..T.TT",
+  "TTT..T.T....T..D...T..O.,.,....-==-................,,.T.T.,,.TTT",
+  "TT.T.TD..T.DTO..O.,,...........===..................OO.,,.TOT.TT",
+  "TTTTO....TD....O...T..........-==-....T.T..,,.,....T..OT,..OTTTT",
+  "TT,DO...TOTOOO.T.O...........-==-.........TTD.....OT..T...TOO.TT",
+  "TTOOO..TOOTT...TTO.,TD,.....-===-.u.,....TDTTOT.D,.TTTT.T.....TT",
+  "TTTT.TT..OT.......T.O.......-==-....,.....OT..TO..O..D...TOT..TT",
+  "TT..TOO.T...T..O...,.D.....-==-....,....OO.T..TT.,TT..DTTOT..TTT",
+  "TT....,D...O.O..DO.,.......===-......O....O..D...TTTOTOTO....TTT",
+  "TTTO,OOODTOTDT.T..T..Tu...-==-.........,..OTDDTOD..T..O,..O...TT",
+  "TT.T.TT.TO...O..O.....,..-===-....,......TO.O..T..T..OO.OTD..TTT",
+  "TT...D.O.T.......OO......-==-........,..DO....TOT.O.D..T...OD.TT",
+  "TT.OT..T...TTOO....,....-===-,........,OO..T...T..T.TD...T.,.TTT",
+  "TT,OTTO.D.OT...O,.......-==-......,.TO..O....T.D.TDO..O.,OTO,TTT",
+  "TTT.O..OT...T..........,===-....,.O......T.D.OOD.TTO.,T.,D.O..TT",
+  "TT.TO..T..,OT..T.O.....-==-...........O...T..D.TD.....OD.T..TDTT",
+  "TT.,DTT..TT.TDO..T.....-==-.....,......TOOT..TOTT...T.TT.TODTTTT",
+  "TT.T.O....TOT........,..==............O....,TO..T..OT...T.,OT.TT",
+  "TT.O.O...DTDD..,......-===-....,.....,OTTO..TO.T....D,DO,.TOTOTT",
+  "TT.T.TOO...,..........-===-.....,.....TOOT..O.TO.D.,..OTT...TTTT",
+  "TT.ODO.,...,..........-===....,,........O..OTDO.TD.T.T.T....T.TT",
+  "TTO.O,T.T.............-===...,.......,,.OTTO,OT,T.T....T.TT...TT",
+  "TT.OD...,..,.,..,.....-===..........,,.TT...D..O.TTTTD.T.T.OODTT",
+  "TTO..O..T.....uukkuuu.-===kukkkku......T,.O.,...TO.O.T..O...TTTT",
+  "TT..O.DOOT,.,..,,.....-===-.............,..TT..O.T.ODTTOT,T,TOTT",
+  "TTT..,TTOT,,....,......-==..............T.,....TT.T.....T...T.TT",
+  "TT.O.T.TD,.....,.......-==-.......,..,.....OO.ODTOT..T..O,..O.TT",
+  "TTT..,.,,...tX..........==-..,..............TO.D...D,.T.DT,T.TTT",
+  "TT.TDDTTTT..XX.........-===-.....tX...,D.www.T.TTTT.T.T.O.T..OTT",
+  "TT.O.T.TOT..,........,,..==-..,..XX.,...wwwww..O.O....,.TT...DTT",
+  "TT..OOTT................-==............wwwwwww.OO..TD...OOOODTTT",
+  "TT.O..OT.T..............-===...........wwwwwww..OO...TO.T,..T.TT",
+  "TTOTOO.OD.O......,.......===.......,.,.wwwwwww.O..OTT.TT...OO.TT",
+  "TT...TT..T.T..uuukkuukk...==..ukkkkkkuk,wwwwwDO.O..T....T.....TT",
+  "TTO.T,O..T..,...,..,.....-==-.....,.,....wwwTD..T.T.TTOOT....,TT",
+  "TT....TD............,....-===-........,.....,..O..TTOT..T.OD.OTT",
+  "TT....DT.TTDT......,c......==.,,..........O..T.O,DT......D.T,.TT",
+  "TT...T.O.T.TT............,.==-...........,D..TO....OOO..TD.O..TT",
+  "TT.T..TD..OTT.....,........===.....tX....,OO.DO.D.D..,..OT..TDTT",
+  "TTO...OOOO.TT....tX.......-===.....XX........OOO.TO....T,T,.T.TT",
+  "TT.D..TT.OT.TT...XX,.......-==-...,.,..,.........TO..,OTOTOT..TT",
+  "TTTT.DTT.T..O........,.....-==-................OOT.OO.OOD..T..TT",
+  "TTOTO.TD.O...T.............-==-....,.,.....D.OTOODOOTT.T,...OOTT",
+  "TTT..,OO.D.T................==...........,.,OTD.TDOT..TO...T.TTT",
+  "TTTTD.TTTO.OD.,,...,....,...==-...,........OD..O..TDTT.TTT...OTT",
+  "TT..TOD.T..,TO....kuukuuuu..===ukukuuuu...,.TOODT..OTTTTTDT.TOTT",
+  "TTTD.TOO..DTD.,...,...,....-===-...........O,......DT.TDTOT.TTTT",
+  "TT..O.T..OTTTO,..,.........-===-......,...,.T.O..T.T.OTO.,T.TTTT",
+  "TTO.....O..................-===.............OTT.O.,...OTDTTO..TT",
+  "TTD.,TO.....O.....,.........===-............O..O.TOO.T,..T..O.TT",
+  "TT..T,.T......D....,........===-.............T..D.ODTDT.T..D.,TT",
+  "TTO.OT.TT....TT..T........,.-==....,...T.T,.T.DO,TDTTT..D.TT..TT",
+  "TT.T.DT.OO.....O.T..O.......-==........T..TT..TTO...T,O.TTTOOTTT",
+  "TTT.T.T.T,O..TO..,TT..O..,..-==-.....D........DOTOTOT.OOTT...OTT",
+  "TTT.D.DOT.O..T..T....T,......==-....O,.....O...O.O...TO.T.DTDOTT",
+  "TT...OTTOTT.T..DT,O.........-==-.........O..OOO...T.,T..T.T..OTT",
+  "TTT.DDD....TDT.D..,..........==.........D.....OTOTT.T,.,...TTTTT",
+  "TT.TT..TO.TOD...O,T......S...===-......T..O..TDD.....OT.T.OTTOTT",
+  "TT..TT..T,OOT..,.......D..,..===-....O....D...T..D..O.TT.TO..OTT",
+  "TTTDT.T...DOD.T..,TO.........-==......,.....,....OD.T.O.OTDOT.TT",
+  "TTTTO......D.OT.TT.O.........-==.................TTT...TO....OTT",
+  "TT.DO...TT.TO..TO..T...,..,..-===-.....WWWWWWW....OO..D.T.T,TTTT",
+  "TTOO.,T.T.DO..TT....T.T.......-==......Wk....W...O,T.,O.T.,OO.TT",
+  "TTOT..,T.ODO......,.O.,.,.....-==-.....W...,.W....TOOOOO..,.OOTT",
+  "TTOTTDT.TTO.OO.T,TT....T.O.....===-.......,..W...D..,.OTTTT...TT",
+  "TT.TTOOT,TD.TTTDT...O...........==-...,......W.......TO.OT.TTTTT",
+  "TT,.O..TO.T....TT.D..T..........===-...W.....u..,..OTDO..DOO..TT",
+  "TT.T.T.OT.D.TD.DTT.TD..O..,T.....==....W....k..,.TO.T...O.T,TOTT",
+  "TT.TT.T.D.T.T...O.T.TO.TT........===-.,WWWWWWW...TT,..OTT.,,DOTT",
+  "TT.,DD.TO.OT.T..O..O...T.........-==-...,........TOO.ODT.DT.DTTT",
+  "TT.D.DOOO.D..TOO,T.T.OO...........-==-............TD,.DOO..T.TTT",
+  "TTTT...TO.T..T.,O,.OTOOO..........-===............O..OTD..T,..TT",
+  "TT.T..TDT.....O...D.OD..,..T........==-.......OO.O.D...O..T,.TTT",
+  "TT...TTO.TTT.D.TTT.T.TO.T.....T....-===-,.,....T......OTTO.T..TT",
+  "TT...D.TDTOO..O.OT..OO..TD..........-==-..,.....D...TOT....OT.TT",
+  "TT...TT.T.,OTT.T,..,DO......D........===-.....T....TT.,.O.OD..TT",
+  "TTO..T,T.T..T.DT...O,OO.......O,......==...........TO.T.TTTDTOTT",
+  "TT..,T.TD.....TTD,.,.TT..T....O......-===-.....,....T.OO,...D.TT",
+  "TT...O.,O.T.TO.T.TTT..D......T.........==......,T.......T,..O.TT",
+  "TT.TD.OOTO..ODT.OTT.O,.........,.,....-==.........,,..,.....,TTT",
+  "TT...T..OD..O.,...T.D..........,..,..,-===.....,...........T..TT",
+  "TT.....T.TDOT....D.T.T.......,........,-==-..u....,..,.....ODDTT",
+  "TT.D.T.TOO.,.....T..OO,...,............-==-........,......,TOOTT",
+  "TT.TT.,DO.OTT.......T.....u.....,..,...-==-................O..TT",
+  "TT..T...O.OT.....OO.......,....,...,...-===.....,.....,...,DO,TT",
+  "TT.O.TT,.O..OT.OO..T.T.................-===..............,.,TTTT",
+  "TTTTT......TTD.TTDOT.T....,............-===..,.............OTDTT",
+  "TTT.TT.,DTTDT..TTD....,.vvu...uuvuvuuvu-===uuvuv...uuuvuu..OODTT",
+  "TTT..T,.T.TDDOT..,OTO...,......,,,.....-==..................DTTT",
+  "TT..TT..T..OO...T.D..............,.....-==-...,...........,T.TTT",
+  "TTOTD...TT.O.DOO..O,.T.,..,....,...,,..-==-...........,....TOOTT",
+  "TTOOOOTT.TDTT,TD.........Z...,........-===-..................TTT",
+  "TTDOD.TT.T.OTT.T..DOT..........,......-==-..........u.....TTTDTT",
+  "TT...T.D.OO..OTOTO..T......,..........-==-.....,.,.,....,..OTDTT",
+  "TTT.TTT..TOT,OTO,T.....,......,.u...,.===........,.,.,...,D..OTT",
+  "TT..T,...OT...O.,.....................==-.....,.....,.....TDTOTT",
+  "TTTO.T..O..TOtX....tX................===-....,........,..DD.TTTT",
+  "TTDD.O..OT.T.XX...,XX...,.,..........==-.,......Z.......OD..DTTT",
+  "TT.TT.D.DTT......c,........,.........==-............,,...DO.O,TT",
+  "TTD.T.TD.T....,....................-===..,.............T.TT,T,TT",
+  "TT..TTT..TD,.........k.............-==-uuu...vuuvuuuu...TOOT.TTT",
+  "TT.,T.DOTT..T........k............-===.,...,...........O.TTTT.TT",
+  "TT..O.O.,TOD,........,,,...........==..............,..O.T.OOT.TT",
+  "TTTOO.DTD,..DT.........,,,........===-......,....,.,.......D..TT",
+  "TTOOT.OT..TOD.,............,....,.===.............,...T...TTT.TT",
+  "TT.......TTT.O......,,..,........-==......u..........DD.TO.O,.TT",
+  "TTO.T.......DT,T................,===-.........,........T.T..O.TT",
+  "TTT...OO.O,O.........,u,........-===..............,.T...OTD.T.TT",
+  "TTOT.TOO..DT..T.,........,,......==..........,....,.DT..T..TT.TT",
+  "TT.OD..TDO......,,......Z..,....-==-........,....,..O.T...T.DOTT",
+  "TTTT..TT...DT.O..,....,.........===-,....,.........,T..OOT..OOTT",
+  "TTT..TD.D,TD.........,.,..,.....===.......,....,......OT.....TTT",
+  "TTO,,T......O,......,..........-===...........,.....T.O.O.T.,OTT",
+  "TTTT..D.OTD..T.,u...uvuuuvuuuvu-==uvvu...uuuvuuuu..DT.O.TT.TTTTT",
+  "TT....T..O.T....,..............-==-....,.,.......,,T.TT.TO.O,.TT",
+  "TT..TO...T.....................-==-.................TO.T.....OTT",
+  "TT...DO.OD.O.............,......==-.....,....,......D..TO,.D..TT",
+  "TT.TO.O.TTT.T.,.....,........,..==-................T.T...T.TD.TT",
+  "TTOO..T.TTTD.O......,.,........===......,.,.........O.O.O.TO..TT",
+  "TT.D......O....,.........,....-===-..................DT.,DODT.TT",
+  "TT..T...OO.,T........,.........===.......,...........T,O.DOTOTTT",
+  "TTTT.DT.TTTO,.OTTTT.O..D......-===...,..........TTODOTT.D....TTT",
+  "TTT.,D.TTD.T....T.............-==-........O.....O.DT.TO.T.TOOOTT",
+  "TTO,D..OTD.....OOT,...T.......-==-.........,.TTTO.T.TDT.T,..OOTT",
+  "TTTT....TO...T..T.,T...........==......T,......T.O.TTDT..TTOT.TT",
+  "TT.T.TT.OO.O..O.D........M....-==...,......,OT..T.O....T.....TTT",
+  "TT...ODTO..OO.OO..T.,DD....,.-===S.........,.TO.TTT.......O...TT",
+  "TTT,,TD,.OT.O..D.....T........==-........,...TOT..T.T..OTT,TD.TT",
+  "TT..O,.OTOT.D,.....T.,O......-==-..,.....O.....TOOTT.T..T..D.TTT",
+  "TTDTT...D..T.TT.....T.T,.....===-..,........O.OT.TD.....O...TDTT",
+  "TT..TDT.O.T.DT,,.,.,TT....,..===..,,..T..,,D..T.TDT...TOTT,..OTT",
+  "TT,O,TOTDDOT.D.DD....T.....,-==.,........,...T.T.T.T....O..TTTTT",
+  "TTTT,O...TO...TD............===-.........TT..,D..TO..T.O....TTTT",
+  "TTTDOD.TOD.TOO.OD..T........===..,..,OD..T.O...D,D.TD.T.T.OOTTTT",
+  "TT....T..TO.T,OT.....,.....-===.........D....,TO.,....T.O.TOOOTT",
+  "TT..TOTTT....OO.D.........-====............OOT.TO.T..O....D..DTT",
+  "TTTT.,..OOO.TT...D.......,-====....,DT.O..OO.OO...DD.DTOOTT..OTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "legend": {
+  ".": {
+   "ground": "grass"
+  },
+  ",": {
+   "ground": "grass",
+   "objects": [
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127
+   ]
+  },
+  "=": {
+   "ground": "path",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  "-": {
+   "ground": "path_edge"
+  },
+  "T": {
+   "ground": "grass",
+   "objects": [
+    248,
+    249,
+    250,
+    251
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "O": {
+   "ground": "grass",
+   "objects": [
+    252,
+    253,
+    254,
+    255
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "D": {
+   "ground": "grass",
+   "objects": [
+    244,
+    245,
+    246,
+    247
+   ],
+   "blocks": true
+  },
+  "w": {
+   "ground": "water"
+  },
+  "c": {
+   "ground": "grass",
+   "objects": [
+    102
+   ],
+   "blocks": true
+  },
+  "t": {
+   "ground": "grass",
+   "objects": [
+    72,
+    75
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "X": {
+   "ground": "grass",
+   "blocks": true
+  },
+  "S": {
+   "ground": "grass",
+   "objects": [
+    265
+   ]
+  },
+  "v": {
+   "ground": "grass",
+   "objects": [
+    1048,
+    1049,
+    1050,
+    1051,
+    1052,
+    1053
+   ],
+   "blocks": true,
+   "cover": true
+  },
+  "u": {
+   "ground": "grass",
+   "objects": [
+    1187,
+    1189,
+    1190,
+    1192,
+    1193,
+    1194
+   ],
+   "blocks": true,
+   "cover": true
+  },
+  "k": {
+   "ground": "grass",
+   "objects": [
+    1285,
+    1286,
+    1287,
+    1288
+   ],
+   "blocks": true,
+   "cover": true
+  },
+  "W": {
+   "ground": "grass",
+   "objects": [
+    1223,
+    1224,
+    1225,
+    1226,
+    1227,
+    1228,
+    1229
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "Q": {
+   "ground": "grass",
+   "objects": [
+    1230
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "Z": {
+   "ground": "grass",
+   "objects": [
+    1241,
+    1242,
+    1243,
+    1244
+   ],
+   "blocks": true
+  },
+  "M": {
+   "ground": "grass",
+   "objects": [
+    1276
+   ],
+   "blocks": true
+  },
+  "Y": {
+   "ground": "grass",
+   "objects": [
+    1291
+   ],
+   "blocks": true
+  },
+  "B": {
+   "ground": "grass",
+   "objects": [
+    102
+   ],
+   "blocks": true,
+   "light": 4.0
+  }
+ },
+ "playerStart": [
+  29,
+  192
+ ],
+ "spawns": [
+  {
+   "at": [
+    32,
+    182
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    26,
+    176
+   ],
+   "radius": 1.5,
+   "pack": [
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    40,
+    176
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    31,
+    167
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    44,
+    163
+   ],
+   "radius": 1.5,
+   "pack": [
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    36,
+    156
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legionary",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "shielded"
+     ]
+    },
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    32,
+    150
+   ],
+   "radius": 1.5,
+   "pack": [
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    46,
+    145
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    18,
+    161
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "outlaw_raider",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "outlaw_bowman",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    15,
+    158
+   ],
+   "radius": 1.2,
+   "pack": [
+    {
+     "creature": "outlaw_bowman",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    42,
+    125
+   ],
+   "radius": 1.2,
+   "pack": [
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    36,
+    127
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    33,
+    132
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    23,
+    108
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    31,
+    103
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    35,
+    96
+   ],
+   "radius": 1.5,
+   "pack": [
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "hasted"
+     ]
+    },
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    18,
+    90
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    25,
+    86
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legionary",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "vengeful"
+     ]
+    },
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    22,
+    74
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "outlaw_raider",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    34,
+    66
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "outlaw_bowman",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "outlaw_raider",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    45,
+    63
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "outlaw_raider",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "outlaw_bowman",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    34,
+    54
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "outlaw_raider",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "hasted"
+     ]
+    },
+    {
+     "creature": "outlaw_raider",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    39,
+    40
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "outlaw_bowman",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "outlaw_raider",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    29,
+    27
+   ],
+   "radius": 1.5,
+   "pack": [
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    44,
+    20
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    31,
+    13
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 7
+  },
+  {
+   "at": [
+    38,
+    19
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "centurion_varro",
+     "rank": "Champion",
+     "count": 1
+    },
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 7,
+   "flag": "act2.varro",
+   "value": "slain"
+  }
+ ],
+ "shrines": [
+  {
+   "id": "causeway_shrine",
+   "name": "The Causeway Shrine",
+   "at": [
+    33,
+    187
+   ]
+  },
+  {
+   "id": "watchtower_shrine",
+   "name": "The Watchtower Shrine",
+   "at": [
+    25,
+    118
+   ]
+  },
+  {
+   "id": "hollow_shrine",
+   "name": "The Hollow Road Shrine",
+   "at": [
+    33,
+    50
+   ]
+  }
+ ],
+ "exits": [
+  {
+   "id": "mire",
+   "label": "Sallow's Mire",
+   "at": [
+    29,
+    196
+   ],
+   "radius": 1.5,
+   "to": "sallows_mire",
+   "toExit": "iron_march",
+   "arrive": [
+    29,
+    191
+   ]
+  },
+  {
+   "id": "ironhold",
+   "label": "Ironhold",
+   "at": [
+    33,
+    4
+   ],
+   "radius": 2.0,
+   "to": "ironhold",
+   "toExit": "march_gate",
+   "arrive": [
+    33,
+    7
+   ]
+  }
+ ],
+ "caches": [
+  {
+   "id": "causeway",
+   "at": [
+    24,
+    190
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "battlefield",
+   "at": [
+    47,
+    171
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "lookout",
+   "at": [
+    14,
+    162
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "watchtower",
+   "at": [
+    42,
+    126
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "siege_camp",
+   "at": [
+    15,
+    102
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "drowned_shrine",
+   "at": [
+    49,
+    63
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "hollow_road",
+   "at": [
+    17,
+    75
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "siege_line",
+   "at": [
+    45,
+    20
+   ],
+   "kind": "Reliquary",
+   "facing": 1
+  }
+ ],
+ "interactables": [
+  {
+   "id": "wanted_poster",
+   "name": "Wanted poster",
+   "at": [
+    36,
+    168
+   ],
+   "tile": 139,
+   "dialogue": "march_poster"
+  },
+  {
+   "id": "brass_mainspring",
+   "name": "Brass in the rubble",
+   "at": [
+    43,
+    124
+   ],
+   "tile": 1271,
+   "blocks": false,
+   "dialogue": "march_spring"
+  }
+ ]
+}

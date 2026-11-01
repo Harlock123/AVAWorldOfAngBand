@@ -1,0 +1,838 @@
+{
+ "id": "frostbitten_pass",
+ "name": "The Frostbitten Pass",
+ "level": 11,
+ "act": 3,
+ "revision": 1,
+ "xpScale": 0.8,
+ "tileset": "tileset_oriel",
+ "cold": true,
+ "tagline": "The road up the mountain freezes the faithless first.",
+ "darkness": 0.6,
+ "rows": [
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC===CCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCTTC............===....O...CCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCOT..........-====..........CCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCTTO..........-===,..........TOTCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCTTT...........==............CCTCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCOTT...........-==-...........TCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCT..,.....,...-==-............OCOCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCOC......,.,..,-===.............CTCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCTC............-==-............OOTCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCO..,........S-===-.....,,.....OCOCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCT....,...O....-==..............OCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCOCC........,O...-==-.,T...,.....TCCTCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCTC..,.O........-===..T..........TCOCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCT...T..,.T....===-.....TO......CCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCOO.............===-.............TCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCC.T..,........===-.cT...,......CCOCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCOT.,.........,-===-..........,,CCTCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCC.....,.......===-........T..,TCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCOC..O..O...T..-==-.............TOCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCC......T.....-==-............CTCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCO..,....,....-==-......,.....COOCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCTC...........-===-...........TCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCOO...........-==-........T..CTOCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCOOT.....u......==-....u......OCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCOC,.........-===-..........OOOCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCTCC..........-==-..........COCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCC..........-==-.........OTCOCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCOTC.........-==-.........CCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCOCC....u....===......u..CTCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCTCT........-===.........CCOCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCO......,.-==.,.OO...TCCOCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCC.......-==-......O.CCTCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCOTO....O...==-..,...TOTCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCT...T...-==-...O...CCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCOCO.......==.......OOOCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCOOT.T..c.-==-...O..COOCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCC.....-==.......CTTCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCOOTO...-===,.....TTOCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCOCC.O..,-===......CCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCC,....-===-.....CCOCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCTCC.....===......TCOCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCC...............===......CCTCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCC............,..===-.....TTTCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCC...............===-.....TOTCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCC......c.....T.-===......TCTCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCC...............===-,....CCTCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCC...S.......,..-==-....O.TCOCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCC..........O...-==-,....,COCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCC..............===-..,...CTOCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCC.............-==-.......OCTCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCOC........==-...,..COCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCTCC.......-==-..c....OCTCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCTTC........===-.......CTCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCTT.......-==-.....,..TTCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCOCO.........==.........CCTCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCT.T.......===.........CCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCOO.........-===-.....O...OCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCT,........-===.....,T...CTTCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCO..........===...........TCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCC.......,...===-..........TCOCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCOC........T..-==............CTTCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCOTC............==-............COCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCTC............-==-...vvvvv.....TCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCTCC............-==-..vvvvvvvvv...OCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCO.....,......-==...vvvvvvvvvvv..CCCCCCCCCCCCCCCCCCCC",
+  "CCCCCTOOO...........-===-..vvvvvvvvvvv..CCCCCCCCCCCCCCCCCCCC",
+  "CCCCTCC.,...........-==....vvvvvvvvvvv..CCCCCCCCCCCCCCCCCCCC",
+  "CCCOCCO..,..OO.....-==......vvvvvvvvv...CCCCCCCCCCCCCCCCCCCC",
+  "CCCOCC.............===-.......vvvvv.....CCCCCCCCCCCCCCCCCCCC",
+  "CCOTT..,....,.,.c..==...................CCCCCCCCCCCCCCCCCCCC",
+  "CCCCT.............-==-..................CCCCCCCCCCCCCCCCCCCC",
+  "CCCCT........T...-===-,,..........OCTCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCC.......T......===........,....CCCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCOOT....,.T......==-......,.,....COCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCOCC..,..........===.......,.....TCOCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCTO...........,-===-............COTCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCT...........,===-............TCCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCTT.,..........-==-...,........TTCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCT...........-===............CCCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCOCT...T....T..-==.,..........TTTCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCOO...,....,.-==-..T....TT..TCTCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCTC............==-..........COCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCWWWWW..fWWWWW..==-..........OCOCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCWffff..........-==-,.c.T....CCCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCWfffff.........-===.........CCCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCWffIfff..I......-==-........CTCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCWfffffff..f.....-===-.,.O...COTCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCWffffffff........-==-........OTCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCWffffffcff...,,..-===-......,CCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCWffIfffffIf.f......==-.......CCTCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCWfffffffffff.......==.,...T..COCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCWfffffffffff.......===-...,..CCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCRfffffffffffR......-==.......OCTCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCTO.....-==-......TOOCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCTTC,...,-===......TCOCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCTO......===-.....TCTCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCC.....-==-..,..CTOCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCOCC.....-==-..,,.COCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCC......==-...,.OCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCTT..,..-==-.c...OOCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCOCT......==-.....TTCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCTCT......==-.....TCOCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCO...,.-==......OCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCOO..O..-==-....O,CCTCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCC.....,-==-.,....CCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCTC,.....-===.......OTTCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCTO.,.O..-===.................CCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCOCC.......-==.............i...CCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCTCO.......-==-.......i........CCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCOC.O.....-===................CCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCTT......,..==.,..............CCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCOCT.,.,....-==-...............CCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCTTO.........==-,...........i.CCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCTCC..........==-..............CCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCC..........-==-...i.........CCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCOCC..,,......-===-......i.....CCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCTCC.......,...===............CTCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCTOC...O.....c.-==-...T....T..CCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCT.......T.,..-==-......T....CCTCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCC..,......T..===-.........,.OCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCOCC,...........-===-........,...OOCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCC............-==...........,..CCOCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCOO........,,...-==-.............TCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCTOT.....O.......-==-.......O.....TCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCOTC..........T..===-..........,.OTOCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCOOC.....,...,...-==...O..,.......CCTCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCTC.............-==..............CCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCO....,........-==..,........,..OCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCTTC........,.....==-.............CCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCOCT.,.,..........==.....,.......TCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCC............-==-...........TOCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCTTT..,........S-===-.......T....CCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCTO....,.......-===-......,..T..TCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCTCC...........-===..,.........OTCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCO.....T.,...-==-......,.....OOCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCO...........==-..c.....,..OTOCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCOOC.......,...===-...........OCOCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCTTT..........-==-...........TTCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCTT...........==-,........OCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCT....O....-==...........CCTCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCOCO......,..-===-..,.,...,TCOCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCTCT....,.,...==-...,.....TTTCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCO........-==-..,.....TTOCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCOT........===........CTCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCT.......-===-..,....CCTCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCOCO.,,.....====.....OOCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCTTC....,...=====.....TTCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC===CCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+ ],
+ "legend": {
+  ".": {
+   "ground": "grass"
+  },
+  ",": {
+   "ground": "grass",
+   "objects": [
+    112,
+    113,
+    116,
+    117,
+    120,
+    121,
+    124,
+    125
+   ]
+  },
+  "=": {
+   "ground": "path",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  "-": {
+   "ground": "path_edge"
+  },
+  "f": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  "v": {
+   "ground": "grass",
+   "tiles": [
+    344,
+    345,
+    348,
+    349,
+    352,
+    353,
+    356,
+    357
+   ]
+  },
+  "C": {
+   "ground": "grass",
+   "objects": [
+    48,
+    49,
+    52,
+    53,
+    56,
+    60,
+    64,
+    68
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "T": {
+   "ground": "grass",
+   "objects": [
+    244,
+    245,
+    246,
+    247
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "O": {
+   "ground": "grass",
+   "objects": [
+    552,
+    553,
+    554,
+    555,
+    556,
+    557
+   ],
+   "blocks": true,
+   "cover": true
+  },
+  "i": {
+   "ground": "grass",
+   "objects": [
+    440,
+    444
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "W": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1223,
+    1224,
+    1225,
+    1226,
+    1227,
+    1228,
+    1229
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "R": {
+   "ground": "grass",
+   "objects": [
+    1185,
+    1186
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "I": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1223,
+    1226,
+    1228
+   ],
+   "blocks": true,
+   "cover": true
+  },
+  "u": {
+   "ground": "grass",
+   "objects": [
+    1187,
+    1189,
+    1190,
+    1192,
+    1193,
+    1194
+   ],
+   "blocks": true,
+   "cover": true
+  },
+  "c": {
+   "ground": "grass",
+   "objects": [
+    102
+   ],
+   "blocks": true,
+   "light": 3.5
+  },
+  "S": {
+   "ground": "grass",
+   "objects": [
+    265
+   ]
+  }
+ },
+ "playerStart": [
+  37,
+  144
+ ],
+ "spawns": [
+  {
+   "at": [
+    44,
+    128
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "rime_crawler",
+     "rank": "Normal",
+     "count": 4
+    }
+   ]
+  },
+  {
+   "at": [
+    31,
+    122
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "frost_wraith",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    40,
+    112
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "rime_crawler",
+     "rank": "Normal",
+     "count": 4
+    }
+   ]
+  },
+  {
+   "at": [
+    43,
+    109
+   ],
+   "radius": 1.5,
+   "pack": [
+    {
+     "creature": "rime_crawler",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "hasted"
+     ]
+    },
+    {
+     "creature": "rime_crawler",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    30,
+    106
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "frost_hexer",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "frost_wraith",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    24,
+    95
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "horned_guardian",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "rime_crawler",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    14,
+    88
+   ],
+   "radius": 1.5,
+   "pack": [
+    {
+     "creature": "horned_guardian",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    10,
+    86
+   ],
+   "radius": 1.2,
+   "pack": [
+    {
+     "creature": "horned_guardian",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "vengeful"
+     ]
+    },
+    {
+     "creature": "frost_hexer",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    22,
+    78
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "frost_wraith",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "frost_hexer",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    30,
+    66
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "frost_wraith",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 12
+  },
+  {
+   "at": [
+    35,
+    67
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "frost_wraith",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "shielded"
+     ]
+    },
+    {
+     "creature": "frost_wraith",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 12
+  },
+  {
+   "at": [
+    26,
+    58
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "rime_crawler",
+     "rank": "Normal",
+     "count": 3
+    },
+    {
+     "creature": "frost_hexer",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 12
+  },
+  {
+   "at": [
+    39,
+    42
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "horned_guardian",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "frost_wraith",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 12
+  },
+  {
+   "at": [
+    32,
+    34
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "frost_hexer",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "rime_crawler",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 12
+  },
+  {
+   "at": [
+    34,
+    26
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "mirror_cultist",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "mirrored"
+     ]
+    },
+    {
+     "creature": "mirror_cultist",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 12
+  },
+  {
+   "at": [
+    41,
+    27
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "mirror_cultist",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "frost_hexer",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 12
+  },
+  {
+   "at": [
+    36,
+    18
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "horned_guardian",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "mirrored",
+      "hasted"
+     ]
+    },
+    {
+     "creature": "rime_crawler",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 12
+  }
+ ],
+ "shrines": [
+  {
+   "id": "pass_foot_shrine",
+   "name": "The Foot of the Pass",
+   "at": [
+    39,
+    132
+   ]
+  },
+  {
+   "id": "hermits_shrine",
+   "name": "The Hermit's Shrine",
+   "at": [
+    23,
+    47
+   ]
+  },
+  {
+   "id": "high_road_shrine",
+   "name": "The High Road Shrine",
+   "at": [
+    35,
+    10
+   ]
+  }
+ ],
+ "exits": [
+  {
+   "id": "siege_walls",
+   "label": "The Siege Walls",
+   "at": [
+    37,
+    147
+   ],
+   "radius": 1.5,
+   "to": "siege_walls",
+   "toExit": "heights",
+   "arrive": [
+    37,
+    144
+   ]
+  },
+  {
+   "id": "rest",
+   "label": "Saint Oriel's Rest",
+   "at": [
+    34,
+    3
+   ],
+   "radius": 1.5,
+   "to": "saint_oriels_rest",
+   "toExit": "south_road",
+   "arrive": [
+    34,
+    7
+   ]
+  }
+ ],
+ "caches": [
+  {
+   "id": "foot_of_the_pass",
+   "at": [
+    34,
+    140
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "ice_falls",
+   "at": [
+    44,
+    110
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "horned_stair",
+   "at": [
+    8,
+    91
+   ],
+   "kind": "Reliquary",
+   "facing": 0
+  },
+  {
+   "id": "tarn_shore",
+   "at": [
+    38,
+    70
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "hermits_ledge",
+   "at": [
+    22,
+    44
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "saddle",
+   "at": [
+    45,
+    25
+   ],
+   "kind": "Cache",
+   "facing": 1
+  }
+ ],
+ "npcs": [
+  {
+   "id": "hermit",
+   "name": "Old Teodor",
+   "title": "Hermit of the Pass",
+   "at": [
+    24,
+    44
+   ],
+   "facing": 3,
+   "portrait": "flare/male07",
+   "dialogue": "pass_hermit",
+   "look": {
+    "head": "leather_hood",
+    "chest": "leather_chest",
+    "hands": "cloth_gloves",
+    "legs": "cloth_pants",
+    "feet": "leather_boots",
+    "main": "staff"
+   }
+  }
+ ],
+ "interactables": [
+  {
+   "id": "page_1",
+   "name": "A burned page",
+   "at": [
+    15,
+    85
+   ],
+   "tile": 1276,
+   "dialogue": "library_page_1"
+  },
+  {
+   "id": "page_2",
+   "name": "A burned page",
+   "at": [
+    27,
+    48
+   ],
+   "tile": 1276,
+   "dialogue": "library_page_2"
+  }
+ ]
+}

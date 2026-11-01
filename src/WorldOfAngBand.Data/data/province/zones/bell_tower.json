@@ -1,0 +1,774 @@
+{
+ "id": "bell_tower",
+ "name": "The Bell Tower",
+ "level": 14,
+ "act": 3,
+ "revision": 1,
+ "xpScale": 0.8,
+ "tileset": "tileset_dungeon",
+ "tagline": "Three voices, one song, and the bells silent above them.",
+ "darkness": 0.88,
+ "heroLight": 5.0,
+ "rows": [
+  "##################################################",
+  "#######################DAHA#######################",
+  "######################DC.,.A######################",
+  "###################DAAC...,.AAA###################",
+  "##################DC...........A##################",
+  "#################DC,.......,....e#################",
+  "################DC.....,.....,...A################",
+  "###############DC,.I,..........I..A###############",
+  "###############B..,,..,.,,....,....M##############",
+  "###############B,............,...,,M##############",
+  "##############DCZ....Z.......Z..,,Ze##############",
+  "##############B...........,.........M#############",
+  "##############B,...,..r..,,.r...,...M#############",
+  "##############B.,....,.......,.,....M#############",
+  "##############b,..r............,r..,M#############",
+  "##############B..,......,,..,.......M#############",
+  "###############B...,.Z.,.r...Z..,,.ON#############",
+  "###############BZ...........,.....ZM##############",
+  "###############B..,.,.,....,.....,.M##############",
+  "################f,.I.........,.I..ON##############",
+  "#################B...,,,...,,q...ON###############",
+  "##################B.,,.....,....ON################",
+  "###################B.....,.,..,ON#################",
+  "####################LLB.,...OLLN##################",
+  "#######################f...ON#####################",
+  "#######################f,,.M######################",
+  "#######################f...M######################",
+  "#######################f...M######################",
+  "############DAAAAAeAaAAC...AaAAAAAeAaA############",
+  "############B..,.......,..,.........,.M###########",
+  "############B,Z..,,.,.,.,.......,...Z.M###########",
+  "############B..I......,.......,,..,,,.M###########",
+  "############B,.,.....,,...,..,..,..,.,M###########",
+  "############B......,.....,...q.,..S...M###########",
+  "############B....,...,......,.........M###########",
+  "############B.,,....,.,.,.....,..,....M###########",
+  "############b....,..,.q.........,.....M###########",
+  "############f,.,,..................I,.M###########",
+  "############B.,,.....,..,..,.........,M###########",
+  "############B....,.....,..............M###########",
+  "#############LLLLLLLLLLB.,.OLLLLLLLLLLN###########",
+  "DaAAADAAAa#############f.,,M#############DAAAAAAA#",
+  "B....C....M############B..,M#############B.,.Y...M",
+  "B...,.,Z..M############B,..M#############B...,...M",
+  "B....B....M############B...M#############B......,M",
+  "f...db,,..DAeaAAAAAAeaAC..,AAaAAAeAeeaAA#B..,....M",
+  "#LLLLB....B....,......,..,.........,...,MB..p.p..M",
+  "DAAeAB....B.Z........,..........,,...,Z,Mf,,....,M",
+  "b....C.,..B..,,,I.......,.,,..,,..I.....MB,......M",
+  "f.,,......B..,.,......,.........,.,..,..eC,.....,M",
+  "f.,..B,...b.,...,.........,.,,...........,..p.p,.M",
+  "B...dB....C.....,...,.,.,........,........,..,,..M",
+  "#LLLLf.........,....q,,,...,.........,,.......,,.M",
+  "DAAgAb...,...,,......,.,....,...........OB.......M",
+  "B....C....,,..,....,...,....,.,,..,....,MB..p.p..M",
+  "B.,.....,.B...,.........,......q....,,,.MB.....,,M",
+  "b....B...,B,.......,,......,............Mh...,...M",
+  "B..,dB....B,,,.,.,................,.....Mb.Z.,...M",
+  "#LLLLB..q.b.....I.,.,..,...,,..,..I.,...MB..p.p..M",
+  "#####B...,B,Z.......,........,,..,.,..Z.M#LLLLLLLN",
+  "#####B..,.B,............................M#########",
+  "######LLLLNLLLLLLLLLLLLB..,OLLLLLLLLLLLLN#########",
+  "#######################B...M######################",
+  "#######################b.,.M######################",
+  "#######################B...M######################",
+  "#######################h,..M######################",
+  "#######################B...M######################",
+  "#######################B..,M######################",
+  "################DAAAaeeC,.,AaAAAeA################",
+  "################B,.,...,..........M###############",
+  "################f.Z...,...,.....Z.M###############",
+  "################h..........,......M###############",
+  "################b.,.,..........,..M###############",
+  "################f.............S.,.M###############",
+  "################B.........,.......M###############",
+  "################B,................M###############",
+  "################B....q.,.,,......,M###############",
+  "################h,.,..,.,.....,..,M###############",
+  "################B..,...,...,......M###############",
+  "################B....,..........,.M###############",
+  "#################LLLLLLLLHLLLLLLLLN###############",
+  "##################################################",
+  "##################################################",
+  "##################################################"
+ ],
+ "legend": {
+  ".": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  ",": {
+   "ground": "floor",
+   "tiles": [
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47
+   ]
+  },
+  "#": {
+   "ground": "none",
+   "blocks": true,
+   "blocksSight": true
+  },
+  "A": {
+   "ground": "none",
+   "objects": [
+    65,
+    69,
+    97
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "B": {
+   "ground": "none",
+   "objects": [
+    64,
+    68,
+    96
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "a": {
+   "ground": "none",
+   "objects": [
+    103
+   ],
+   "blocks": true,
+   "blocksSight": true,
+   "light": 3.5
+  },
+  "b": {
+   "ground": "none",
+   "objects": [
+    102
+   ],
+   "blocks": true,
+   "blocksSight": true,
+   "light": 3.5
+  },
+  "e": {
+   "ground": "none",
+   "objects": [
+    107
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "f": {
+   "ground": "none",
+   "objects": [
+    106
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "g": {
+   "ground": "none",
+   "objects": [
+    101
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "h": {
+   "ground": "none",
+   "objects": [
+    100
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "C": {
+   "ground": "none",
+   "objects": [
+    73
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "D": {
+   "ground": "none",
+   "objects": [
+    74
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "L": {
+   "ground": "none",
+   "objects": [
+    80
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "M": {
+   "ground": "none",
+   "objects": [
+    81
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "N": {
+   "ground": "none",
+   "objects": [
+    88
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "O": {
+   "ground": "none",
+   "objects": [
+    89
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "H": {
+   "ground": "none",
+   "objects": [
+    285
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "I": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    110,
+    111
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "r": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    192,
+    193
+   ],
+   "blocks": false
+  },
+  "p": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    136,
+    137
+   ],
+   "blocks": true
+  },
+  "Y": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    134
+   ],
+   "blocks": true,
+   "light": 3.0,
+   "lightColor": "#c9a8ff"
+  },
+  "d": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    202,
+    203,
+    204,
+    205
+   ],
+   "blocks": true
+  },
+  "Z": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    167
+   ],
+   "blocks": true,
+   "light": 4.5
+  },
+  "q": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183
+   ],
+   "blocks": false
+  },
+  "S": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    265
+   ],
+   "blocks": false,
+   "light": 3.5
+  }
+ },
+ "playerStart": [
+  25,
+  77
+ ],
+ "spawns": [
+  {
+   "at": [
+    22,
+    73
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "catacomb_dead",
+     "rank": "Normal",
+     "count": 3
+    },
+    {
+     "creature": "whisperer",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    18,
+    51
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "mirror_cultist",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "choir_acolyte",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    33,
+    52
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "phantom",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "frost_wraith",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    25,
+    57
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "mirror_cultist",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "mirrored"
+     ]
+    },
+    {
+     "creature": "choir_acolyte",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    7,
+    49
+   ],
+   "radius": 1.0,
+   "pack": [
+    {
+     "creature": "catacomb_dead",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    45,
+    51
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "choir_acolyte",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "whisperer",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    19,
+    34
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "choir_acolyte",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "hasted"
+     ]
+    },
+    {
+     "creature": "mirror_cultist",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    30,
+    36
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "whisperer",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "phantom",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    25,
+    26
+   ],
+   "radius": 1.0,
+   "pack": [
+    {
+     "creature": "mirror_cultist",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "shielded",
+      "mirrored"
+     ]
+    },
+    {
+     "creature": "choir_acolyte",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    25,
+    13
+   ],
+   "radius": 0,
+   "pack": [
+    {
+     "creature": "choir_agnete",
+     "rank": "Herald",
+     "count": 1
+    }
+   ],
+   "level": 13
+  }
+ ],
+ "shrines": [
+  {
+   "id": "tower_foot_shrine",
+   "name": "The Tower Foot Shrine",
+   "at": [
+    30,
+    73
+   ]
+  },
+  {
+   "id": "ringing_chamber_shrine",
+   "name": "The Ringing Chamber Shrine",
+   "at": [
+    34,
+    33
+   ]
+  }
+ ],
+ "exits": [
+  {
+   "id": "catacombs",
+   "label": "The Catacombs of Oriel",
+   "at": [
+    25,
+    79
+   ],
+   "radius": 1.5,
+   "to": "catacombs_of_oriel",
+   "toExit": "bell_tower",
+   "arrive": [
+    25,
+    76
+   ]
+  },
+  {
+   "id": "cliff_road",
+   "label": "The Ember Gate Camp",
+   "at": [
+    25,
+    2
+   ],
+   "radius": 1.5,
+   "to": "ember_gate",
+   "toExit": "cliff_road",
+   "arrive": [
+    25,
+    5
+   ],
+   "requires": {
+    "act3.choir": "slain"
+   },
+   "sealedText": "The Choir's song fills the belfry. There is no going on while they sing."
+  }
+ ],
+ "caches": [
+  {
+   "id": "tower_foot",
+   "at": [
+    32,
+    78
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "cilles_cell",
+   "at": [
+    2,
+    57
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "candle_chapel",
+   "at": [
+    47,
+    57
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "ringing_chamber",
+   "at": [
+    14,
+    37
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "belfry",
+   "at": [
+    32,
+    8
+   ],
+   "kind": "Reliquary",
+   "facing": 1
+  }
+ ],
+ "npcs": [
+  {
+   "id": "caddoc",
+   "name": "Brother Caddoc",
+   "title": "Penitent",
+   "at": [
+    20,
+    77
+   ],
+   "facing": 2,
+   "portrait": "flare/male10",
+   "dialogue": "tower_caddoc",
+   "requires": {
+    "act3.penitent": "forgiven"
+   },
+   "look": {
+    "head": "leather_hood",
+    "chest": "mage_vest",
+    "hands": "cloth_gloves",
+    "legs": "cloth_pants",
+    "feet": "cloth_sandals",
+    "main": "staff"
+   }
+  }
+ ],
+ "interactables": [
+  {
+   "id": "agnete_hymnal",
+   "name": "A sister's hymnal",
+   "at": [
+    1,
+    42
+   ],
+   "tile": 148,
+   "dialogue": "tower_note_agnete"
+  },
+  {
+   "id": "brigid_hymnal",
+   "name": "A sister's hymnal",
+   "at": [
+    1,
+    48
+   ],
+   "tile": 148,
+   "dialogue": "tower_note_brigid"
+  },
+  {
+   "id": "cille_hymnal",
+   "name": "A sister's hymnal",
+   "at": [
+    1,
+    54
+   ],
+   "tile": 148,
+   "dialogue": "tower_note_cille"
+  },
+  {
+   "id": "candle_agnete",
+   "name": "Agnete's candle",
+   "at": [
+    43,
+    44
+   ],
+   "tile": 166,
+   "action": "candle"
+  },
+  {
+   "id": "candle_brigid",
+   "name": "Brigid's candle",
+   "at": [
+    45,
+    44
+   ],
+   "tile": 166,
+   "action": "candle"
+  },
+  {
+   "id": "candle_cille",
+   "name": "Cille's candle",
+   "at": [
+    47,
+    44
+   ],
+   "tile": 166,
+   "action": "candle"
+  },
+  {
+   "id": "snuffer",
+   "name": "A brass snuffer",
+   "at": [
+    42,
+    56
+   ],
+   "tile": 150,
+   "dialogue": "tower_snuffer"
+  }
+ ]
+}

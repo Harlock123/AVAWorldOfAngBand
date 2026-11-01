@@ -1,0 +1,383 @@
+{
+ "id": "fort_gallowmere",
+ "name": "Fort Gallowmere",
+ "level": 1,
+ "revision": 2,
+ "tileset": "tileset_grassland",
+ "town": true,
+ "tagline": "The refugees open the gate.",
+ "rows": [
+  "TTTTTTOTTTTTTTTTTTTTOTTOTTTOTT",
+  "TOTOTTTTOTOTTTOTTTTTTTTTOTTTTT",
+  "OTOTTTTTOTTTTTOTOTTTOOTOTTTTOT",
+  "OOTTPFFFFFFFFFFFFFFFFFFFFPTTTO",
+  "OTTTL.,..................LTTTT",
+  "OTTOL........-===-.......LTTOT",
+  "TTTTL..tX....-===-...tX..LTTTT",
+  "TTTTL..XX....-===-...XX..LOOOT",
+  "TTTOL........-===-.......LTOTT",
+  "TTTTL........-===-.......LTTTT",
+  "TOOTL........-===-...a...LOTTT",
+  "----P-x-------=c=-.......LTTTO",
+  "=================-.......LTOOO",
+  "----P---------===-.......LOTTT",
+  "TTTOL........-===-.S.....LOTTT",
+  "TTTTL........-===-.......LOOOT",
+  "TTOTL........-===-.......LTTTO",
+  "TTOOL........-===-.......LTTTO",
+  "TOTTL..tX....-===-.......LTOTT",
+  "TTTOL..XX....-===-.......LTOTT",
+  "TTTTL........-===-....xx.LOTTT",
+  "TTTTL........-===-.......LTOTT",
+  "TTTTL......,.-===-.....,.LTTOT",
+  "TTTTL........-===-.......LOTTT",
+  "TTOTPFFFFFFFFP===PFFFFFFFPTTTT",
+  "TOTTTTTOOTTTO-===-TOTTOTTTOTTT",
+  "TTTOTTOTTTTTT-===-TTTTOTTTOTTT",
+  "TTTTTTTTTTTTT-===-TTTTOTTOTOTO"
+ ],
+ "legend": {
+  ".": {
+   "ground": "grass"
+  },
+  ",": {
+   "ground": "grass",
+   "objects": [
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127
+   ]
+  },
+  "=": {
+   "ground": "path"
+  },
+  "-": {
+   "ground": "path_edge"
+  },
+  "T": {
+   "ground": "grass",
+   "objects": [
+    248,
+    249,
+    250,
+    251
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "O": {
+   "ground": "grass",
+   "objects": [
+    252,
+    253,
+    254,
+    255
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "c": {
+   "ground": "path",
+   "objects": [
+    102
+   ],
+   "blocks": true
+  },
+  "t": {
+   "ground": "grass",
+   "objects": [
+    72,
+    75
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "x": {
+   "ground": "grass",
+   "objects": [
+    96,
+    97,
+    98,
+    99,
+    100,
+    101
+   ],
+   "blocks": true
+  },
+  "S": {
+   "ground": "grass",
+   "objects": [
+    265
+   ]
+  },
+  "X": {
+   "ground": "grass",
+   "blocks": true
+  },
+  "P": {
+   "ground": "grass",
+   "objects": [
+    132
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "F": {
+   "ground": "grass",
+   "objects": [
+    107
+   ],
+   "blocks": true
+  },
+  "L": {
+   "ground": "grass",
+   "objects": [
+    104
+   ],
+   "blocks": true
+  },
+  "a": {
+   "ground": "grass",
+   "objects": [
+    103
+   ],
+   "blocks": true
+  }
+ },
+ "playerStart": [
+  15,
+  22
+ ],
+ "spawns": [],
+ "shrines": [
+  {
+   "id": "fort_shrine",
+   "name": "The Fort Shrine",
+   "at": [
+    19,
+    14
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "brask",
+   "name": "Sergeant Brask",
+   "title": "Gate warden",
+   "at": [
+    17,
+    21
+   ],
+   "facing": 7,
+   "portrait": "flare/male05",
+   "dialogue": "fort_brask",
+   "look": {
+    "head": "chain_coif",
+    "chest": "chain_cuirass",
+    "hands": "chain_gloves",
+    "legs": "chain_greaves",
+    "feet": "chain_boots",
+    "main": "shortsword"
+   }
+  },
+  {
+   "id": "ysolde",
+   "name": "Ysolde",
+   "title": "Herbalist",
+   "at": [
+    9,
+    15
+   ],
+   "facing": 4,
+   "portrait": "flare/female06",
+   "dialogue": "fort_ysolde",
+   "look": {
+    "head": "mage_hood",
+    "chest": "mage_vest",
+    "hands": "cloth_gloves",
+    "legs": "mage_skirt",
+    "feet": "cloth_sandals",
+    "main": "staff"
+   }
+  },
+  {
+   "id": "anselm",
+   "name": "Brother Anselm",
+   "title": "Lantern priest",
+   "at": [
+    22,
+    12
+   ],
+   "facing": 4,
+   "portrait": "flare/male03",
+   "dialogue": "fort_anselm",
+   "look": {
+    "head": "mage_hood",
+    "chest": "mage_vest",
+    "hands": "mage_sleeves",
+    "legs": "mage_skirt",
+    "feet": "mage_boots",
+    "main": "rod"
+   }
+  },
+  {
+   "id": "coll",
+   "name": "Old Coll",
+   "title": "Ferryman",
+   "at": [
+    22,
+    18
+   ],
+   "facing": 0,
+   "portrait": "flare/male09",
+   "dialogue": "fort_coll",
+   "look": {
+    "head": "leather_hood",
+    "chest": "cloth_shirt",
+    "hands": "leather_gloves",
+    "legs": "cloth_pants",
+    "feet": "leather_boots",
+    "main": "rod"
+   }
+  }
+ ],
+ "interactables": [
+  {
+   "id": "notice_board",
+   "name": "Notice board",
+   "at": [
+    11,
+    16
+   ],
+   "tile": 139,
+   "dialogue": "fort_notice"
+  },
+  {
+   "id": "stash",
+   "name": "Stash",
+   "at": [
+    18,
+    17
+   ],
+   "tile": 76,
+   "action": "stash"
+  },
+  {
+   "id": "altar",
+   "name": "Lantern altar",
+   "at": [
+    21,
+    13
+   ],
+   "tile": 142,
+   "dialogue": "fort_altar"
+  },
+  {
+   "id": "well",
+   "name": "The old well",
+   "at": [
+    8,
+    22
+   ],
+   "tile": 264,
+   "dialogue": "fort_well"
+  }
+ ],
+ "vendors": [
+  {
+   "id": "wenna",
+   "name": "Wenna Marsh",
+   "title": "Peddler",
+   "at": [
+    10,
+    9
+   ],
+   "facing": 5,
+   "stockSize": 12,
+   "greeting": "Coin for kit, kit for coin. Behind walls, at last.",
+   "supplies": [
+    "alchemists_fire",
+    "frost_vial",
+    "bottled_lightning",
+    "acid_flask",
+    "antidote"
+   ],
+   "look": {
+    "head": "leather_hood",
+    "chest": "cloth_shirt",
+    "hands": "cloth_gloves",
+    "legs": "cloth_pants",
+    "feet": "cloth_sandals",
+    "main": "dagger"
+   }
+  },
+  {
+   "id": "garrow",
+   "name": "Garrow",
+   "title": "Smith",
+   "at": [
+    20,
+    9
+   ],
+   "facing": 6,
+   "stockSize": 12,
+   "sells": [
+    "weapons",
+    "armour"
+   ],
+   "runework": true,
+   "greeting": "Steel for the road. Bring me a blade and I'll etch it, or move the runes off your old one.",
+   "look": {
+    "chest": "leather_chest",
+    "hands": "leather_gloves",
+    "legs": "leather_pants",
+    "feet": "leather_boots",
+    "main": "mace"
+   }
+  }
+ ],
+ "exits": [
+  {
+   "id": "gate",
+   "label": "Gallows Road",
+   "at": [
+    15,
+    26
+   ],
+   "radius": 1.5,
+   "to": "gallows_road",
+   "toExit": "fort_gallowmere",
+   "arrive": [
+    15,
+    22
+   ]
+  },
+  {
+   "id": "west_gate",
+   "label": "The Rotwater Fens",
+   "at": [
+    1,
+    12
+   ],
+   "radius": 1.5,
+   "to": "rotwater_fens",
+   "toExit": "fort",
+   "arrive": [
+    7,
+    12
+   ]
+  }
+ ]
+}

@@ -1,0 +1,801 @@
+{
+ "id": "siege_walls",
+ "name": "The Siege Walls",
+ "level": 9,
+ "act": 2,
+ "revision": 1,
+ "xpScale": 0.9,
+ "tileset": "tileset_ironhold",
+ "tagline": "The Iron Legion holds the breach it died for.",
+ "darkness": 0.72,
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTfffTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTOTTOOTTTTOOTOOTTTTTTOOOTTQfffQTOTOTOOTTTTTTTTTTTTTTTTOOOTOOTT",
+  "TTTTTOOOOOOOTOTTTOOTTOTTTTOOOfffOTTOTOOTTOOOTOTOTTOTTTTOOTTTTTTT",
+  "TTOTOTTTOOTOTOTOOTOOTOTOTTTOTfffTOOOTTTOTTTTTOTTOOOOTOTTTTOOOTTT",
+  "TTOTTTOTOTTTOOOTOTOTOTOTOTOTTfffTTTTOOOOOOOTTTOOOTOTOTTTTOTOTOTT",
+  "TTTOOTTTOOTOTOOOTTOTTOOTTTTTTfffTTTOOOTTTTOTOTOOOTTTTOOTTTOTTOTT",
+  "TTTTTTTOTTOOTOTTTTOTOOTTTTTOTfffTOTTTOTOOTTOTOOTTOOOTTOTTTOOTTTT",
+  "TTOTTTOOOTTTTTOTTTOTOTOTTTTTOfffTOOOOTTTTTTTOOTOOTTTOTTOOOOOTOTT",
+  "TTTTOTOTOOTTOTTOOOTTTTTOOTOTOfffOTTTOTTTTTTOTOTOTOOTOTTOOTTOTOTT",
+  "TTTTOOTOOTTTTTTTTOOTOOTOTOOTTfffTTOOTTTOOOTTOOOTTTOTOOTTTTTOOOTT",
+  "TTTTOOTOOTOTOOTTOOTTTTTOTOTOOfffTOTTOTOTOTTOOOTOTTTOOTTOTTOTOOTT",
+  "TTTTOTTTOOTTOTTTTOTTTOOTTTOuufffuuTTOTTTTTTOTOTTOTOTTTTOOOTOTTTT",
+  "TTTOOOTTTTOOTTTTTOTTTTTTTRufgfffffuROTOOTTOTTTTOTTTOOTTTTTTOOTTT",
+  "TTTOOOTOTTOOTOTTTOTTTOTuRfffffffffgfRuTTOTOTTTTOTTTOTOTOTTOOOTTT",
+  "TTTTOTTOTOTTTOTOOTTOTTufffffgfffffffffuTTTTOTTTTOOOTTTTTOTTOOOTT",
+  "TTTOTTTOOOTTTOTTTTTTTRggfffffffffgfffffuTTTTTOOTTOOOOTTTTTOTTOTT",
+  "TTOTOTTOOTOOTOTTTTTORggfffffffgfgffffffguTOTTOOTTTTTTOTOTTTOOTTT",
+  "TTTTTTOTTOTTTOTTTOTORfffIfffgfffffgfIfffROOTTOTTOOTTOOTTOOTOTOTT",
+  "TTOTTTTTTOTTTTTOTOOufffggffffffffffffgfffROTOTTOTTOTOTOOTOTTTTTT",
+  "TTTTTTTOOTOTOOOOTOORffffffffffgffffggffgguTTTTOOTTTOTOTOOOOOOTTT",
+  "TTTOOTOOTTOTTOTTTORfgffffffffffggfffgfffgfRTOTTTTOTTTOOTTTOOTTTT",
+  "TTOTTOOTTOTTOTTOOTufffgfffffffffffffffffffROOOTOOTOTOTOOOTTTTTTT",
+  "TTTTTTOTTTTTTOTOOTRfgfgfffffffgfffffffffffuTTTTOTOOOTTTTOTTOTOTT",
+  "TTTOTOTTOOOOOTTTOORfgBffffffffffffffgffBffROOTTOTTOOTTTOTTOOOTTT",
+  "TTTOTTTOTOTOOOTTTTRfgffffgffffffgfffffffgfRTTTOTOTTOOOOOTTTTTTTT",
+  "TTOTOOTTTTTOOOTTTTRfffffgfffffffffffffgffgRTOTTTTTTTOOTTTTTOOTTT",
+  "TTTTTOOTTTTOTTTOOTuffffgfffggffgfgfffffgffuTOTOTTTTTTTTTTTTTOTTT",
+  "TTTTOOTOTTOOOOTTOTTufffffffffgggfffffffgfRTOTOTTOOTOOTOTTOTOOOTT",
+  "TTOTTTTTOOTOTTTTOOTugfgfffffffffgffffffffROOTTTOOOTTOTTOTOTOOOTT",
+  "TTOOTOOTTTOTOTTTTOOTRffgIffffffgffffIfffuOOOOOTTTTTOTOTOTTTOTOTT",
+  "TTTTTTTTOTTOTOOOOOOORffffffffggfffgfffffRTOTOOOTTTOOTOTTTOTOOTTT",
+  "TTTTOTTOTTTOTOOOOTOTTRffgfffgfgfgfgffffuOTTTOTTOTOTOTTTTOTTTTTTT",
+  "TTOTOOOOOOOTTTTOOOTOTTRfffffffgfffffffROTTOOOOTOTTTTTTOTOTOTTTTT",
+  "TTOTOTTTOOTTTOTTTTTTOOORuffffgfgffffRRTTTTTTOTTOTOTTTOTTOTOTOTTT",
+  "TTTOTTTTTTTTTTTTOTTTTOTOTuufgfffgfRRTOTOOOTOTTTTOOOTTTOTTTTTOTTT",
+  "TTOTTOTOOOOTOTTOTTTOTOOTTTORfffffROOTOTTTOTOOTOOTOTTTTTTTTOOTOTT",
+  "TTOOTOOTTOOTTTOTOTOOTTTTTTTTfffffTTTTTTTTTTOOTOOOOTOTTTTTTTOTTTT",
+  "TTTOTTTOOTOOTOTOOOTTTOOOTTOTfffffTTTOOTOTTOTOOTOTOOTTTOOTOTOTTTT",
+  "TTTOTTTTTTOTTOTTTOTTTTTTOOOOfffffTTTTOTOOTOOOTTOTTOTTTTTOOOTTOTT",
+  "TTTOOTTTTOTOTOTTTTOOTOOTOTOTfffffTTTTTOTOTOTTTTTTTOTOTOOTTTTOTTT",
+  "TTTTOOOOOTTTOOOTTOOOTOTTTTTOfffffTTTTOTTOTOTTTOOTTTOOOOTTTTTTTTT",
+  "TTTOOOOTTTTTOOTOOOTOTTTTTTOOffffSOTTOTOOTTTOTOTOOOOTOOOOTOOOTOTT",
+  "TTTTOOOOOTTTOTTTOTTOTOTTOOOOfffffTOTTOTTOOOTOTOTTOOTOTTTOOOTTOTT",
+  "TTTOOTOOTTTOTOTOTTOOTTTTTOTTfffffOTTOTOOOTTOTOOOOOTTTTTOOOTTOTTT",
+  "TTTOOOTTTTTTOTOTTTOTOOOTTTOOfffffOOOOTTOTTTOOTOTOOTOOTTOTOTTOTTT",
+  "TTOTTTOTOOOTTTOTTTOTTTOTTOTTfffffTTTTTOTOOTTOOOOTOOOTTTTOOTOTTTT",
+  "TTTOTOTTTTTTTOOOTOTTTTOTOOOOfffffTOOTOTOOOOOOOOTTOOTOTTTTOTTTTTT",
+  "TTTTTTOTTTTTTTOTOTTOTTTTTTTOfffffOOOTTOOTTOOOTTTOOOOTTTTTTTTTOTT",
+  "TTOTTTOOOOTOTOTOTOTTTTTOTTOOfffffTTOTTOTTTTTOOOOOOOTOOTTTTOTOTTT",
+  "TTWWWWWWWWWWWWWWWWWWWWWWWWR=======RWWWWWWWWWWWWWWWWWWWWWWWWWWWTT",
+  "TTWTT,TW.DWWWDWDWW.W.W....W=====..WWuWW.WWDWWDW.TWDW.TWWWWWTDWTT",
+  "TTDTDT.DTDTD....,.D.....u.,.-==.........T...T..ODT.OT.DT.TTTTDTT",
+  "TT..OTDO..D.T...O.T........-===-.......D..O......DT,OO...OT...TT",
+  "TT.TOO,T..TT...T.,.D........==...........D.T..T..D..TOD.D.....TT",
+  "TT....TDT.DO..,T.........,.-==-..........,..,O...O..OOTT...TO.TT",
+  "TT.DTD.OTOT,.....D.T,......===-...,..,.......D..TD.D.DT.ODDDT.TT",
+  "TT.OD.TTOD.DD,............-==........,......OD....DOTT.T..T...TT",
+  "TT.TT.D.T...D.,...........-==-.............,.DT.,.O.O..D..TTT.TT",
+  "TT..OTO.O..O,..T........,..==-...........D.T.DTTDDO....O.OT..DTT",
+  "TTD.O..D.........,.......-===-.......,...O...T..T,O..TTT,.DD,.TT",
+  "TT..DO.DT,..D..,,......,.-==..,........D..D.T.T..DO..OTDTT....TT",
+  "TT.DD.O,ODD..O...........-==-.S....,.,O.O.T.,DD.O,.OTTD.T..,.OTT",
+  "TTTD..TD,O,..D...........-==-..,........,...,TT.O.DTO....TDDD.TT",
+  "TTOT...,..................==-...............DD.ODDO..TD..TTD.DTT",
+  "TT.D.,...................===-.....,...OD....O.DO.TT.O.DO.,.,DTTT",
+  "TTO...WWWWWWWWW.....,....===-.....,.....T..D.D.D.O.TTD..TO...TTT",
+  "TTTD,.W.......W........,-===-......,.....TDT.T,O.OO.D..,D...D.TT",
+  "TT.D..W,c....,Q.......,.-===...........T.DDD.DTDD...D...T..TO.TT",
+  "TT.D,.W,,............,..-===-.......T...,DD..TT...TDT,.TDD...DTT",
+  "TTTT,,W.................-===-........DD....,DD..TD.OT..D.D.TT.TT",
+  "TTTD..W..................===-...........D.DTO.DT..T....O.O..TTTT",
+  "TTT.,.W,...,..Q..........===........T....T.....DD.,..OO,.D..,.TT",
+  "TTD...Wk....k.W..........-==..............O.D.....TO,DO,TT,..OTT",
+  "TTTD..WWWWWWWWW,.........-==-...........D.,TD.D.......,..OO.T.TT",
+  "TT.T.....................-==-......,....T,.DD,.DO.D......TTD..TT",
+  "TTDO....................,-==-........,...TT,DO,D.D...O...ODDDTTT",
+  "TTO..D.OTO,OD.D.....,....-===........D..,...OTO,T.T.O.DTDD.TO.TT",
+  "TT,.D..,..,...............===-.........,.......O.T.DTOOT.ODDODTT",
+  "TT...D,..T.,......,.......-==-.......,,....T.,,.OTD.......,O,DTT",
+  "TT.O..T..,.................==-................DO.T...D.DT,DTDOTT",
+  "TT..D..,..D...............-===.........T.,.....DT.DD..DDDTTDDTTT",
+  "TT.DT.T.O.,,.....O..,.....,.==-........,...,.,.TDDD.T..D..DD.TTT",
+  "TT...DD.T..,D,..TD..........==............,........OO..D.O...,TT",
+  "TTD.D..D,...........,.......===.....,......OO..TO,TDD.OOO.....TT",
+  "TT.DT.OTTDD...,...,..........==-..........,.....,..DTD..T.T...TT",
+  "TTO,D.DD..T..D......,.......-==-...,....,......,...T.TO.OT..O.TT",
+  "TTOOTD.T..O.....,...........-===-..,....D,......DOODTD.OO...T.TT",
+  "TT..OOT.OODT..uukuk...uukkukk-==kkuukuk...ukuuu..DTT..OO.D...DTT",
+  "TTT..T...TT......,,,.........-==-.................D.,OOO..TT.OTT",
+  "TT..T..DTT.T......,...........===-................O.T,..OT..O,TT",
+  "TTT.TOTD.D.T...O+.+.+.+......,-==...,..........,...T..T,TD...OTT",
+  "TT..OD,TT..TD...,..............===-........,..O....OT,O......DTT",
+  "TT..OOD..DDD....+.+.+.+........-==-.................DO,.T..OT.TT",
+  "TTOOTTO.,T..,..D,...D...,.......==............,.,.,.TO...D.T..TT",
+  "TTD.D.TD.TO,T...+.+.+.+.........===-...............,.O.....DTTTT",
+  "TTD...,....T.O..OO.,.............==.......,,.O..,,.D..OTOD.DD.TT",
+  "TTD,....,..D..O.,................===.,..............D.T.T..T.OTT",
+  "TT.O.D.TO..DDOT.,.ukuku...ukuuukuu==-uuukkk.,.kkuuk..D.OOOT.DOTT",
+  "TTOTDT..,.TT.ODDD.,...............==-.............T..,T.D.O.DDTT",
+  "TT,...ODT..D.O...................-===-..............,...TO.O.TTT",
+  "TTTD.TDDD.ODTTTD,............,,...-==.,.....+.+.+.+.,.D...T..OTT",
+  "TT.TO.O.DOD..,T..,.,.D.....,......-==-.,..........,....T....DDTT",
+  "TT....T,D..,....O..,......,.......-===......+.+.+,+.....,.D.ODTT",
+  "TTTDT...O,OO..DTOD...D.............-==-....,...,.,...,.TD...DTTT",
+  "TTOTTD.O.T..T.OT.D,..O.....,,,.....-==-.....+.+.+.+.,..DD..D.TTT",
+  "TTDTDTTD...D..OTDDO..D.,,..........-==-...............DT.T..,DTT",
+  "TT..TTT.DD...TO.D.....O.T.........,-===-.........,....,...DD..TT",
+  "TTDDTTDTD.DD.,TDTOT..ukkuu...uukukuuu==-uukuuu...ukuuk.,.DTO..TT",
+  "TTT..DDD.T.D...OD.D.O...............-==-...........,....D.D.T.TT",
+  "TT..DOTT....T....D..................-==-.........,......TDDT..TT",
+  "TT.DTDO....O.O.T.TT..D..,............==-.............,..TT..T.TT",
+  "TTDD.T.,.....D,..T......T.........,..===........,....T.OD.TO.TTT",
+  "TTODO..DTD.TD.D..T.....,T.T.....,...-===..................OD.OTT",
+  "TTDTDOT..ODO..T.T.TDDD........,.....-===,................TDD.DTT",
+  "TTT..OO...TD..T.D.TD.D..O............===........O....TD,.DT.TOTT",
+  "TTD.DO,O.T..D.D..D.D.O.TD,..,...,...-===,.............T.DOT.OTTT",
+  "TT..T.TO.O.DTO...DO.TT..O...........-===-S..,....O....TT.O...DTT",
+  "TTDD..TDDD...TTO,.OTT....O..........-===-..,.......,,DO.OTOTT,TT",
+  "TT..ODDT...,D..DDTDO,ODT.DD....,....-===..........T.TD.,.T.ODDTT",
+  "TT,O..TO...,T.........,.............-==-............D..T.DT.O.TT",
+  "TT.O...,TTO.T......OTD,,TO..........-==-..............D..OTDD.TT",
+  "TT.DTDTDTDDT..DO.O.O...D..T.,.......===-.......D..,.T.O...DDO.TT",
+  "TTT.TDTTO.O..DTT.D..DDDO..,.....,...===.,....,...D.TTOD.D.O.O.TT",
+  "TTTD.D..,DDDT.DT.TD..DO.T.......,...===-...........O.O..D,.,T.TT",
+  "TT.D.T..,T.,,..T....T..T...........-===-............D,DTDTO...TT",
+  "TTODT..DD..TDO.DTD.T.T..D..........-===.......,...DD..,.,TODOTTT",
+  "TT..,,D.T.T.T.O..T.D.O.............-===...,..........T.....O,.TT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "legend": {
+  ".": {
+   "ground": "grass"
+  },
+  ",": {
+   "ground": "grass",
+   "objects": [
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127
+   ]
+  },
+  "=": {
+   "ground": "path",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  "-": {
+   "ground": "path_edge"
+  },
+  "f": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  "g": {
+   "ground": "grass",
+   "tiles": [
+    1074,
+    1075,
+    1076,
+    1077,
+    1078
+   ]
+  },
+  "T": {
+   "ground": "grass",
+   "objects": [
+    248,
+    249,
+    250,
+    251
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "O": {
+   "ground": "grass",
+   "objects": [
+    252,
+    253,
+    254,
+    255
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "D": {
+   "ground": "grass",
+   "objects": [
+    244,
+    245,
+    246,
+    247
+   ],
+   "blocks": true
+  },
+  "+": {
+   "ground": "grass",
+   "objects": [
+    140,
+    141,
+    142,
+    143
+   ],
+   "blocks": true
+  },
+  "u": {
+   "ground": "grass",
+   "objects": [
+    1187,
+    1189,
+    1190,
+    1192,
+    1193,
+    1194
+   ],
+   "blocks": true,
+   "cover": true
+  },
+  "k": {
+   "ground": "grass",
+   "objects": [
+    1285,
+    1286,
+    1287,
+    1288
+   ],
+   "blocks": true,
+   "cover": true
+  },
+  "W": {
+   "ground": "grass",
+   "objects": [
+    1223,
+    1224,
+    1225,
+    1226,
+    1227,
+    1228,
+    1229
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "R": {
+   "ground": "grass",
+   "objects": [
+    1230,
+    1231,
+    1232,
+    1233
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "Q": {
+   "ground": "grass",
+   "objects": [
+    1230
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "I": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1223,
+    1226,
+    1228
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "c": {
+   "ground": "grass",
+   "objects": [
+    102
+   ],
+   "blocks": true
+  },
+  "B": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    102
+   ],
+   "blocks": true,
+   "light": 4.0
+  },
+  "S": {
+   "ground": "grass",
+   "objects": [
+    265
+   ]
+  }
+ },
+ "playerStart": [
+  37,
+  124
+ ],
+ "spawns": [
+  {
+   "at": [
+    34,
+    114
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    45,
+    112
+   ],
+   "radius": 1.5,
+   "pack": [
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    27,
+    102
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    47,
+    107
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "barrow_dead",
+     "rank": "Normal",
+     "count": 3
+    },
+    {
+     "creature": "barrow_wight",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    36,
+    97
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "legionary",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "shielded"
+     ]
+    },
+    {
+     "creature": "legionary",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    19,
+    93
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "barrow_dead",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    40,
+    92
+   ],
+   "radius": 1.5,
+   "pack": [
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    23,
+    86
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "grave_hound",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    31,
+    80
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "barrow_legionary",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    22,
+    74
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "grave_hound",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "barrow_legionary",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    23,
+    68
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "barrow_knight",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "barrow_legionary",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 10
+  },
+  {
+   "at": [
+    34,
+    60
+   ],
+   "radius": 1.5,
+   "pack": [
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "hasted"
+     ]
+    },
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 10
+  },
+  {
+   "at": [
+    22,
+    57
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "barrow_wight",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "barrow_dead",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 10
+  },
+  {
+   "at": [
+    30,
+    47
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "barrow_knight",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "vengeful"
+     ]
+    },
+    {
+     "creature": "barrow_legionary",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 10
+  },
+  {
+   "at": [
+    33,
+    41
+   ],
+   "radius": 1.2,
+   "pack": [
+    {
+     "creature": "legion_crossbowman",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 10
+  },
+  {
+   "at": [
+    30,
+    26
+   ],
+   "radius": 0,
+   "pack": [
+    {
+     "creature": "ser_hadric",
+     "rank": "Herald",
+     "count": 1
+    }
+   ],
+   "level": 9
+  }
+ ],
+ "shrines": [
+  {
+   "id": "siege_works_shrine",
+   "name": "The Siege Works Shrine",
+   "at": [
+    41,
+    119
+   ]
+  },
+  {
+   "id": "breach_shrine",
+   "name": "The Breach Shrine",
+   "at": [
+    30,
+    64
+   ]
+  },
+  {
+   "id": "wall_walk_shrine",
+   "name": "The Wall-Walk Shrine",
+   "at": [
+    32,
+    44
+   ]
+  }
+ ],
+ "exits": [
+  {
+   "id": "barrow_fields",
+   "label": "The Barrow Fields",
+   "at": [
+    37,
+    128
+   ],
+   "radius": 1.5,
+   "to": "barrow_fields",
+   "toExit": "siege_walls",
+   "arrive": [
+    37,
+    123
+   ]
+  },
+  {
+   "id": "heights",
+   "label": "The Frostbitten Pass",
+   "at": [
+    30,
+    5
+   ],
+   "radius": 1.5,
+   "requires": {
+    "act2.hadric": "slain"
+   },
+   "sealedText": "The Iron Legion still holds the north gate. It will not open while Ser Hadric stands.",
+   "to": "frostbitten_pass",
+   "toExit": "siege_walls",
+   "arrive": [
+    30,
+    17
+   ]
+  }
+ ],
+ "caches": [
+  {
+   "id": "siege_road",
+   "at": [
+    32,
+    120
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "first_trench",
+   "at": [
+    51,
+    112
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "mass_grave",
+   "at": [
+    17,
+    97
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "gatehouse",
+   "at": [
+    12,
+    70
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "nest",
+   "at": [
+    41,
+    86
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "before_the_breach",
+   "at": [
+    22,
+    58
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "hadrics_hoard",
+   "at": [
+    39,
+    21
+   ],
+   "kind": "Reliquary",
+   "facing": 1
+  }
+ ],
+ "npcs": [
+  {
+   "id": "mirella",
+   "name": "Red Mirella",
+   "title": "The Outlaw Queen",
+   "at": [
+    10,
+    72
+   ],
+   "facing": 2,
+   "portrait": "flare/female04",
+   "dialogue": "siege_mirella",
+   "requires": {
+    "act2.faction": ""
+   },
+   "look": {
+    "head": "leather_hood",
+    "chest": "leather_chest",
+    "hands": "leather_gloves",
+    "legs": "leather_pants",
+    "feet": "leather_boots",
+    "main": "longbow"
+   }
+  }
+ ]
+}

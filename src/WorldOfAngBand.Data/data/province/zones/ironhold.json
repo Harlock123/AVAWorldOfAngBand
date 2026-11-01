@@ -1,0 +1,593 @@
+{
+ "id": "ironhold",
+ "name": "Ironhold",
+ "level": 6,
+ "act": 2,
+ "revision": 1,
+ "tileset": "tileset_ironhold",
+ "town": true,
+ "tagline": "The last city of the Iron March holds.",
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTRWWWWWWWWWWWWWQGGGQWWWWWWWWWWWWRTTTT",
+  "TTTTW.,...,..,.....===..W.........,WTTTT",
+  "TTTTW...,...,......===..W.,r.,r,.r.WTTTT",
+  "TTTTW..,...,...,,..===............,WTTTT",
+  "TTTTW............B.===..W......,.,.WTTTT",
+  "TTTTW.........,...,===..WWWWWWWWWWWWTTTT",
+  "TTTTW..............===.............WTTTT",
+  "TTTTW..,.....,.....===,.,.....,.,..WTTTT",
+  "TTTTW....,,Z..Z..Z.===.B.,......,..WTTTT",
+  "TTTTW..,..,....,...===...........,.WTTTT",
+  "TTTTW.........,....===...m,..m.....WTTTT",
+  "TTTTW..............===......,......WTTTT",
+  "TTTTW...........,..===..........k..WTTTT",
+  "TTTTW........,.....===.......,,.k..WTTTT",
+  "TTTTW==============================WTTTT",
+  "TTTTW.........S....===........,....WTTTT",
+  "TTTTW..........,...===.........,...WTTTT",
+  "TTTTW..,,......,...===..k.........,WTTTT",
+  "TTTTW.tX..tX.......===,............WTTTT",
+  "TTTTW.XX..XX,......===...,,.,.,....WTTTT",
+  "TTTTW........w.....===.......a.c...WTTTT",
+  "TTTTW....c...,.....===..,..........WTTTT",
+  "TTTTW.,,,..,.,....,===....,........WTTTT",
+  "TTTTW.tX...........===.............WTTTT",
+  "TTTTW,XX..tX....,..===......,......WTTTT",
+  "TTTTW.....XX.......===..,,......,,.WTTTT",
+  "TTTTW..,,......,.B.===......,.,....WTTTT",
+  "TTTTW......,,.,....===.B......,.,,.WTTTT",
+  "TTTTW..,......,,...===....,...,....WTTTT",
+  "TTTTW.,............===.......,.,..,WTTTT",
+  "TTTTRWWWWWWWWWWWWWQ===QWWWWWWWWWWWWRTTTT",
+  "TTTTTTTTTTTTTTTTTTT===TTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTT===TTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTT===TTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTT===TTTTTTTTTTTTTTTTTT"
+ ],
+ "legend": {
+  ".": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  ",": {
+   "ground": "grass",
+   "tiles": [
+    1074,
+    1075,
+    1076,
+    1077,
+    1078
+   ]
+  },
+  "=": {
+   "ground": "path",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  "T": {
+   "ground": "grass",
+   "objects": [
+    248,
+    249,
+    250,
+    251
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "W": {
+   "ground": "grass",
+   "objects": [
+    1223,
+    1224,
+    1225,
+    1226,
+    1227,
+    1228,
+    1229
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "R": {
+   "ground": "grass",
+   "objects": [
+    1185,
+    1186
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "Q": {
+   "ground": "grass",
+   "objects": [
+    1230
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "G": {
+   "ground": "path",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1362,
+    1365
+   ],
+   "blocks": true
+  },
+  "m": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1281,
+    1282,
+    1283,
+    1284
+   ],
+   "blocks": true
+  },
+  "k": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1285,
+    1286,
+    1287,
+    1288
+   ],
+   "blocks": true
+  },
+  "Z": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1241,
+    1242,
+    1243,
+    1244
+   ],
+   "blocks": true
+  },
+  "a": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    103
+   ],
+   "blocks": true
+  },
+  "c": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    102
+   ],
+   "blocks": true
+  },
+  "r": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1274,
+    1275
+   ],
+   "blocks": true
+  },
+  "t": {
+   "ground": "grass",
+   "objects": [
+    72,
+    75
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "X": {
+   "ground": "grass",
+   "blocks": true
+  },
+  "w": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1289
+   ],
+   "blocks": true
+  },
+  "B": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    102
+   ],
+   "blocks": true,
+   "light": 4.0
+  },
+  "S": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    265
+   ]
+  }
+ },
+ "playerStart": [
+  20,
+  31
+ ],
+ "spawns": [],
+ "shrines": [
+  {
+   "id": "ward_shrine",
+   "name": "The Ward Shrine",
+   "at": [
+    14,
+    18
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "thale",
+   "name": "Captain Oswin Thale",
+   "title": "Ironhold Guard",
+   "at": [
+    23,
+    30
+   ],
+   "facing": 7,
+   "portrait": "flare/male07",
+   "dialogue": "ironhold_thale",
+   "look": {
+    "head": "plate_helm",
+    "chest": "plate_cuirass",
+    "hands": "plate_gauntlets",
+    "legs": "plate_greaves",
+    "feet": "plate_boots",
+    "main": "longsword",
+    "off": "kite_shield"
+   }
+  },
+  {
+   "id": "confessor",
+   "name": "The Clockwork Confessor",
+   "title": "Silent",
+   "at": [
+    12,
+    15
+   ],
+   "facing": 2,
+   "still": true,
+   "dialogue": "ironhold_confessor",
+   "look": {
+    "head": "plate_helm",
+    "chest": "plate_cuirass",
+    "hands": "plate_gauntlets",
+    "legs": "mage_skirt",
+    "feet": "plate_boots",
+    "main": "rod"
+   }
+  },
+  {
+   "id": "hale",
+   "name": "Sister Hale",
+   "title": "Refugees' nurse",
+   "at": [
+    14,
+    25
+   ],
+   "facing": 3,
+   "portrait": "flare/female07",
+   "dialogue": "ironhold_hale",
+   "look": {
+    "head": "mage_hood",
+    "chest": "mage_vest",
+    "hands": "cloth_gloves",
+    "legs": "mage_skirt",
+    "feet": "cloth_sandals"
+   }
+  },
+  {
+   "id": "pell",
+   "name": "Archivist Pell",
+   "title": "Keeper of the founders' rolls",
+   "at": [
+    14,
+    13
+   ],
+   "facing": 3,
+   "portrait": "flare/male03",
+   "dialogue": "ironhold_pell",
+   "look": {
+    "head": "mage_hood",
+    "chest": "mage_vest",
+    "hands": "mage_sleeves",
+    "legs": "mage_skirt",
+    "feet": "mage_boots",
+    "main": "staff"
+   }
+  }
+ ],
+ "interactables": [
+  {
+   "id": "stash",
+   "name": "Stash",
+   "at": [
+    17,
+    18
+   ],
+   "tile": 76,
+   "action": "stash"
+  },
+  {
+   "id": "altar",
+   "name": "Founders' altar",
+   "at": [
+    11,
+    13
+   ],
+   "tile": 1293,
+   "dialogue": "ironhold_altar"
+  },
+  {
+   "id": "daughter_ironhold",
+   "name": "A physicians' ledger",
+   "at": [
+    13,
+    25
+   ],
+   "dialogue": "daughter_ironhold",
+   "action": "keepsake",
+   "blocks": false
+  }
+ ],
+ "vendors": [
+  {
+   "id": "hilde",
+   "name": "Hilde",
+   "title": "Smith",
+   "at": [
+    28,
+    22
+   ],
+   "facing": 5,
+   "stockSize": 12,
+   "sells": [
+    "weapons",
+    "armour"
+   ],
+   "runework": true,
+   "greeting": "Ironhold steel. Bring me a blade and I'll etch it, or strip the runes off your old one.",
+   "look": {
+    "head": "chain_coif",
+    "chest": "leather_chest",
+    "hands": "leather_gloves",
+    "legs": "leather_pants",
+    "feet": "leather_boots",
+    "main": "war_hammer"
+   }
+  },
+  {
+   "id": "ottilie",
+   "name": "Ottilie Vance",
+   "title": "Gunsmith",
+   "at": [
+    31,
+    19
+   ],
+   "facing": 5,
+   "stockSize": 8,
+   "sells": [
+    "firearms"
+   ],
+   "runework": true,
+   "greeting": "Powder, shot and Ironhold steel. Bring me a gun and the parts, and I'll make it hold another round.",
+   "supplies": [
+    "incendiary_round",
+    "scatter_round",
+    "silver_round",
+    "black_powder",
+    "lead_shot",
+    "gun_parts"
+   ],
+   "look": {
+    "head": "leather_hood",
+    "chest": "leather_chest",
+    "hands": "leather_gloves",
+    "legs": "leather_pants",
+    "feet": "leather_boots",
+    "main": "pistol"
+   }
+  },
+  {
+   "id": "sable",
+   "name": "Sable",
+   "title": "Fence",
+   "at": [
+    27,
+    14
+   ],
+   "facing": 5,
+   "stockSize": 12,
+   "greeting": "I sell to anyone with coin. Don't ask where it came from.",
+   "supplies": [
+    "alchemists_fire",
+    "frost_vial",
+    "bottled_lightning",
+    "acid_flask",
+    "antidote"
+   ],
+   "terms": [
+    {
+     "requires": {
+      "act1.ferry": "brothers"
+     },
+     "priceScale": 0.8,
+     "rares": 2,
+     "greeting": "A Brother of the Ferry! Coll's word came upriver ahead of you. The good shelf, and a friend's price."
+    },
+    {
+     "requires": {
+      "act1.ferry": "lantern"
+     },
+     "priceScale": 1.25,
+     "greeting": "The Lantern's dog. Coll's word came upriver about you too. You'll pay what the Lantern's coin is worth to me."
+    }
+   ],
+   "look": {
+    "head": "leather_hood",
+    "chest": "leather_chest",
+    "hands": "cloth_gloves",
+    "legs": "cloth_pants",
+    "feet": "leather_boots",
+    "main": "dagger"
+   }
+  }
+ ],
+ "exits": [
+  {
+   "id": "march_gate",
+   "label": "The Iron March",
+   "at": [
+    20,
+    36
+   ],
+   "radius": 1.5,
+   "to": "iron_march",
+   "toExit": "ironhold",
+   "arrive": [
+    20,
+    31
+   ]
+  },
+  {
+   "id": "north_gate",
+   "label": "The Barrow Fields",
+   "at": [
+    20,
+    4
+   ],
+   "radius": 1.5,
+   "requires": {
+    "act2.varro": "slain"
+   },
+   "sealedText": "The Guard keeps the north gate barred while Varro's siege line still holds the March.",
+   "to": "barrow_fields",
+   "toExit": "ironhold",
+   "arrive": [
+    20,
+    7
+   ]
+  }
+ ]
+}

@@ -14,6 +14,8 @@ public enum Tint
     Quartz,
     /// <summary>Lava: the floor burning orange.</summary>
     Lava,
+    /// <summary>Bog: grass darkened and greened, AshenReliquary's fen ground.</summary>
+    Bog,
 }
 
 /// <summary>One tile of Flare art: which tileset, which tile, and how it is drawn.</summary>
@@ -62,6 +64,7 @@ public static class LevelDressing
     private static readonly int[] Cracked = [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47];
     private static readonly int[] Grass = [.. Enumerable.Range(16, 16)];
     private static readonly int[] Trees = [248, 249, 250, 251, 252, 253, 254, 255];
+    private static readonly int[] Road = [.. Enumerable.Range(32, 12)];
     private static readonly int[] Rubble = [181, 182, 183];
     private static readonly int[] LooseRubble = [176, 177, 178, 179];
 
@@ -95,6 +98,13 @@ public static class LevelDressing
 
             if (!Solid(level, p))
             {
+                // A gate out to the province: the road through the wall, and a lantern over it.
+                if (terrain.Id == "zone_gate")
+                {
+                    ground[i] = new Piece(Grassland, Road[hash % (uint)Road.Length]);
+                    lights.Add(new DressLight(p, 2.8f, "#ffd890"));
+                    continue;
+                }
                 ground[i] = terrain.Has(TerrainFlags.Fiery) ? floor with { Tint = Tint.Lava } : floor;
                 if (terrain.Has(TerrainFlags.Fiery))
                     lights.Add(new DressLight(p, 1.6f, "#ff7a30"));

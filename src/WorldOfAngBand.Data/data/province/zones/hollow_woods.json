@@ -1,0 +1,769 @@
+{
+ "id": "hollow_woods",
+ "name": "The Hollow Woods",
+ "level": 12,
+ "act": 3,
+ "revision": 1,
+ "xpScale": 0.8,
+ "tileset": "tileset_oriel",
+ "tagline": "Not everything between the trees is there.",
+ "darkness": 0.78,
+ "heroLight": 5.5,
+ "rows": [
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCTTTTTTTTTTTOTTTTTTTTOTTTTTTOO..,......CCCfHfCCCTTTTTTTTOTTTTOTTTTOCC",
+  "CCTOTTTTTTTTTTTTOOTTTTTTTTTTOTT,,...,,..CCCfffCCC,,,TTTTTTTTTTTTTTTOCC",
+  "CCTTTOOTTTTTTTTTOTOTTTTTOTTTTTTTO.......WWRfffRWW..TOTTTTOTTTTTOTTTTCC",
+  "CCTTTTOTOTOTOTTTTOTTTTTTTOTTTTTTT,T.....,-=fff.T....,,OTTTOTTTTTTTOTCC",
+  "CCTTOOTTTTTTOTTTTTOTTTTTTTTTOOTTTTT......BfffffB..,,,TTTTTOTTTTTTTTTCC",
+  "CCOOTTTTTTTTTTTOOTTTTTTTTTTTTTTTTTT.....fffffffff...TTTTTTOTTOTTOTOTCC",
+  "CCOTTOTTTTTTTOTTOOTTTTTTOTTTTTTTTT,T...fffffffffff.O,,TTTTTOTTTTTTTTCC",
+  "CCTTTTOTOTTTTTTTTTOTTTTOTOOTTTTTTTT,..fffSfffffffff.T,TTTTTTTTTTTTTTCC",
+  "CCTTTTTTTTTOTTOTTTTTTTTOTTTTTTTTTTO,,.fffffffffffff.OTOTTTTTTTTTTTOTCC",
+  "CCTTOTTOTTTTOTTTTTOTTTOTOOTTOTTTTTTTT.fffffffffffff.TTTTTTOOTTTTOTTTCC",
+  "CCTTTTOTTOTTTTTTTTTTTTTTTTTOTTTTTTOT,T.fffffffffff.,OTTTTTOTTOTTOTTOCC",
+  "CCTTTTOTTTTTTOTTTTTOTTTTTTTOTTTTTTTO,T..fffffffff...,TOOOTTTOTTOTTTTCC",
+  "CCTTOTTTTTOTTOTTTOTTTTTTTTOTTTTTOOTOTT..O.fffff..T.,TTOTTTTTOOTTTTTTCC",
+  "CCTTOTTTTTTTTTTTTTTTTOTOTTOTTTOTTTTTTT.O,..-==,....,,TTTTTOTOOTTTTTTCC",
+  "CCTTTTTTTTOTTTTTOTOTTOOOTOTTTTOTTTTOTTT..T.-=-..T..,TTTTOTTTTTTTTTOOCC",
+  "CCTTOTTTOTTTOTTTTTTTTTTTTTTTTTTTOOOTT,TO.,.-=-.,..OOOTOTTTTOOTOTOTTTCC",
+  "CCTTOOOTTTTTTTTTTTTTTOTTTTOTTTTTTOOTT,T....-=-,...T,TTTTTTTTTTTTOTTTCC",
+  "CCTTTOTTTTOTTTTTTOTTTTTOTTOTTTTTOTTTT,T....==-....TTTTOTTTTTTTTTOTTTCC",
+  "CCOTTTTTTTOTTTTOTOOOOTOTTTTTTOOOTTTTTT,...-==-.,,TTTOTTOTTTTTTTTOTTTCC",
+  "CCTTTTTTTTTTTTTOTTTTTTTTTTTTTOTTTTTTOTT.,.-==-,,T,OOTTOTTTOTTTOTTTTTCC",
+  "CCTTTTTTTTTOTTTTTTOTTOTTTTTTTTTTTTTTOT,OT.-==-..,,TTTTTTTTTTTTTOTTTOCC",
+  "CCTTTTTTTTTTTTOTTTTTTTTTTTTTTTOTTOOTTT,T...==-...,TOTTTTTTTTTTTTTTOTCC",
+  "CCTTTOTTOTTTTTOTOTOTOTTTTTTOTOTTTTTTOT,T...==-...TTTTTTTOTTTTTTTOTTTCC",
+  "CCTTOTTTTTOTTTTTOOTOTOTOTTTOTTTT...,...T...-=-.,.,,OTTTOTOTTTOOTTOOTCC",
+  "CCTTTTTTTOOTTOOOOTOTTOTTTTTTTT.....,...,...-==-..,TTTTTTTTTTTTOTTTTTCC",
+  "CCTOTOTTTTOTTTTTOOOTOTTTTTOTT,...,.,..T,,..-==-..TOTTTTTOTOOTTTOTTOOCC",
+  "CCTOOTTTTTOTTTTTTTOTOOOTOTTOT..T,.....,..,.-==-..,,TTTTTTOTTOTTTTTTOCC",
+  "CCTOTTTTOTTTTOTOOTOTOOTOOTTT............,,..-==,.,TTTTTTTOTTTOOTTTTTCC",
+  "CCOTOTTTTTTTTTTTTTTTTTTTOTTT..,....,T..,,...-==-..,,TTTTOTTOTTTTTTTTCC",
+  "CCTOTTTTTTOOTOOTTTTTTTTTTTOO.........,..T....-=-,.,,TOTTTTTTOTTTTOOTCC",
+  "CCTTTTTTTTTOOTTOTOTTTTTTTTOTO.,,.........,T.,-==-..,,TTTTOTTTTTOTTOTCC",
+  "CCTTTTTTTOTTOTTTTTOTTOTOTTTOO..,.T....,.,.T,..==-..,,TTTTTTOTOTTTTTOCC",
+  "CCTTOOTOTOTTOTTTTOTTTTTTTTTTTT....,.,....T,T..-==-..OTOOTTTTTTOTOTTTCC",
+  "CCOOTTTTTTTOTTTTTTOTTTTTTTTOTOTT,...,..TTT,,T,.==-.T.,OOTTTOTOTTOTTTCC",
+  "CCTTTOTTTTOTTTTTTTTTTTOTTTTTOOTOOOTTTOTTTTTO.O.-==-..,TTTTTTTTTTTTTTCC",
+  "CCTTOOTOTTTTTOTTTTOTTTTOTOTTTTTTTTTOTTTTTTT,,..-==-...T,TTTTTTTTTTTTCC",
+  "CCTTTTTTTOTTOTTTTTTTTTTTTOTTTTTTTTTTTTTTOTTTT...-==...O,TTTTTTTTOTOTCC",
+  "CCTTTOOTTTTTTOTTTTTOTTTTOTTTTTTOTTTTTTTTTTO,,.T,-==-,..,TOTTTTTOTTTTCC",
+  "CCTTTTTTOTTTTTTTTOTTTOTOTTOTTTTOTTOTTTTTOTO,T....==-...,OTTTOOOTOTTTCC",
+  "CCTOTTTTTTTTTTTTTTOTTTOTOTTTTTOTTTOTOTTTTTTTT.T..-==..,O,TOOTTTTTTOTCC",
+  "CCTOTTTTTTOTTTTTTOTTTTTTTTTOTTTTTTTTTOTTTTTTT....-==-,...,TTTOTTTTTTCC",
+  "CCOOTTTTTTTTTOTTTTTTTTTTTTOTTTTTTTOOTTOTTOTTT...,-==-.T..,TTTTTTTTTTCC",
+  "CCTTTTOTTTTTTTTOTTTTTTTTTOTTTTOTTTOTTTTOTTTTT....-==-....T,TTTOTTOTTCC",
+  "CCTTTTTOOTTTTTTTTTTTTTTTTTOTTTTOTTTTTTTTOT,T.....-==-....,OTTOTTTTTTCC",
+  "CCOTTTTTTTTTTTOTTOOTTTTOTTTTTTTTTOTOTTTTTOTT.....-==-,...,,TOTTTOOTTCC",
+  "CCTTTTTTTTTTTTTTTTTTTTTTTTTTTOTTTTTTTTTTTTT.,...,-=-..fffffffTTTTTOTCC",
+  "CCTTOOTTTTTTTTTTTOTTOTTTOTTTTTTTTTTOTTOTTT,.,..,-==-fffffffffffTTTTTCC",
+  "CCTOTTTTTTTTOTTTOOTTTTTTOTTTTTTTTTTTTTOTOT..,...-=-ffRWWWWWWWRffTTTTCC",
+  "CCTTTOTOTTOTTTTTTTTOTOTTOTOTTTTTTTTTTTTTT....O.-==-ffWfffffBfWffTOOTCC",
+  "CCTTTOTTTTTTOOTTTTOOTTTTTTOTOTTTTTTOOT,T.,..T.-==-fffWfffffffWfffOTTCC",
+  "CCTTOTTTTTOTTTTOTOTTTTTTTOTOTTTTTOTTOTT.T..T..-=-.fffWfSfffffWfffTTTCC",
+  "CCTOTOOTTOTTTTTOTTTTTTOOTTOTTTTTOTOT,T,..,..,-==..fffWfffffffWfffTTTCC",
+  "CCTTOTTOTTTOTOTTTOOOTTOOTTTOTTTTOOTT,.......-==....ffWfffffffWffTTTOCC",
+  "CCTTTTTTOTTTTTTTTTTTTTTTTTTOOTTTTTTTTT....,-==,....fffffffffffffTOTOCC",
+  "CCOTOTOOTTTOOOOTTTTTTTTTTTTTTOTTTT..T..,T.-=-,..T...fffffffffffTTTTTCC",
+  "CCOTTTOTTTTTTTTTTOTOTTTTTTTTTTTT,T.......-=-....,...OTfffffffTTTTTTTCC",
+  "CCTTTTOTTTTOTTOTTTTTOTTTTOTTTTTT......,-==-......,.,TOTOTTTTOTTTTTTTCC",
+  "CCTTOTTTOTTTTTTTOTOTTTOTTOTTT,.......,-==-,....,..,TOOOTTTTTTOTTTOTTCC",
+  "CCTTOTTTOOTTTOOTTOTTTTTOTOOOO,.....T.-==-....T...,OTTTTTTTTTTOTOTTTTCC",
+  "CCTTTTTTTTTTOTTOTOTTOTTTTOT,T,....,,-==......T..T,TOTTTTTTTTTTTTTTTTCC",
+  "CCTTOTTTOOTTOTTTOTTTTTTTTTT........-=-,.......,,TOOTTTOTOTTTTTTTTTOOCC",
+  "CCTOTTTOTOTOTOTTTOTTOTTOT....T...-==-....,...O,TTTTTTTTTTTTTTTTTOTTTCC",
+  "CCTTTTTTTTOTTTTTTTOTTOO,.....,.,-==-.,..,...TTOTOOTTTOOTTTTTOTOOTOTTCC",
+  "CCTOOOTTOTTTTTTTTTTOTTT.,......-==-.,......TTTTTTTOTOTOTTOTOTTOTTTTTCC",
+  "CCTTOTTTTTTOTTTOTTTTTTO.....,.-==-....,...,,TTTTTOTTTTTOOTOOTTTTTTTTCC",
+  "CCTTTTTTOTOT.......,,..T...T,-==-,....,..,OTOTTTTOOTTOTTTTOTTOTOTTOTCC",
+  "CCOOOTOTTT..,.........,T,....==-.T...,.T,,TTTTTTOTTTTTTTTOOTTTTTTTTTCC",
+  "CCTTTTTT..,.............T...-=-.,......,TTTTTOOOOOTTTOTTTOTTTTTTTTTTCC",
+  "CCTTOTTT..,..vvvvv.........-==-.......,TOTOTTTTOOTTOTOTTOTTTOTOOTTOOCC",
+  "CCTTTTO....vvvvvvvvv...,..-==-...,....TTTTTTOTTTTTTTTTTTOTTTTTOTOTTOCC",
+  "CCTTTOT....vvvvvvvvv,....,-==-....T..,,TTTTTTTTTTTTOTTTOOOOTTTTTTTTTCC",
+  "CCTTTOO....vvvvvvvvv.....-==-.......TTTTOTTTTOTTTTTTTTTTTTTTTOTTTOOTCC",
+  "CCTTTTTO.....vvvvv.,....,-==-....,..,TOTTTTOTTTTTTTOOTOTTTTTTTTTTTTTCC",
+  "CCOTTTTT..,,.....,,......-==.......,,OTOTTTTOTTOTTTTTTTOOOTTTOOTTTTTCC",
+  "CCTTOTTTTT..,.,..........-=-.......TTTTTTTTTTTTTTTOTTOTTOOOTTTTTTTOTCC",
+  "CCOTOTTTTTTO......,.....,==-,......,OTTTTTOTTTTTTTTTTTOTTTOTTTTTTTTTCC",
+  "CCTTTTTTTOTTTTTT,T.,....-==-.T....T,OTTTOTTTTTTOTTTOTTTOTTTOTTTTTTTTCC",
+  "CCTTOTTTTTOTOTTTT,O.....-==-......,TTTTTTOTTTTTTTTOTTTTOTTTTOTTTTTTTCC",
+  "CCTTTOTTTTTTTTTTTT,.T.T.-==-..T...T,TTTOOTOTOTTTTOTTTOOOOTTTTTTTTTTOCC",
+  "CCTTTTTTTTTOTTTTTTT......==-,.....,TTTOTTTTTOOTTOTOTTTTOTTTTTTTTTTTTCC",
+  "CCTTTTTTTTTOTTTOTTTT..,..-=-.,...TTTTTTTTTTOOTTTTTOTOTTOTTOTTTTTTTTTCC",
+  "CCTTOTTTTTTTOTTTTTO,.....-=-.....,TTTOTTTTTTOTTTTTTTTTOOTTOOTOTTTTOTCC",
+  "CCOOOTTTTTOTTTTTTT,O,....-=-.....,,TTTTTTTTTTTTTTTTOTTTTTTTTTTTTTTOTCC",
+  "CCTTTOTTTTTOTOTTTTO,,....-==,....T,TOTTOTTTTTOTTTTTTTTTTTTTTTTTOTTTTCC",
+  "CCTTTTTTTTOTTTOOTTOTO....-==-....OT.,..,TOTTTTTTTTTTTTTTOTTTTTOTTTOTCC",
+  "CCTOTTTTOTOTTTOOOTO,T....-==-..OT,......,.TOTOTTTTOTOTTTTTTTTTTTTTOTCC",
+  "CCTTTTOTTOTOTTTOTTTOT.O..-==-......,,Z.....TOTTTTTTOOTOTTTTTTTTOTOOTCC",
+  "CCTTOTTOOTTOTOTTTTTTTO...-==.....Z..,,...Z..TTTTTTTTTTOOTOTTTTTOTTOTCC",
+  "CCTTTTTTTTTTTTTOOTTT,O...-=-.......,,.,......TTOTOOTTTTOTTTOTOTTTOOTCC",
+  "CCOOTTTTTTOTTTOTTOTT,,...-=-...........,.....TTTTTTOTTOTTTOTOTTOTTTTCC",
+  "CCTTTTTOTTTTOOTTTTOTTT..-==-....Z........,Z..TOTOTTTTTTTTTTTOTTOTTTTCC",
+  "CCTTTTTTTTTTOTTOOTOTTT..-==-.......,,........TTTTTTTTTTOTTTTTTOTOOTTCC",
+  "CCTOOTTTTTTTTTTTTTTTO...-==-....,....,,....,.TTOTTOOTOTTTTTTTOTTTOTTCC",
+  "CCTTTOTTOOTTTOTTTTTOT...==-...,..Z.....,.Z..TTTTTTTOTTTTTTTTOTTTTOTTCC",
+  "CCTTTTTTTTTTTTTTOTT,T,.-==-..,TT.,...Z.....TOTTTTTTOTTOTTOTTTTOTTOOTCC",
+  "CCOTTTTTTTTOTTTOTTT,O..-=-...O,TT........,TTTTTTOTOTOTTTTOTTTOTTOOTTCC",
+  "CCTTOTTTTTOTTTTTTOOT..-==-..,,OTTTT...,.TOTTTOOTTOTTOOTTTTTOTOTTOTTTCC",
+  "CCTTTOOTTTTTTOTOTTTT..-==...O,TOTTTTTTOTTTTTTTOOOTTTTTTTTTTTTOTTTOTTCC",
+  "CCTTOTTTOTTTOTTOO,T..-==-.T,,TTTTOTTTTTTTTTTOTTOTTTTTTTTTTTTTTOTTTTTCC",
+  "CCTTOTTTTTTOTTTTTT,..-==...OTTOTTTTTTTTTTTTTOOOTTOTTTTTTTTTTTTTTTOTTCC",
+  "CCOTOOTOTTTTTTTTTT..-==-.,TTTTTTTTTTOTTOTTTTTTTOTTTTOOTTTTTTTTTOTTTOCC",
+  "CCTTTTTTOOTTTTTTTO..-==-..T,TOTTTTOOTTOTTTTOTTOOOTOTTTOTTTTOOOTTTTTTCC",
+  "CCTTTOTTTTOTTOOO,...==-.TTTTTOTTTTTTTTOTTOTTTTTTTTTTOTTTTTTTOTTTTTTTCC",
+  "CCTOTTOTTTOTTTTT...-==-..TTTTTOTOTTOOTTTOTTTTTOOTTTTOTTTTTTTOTTTTOTTCC",
+  "CCTTOTOTTOOOTTTTT..-=-,,.T,TTTTOTTTTTTTTTOTTTTTTTTTTTTTOTTTTTTTOTOTTCC",
+  "CCTTOOTOOTTTTTT,T.,==-,,.,,TOTTTTOTOTTTTTTTTOOTOTTTTTTOTTOTOTTTTTTOTCC",
+  "CCTOTTTTT.....T...-==-...TTTTTOOTOTTTTTTOOTTOTTTOOTTTTTOOTTTTTTTTOTTCC",
+  "CCTTTOT,.,......O.-==-...,,OTOTTTTTTTTTTOOOTTTTTTTTTTTTTTTTTTTTTTTTOCC",
+  "CCTTOO,..,..S..k..-==-...O,OOTTOTTTTTTOTTOTTTTOTTTTTTTTTTTOTTTTTTTTTCC",
+  "CCTOT,.,k....,....-==-,...TTTTTTOOTTTTTTOTOTTTTTTTTOOTTTTTTTTTOOTTOTCC",
+  "CCTTT,....,......,-==-..,.T,OTOTTTTTTTTTTTTTOTTTTTOTTTTTTOTTOOTOOTTOCC",
+  "CCOTT..,,...,,.,..,-=-.,...T,TOTTTOTTTTTTTTTOTOTTOTTOTOTTTOOTTTTTTTTCC",
+  "CCTTTT,......k,....-==-....O,TTTTTOTTOTTTTTTOOTOTTTTTTTTTTTTTTOTTOTOCC",
+  "CCTTOTO...,.,.,....,-=-...O.T,TTTTTTTTOTTTTOTTTTTTTOTOTOTTTTOTTTTTTOCC",
+  "CCOOTTTOT.....T.....-==-.....T,OTOTTTTTTOTTTTTOTTTOOTTTTTOTTTTTTTOOTCC",
+  "CCTOTTTOTOOTTTOT.....-==-.....TTTOTTOTTTTTTTOOTTTTTTTTOTTTTOOOTTTTTTCC",
+  "CCTTTTTTTTOTOT,,......-=-.,T.T,OTTTOTTTTTOOOTTTTTOOTTOTTTTTTTTTTTTTTCC",
+  "CCTTTTTTTOTTTTT,O......-=-...T..,TTTTTTTTTTTOTOTTOOOTTTTOTTOTTOTTTTTCC",
+  "CCTTTTOTTTTTTTTTO.......==-.T,.,.T,TTOTTTTTTTTTTTTTTTTTTTTTOTTTTOTTTCC",
+  "CCTTOOTTOTTTTOTT,,.......==-......,TTTTOTTTTOTTTOOTOOTTOOTTTOTTTTOTTCC",
+  "CCTTTTOOTTTOTOOTT,,.....,.-=-,O.....TTTTTTOTTTTTTTOOOTOOTOTTTTTTTOTOCC",
+  "CCTOTOTTTTTTTTTTTTT,..,....-==,,.....TTTTTTTOOTTTTTTOTTTTOTTTTTTTTOOCC",
+  "CCTTTTTTTTTTOOTTTTTTT..,....-==-...,...TTTTTTTOOTOTTTTTTTOTTOTTTOTTTCC",
+  "CCTTOTTTOTTTTOOTTTTTTO,......-==-...OO.,OTTTTTTTTTTTOOTTTTOOTTTTTTTTCC",
+  "CCTTTTTTTTOTOTOTTOTOOTT.,,..=====-........OTOTTTTTTTTTTTTTTTTTTOTTTTCC",
+  "CCTTTTTTOTTTTTTTTTTTTOO,....===.==-...T....TOTTTTTTTTTTTTTTOTTTTTTTOCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCC===CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+ ],
+ "legend": {
+  ".": {
+   "ground": "grass"
+  },
+  ",": {
+   "ground": "grass",
+   "objects": [
+    112,
+    113,
+    116,
+    117,
+    120,
+    121,
+    124,
+    125
+   ]
+  },
+  "=": {
+   "ground": "path",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  "-": {
+   "ground": "path_edge"
+  },
+  "f": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  "v": {
+   "ground": "grass",
+   "tiles": [
+    344,
+    345,
+    348,
+    349,
+    352,
+    353,
+    356,
+    357
+   ]
+  },
+  "C": {
+   "ground": "grass",
+   "objects": [
+    48,
+    49,
+    52,
+    53,
+    56,
+    60,
+    64,
+    68
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "T": {
+   "ground": "grass",
+   "objects": [
+    244,
+    245,
+    246,
+    247
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "O": {
+   "ground": "grass",
+   "objects": [
+    552,
+    553,
+    554,
+    555,
+    556,
+    557
+   ],
+   "blocks": true,
+   "cover": true
+  },
+  "k": {
+   "ground": "grass",
+   "objects": [
+    535,
+    538,
+    540
+   ],
+   "blocks": true
+  },
+  "Z": {
+   "ground": "grass",
+   "objects": [
+    1291,
+    1292
+   ],
+   "blocks": true,
+   "cover": true
+  },
+  "W": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1223,
+    1224,
+    1225,
+    1226,
+    1227,
+    1228,
+    1229
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "R": {
+   "ground": "grass",
+   "objects": [
+    1185,
+    1186
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "H": {
+   "ground": "path",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1346
+   ],
+   "blocks": true
+  },
+  "B": {
+   "ground": "grass",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    102
+   ],
+   "blocks": true,
+   "light": 4.0
+  },
+  "S": {
+   "ground": "grass",
+   "objects": [
+    265
+   ]
+  }
+ },
+ "playerStart": [
+  29,
+  124
+ ],
+ "spawns": [
+  {
+   "at": [
+    25,
+    118
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "hollow_stalker",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    13,
+    113
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "mirror_cultist",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "whisperer",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    19,
+    102
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "phantom",
+     "rank": "Normal",
+     "count": 3
+    },
+    {
+     "creature": "frost_wraith",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    35,
+    92
+   ],
+   "radius": 2.5,
+   "pack": [
+    {
+     "creature": "phantom",
+     "rank": "Normal",
+     "count": 4
+    }
+   ]
+  },
+  {
+   "at": [
+    39,
+    93
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "whisperer",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "phantom",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "hollow_stalker",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    23,
+    84
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "hollow_stalker",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    17,
+    75
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "mirror_cultist",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "mirrored"
+     ]
+    },
+    {
+     "creature": "mirror_cultist",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    10,
+    71
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "whisperer",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "phantom",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    39,
+    62
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "frost_wraith",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "hollow_stalker",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    47,
+    44
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "hollow_stalker",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "whisperer",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 13
+  },
+  {
+   "at": [
+    52,
+    38
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "mirror_cultist",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 13
+  },
+  {
+   "at": [
+    35,
+    29
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "hollow_stalker",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "hasted"
+     ]
+    },
+    {
+     "creature": "hollow_stalker",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 13
+  },
+  {
+   "at": [
+    48,
+    22
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "phantom",
+     "rank": "Normal",
+     "count": 3
+    },
+    {
+     "creature": "whisperer",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 13
+  },
+  {
+   "at": [
+    44,
+    11
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "mirror_cultist",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "mirrored",
+      "shielded"
+     ]
+    },
+    {
+     "creature": "whisperer",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 13
+  }
+ ],
+ "shrines": [
+  {
+   "id": "woodcutters_shrine",
+   "name": "The Woodcutters' Shrine",
+   "at": [
+    12,
+    110
+   ]
+  },
+  {
+   "id": "hermitage_shrine",
+   "name": "The Hermitage Shrine",
+   "at": [
+    55,
+    52
+   ]
+  },
+  {
+   "id": "catacomb_door_shrine",
+   "name": "The Catacomb Door",
+   "at": [
+    41,
+    9
+   ]
+  }
+ ],
+ "exits": [
+  {
+   "id": "rest",
+   "label": "Saint Oriel's Rest",
+   "at": [
+    29,
+    127
+   ],
+   "radius": 1.5,
+   "to": "saint_oriels_rest",
+   "toExit": "north_door",
+   "arrive": [
+    29,
+    124
+   ]
+  },
+  {
+   "id": "catacombs",
+   "label": "The Catacombs of Oriel",
+   "at": [
+    44,
+    3
+   ],
+   "radius": 1.5,
+   "to": "catacombs_of_oriel",
+   "toExit": "woods",
+   "arrive": [
+    44,
+    7
+   ]
+  }
+ ],
+ "caches": [
+  {
+   "id": "woodcutters",
+   "at": [
+    7,
+    114
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "stone_ring",
+   "at": [
+    37,
+    92
+   ],
+   "kind": "Reliquary",
+   "facing": 0
+  },
+  {
+   "id": "mirror_pool",
+   "at": [
+    21,
+    70
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "hermitage",
+   "at": [
+    59,
+    53
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "hanging_grove",
+   "at": [
+    30,
+    29
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "catacomb_door",
+   "at": [
+    48,
+    7
+   ],
+   "kind": "Cache",
+   "facing": 1
+  }
+ ],
+ "npcs": [
+  {
+   "id": "caddoc",
+   "name": "Brother Caddoc",
+   "title": "Penitent",
+   "at": [
+    58,
+    51
+   ],
+   "facing": 3,
+   "portrait": "flare/male10",
+   "dialogue": "woods_caddoc",
+   "requires": {
+    "act3.caddoc": "met",
+    "act3.penitent": ""
+   },
+   "look": {
+    "head": "leather_hood",
+    "chest": "mage_vest",
+    "hands": "cloth_gloves",
+    "legs": "cloth_pants",
+    "feet": "cloth_sandals",
+    "main": "staff"
+   }
+  }
+ ],
+ "interactables": [
+  {
+   "id": "page_3",
+   "name": "A burned page",
+   "at": [
+    39,
+    90
+   ],
+   "tile": 1276,
+   "dialogue": "library_page_3"
+  },
+  {
+   "id": "page_4",
+   "name": "A burned page",
+   "at": [
+    38,
+    32
+   ],
+   "tile": 1276,
+   "dialogue": "library_page_4"
+  }
+ ]
+}

@@ -8,6 +8,8 @@ using WorldOfAngBand.Engine.Sight;
 using WorldOfAngBand.Engine.Time;
 using WorldOfAngBand.Engine.World;
 using WorldOfAngBand.Game.Bridge;
+using WorldOfAngBand.Game.Dressing;
+using WorldOfAngBand.Game.Province;
 using WorldOfAngBand.Rules.Characters;
 using WorldOfAngBand.Rules.Combat;
 using WorldOfAngBand.Rules.Content;
@@ -236,6 +238,7 @@ public sealed class DungeonSession : ITurnHandler
         if (IsOver)
             return false;
         var actions = 1;
+        var before = Level;
         var took = command switch
         {
             Walk walk => DoWalk(walk.Direction),
@@ -260,7 +263,7 @@ public sealed class DungeonSession : ITurnHandler
         // paid for and the world runs on.
         if (command is ChooseLevel)
             return true;
-        if (command is not TakeStairs)
+        if (command is not TakeStairs && Level == before)
         {
             for (var i = 0; i < actions; i++)
             {
@@ -451,7 +454,7 @@ public sealed class DungeonSession : ITurnHandler
         if (Hero.DescentIn > 0 && --Hero.DescentIn == 0)
         {
             var to = NoDeeperThan(Math.Min(Data.Constants.MaxDepth, Math.Max(Depth, 1) + 5));
-            if (to > Depth)
+            if (Zone is null && to > Depth)
             {
                 Say("The floor opens beneath you!");
                 _pendingLevel = (to, StairArrival.None);
@@ -498,6 +501,7 @@ public sealed class DungeonSession : ITurnHandler
         Publish(new HeroMovedEvent(from, to));
         Belongings.Arrive();
         Altar();
+        Wayfare();
         if (terrain.Shop is { } shop && Data.Stores.Any(st => st.Id == shop))
             Publish(new ShopEnteredEvent(shop));
         return true;
@@ -555,7 +559,7 @@ public sealed class DungeonSession : ITurnHandler
     }
 
     /// <summary>Makes the level at <paramref name="depth"/> and puts the hero on it. The town is the same on every visit.</summary>
-    private void Enter(int depth, StairArrival arrival)
+    private void Enter(int depth, StairArrival arrival, string? arriveAtGate = null)
     {
         var seed = depth == 0
             ? GameRandom.DeriveSeed(_seed, 0)
@@ -565,30 +569,17 @@ public sealed class DungeonSession : ITurnHandler
         var quest = Unfinished(depth);
         var generated = _generator.Generate(new LevelRequest(depth, seed, arrival, Quest: quest,
             QuestRoom: story is not null && (!_flags.ContainsKey(story.Id) || Unfinished(depth)) ? story.Room : null));
-        if (Level is not null)
-            _vision.Reset(Level);
-        Level = generated.Level;
-        Known = new KnownMap(Level.Width, Level.Height);
-        if (Level.IsKnown)
-        {
-            foreach (var p in Level.AllLocs())
-                Known.Remember(Level, p);
-        }
-        Hero.Position = generated.PlayerStart;
+        Install(generated.Level, generated.PlayerStart);
         Hero.MaxDepth = Math.Max(Hero.MaxDepth, depth);
-        Noise.Reset(Level);
-        Scent.Reset(Level);
-
-        // Uniques left alive on the old level can be met again (Angband resets their count when a level goes).
-        foreach (var foe in _foes.Values.Where(f => f.Monster.Race.IsUnique))
-            _uniquesGone.Remove(foe.Monster.Race.Id);
-        Scheduler.Clear();
-        _foes.Clear();
-        Scheduler.Add(Hero);
-        // Angband: the player always gets the first move on a new level.
-        Hero.Energy = EnergyTable.MoveEnergy;
         if (depth == 0)
         {
+            // Gallowmere's gates out to the province (the spec's section 7.4); back through one, the hero is beside it.
+            PlaceTownGates();
+            if (arriveAtGate is not null && _gates.TryGetValue(arriveAtGate, out var gate))
+            {
+                Hero.Position = Level.Neighbors(gate).Where(Level.IsEmptyFloor).OrderBy(p => p.DistanceTo(new Loc(Level.Width / 2, Level.Height / 2))).FirstOrDefault(gate);
+                _insideGate = arriveAtGate;
+            }
             // Gallowmere: the flasks are filled again, Second Breath comes back, and the shops have new stock.
             Hero.Character.Potion.Refill();
             ThinFlasks();
@@ -626,6 +617,164 @@ public sealed class DungeonSession : ITurnHandler
             Enlist(monster);
         UpdateView();
         Publish(new LevelEnteredEvent(depth));
+    }
+
+    /// <summary>
+    /// A level comes into play: the old one's sight let go, the new one's memory, noise and scent fresh, its monsters
+    /// cleared from the scheduler (uniques left alive can be met again, as in Angband), and the hero at
+    /// <paramref name="start"/> with the first move.
+    /// </summary>
+    private void Install(Level level, Loc start)
+    {
+        if (Level is not null)
+            _vision.Reset(Level);
+        Level = level;
+        Zone = null;
+        _dressed = null;
+        _gates = new Dictionary<string, Loc>();
+        _insideGate = null;
+        Known = new KnownMap(Level.Width, Level.Height);
+        if (Level.IsKnown)
+        {
+            foreach (var p in Level.AllLocs())
+                Known.Remember(Level, p);
+        }
+        Hero.Position = start;
+        Noise.Reset(Level);
+        Scent.Reset(Level);
+        foreach (var foe in _foes.Values.Where(f => f.Monster.Race.IsUnique))
+            _uniquesGone.Remove(foe.Monster.Race.Id);
+        Scheduler.Clear();
+        _foes.Clear();
+        Scheduler.Add(Hero);
+        // Angband: the player always gets the first move on a new level.
+        Hero.Energy = EnergyTable.MoveEnergy;
+    }
+
+    // --- The province (the spec's section 7.4) ---
+
+    /// <summary>The province's zones (AshenReliquary's), loaded once.</summary>
+    public ProvinceMap Province => ProvinceMap.Shared;
+
+    /// <summary>The province zone the hero is in, or null in Gallowmere and the dungeon.</summary>
+    public ZoneDef? Zone { get; private set; }
+
+    private DressedLevel? _dressed;
+
+    /// <summary>
+    /// The level in Flare's art: a zone as AshenReliquary drew it (built once), else Angband's level dressed afresh
+    /// (LevelDressing), since its doors and veins change.
+    /// </summary>
+    public DressedLevel Dressed => Zone is not null && _dressed is { } zone ? zone : LevelDressing.Dress(Level);
+
+    /// <summary>The gates on this level (Gallowmere's, or a zone's exits), by exit id.</summary>
+    private Dictionary<string, Loc> _gates = [];
+
+    /// <summary>The gate the hero is standing in (passing through one only counts on the way in).</summary>
+    private string? _insideGate;
+
+    public IReadOnlyDictionary<string, Loc> Gates => _gates;
+
+    /// <summary>
+    /// Gallowmere's two gates, as Fort Gallowmere's two exits: the south gate to the Gallows Road and the west gate to
+    /// the Rotwater Fens, each cut through the town's wall where the town's ground comes nearest it.
+    /// </summary>
+    private void PlaceTownGates()
+    {
+        var gate = Data.Terrain["zone_gate"].Index;
+        var open = Level.AllLocs().Where(Level.IsPassable).ToList();
+        if (open.Count == 0)
+            return;
+        void Cut(string id, Func<Loc, double> nearness, Loc outward)
+        {
+            foreach (var p in open.OrderBy(nearness))
+            {
+                var wall = p + outward;
+                if (!Level.InBounds(wall) || Level.IsPassable(wall) || Level.FeatureAt(wall).Has(TerrainFlags.Shop))
+                    continue;
+                Level.SetFeature(wall, gate);
+                Level[wall].Flags |= SquareFlags.Glow;
+                _gates[id] = wall;
+                return;
+            }
+        }
+        var middleX = Level.Width / 2.0;
+        var middleY = Level.Height / 2.0;
+        foreach (var exit in Province.Gates)
+        {
+            if (exit.Id == "gate")
+                Cut(exit.Id, p => -p.Y * 4 + Math.Abs(p.X - middleX), new Loc(0, 1));
+            else
+                Cut(exit.Id, p => p.X * 4 + Math.Abs(p.Y - middleY), new Loc(-1, 0));
+        }
+    }
+
+    /// <summary>
+    /// A zone comes into play, built from AshenReliquary's file: the hero at the exit they came through (or the zone's
+    /// start), a few of Angband's monsters of the depth the zone stands for wandering it, and its tagline said.
+    /// </summary>
+    internal void EnterZone(string zoneId, string? arrivingAt)
+    {
+        var zone = Province[zoneId] ?? throw new InvalidOperationException($"No zone '{zoneId}'.");
+        var depth = ProvinceMap.DepthFor(zone.Level);
+        var built = ZoneBuilder.Build(zone, Data.Terrain, depth);
+        var exit = arrivingAt is null ? null : zone.Exits.FirstOrDefault(e => e.Id == arrivingAt);
+        var start = ZoneBuilder.LevelAt(exit?.Arrive ?? exit?.At ?? zone.PlayerStart);
+        Install(built.Level, start);
+        Zone = zone;
+        _dressed = built.Dressed;
+        _gates = new Dictionary<string, Loc>(built.Gates);
+        if (!Level.IsPassable(Hero.Position))
+            Hero.Position = Level.AllLocs().Where(Level.IsEmptyFloor).OrderBy(p => p.DistanceTo(start)).First();
+        _insideGate = InsideGate();
+        // Until Ashen's own creatures come (M7b): a few of Angband's, of the zone's depth, about the zone.
+        var area = zone.Width * zone.Height;
+        Level.Population = new PopulationBudget(Monsters: 3 + area / 2500, RoomObjects: 0, AnywhereObjects: 1 + area / 4000, Gold: 2 + area / 3000);
+        _spawner.Populate(Level, Rng, Hero.Position, _uniquesGone);
+        Loot.Populate();
+        foreach (var monster in Level.Monsters.All)
+            Enlist(monster);
+        UpdateView();
+        Publish(new LevelEnteredEvent(depth));
+        Say(zone.Tagline is { Length: > 0 } tagline ? $"{zone.Name}. {tagline}" : zone.Name);
+    }
+
+    /// <summary>The gate whose reach the hero stands in, if any.</summary>
+    private string? InsideGate()
+    {
+        foreach (var (id, at) in _gates)
+        {
+            var radius = Zone?.Exits.FirstOrDefault(e => e.Id == id)?.Radius ?? 1.0;
+            if (Hero.Position.DistanceTo(at) <= Math.Max(1.0, radius))
+                return id;
+        }
+        return null;
+    }
+
+    /// <summary>The hero walked: into a gate's reach, they go through it (once, until they step out and back in).</summary>
+    private void Wayfare()
+    {
+        var inside = InsideGate();
+        if (inside is null || inside == _insideGate)
+        {
+            _insideGate = inside;
+            return;
+        }
+        _insideGate = inside;
+        var exit = Zone is { } zone ? zone.Exits.First(e => e.Id == inside) : Province[ProvinceMap.Gallowmere]!.Exits.First(e => e.Id == inside);
+        switch (exit.To)
+        {
+            case ProvinceMap.Gallowmere:
+                Enter(0, StairArrival.None, exit.ToExit);
+                Say("You come back through Gallowmere's gate.");
+                break;
+            case { } to when ProvinceMap.Open.Contains(to):
+                EnterZone(to, exit.ToExit);
+                break;
+            default:
+                Say($"The way to {exit.Label} is not open yet.");
+                break;
+        }
     }
 
     private Foe Enlist(Monster monster)
@@ -991,6 +1140,12 @@ public sealed class DungeonSession : ITurnHandler
     /// <summary>Angband teleport_level: up or down a level (only down from the town).</summary>
     internal void TeleportLevel()
     {
+        // Above ground there is no level up or down to go to.
+        if (Zone is not null)
+        {
+            Say("The ground holds you.");
+            return;
+        }
         // Never down past a quest level whose keeper still stands.
         var up = Depth > 0 && (Rng.OneIn(2) || Unfinished(Depth));
         Say(up ? "You rise up through the ceiling." : "You sink through the floor.");
@@ -1157,7 +1312,7 @@ public sealed class DungeonSession : ITurnHandler
         var c = Hero.Character;
         Death = new DeathRecord(c.Name, c.Ancestry.Name, c.Class.Name, c.Level, Depth, Hero.MaxDepth,
             killer, Turn / EnergyTable.GameTurnsPerNormalTurn,
-            _seed, DateTimeOffset.Now);
+            _seed, DateTimeOffset.Now, Place: Zone?.Name);
         Say("You die.");
         Publish(new HeroDiedEvent(Death));
     }

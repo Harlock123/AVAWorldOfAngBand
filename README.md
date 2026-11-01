@@ -152,10 +152,18 @@ door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-t
   own, laid over them by id. A modded monster or item comes into the game through the mod's `bridge/monsters.json` and
   `bridge/items.json`, and its names through `ashen_names.json`. The Mods window shows what each adds and switches it
   off, and "Make an example mod" writes one to copy.
+- **The province** (the spec's section 7.4, milestone 7 under way). AshenReliquary's own zones lie outside Gallowmere,
+  ten years on: the south gate opens onto the Gallows Road and the west gate onto the Rotwater Fens. Each zone is read
+  from AshenReliquary's file and drawn as AshenReliquary drew it, its shores and lava shaped the same way. A few of
+  Angband's monsters of the depth a zone stands for wander it until AshenReliquary's own creatures come. Its other ways
+  on (to the Drowned Chapel and the rest of Vardmoor) open with the next parts of the milestone.
 - **The balance bots** (the spec's M5). A hero made ready for a depth (the spec's level for it, runes, the protections
   Angband heroes have by then, potions) dives three levels from 5, 30, 60 and 90, and one made ready for the bottom
   goes down through Saint Ysmere and the Cinder. The tests hold them to it: most dives live, and a hero ready for the
   bottom puts out the Cinder.
+
+![The Gallows Road, out of Gallowmere's south gate: grass, a cobbled road, tents and a campfire, a fence and dark woods,
+as AshenReliquary drew it](docs/images/WorldOfAngBand-gallows-road.png)
 
 ![The birth window: a human priest, a Confessor, who heard it ended as Vessa's Legacy, The Lantern Rekindled, with the
 randarts option below](docs/images/WorldOfAngBand-birth.png)

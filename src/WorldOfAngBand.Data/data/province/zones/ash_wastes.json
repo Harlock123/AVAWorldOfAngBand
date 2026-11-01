@@ -1,0 +1,805 @@
+{
+ "id": "ash_wastes",
+ "name": "The Ash Wastes",
+ "level": 16,
+ "act": 4,
+ "revision": 1,
+ "xpScale": 0.8,
+ "tileset": "tileset_cinder",
+ "ashStorms": true,
+ "tagline": "Where the Prophet's fire fell, nothing grows but ash.",
+ "darkness": 0.7,
+ "rows": [
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC===CCCCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCC,C...................===.,......C.,....oo,CCCCCCCCC",
+  "CCCCCCCCCCCCCC,CC................,.====..,...........,..CCCCCCCCCC",
+  "CCCCCCCCCCCCCCCC,,...,.o.o..........===..................,CoCCCCCC",
+  "CCCCCCCCCCCCCCCCCC..................====................C..,,,CCCC",
+  "CCCCCCCCCCCCCCCCCoC.........,..,....,.==...o...,......,.....C,CCCC",
+  "CCCCCCCCCCCCCCCCoCo....................=,....o.o....,..,.....C,CCC",
+  "CCCCCCCCCCCCCCCCoC,.........,.......C...==..........,.......,.C,CC",
+  "CCCCCCCCCCCCCCCCCo,o.......,............=,=....................,CC",
+  "CCCCCCCCCCCCCCCCC,CC...........,.........==..................,..CC",
+  "CCCCCCCCCCCCCCCCCCCC...C......,....,....,===...........o........CC",
+  "CCCCCCCCCCCCCCCCCCCoC......,......,....,..,=..S....C,...........CC",
+  "CCCCCCCCCCCCCCCCCC,C,.................,..,,==...................CC",
+  "CCCCCCCCCCCCCCCCCCC,C....,.......,........===.......o...........CC",
+  "CCCCCCCCCCCCCCCCCCo,o..............,.....,.==...................CC",
+  "CCCCCCCCCCCCCCCCCCoCC.....,.,........o.....==..........,..,.....CC",
+  "CCCCCCCCCCCCCCCCCCCoC......,.......,.......==..........,.......CCC",
+  "CCCCCCCCCCCCCCCCCC,C,...........o.....,.,..,=.........,..,......CC",
+  "CCCCCCCCCCCCCCCCCCCCo......,,............,,,=.................o.CC",
+  "CCCCCCCCCCCCCCCCCCCoC.........,............,=.........,.,..,....CC",
+  "CCCCCCCCCCCCCCCCCCCoo......,.,......C......=,.........,o........CC",
+  "CCCCCCCCCCCCCCCCCC,C,...............,...B.==,..........,.......oCC",
+  "CCCCCCCCCCCCCCCCCC,C,.................o...==,...................CC",
+  "CCCCCCCCCCCCCCCCCCC,C..,,.................,=.........o.,..o....oCC",
+  "CCCCCCCCCCCCCCCCCCoCC....C...............,,=......,o..,....o..,.CC",
+  "CCCCCCCCCCCCCCCCCCCCC...............,....=,,..,.................CC",
+  "CCCCCCCCCCCCCCCCCCC,C..o.................==...,,.....,.o...o,,..CC",
+  "CCCCCCCCCCCCCCCCCCCoC....................=.........C..C....,..,CCC",
+  "CCCCCCCCCCCCCCCCCCCC,C...,...............=....................CCCC",
+  "CCCCCCCCCCCCCCCCCCC,C,.....eee...........==..,................oCCC",
+  "CCCCCCCCCCCCCCCCCCCCC,........e..........==....C..o....C.....CCCCC",
+  "CCCCCCCCCCCCCCCCCCC,Co...,.....ee.......===....,...o.......,.,,,CC",
+  "CCCCCCCCCCCCCCCCCCCCCoo.,........e....e.==.....,............CC,CCC",
+  "CCCCCCCCCCCCCCCCCCCC,,,...........eeee..==.........,...C,...CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCC,,....................................,,CCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCC,C................=...........,......,,oCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCoo................==...............ooCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCC...,.,......,..=,.....,..........o,CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCoCo.....,.........==...............CC,CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCo,o..............==,......o.......Co,CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCoCC..............=,=........,.....,CoCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCC,...........B.===.........C...C,CCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCC,CC...,.........===.............C,CCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCC,CC..........o..===.....,o,.....Co,CCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCoo,............=,=,......,....CCC,CCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCoC,.,..........===.....=......=====CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCC,....,......,,==.WWWWWWWWWWWWWWW=CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCC,,C......,....,===.W..........===W=CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCC,.....,,.....,==.W..B.....=.B==W=CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCo,C............,,..W=...=....====W=CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCo,..........,,,=..........=.====W=CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCC,CC...........,,,.=..........====W=CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCC,........,,..,,....=..=....=====W=CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCC,,............==...W........=====W=CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCoCo.....,.o....,,.,.=W..B....===B==W=CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCo..,.........,==..,.W..=..=.======W=CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCo,C.............,=.....WWWWWW.==WWWWWW=CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCoCC........,...,,=............==========CCCCCC",
+  "CCCCCCCCCCCCCCCCCCCC,C.............=,=....,.......CC,CCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCC,,,,..........,.=,=......,......o,,CCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCC.......,.....=,,............CCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCC,,,.....o.,......,,..............,o,CCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCC,..............==.,.,..........ooCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCC,CC............B..,=...............CC,CCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCC,,...,.........,.==.,....,..o,....CooCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCoo..,,............==,.,.............CoCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCo,C..........,.....=,..........,.....C,CCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC...,,....C.......==................o,CCCCCCCCCCCCCCCCCCC",
+  "CCCCCC,o,..ooC...........,,,.,.,.............CCoCCCCCCCCCCCCCCCCCC",
+  "CCCCC,,C............,....=,,......C..........,,CCCCCCCCCCCCCCCCCCC",
+  "CCCCCCo..,..........,...=,=..C,.............ooCCCCCCCCCCCCCCCCCCCC",
+  "CCC,C......o.....o.....,,=......,...........CooCCCCCCCCCCCCCCCCCCC",
+  "CCC,...o...............,,...C...............CCoCCCCCCCCCCCCCCCCCCC",
+  "CCo..C................=,...................C,CCCCCCCCCCCCCCCCCCCCC",
+  "CC.............S.....=,,..,....C...........,CoCCCCCCCCCCCCCCCCCCCC",
+  "CC...................==,...............,.,.CoCCCCCCCCCCCCCCCCCCCCC",
+  "CC...,.....o.....o...==......C,..C...,.....,C,CCCCCCCCCCCCCCCCCCCC",
+  "CC..................==,..o...........,.....o,CCCCCCCCCCCCCCCCCCCCC",
+  "CC..........o..,....,=.....................,CCCCCCCCCCCCCCCCCCCCCC",
+  "CC..................,=,....................CC,CCCCCCCCCCCCCCCCCCCC",
+  "CC...,..............==.......,.....,.......CCCCCCCCCCCCCCCCCCCCCCC",
+  "CCC.......,.......,.==...............,....,oC,,CCCCCCCCCCCCCCCCCCC",
+  "CC.............,,..,==......................CC,CCCCCCCCCCCCCCCCCCC",
+  "CC.C..............B.===.....................,,CCCCCCCCCCCCCCCCCCCC",
+  "CC.......o..,...,...,=,........o,.......,.,..,CoCCCCCCCCCCCCCCCCCC",
+  "CC.o...,.............,,..,....C..............,ooCCCCCCCCCCCCCCCCCC",
+  "CC..............,....==.....C................oo,CCCCCCCCCCCCCCCCCC",
+  "CC.....,.............=,=.....................CCoCCCCCCCCCCCCCCCCCC",
+  "CC......,.............==....o..C..............CCoCCCCCCCCCCCCCCCCC",
+  "CC..,.............,...===...,..............C..CCCCCCCCCCCCCCCCCCCC",
+  "CC..............,......=,.........e...........,CoCCCCCCCCCCCCCCCCC",
+  "CC......o..............,=........eee...........o,CCCCCCCCCCCCCCCCC",
+  "CC,C,..,...............,==...,....e............CoCCCCCCCCCCCCCCCCC",
+  "CCC,....................==..............e......oCCCCCCCCCCCCCCCCCC",
+  "CCCo.................,..=,,.,..........eee...,,,,,CCCCCCCCCCCCCCCC",
+  "CCC,o...,....C...........=,.........e...e......CCCCCCCCCCCCCCCCCCC",
+  "CCoCC,.....C.............==,.,.....eee.........,C,CCCCCCCCCCCCCCCC",
+  "CCCoC,...................===........e..........C,oCCCCCCCCCCCCCCCC",
+  "CCCCo,C..o..............,.,=...C..........C....CCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCC.....,.o...,....,.,=...................Co,CCCCCCCCCCCCCCCC",
+  "CCCCCoCo..,...............,=,......,.....,...,.o,,CCCCCCCCCCCCCCCC",
+  "CCCCCCC,,..,............,.=,=...C.............,ooCCCCCCCCCCCCCCCCC",
+  "CCCCCCo,C......,..,......,,,,.,..,.........,.,CooCCCCCCCCCCCCCCCCC",
+  "CCCCCCCoC,...,...,......B..=,.,....C,.........CCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCC,o.,,........o.....==.,.o.o.........ooCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCC..,.............==.,..............CCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCoCC,.,.....,,.....,=........,...,...CC,CCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC,C.......,,......=,.......,.......,,,CCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC,C,..............==........,......C,oCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCoCC..............=,...,....,,..,..CoCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCo..,o..........===...,..,......o,oCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC.................===..........,,.o,CCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC.................=,,..,..........,CCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC..WWWW....WWW....,==.............CCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC..W==W....==W.....==.............,CoCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC..WWWW....WWW.....==.....,.......CCoCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC..................===........,o..CCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC.......B...........==.....,.....,CC,CCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC...................,==...........CCoCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC..WWWW.....WWW......==,...........,,CCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC..W==.....W==.......==,...,.......Co,CCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC..WWWW....WWWW.......==............,,oCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC..................C...==.....,......CCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCC................C.....===.........,,.C,,CCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCC,C........,...=,,..C.........C,CCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCoC.............==.....,.......,CCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCC,,,.............==....,.....,..Co,CCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCC,CC.....,.......==.............,,oCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCC.....o.,.,...===.............C,oCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCC,C......,......===.........o...,,CCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCC,C.,............=,=.............,,,CCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCoCC............B.,==..............o,CCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCo..o..o........=,...............CoCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCC...............==............,..,C,CCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCoo...,........,...==..............,oC,CCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCoCo...,...........==,...,............C,CCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCC,...............==...........o...,.CCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCoo...C.............,,.........C,......,CC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCC....C,.........,.,=,.................CC",
+  "CCCCCCCCCCCCCCCCCCCCCCCC,CC,.....,.......S...,,.................CC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCo,,..........,....,.,===..............o.CC",
+  "CCCCCCCCCCCCCCCCCCCCCCCC,,C........,.........===.......,,.......CC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCo,C............,C.....,,................CC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCoC,.......,...........==...........,....CC",
+  "CCCCCCCCCCCCCCCCCCCCCCCoC,..........,.........==...,,......o....CC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCC....CC,....,..,.....,=............,...CC",
+  "CCCCCCCCCCCCCCCCCCCCCC,,C.o,.,....C..,....C...,=...,............CC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCC.....................==....C...,..o....CC",
+  "CCCCCCCCCCCCCCCCCCCCC,CC..........,,C........=,=...........,,...CC",
+  "CCCCCCCCCCCCCCCCCCCCCCCC.......,.,...,.......==...............,,CC",
+  "CCCCCCCCCCCCCCCCCCCC,oo.....................====.....,..,.......CC",
+  "CCCCCCCCCCCCCCCCCCCCo,....,....,........,...====..,.,.....,.....CC",
+  "CCCCCCCCCCCCCCCCCCCCo,.....................,,===........o....,,.CC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC===CCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+ ],
+ "legend": {
+  ".": {
+   "ground": "ash"
+  },
+  ",": {
+   "ground": "ash",
+   "tiles": [
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55
+   ]
+  },
+  "=": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  "~": {
+   "ground": "lava"
+  },
+  "#": {
+   "ground": "lava",
+   "objects": [
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239
+   ],
+   "bridge": true
+  },
+  "e": {
+   "ground": "embers"
+  },
+  "C": {
+   "ground": "ash",
+   "objects": [
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    153
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "o": {
+   "ground": "ash",
+   "objects": [
+    150,
+    151,
+    152
+   ],
+   "blocks": true,
+   "cover": true
+  },
+  "W": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1223,
+    1224,
+    1225,
+    1226,
+    1227,
+    1228,
+    1229
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "R": {
+   "ground": "ash",
+   "objects": [
+    1185,
+    1186
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "B": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1295
+   ],
+   "blocks": true,
+   "light": 4.5
+  },
+  "S": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    264
+   ],
+   "light": 3.5,
+   "lightColor": "#ffd9a0"
+  },
+  "X": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  " ": {
+   "ground": "none",
+   "blocks": true,
+   "blocksSight": true
+  }
+ },
+ "playerStart": [
+  46,
+  150
+ ],
+ "spawns": [
+  {
+   "at": [
+    46,
+    134
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "ash_husk",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    30,
+    126
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "fire_ant",
+     "rank": "Normal",
+     "count": 5
+    }
+   ]
+  },
+  {
+   "at": [
+    16,
+    119
+   ],
+   "radius": 2.5,
+   "pack": [
+    {
+     "creature": "ash_husk",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "vengeful"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "ash_husk",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    21,
+    115
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cinder_wraith",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "ash_husk",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    32,
+    108
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cinder_wraith",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    35,
+    95
+   ],
+   "radius": 2.5,
+   "pack": [
+    {
+     "creature": "tainted_antlion",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "fire_ant",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    40,
+    92
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "tainted_antlion",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "tainted"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "fire_ant",
+     "rank": "Normal",
+     "count": 4
+    }
+   ]
+  },
+  {
+   "at": [
+    17,
+    84
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "fire_ant",
+     "rank": "Normal",
+     "count": 4
+    },
+    {
+     "creature": "cinder_wraith",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    32,
+    66
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "inquisitor",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "inquisitor_zealot",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 17
+  },
+  {
+   "at": [
+    51,
+    52
+   ],
+   "radius": 2.5,
+   "pack": [
+    {
+     "creature": "inquisitor_captain",
+     "rank": "Elite",
+     "count": 1,
+     "affixes": [
+      "shielded"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "inquisitor",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "inquisitor_zealot",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 17
+  },
+  {
+   "at": [
+    56,
+    56
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "inquisitor_zealot",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 17
+  },
+  {
+   "at": [
+    37,
+    46
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "inquisitor",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "hasted"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "inquisitor",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 17
+  },
+  {
+   "at": [
+    32,
+    30
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cinder_wraith",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 17
+  },
+  {
+   "at": [
+    40,
+    33
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "tainted_antlion",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "mirrored"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "tainted_antlion",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "fire_ant",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 17
+  },
+  {
+   "at": [
+    47,
+    24
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "ash_husk",
+     "rank": "Normal",
+     "count": 3
+    },
+    {
+     "creature": "cinder_wraith",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 17
+  },
+  {
+   "at": [
+    40,
+    16
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "inquisitor_captain",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "vengeful"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "inquisitor",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "inquisitor_zealot",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 17
+  },
+  {
+   "at": [
+    45,
+    8
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "fire_ant",
+     "rank": "Normal",
+     "count": 5
+    }
+   ],
+   "level": 17
+  }
+ ],
+ "shrines": [
+  {
+   "id": "cairn_shrine",
+   "name": "The Cairn Field",
+   "at": [
+    41,
+    140
+   ]
+  },
+  {
+   "id": "patrol_shrine",
+   "name": "The Fallen Patrol",
+   "at": [
+    15,
+    75
+   ]
+  },
+  {
+   "id": "mountain_foot_shrine",
+   "name": "The Mountain's Foot",
+   "at": [
+    46,
+    12
+   ]
+  }
+ ],
+ "exits": [
+  {
+   "id": "camp",
+   "label": "The Ember Gate Camp",
+   "at": [
+    46,
+    153
+   ],
+   "radius": 1.5,
+   "to": "ember_gate",
+   "toExit": "wastes",
+   "arrive": [
+    46,
+    150
+   ]
+  },
+  {
+   "id": "rivers",
+   "label": "The Lava Rivers",
+   "at": [
+    37,
+    3
+   ],
+   "radius": 1.5,
+   "to": "lava_rivers",
+   "toExit": "wastes",
+   "arrive": [
+    37,
+    7
+   ]
+  }
+ ],
+ "caches": [
+  {
+   "id": "cairn_field",
+   "at": [
+    53,
+    146
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "harrowmere",
+   "at": [
+    14,
+    113
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "antlion_pits",
+   "at": [
+    42,
+    91
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "fallen_patrol",
+   "at": [
+    12,
+    76
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "muster_yard",
+   "at": [
+    56,
+    53
+   ],
+   "kind": "Reliquary",
+   "facing": 0
+  },
+  {
+   "id": "glass_flats",
+   "at": [
+    28,
+    35
+   ],
+   "kind": "Cache",
+   "facing": 0
+  }
+ ],
+ "interactables": [
+  {
+   "id": "patrol_note",
+   "name": "A knight's last letter",
+   "at": [
+    13,
+    73
+   ],
+   "tile": 1276,
+   "dialogue": "wastes_patrol_note"
+  }
+ ]
+}

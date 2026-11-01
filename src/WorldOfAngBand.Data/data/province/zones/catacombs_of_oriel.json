@@ -1,0 +1,932 @@
+{
+ "id": "catacombs_of_oriel",
+ "name": "The Catacombs of Oriel",
+ "level": 13,
+ "act": 3,
+ "revision": 1,
+ "xpScale": 0.6,
+ "tileset": "tileset_dungeon",
+ "tagline": "The abbots sleep. Something sings them dreams.",
+ "darkness": 0.92,
+ "heroLight": 4.5,
+ "rows": [
+  "##############################################################",
+  "##############################################################",
+  "########################DAaegAHAAmaeA#########################",
+  "########################B............M########################",
+  "########################h............M########################",
+  "########################B..Z,....,Z.,M########################",
+  "########################B.,.,.,.....,M########################",
+  "########################B............M########################",
+  "########################b....,..,S...M########################",
+  "########################B.......,.,..M########################",
+  "########################B.....,.,....M########################",
+  "#DAaAAAA#################LLLn.,..OLLLN##############DAAAAeea##",
+  "#B....,.M###################b.,,.M##################b.......M#",
+  "#B..Y...M###################B...,M##################f....,.dM#",
+  "#B..pp..M####DaAAAgAAmaAgmAmC...,AeAAAaAAAAAAAag####B..Z,...M#",
+  "#B.Z....M####B..i..i.,i..i..i....,i..i,.i,,i...,M###B.......M#",
+  "#B...,..aAgAAC,.....,..,...........,.,,,,..,....aeAeC..,....M#",
+  "#b,.,.,...,...,.Z...,..,.....................Z.............,M#",
+  "#B..pp.,,...,....,..q......,,.......,.......,.,.,........,.dM#",
+  "#f...........,.......,..................,..,,.,..........,,.M#",
+  "#B.....,OLLLLf....,,,......,...,.,.......,......OLLLb.......M#",
+  "#n.....,M####b....OLLLLLLLLLh...,OLLLLLLLLLB....M###h,......M#",
+  "#h..pp..M####Bi.,.M#########h..,.M#########B..,iM###B.......M#",
+  "#B.,..,.M####B....M#########n....M#########B....M###B......dM#",
+  "#f......M####B,...M#########B...,M#########B....M###B,....,.M#",
+  "#b.,....M####ni...M#########B....M#########B...iM###B...,...M#",
+  "#f,.pp,,M####B....M#########B,,..M#########B.q,.M###f..,....M#",
+  "#f....q,M####B....M#########h..,,M#########b....M###f..,.,..M#",
+  "#B,...,.M####Bi...M#########b....M#########B,.,iM###b...,..dM#",
+  "#B,..,..M####b..,.M#########B....M#########h,...M###h.....,.M#",
+  "#B..pp.,M####B,.,.AAAAaAAAAAC....AAAAAaAAmAC....M###f....q..M#",
+  "#B,..,..M####B,,,.......,...........,....,.,..,,M###B..,,...M#",
+  "#B....,.M####f.......,.,.,.,.....,,........,,...M###h.......M#",
+  "#b....,.M####f,.............,......,...q........M###B....,.dM#",
+  "#B,.pp..M####n....,.,,...,..........,,...,....,,M###B.......M#",
+  "#B......M####f,.i.,i,.i..i,.i..,..i..i..i..i....M###n......,M#",
+  "#h.,...,M#####LLLLLLLLLLLLLLb....OLLLLLLLLLLLLLLN###b,....,.M#",
+  "#n.Z..,.M###################h...,M##################B,,,....M#",
+  "#h..pp..M###################n,.,.M##################B..Z...dM#",
+  "#B.....,M###################B...,M##################B,.,....M#",
+  "#B......M###################B....M##################h.....,.M#",
+  "##B..,..M######DAaAAAAAggaAAC....agAAAAAeaAAAA######B....,OLN#",
+  "##b.,,..M######B,.,...,................,....,.M#####n,.,,.M###",
+  "##B..,,.mAAagAAC..Z...,.......,....,,.,.,..Z,.M#####B.....M###",
+  "##f...,.,......,..,I......,.,......,.....,I..,M#####b.....M###",
+  "##B,.....,.,....,.....,..,.............,......AAAAAAC,,.,.M###",
+  "##f.......q..,.,...,....,.,..................,..,.....,.,.M###",
+  "##f.......,.,......,....S....,.....................,..,...M###",
+  "###LLLLLLLLLLLLB....,.,..q...,..,....,,.......,......OLLLLN###",
+  "###############B.............,...............,OLLLLLLN########",
+  "###############B,...,................q..,,..,.M###############",
+  "###############B.............,...,....,,.,,..,M###############",
+  "###############B..,I,..,..,..,.,.........,I...M###############",
+  "###############B....,...........,.,......,,...M###############",
+  "###############B....,...,...,,,...............M###############",
+  "################LLLLLLLLLLLLB...,OLLLLLLLLLLLLN###############",
+  "############################B.,..M############################",
+  "############################B....M############################",
+  "############################B....M############################",
+  "############################B..,.M############################",
+  "#############DAAAAAgamgeAgAAC.,,.AAeaAeAAAAAaAAA##############",
+  "#############b..........,......,.,.........,....M#############",
+  "#############B..Z........,.................,.Z..M#############",
+  "#############f................,........,..,.,.,,M#############",
+  "#############B..........,...,.............,,....M#############",
+  "#############f,...u.,.u...u..,,....u...u...u....M#############",
+  "#############B....,............,.,......,.......M#############",
+  "#############B....,.,....,.........,,..,q.......M#############",
+  "#############B.....,.,..,..........,....,.......M#############",
+  "#############b.........,,..,....,..,......,.,,..M#############",
+  "#############h..,.u...u..,u.,.,....u...u,..u,,,.M#############",
+  "#############B,.....,...........,,,.,......,....M#############",
+  "#############B.....,..q...,......,.....,........M#############",
+  "#############h....,.,.,....,,,...,....,.,.......M#############",
+  "#############B......,...,...,.,.....,..,....,...M#############",
+  "#############B.,,.u...u...u...,....u...u,.,u..,,M#############",
+  "#############B..............,..,.,.,........,.,.M#############",
+  "#############b,....,..,..,.,..q.,.....,,..,,,...M#############",
+  "#############h,..,.....,...,..........,.........M#############",
+  "#############B..Z...,..,,...................,Z.,M#############",
+  "#############B...........,.....,....,.,.........M#############",
+  "##############LLLLLLLLLLLLLLB....OLLLLLLLLLLLLLLN#############",
+  "############################f,,..M############################",
+  "############################B..,.M############################",
+  "############################b,...M############################",
+  "############################h,...M############################",
+  "########################DeeeC....AAAe#########################",
+  "########################B.......,.,,.M########################",
+  "########################b......,..,..M########################",
+  "########################B..Z.....,Z,.M########################",
+  "########################B.,......S...M########################",
+  "########################B...........,M########################",
+  "########################f..,...,.,,..M########################",
+  "#########################LLLLLHLLLLLLN########################",
+  "##############################################################",
+  "##############################################################"
+ ],
+ "legend": {
+  ".": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  ",": {
+   "ground": "floor",
+   "tiles": [
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47
+   ]
+  },
+  "#": {
+   "ground": "none",
+   "blocks": true,
+   "blocksSight": true
+  },
+  "A": {
+   "ground": "none",
+   "objects": [
+    65,
+    69,
+    97
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "B": {
+   "ground": "none",
+   "objects": [
+    64,
+    68,
+    96
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "a": {
+   "ground": "none",
+   "objects": [
+    103
+   ],
+   "blocks": true,
+   "blocksSight": true,
+   "light": 3.5
+  },
+  "b": {
+   "ground": "none",
+   "objects": [
+    102
+   ],
+   "blocks": true,
+   "blocksSight": true,
+   "light": 3.5
+  },
+  "e": {
+   "ground": "none",
+   "objects": [
+    107
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "f": {
+   "ground": "none",
+   "objects": [
+    106
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "g": {
+   "ground": "none",
+   "objects": [
+    101
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "h": {
+   "ground": "none",
+   "objects": [
+    100
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "m": {
+   "ground": "none",
+   "objects": [
+    105
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "n": {
+   "ground": "none",
+   "objects": [
+    104
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "C": {
+   "ground": "none",
+   "objects": [
+    73
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "D": {
+   "ground": "none",
+   "objects": [
+    74
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "L": {
+   "ground": "none",
+   "objects": [
+    80
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "M": {
+   "ground": "none",
+   "objects": [
+    81
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "N": {
+   "ground": "none",
+   "objects": [
+    88
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "O": {
+   "ground": "none",
+   "objects": [
+    89
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "H": {
+   "ground": "none",
+   "objects": [
+    285
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "I": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    110,
+    111
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "i": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    178,
+    180,
+    181
+   ],
+   "blocks": true
+  },
+  "p": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    136,
+    137
+   ],
+   "blocks": true
+  },
+  "Y": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    134
+   ],
+   "blocks": true,
+   "light": 3.0,
+   "lightColor": "#c9a8ff"
+  },
+  "d": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    202,
+    203,
+    204,
+    205
+   ],
+   "blocks": true
+  },
+  "u": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    194,
+    197,
+    199,
+    200
+   ],
+   "blocks": true
+  },
+  "Z": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    167
+   ],
+   "blocks": true,
+   "light": 4.5
+  },
+  "q": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183
+   ],
+   "blocks": false
+  },
+  "S": {
+   "ground": "floor",
+   "tiles": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "objects": [
+    265
+   ],
+   "blocks": false,
+   "light": 3.5
+  }
+ },
+ "playerStart": [
+  30,
+  6
+ ],
+ "spawns": [
+  {
+   "at": [
+    20,
+    17
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "catacomb_dead",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    40,
+    18
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "catacomb_dead",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "choir_acolyte",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    30,
+    26
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "phantom",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "catacomb_dead",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    15,
+    26
+   ],
+   "radius": 1.2,
+   "pack": [
+    {
+     "creature": "catacomb_dead",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    46,
+    25
+   ],
+   "radius": 1.2,
+   "pack": [
+    {
+     "creature": "frost_wraith",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    24,
+    33
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "mirror_cultist",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "choir_acolyte",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    4,
+    20
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "choir_acolyte",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "mirror_cultist",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    5,
+    32
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "choir_acolyte",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "mirrored"
+     ]
+    },
+    {
+     "creature": "mirror_cultist",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    56,
+    16
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "catacomb_dead",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    56,
+    28
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "whisperer",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "catacomb_dead",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    22,
+    46
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "catacomb_dead",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "choir_acolyte",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 14
+  },
+  {
+   "at": [
+    38,
+    48
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "mirror_cultist",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "shielded"
+     ]
+    },
+    {
+     "creature": "mirror_cultist",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "choir_acolyte",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 14
+  },
+  {
+   "at": [
+    30,
+    52
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "whisperer",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "phantom",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 14
+  },
+  {
+   "at": [
+    20,
+    67
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "catacomb_dead",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 14
+  },
+  {
+   "at": [
+    41,
+    67
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "choir_acolyte",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "catacomb_dead",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 14
+  },
+  {
+   "at": [
+    30,
+    74
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "hollow_abbot",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "vengeful"
+     ]
+    },
+    {
+     "creature": "choir_acolyte",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 14,
+   "flag": "act3.bell_tower",
+   "value": "open",
+   "says": "Somewhere to the south, stone shifts and falls: the stair up to the Bell Tower is open."
+  },
+  {
+   "at": [
+    30,
+    89
+   ],
+   "radius": 1.8,
+   "pack": [
+    {
+     "creature": "mirror_cultist",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "mirrored",
+      "hasted"
+     ]
+    },
+    {
+     "creature": "choir_acolyte",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 14
+  }
+ ],
+ "shrines": [
+  {
+   "id": "catacomb_stair_shrine",
+   "name": "The Catacomb Stair",
+   "at": [
+    33,
+    8
+   ]
+  },
+  {
+   "id": "abbots_hall_shrine",
+   "name": "The Abbots' Hall Shrine",
+   "at": [
+    24,
+    47
+   ]
+  },
+  {
+   "id": "bell_stair_shrine",
+   "name": "The Bell Stair Shrine",
+   "at": [
+    33,
+    90
+   ]
+  }
+ ],
+ "exits": [
+  {
+   "id": "woods",
+   "label": "The Hollow Woods",
+   "at": [
+    30,
+    3
+   ],
+   "radius": 1.5,
+   "to": "hollow_woods",
+   "toExit": "catacombs",
+   "arrive": [
+    30,
+    6
+   ]
+  },
+  {
+   "id": "bell_tower",
+   "label": "The Bell Tower",
+   "at": [
+    30,
+    92
+   ],
+   "radius": 1.5,
+   "requires": {
+    "act3.bell_tower": "open"
+   },
+   "sealedText": "The stair up to the Bell Tower is choked with fallen stone. Something in the abbots' crypt holds it shut.",
+   "to": "bell_tower",
+   "toExit": "catacombs",
+   "arrive": [
+    30,
+    89
+   ]
+  }
+ ],
+ "caches": [
+  {
+   "id": "ossuary_west",
+   "at": [
+    15,
+    28
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "choir_chapel",
+   "at": [
+    6,
+    38
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "penitents_cells",
+   "at": [
+    57,
+    22
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "abbots_hall",
+   "at": [
+    44,
+    49
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "abbots_crypt",
+   "at": [
+    30,
+    78
+   ],
+   "kind": "Reliquary",
+   "facing": 0
+  },
+  {
+   "id": "bell_stair",
+   "at": [
+    26,
+    91
+   ],
+   "kind": "Cache",
+   "facing": 0
+  }
+ ],
+ "npcs": [
+  {
+   "id": "caddoc",
+   "name": "Brother Caddoc",
+   "title": "Penitent",
+   "at": [
+    57,
+    37
+   ],
+   "facing": 6,
+   "portrait": "flare/male10",
+   "dialogue": "catacombs_caddoc",
+   "requires": {
+    "act3.caddoc": "met",
+    "act3.penitent": ""
+   },
+   "look": {
+    "head": "leather_hood",
+    "chest": "mage_vest",
+    "hands": "cloth_gloves",
+    "legs": "cloth_pants",
+    "feet": "cloth_sandals",
+    "main": "staff"
+   }
+  }
+ ],
+ "interactables": [
+  {
+   "id": "page_5",
+   "name": "A burned page",
+   "at": [
+    46,
+    33
+   ],
+   "tile": 164,
+   "dialogue": "library_page_5"
+  },
+  {
+   "id": "page_6",
+   "name": "A burned page",
+   "at": [
+    3,
+    30
+   ],
+   "tile": 164,
+   "dialogue": "library_page_6"
+  },
+  {
+   "id": "page_7",
+   "name": "A burned page",
+   "at": [
+    44,
+    72
+   ],
+   "tile": 164,
+   "dialogue": "library_page_7"
+  }
+ ]
+}

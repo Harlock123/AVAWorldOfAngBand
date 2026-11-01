@@ -1,0 +1,787 @@
+{
+ "id": "wyrms_nest",
+ "name": "The Wyrm's Nest",
+ "level": 18,
+ "act": 4,
+ "revision": 2,
+ "xpScale": 0.8,
+ "tileset": "tileset_cinder",
+ "tagline": "The mountain's heart is hollow, and something sleeps in it.",
+ "darkness": 0.9,
+ "heroLight": 5.5,
+ "rows": [
+  "                                                                  ",
+  "                              31113                               ",
+  "                              2===3                               ",
+  "                              2===3                               ",
+  "                            312===113                             ",
+  "                        31114.4===..11313                         ",
+  "                     3114~~~~~~===~~~~4~1113                      ",
+  "                   314~~~~~~~~~===~~~~~~~~~113                    ",
+  "                 314,~~~~~bbbbb===bbbbb~~~~~.13                   ",
+  "                 2,~~~~~aaabbbb...bbbbccc~~~~~13                  ",
+  "                 2~~~~aaaaaabbb...bbbcccccc~~~~13                 ",
+  "                34~~~aaaaaaa,.....,..ccccccc~~~~3                 ",
+  "                2~~~aaaaaa.,...........cccccc~~~13                ",
+  "                2~~~aaaaaa.......,...,.cccccc~~~.3                ",
+  "               34~~!aaaaa......,.......,ddddd!~~13                ",
+  "               2.~~~gggggg,............dddddd~~~.3                ",
+  "               32~~~gggggg.............dddddd~~~3                 ",
+  "                32~~~ggggggg.........ddddddd~~~3                  ",
+  "                 32~~~ggggggfff...fffdddddd~~~3                   ",
+  "                  2~~~~~gggffff...ffffddd~~~~~3                   ",
+  "                  2..2~~~~fffff...fffff~~~~~33                    ",
+  "                  33332~~!~~~~~...~~~~~!~~2.3                     ",
+  "                      3332~~~~~...~~~~~~3333                      ",
+  "                         3332..,.3332...3                         ",
+  "                            2...3   2...13                        ",
+  "                            2...3   2....3                        ",
+  "                            2...13  2....13                       ",
+  "                            2....3  2.....13                      ",
+  "                            2....3  32.....13                     ",
+  "                            32...3   32.....1111111113            ",
+  "                             2...3    32.............113          ",
+  "                             2...3     32............,.3          ",
+  "                             2...3      2.,.........,..13         ",
+  "                            34...3     34...,....eee....113       ",
+  "                            2....3     2........eeeee....,3       ",
+  "                            2....3     2.......eeeXeee...3        ",
+  "                           34...3      2.,......eeeee,...3        ",
+  "                           2....3      2..,,,....eee.....3        ",
+  "                          34....3      2,.......,.,......3        ",
+  "                          2.....3      32..B........,..,.3        ",
+  "                         34....3       34,.............33         ",
+  "                         2.....3      34...............3          ",
+  "                        34....3     314.......,......33           ",
+  "                        2.....3  3114.......332..32.3             ",
+  "                        2....3  34........33  333 33              ",
+  "                       34....3314........3                        ",
+  "                       2....334.......333                         ",
+  "                       2....34......33                            ",
+  "                    3114...34......3                              ",
+  "                   34....,.4.....33                               ",
+  "                 314...,........3                                 ",
+  "               314...,.,...,....13                                ",
+  "              34.................3                                ",
+  "              2.....B.......B....13                               ",
+  "              2...................3                               ",
+  "             34,.....,.,.......,..13                              ",
+  "             2...,.............,..,3                              ",
+  "             2.,,.........,,...S..3                               ",
+  "             32..,................3                               ",
+  "              32.,.........,.....,3                               ",
+  "               32.......B......,,3                                ",
+  "                2..............13                                 ",
+  "                3332............113                               ",
+  "                   32.2.,.32......113                             ",
+  "                    332...332.......113                           ",
+  "                      2...3 32........13                          ",
+  "                      2...3  3332......113                        ",
+  "                      2...3     32.......3                        ",
+  "                      2...3      332.....13                       ",
+  "                      2...3        32.....13 313                  ",
+  "                     34...3         32.....114.11113              ",
+  "                     2....3          32..,......,..113            ",
+  "                    34....3          314........,...,113          ",
+  "                    2....3          34......,..........13         ",
+  "                   34....3         34.....,.............3         ",
+  "                   2....3          2.............~,.....13        ",
+  "                  34....3          2....,.....~~~~~~~.,.,13       ",
+  "                 34....3          34........,~~~~~~~~~....3       ",
+  "                 2.....3          2....,.....~~~~!~~~~,..3        ",
+  "                 2....3           32.........~~~~~~~~~...3        ",
+  "                34...3             2..,.......~~~~~~~....3        ",
+  "                2....3             2,............~.,....3         ",
+  "                2....3             2............,.......3         ",
+  "                2...3              332....,........,....3         ",
+  "                2...13               332..,.......,..333          ",
+  "              314....1113              32...........3             ",
+  "          31114.......,.113             332....2.333              ",
+  "          2,,.....,......,3              34....33                 ",
+  "         34....,,.....,...113           34....3                   ",
+  "        34................,.3           2.....3                   ",
+  "        2...................3          34....3                    ",
+  "        2~~~~~~~...,........3         34.....3                    ",
+  "        2~~~!~~~.,..........3        34.....3                     ",
+  "        2~~~~~~~.........,..3        2.....3                      ",
+  "        2......,,...........3       34....3                       ",
+  "        2...............,..3       34.....3                       ",
+  "        32.................3      34.....3                        ",
+  "         332..,...........13      2.....3                         ",
+  "           2.2.............113   34....3                          ",
+  "           333332..2.32......3   2.....3                          ",
+  "                33333 32.....13  2....3                           ",
+  "                       32.....3  2....3                           ",
+  "                        32....3 34...3                            ",
+  "                         32...3 2....3                            ",
+  "                          2...3 2....3                            ",
+  "                          2...132....3                            ",
+  "                          2....14,..113                           ",
+  "                          2...........13                          ",
+  "                         34..,.........13                         ",
+  "                         2.,,.,..,......13                        ",
+  "                         2...,.......B.,.3                        ",
+  "                         2......,,.......3                        ",
+  "                         2...............3                        ",
+  "                         2...........,...3                        ",
+  "                         2....S,........,3                        ",
+  "                         32........,.,..3                         ",
+  "                          2...........,3                          ",
+  "                          332........33                           ",
+  "                            3332...33                             ",
+  "                               2...3                              ",
+  "                               2...3                              ",
+  "                               2...3                              ",
+  "                               3333                               ",
+  "                                                                  "
+ ],
+ "legend": {
+  ".": {
+   "ground": "ash"
+  },
+  ",": {
+   "ground": "ash",
+   "tiles": [
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55
+   ]
+  },
+  "=": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  "~": {
+   "ground": "lava"
+  },
+  "#": {
+   "ground": "lava",
+   "objects": [
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239
+   ],
+   "bridge": true
+  },
+  "e": {
+   "ground": "embers"
+  },
+  "C": {
+   "ground": "ash",
+   "objects": [
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    153
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "o": {
+   "ground": "ash",
+   "objects": [
+    150,
+    151,
+    152
+   ],
+   "blocks": true,
+   "cover": true
+  },
+  "W": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1223,
+    1224,
+    1225,
+    1226,
+    1227,
+    1228,
+    1229
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "R": {
+   "ground": "ash",
+   "objects": [
+    1185,
+    1186
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "B": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1295
+   ],
+   "blocks": true,
+   "light": 4.5
+  },
+  "S": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    264
+   ],
+   "light": 3.5,
+   "lightColor": "#ffd9a0"
+  },
+  "X": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  " ": {
+   "ground": "none",
+   "blocks": true,
+   "blocksSight": true
+  },
+  "!": {
+   "ground": "lava",
+   "light": 3.0,
+   "lightColor": "#ff8a3a"
+  },
+  "a": {
+   "ground": "ash",
+   "tiles": [
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55
+   ],
+   "crumbles": "a"
+  },
+  "b": {
+   "ground": "ash",
+   "tiles": [
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55
+   ],
+   "crumbles": "b"
+  },
+  "c": {
+   "ground": "ash",
+   "tiles": [
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55
+   ],
+   "crumbles": "c"
+  },
+  "d": {
+   "ground": "ash",
+   "tiles": [
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55
+   ],
+   "crumbles": "d"
+  },
+  "f": {
+   "ground": "ash",
+   "tiles": [
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55
+   ],
+   "crumbles": "f"
+  },
+  "g": {
+   "ground": "ash",
+   "tiles": [
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55
+   ],
+   "crumbles": "g"
+  },
+  "1": {
+   "ground": "ash",
+   "objects": [
+    64,
+    68
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "2": {
+   "ground": "ash",
+   "objects": [
+    65,
+    69
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "4": {
+   "ground": "ash",
+   "objects": [
+    72,
+    76,
+    96,
+    98,
+    100,
+    102
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "3": {
+   "ground": "ash",
+   "objects": [
+    74,
+    78
+   ],
+   "blocks": true,
+   "blocksSight": true
+  }
+ },
+ "playerStart": [
+  33,
+  116
+ ],
+ "spawns": [
+  {
+   "at": [
+    33,
+    107
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "fire_ant",
+     "rank": "Normal",
+     "count": 5
+    }
+   ]
+  },
+  {
+   "at": [
+    20,
+    94
+   ],
+   "radius": 3,
+   "pack": [
+    {
+     "creature": "fire_ant",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "hasted"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "fire_ant",
+     "rank": "Normal",
+     "count": 5
+    }
+   ]
+  },
+  {
+   "at": [
+    23,
+    88
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "tainted_antlion",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "fire_ant",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    21,
+    74
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "ash_husk",
+     "rank": "Normal",
+     "count": 3
+    },
+    {
+     "creature": "cinder_wraith",
+     "rank": "Normal",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "at": [
+    41,
+    75
+   ],
+   "radius": 2.5,
+   "pack": [
+    {
+     "creature": "cinder_drake",
+     "rank": "Normal",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "at": [
+    48,
+    83
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cinder_drake",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "vengeful"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "cinder_drake",
+     "rank": "Normal",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "at": [
+    24,
+    56
+   ],
+   "radius": 3,
+   "pack": [
+    {
+     "creature": "inquisitor_captain",
+     "rank": "Elite",
+     "count": 1,
+     "affixes": [
+      "shielded"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "inquisitor",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "inquisitor_zealot",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 19
+  },
+  {
+   "at": [
+    18,
+    52
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "inquisitor_zealot",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "cinder_wraith",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 19
+  },
+  {
+   "at": [
+    45,
+    38
+   ],
+   "radius": 2.5,
+   "pack": [
+    {
+     "creature": "cinder_drake",
+     "rank": "Elite",
+     "count": 1,
+     "affixes": [
+      "tainted"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "cinder_drake",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 19
+  },
+  {
+   "at": [
+    40,
+    29
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "tainted_antlion",
+     "rank": "Champion",
+     "count": 1,
+     "affixes": [
+      "mirrored"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "tainted_antlion",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "fire_ant",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 19
+  },
+  {
+   "at": [
+    32,
+    14
+   ],
+   "radius": 0,
+   "pack": [
+    {
+     "creature": "vorthrax",
+     "rank": "Herald",
+     "count": 1
+    }
+   ],
+   "level": 18
+  }
+ ],
+ "shrines": [
+  {
+   "id": "nest_mouth_shrine",
+   "name": "The Mouth of the Nest",
+   "at": [
+    30,
+    114
+   ]
+  },
+  {
+   "id": "vigil_shrine",
+   "name": "The Vigil",
+   "at": [
+    31,
+    57
+   ]
+  }
+ ],
+ "exits": [
+  {
+   "id": "rivers",
+   "label": "The Lava Rivers",
+   "at": [
+    33,
+    121
+   ],
+   "radius": 1.5,
+   "to": "lava_rivers",
+   "toExit": "nest",
+   "arrive": [
+    33,
+    116
+   ]
+  },
+  {
+   "id": "reliquary",
+   "label": "The Ember Gate",
+   "at": [
+    32,
+    3
+   ],
+   "radius": 1.5,
+   "to": "reliquary",
+   "toExit": "gate",
+   "arrive": [
+    32,
+    6
+   ],
+   "requires": {
+    "act4.vorthrax": "slain"
+   },
+   "sealedText": "The Ember Gate is shut, and the heat behind it breathes. Something guards it that has not shown itself yet."
+  }
+ ],
+ "caches": [
+  {
+   "id": "the_mouth",
+   "at": [
+    38,
+    114
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "bone_gallery",
+   "at": [
+    24,
+    88
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "the_roost",
+   "at": [
+    39,
+    82
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "the_vigil",
+   "at": [
+    18,
+    58
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "the_clutch",
+   "at": [
+    54,
+    39
+   ],
+   "kind": "Reliquary",
+   "facing": 0
+  }
+ ],
+ "interactables": [
+  {
+   "id": "egg",
+   "name": "A warm egg",
+   "at": [
+    50,
+    35
+   ],
+   "action": "egg",
+   "dialogue": "nest_egg"
+  },
+  {
+   "id": "vigil_orders",
+   "name": "The Vigil's orders",
+   "at": [
+    26,
+    52
+   ],
+   "tile": 1276,
+   "dialogue": "nest_vigil_orders"
+  }
+ ]
+}

@@ -1,0 +1,550 @@
+{
+ "id": "cinder_throne",
+ "name": "The Cinder Throne",
+ "level": 20,
+ "act": 4,
+ "revision": 1,
+ "xpScale": 0.8,
+ "tileset": "tileset_cinder",
+ "tagline": "He has been building a god out of bones, and he has kept a place for your heart.",
+ "darkness": 0.88,
+ "heroLight": 6.0,
+ "rows": [
+  "                                                    ",
+  "                                                    ",
+  "                       WWW  WWW                     ",
+  "                  WWWWWW,WWWW=WWWWW                 ",
+  "              WWWWW===============WWWWW             ",
+  "            WWW=======,===============WWW           ",
+  "           WW~==============,====,====~~WWW         ",
+  "         WWW~~~======================~~~~~WW        ",
+  "        WW~~!~~~===============,====~~~!~~~WWW      ",
+  "       WW=~~~~~===,,======b===,==,=,=~~~~~===WW     ",
+  "     WWW,==~~~===,=====b=bbb=b========~~~==,==WW    ",
+  "     W=============B,===b===b,===B=====,===,===W    ",
+  "    WW=========,=============,====,====,=======W    ",
+  "    W==,~~~======Z===,====T=====,==Z=====~~~===WW   ",
+  "    W==~~~~~===========,=====,==========~~~~~===W   ",
+  "    W=~~~!~~~========R==,====,=R=,=====~~~!~~~==W   ",
+  "   WW==~~~~~,=,====,==========,========,~~~~~,==WW  ",
+  "   W====~~~==============,=====,==,======~~~=====W  ",
+  "   W=========,,=======,===============,=========WW  ",
+  "   WW=================,=,=====================,==W  ",
+  "    W====,===========R======,==R================WW  ",
+  "    WW==========================================W   ",
+  "     W=====,,====Z===============,,Z==========,WW   ",
+  "     W=======,=========B,====B,===============WW    ",
+  "     WW===================================,===W     ",
+  "      WWW===,###~~~~~==============~~###~~~=WWW     ",
+  "        W=~~~###~~~~~~~~========~~~~~###~~~WW       ",
+  "        WWW~~=====,=,~~~~###~~~~~~~=======WW        ",
+  "          WWW===========~###~~~~========WWW         ",
+  "            W=======,====,======,=====WWW           ",
+  "            W===WWW===========,=,===WWW             ",
+  "            W===W WWWWW======WWWWWWWW               ",
+  "            W===W     WW=====W                      ",
+  "            W===W      W=====W                      ",
+  "            W===W      W=====W                      ",
+  "            W===W WWWWWW=====WWWWWW                 ",
+  "            W===W W==,,=========,=W                 ",
+  "            W===W W==========,,===W                 ",
+  "            W===W W=B===========B=W                 ",
+  "            W===W W=,=,===========W                 ",
+  "            W===W W===============W                 ",
+  "            W===W W===============W                 ",
+  "            W===W W==========,====W                 ",
+  "            W===W W===============W                 ",
+  "            W===W W==,============W                 ",
+  "            W===W W=====,=========W                 ",
+  "            W===W W===============W                 ",
+  "            W===W W==,============W                 ",
+  "            W===W W===============W                 ",
+  "            W===W W=B========,,=B=W                 ",
+  "            W===W W=======,=,=====W                 ",
+  "            W===W W============,==W                 ",
+  "            W===W WWWW=========WWWW                 ",
+  "            W===WWWWWW=========W                    ",
+  "            W==================W                    ",
+  "            W==================W                    ",
+  "            WWWWWWWWWW=========W                    ",
+  "                     W=S=======W                    ",
+  "                     W=========W                    ",
+  "                     W=========W                    ",
+  "                     W=========W                    ",
+  "                     W=========W                    ",
+  "                     W=========W                    ",
+  "                     WWWWWWWWWWW                    "
+ ],
+ "legend": {
+  ".": {
+   "ground": "ash"
+  },
+  ",": {
+   "ground": "ash",
+   "tiles": [
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55
+   ]
+  },
+  "=": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  "~": {
+   "ground": "lava"
+  },
+  "#": {
+   "ground": "lava",
+   "objects": [
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239
+   ],
+   "bridge": true
+  },
+  "e": {
+   "ground": "embers"
+  },
+  "C": {
+   "ground": "ash",
+   "objects": [
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    153
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "o": {
+   "ground": "ash",
+   "objects": [
+    150,
+    151,
+    152
+   ],
+   "blocks": true,
+   "cover": true
+  },
+  "W": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1223,
+    1224,
+    1225,
+    1226,
+    1227,
+    1228,
+    1229
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "R": {
+   "ground": "ash",
+   "objects": [
+    1185,
+    1186
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "B": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1295
+   ],
+   "blocks": true,
+   "light": 4.5
+  },
+  "S": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    264
+   ],
+   "light": 3.5,
+   "lightColor": "#ffd9a0"
+  },
+  "X": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  " ": {
+   "ground": "none",
+   "blocks": true,
+   "blocksSight": true
+  },
+  "!": {
+   "ground": "lava",
+   "light": 3.5,
+   "lightColor": "#ff8a3a"
+  },
+  "Z": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025
+   ],
+   "objects": [
+    1241,
+    1242,
+    1243,
+    1244
+   ],
+   "blocks": true
+  },
+  "T": {
+   "ground": "ash",
+   "tiles": [
+    1024
+   ],
+   "objects": [
+    1294
+   ],
+   "blocks": true,
+   "light": 4.0,
+   "lightColor": "#ffb070"
+  },
+  "b": {
+   "ground": "ash",
+   "tiles": [
+    52,
+    53,
+    54,
+    55
+   ],
+   "objects": [
+    1187,
+    1189,
+    1190,
+    1192
+   ],
+   "blocks": true,
+   "light": 2.0,
+   "lightColor": "#ff9050"
+  }
+ },
+ "playerStart": [
+  26,
+  59
+ ],
+ "spawns": [
+  {
+   "at": [
+    26,
+    17
+   ],
+   "radius": 2.5,
+   "pack": [
+    {
+     "creature": "malachar",
+     "rank": "Prophet",
+     "count": 1,
+     "leads": true
+    },
+    {
+     "creature": "inquisitor",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "inquisitor_zealot",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 20,
+   "unless": {
+    "act5.malachar": "spared"
+   }
+  },
+  {
+   "at": [
+    18,
+    18
+   ],
+   "radius": 0,
+   "pack": [
+    {
+     "creature": "mother_sallow",
+     "rank": "Herald",
+     "count": 1,
+     "echo": true,
+     "echoHealth": 0.4,
+     "echoPhases": 1,
+     "dormant": true
+    }
+   ],
+   "level": 16,
+   "unless": {
+    "act1.sallow_relic": "destroyed"
+   }
+  },
+  {
+   "at": [
+    34,
+    18
+   ],
+   "radius": 0,
+   "pack": [
+    {
+     "creature": "ser_hadric",
+     "rank": "Herald",
+     "count": 1,
+     "echo": true,
+     "echoHealth": 0.4,
+     "echoPhases": 1,
+     "dormant": true
+    }
+   ],
+   "level": 16,
+   "unless": {
+    "act2.hadric_relic": "returned"
+   }
+  },
+  {
+   "at": [
+    20,
+    12
+   ],
+   "radius": 0,
+   "pack": [
+    {
+     "creature": "choir_agnete",
+     "rank": "Herald",
+     "count": 1,
+     "echo": true,
+     "echoHealth": 0.4,
+     "echoPhases": 1,
+     "dormant": true
+    }
+   ],
+   "level": 16,
+   "requires": {
+    "act3.candles": ""
+   }
+  },
+  {
+   "at": [
+    20,
+    12
+   ],
+   "radius": 0,
+   "pack": [
+    {
+     "creature": "choir_agnete",
+     "rank": "Herald",
+     "count": 1,
+     "echo": true,
+     "echoHealth": 0.4,
+     "echoPhases": 1,
+     "dormant": true,
+     "alone": true
+    }
+   ],
+   "level": 16,
+   "requires": {
+    "act3.candles": "snuffed"
+   }
+  },
+  {
+   "at": [
+    32,
+    12
+   ],
+   "radius": 0,
+   "pack": [
+    {
+     "creature": "vorthrax",
+     "rank": "Herald",
+     "count": 1,
+     "echo": true,
+     "echoHealth": 0.4,
+     "echoPhases": 1,
+     "dormant": true
+    }
+   ],
+   "level": 16,
+   "unless": {
+    "act4.egg": "smashed"
+   }
+  },
+  {
+   "at": [
+    26,
+    44
+   ],
+   "radius": 3,
+   "pack": [
+    {
+     "creature": "inquisitor_captain",
+     "rank": "Elite",
+     "count": 1,
+     "affixes": [
+      "shielded"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "inquisitor",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "inquisitor_zealot",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 20
+  }
+ ],
+ "gates": [
+  {
+   "id": "hidden_way",
+   "name": "The Order's hidden ward",
+   "cells": [
+    [
+     13,
+     53
+    ],
+    [
+     14,
+     53
+    ],
+    [
+     15,
+     53
+    ]
+   ],
+   "requires": {
+    "act4.beacon": "dark"
+   }
+  }
+ ],
+ "shrines": [
+  {
+   "id": "throne_landing_shrine",
+   "name": "The Last Landing",
+   "at": [
+    23,
+    57
+   ]
+  }
+ ],
+ "exits": [
+  {
+   "id": "stair",
+   "label": "The Reliquary",
+   "at": [
+    26,
+    62
+   ],
+   "radius": 1.5,
+   "to": "reliquary",
+   "toExit": "throne",
+   "arrive": [
+    26,
+    59
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "malachar_spared",
+   "name": "Malachar Vane",
+   "title": "Spared",
+   "at": [
+    26,
+    15
+   ],
+   "facing": 2,
+   "still": true,
+   "dialogue": "malachar_spared",
+   "requires": {
+    "act5.malachar": "spared"
+   },
+   "look": {
+    "head": "mage_hood",
+    "chest": "mage_vest",
+    "hands": "mage_sleeves",
+    "legs": "mage_skirt",
+    "feet": "mage_boots"
+   }
+  }
+ ],
+ "interactables": [
+  {
+   "id": "throne",
+   "name": "The Cinder Throne",
+   "at": [
+    26,
+    14
+   ],
+   "dialogue": "cinder_throne_seat",
+   "blocks": false
+  }
+ ]
+}

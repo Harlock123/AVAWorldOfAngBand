@@ -1,0 +1,964 @@
+{
+ "id": "reliquary",
+ "name": "The Reliquary",
+ "level": 19,
+ "act": 4,
+ "revision": 2,
+ "xpScale": 0.8,
+ "tileset": "tileset_cinder",
+ "tagline": "Three hundred years the Order kept him here. Then a High Lector broke the seals.",
+ "darkness": 0.92,
+ "heroLight": 6.0,
+ "rows": [
+  "                          WWWWW                         ",
+  "                          W===W                         ",
+  "                          W===W                         ",
+  "                     WWWWWW===WWWWWW                    ",
+  "                     W==,=====,====W                    ",
+  "                     W=B=========B=W                    ",
+  "                     W=============W                    ",
+  "                     W====,==,=====W                    ",
+  "                     W=============W                    ",
+  "                     W=============W                    ",
+  "                     W===S=========W                    ",
+  "                     W=============W                    ",
+  "                     W==,=======,==W                    ",
+  "                     W=============W                    ",
+  "                     W=============W                    ",
+  "                     WWWWWW===WWWWWW                    ",
+  "                          W===W                         ",
+  "                          W===W                         ",
+  "                          W===W                         ",
+  "                WWWWWWWWWWW===WWWWWWWWWWW               ",
+  "                W=======================W               ",
+  "                W=B===========,===,===B=W               ",
+  "                W=,=====,==============,W               ",
+  "                W===R====,==========R===W               ",
+  "                W========,==============W               ",
+  "         WWWWWWWW===,============,======W               ",
+  "         W==============================W               ",
+  "         W===================,===,======W               ",
+  "         W==========R====,==========R=,=W               ",
+  "         W===WWWW===========,===========W               ",
+  "         W==BW  W=====,================,W               ",
+  "         W===W  W======,================W               ",
+  "         W===W  W================,======W               ",
+  "         W===W  W=B=====,=============B=W               ",
+  "         W===W  W==========,============W               ",
+  "         W===W  WWWWWWWWWWW===WWWWWWWWWWW               ",
+  "         W==BW            W===W                         ",
+  "         W===W            W===W                         ",
+  "         W===W            W===W                         ",
+  "         W===W WWWWWWWWWWWW===WWWWWWWWWWWW              ",
+  "         W===W W===========,=============W              ",
+  "         W===W W=B==,==,===============B=W              ",
+  "         W==BW W=========================W              ",
+  "         W===W W===R=,===,===========R===W              ",
+  "         W===W W=========================W              ",
+  "         W===W W=====,========,==========W              ",
+  "         W===W W=====,==,========,=======W              ",
+  "         W===W W=========================W              ",
+  "         W==BW W===R=========,=======R===W              ",
+  "         W===W W=======,,====,===========W              ",
+  "         W===W W================,========W              ",
+  "         W===W W====================,====W              ",
+  "         W===W W==========,==============W              ",
+  "         W===W W===R==,==,======,===,R===W              ",
+  "         W==BW W=======,=================W              ",
+  "         W===W W=B=====================B=W              ",
+  "         W===W W=========================W              ",
+  "         W===W WWWWWWWWWWWW===WWWWWWWWWWWW              ",
+  "         W===WWWWWWWWWWWWWW===W                         ",
+  "         W====================W                         ",
+  "         W====================W                         ",
+  "         W====================W                         ",
+  "         WWWWWWWWWWWWWWWWWW===W                         ",
+  "               WWWWWWWWWWWW===WWWWWWWWWWWW              ",
+  "               W====,==========,=========W              ",
+  "               W=B==========,,=========B=W              ",
+  "               W====,===,===,============W              ",
+  "               W===R==============,==R===W              ",
+  "               W=,=======================W              ",
+  "               W=========================W              ",
+  "               W========,================W              ",
+  "               W=========================W              ",
+  "               W===R========,========R=,=W              ",
+  "               W======,================,=W              ",
+  "               W=========,===============W              ",
+  "               W=,==============,========W              ",
+  "               W=========================W              ",
+  "               W===R=======,=========R===W              ",
+  "               W=========================W              ",
+  "               W=====,============,======W              ",
+  "               W=======,===============,=W              ",
+  "               W=====,===================W              ",
+  "               W,==R=================R,==W              ",
+  "               W=B==========,=,======,,B=W              ",
+  "               W=======================,=W              ",
+  "               WWWWWWWWWWWW===WWWWWWWWWWWW              ",
+  "                          W===W                         ",
+  "                          W===W                         ",
+  "                          W===W                         ",
+  "               WWWWWWWWWWWW===WWWWWWWWWWWW              ",
+  "               W=============,======,=,,=W              ",
+  "               W=B====,===============,B=W              ",
+  "               W================,,=,=,===W              ",
+  "               W===R=====,=====,==,==R===W              ",
+  "               W========================,W              ",
+  "               W============,======,==,==W              ",
+  "               W,=====,===,==,===========W              ",
+  "               W==================,,=====W              ",
+  "               W,==R=====,=======,,==R===W              ",
+  "               W============,============W              ",
+  "               W===,=====,============,==W              ",
+  "               W=========================W              ",
+  "               W==================,======W              ",
+  "               W===R=================R===W              ",
+  "               W========================,W              ",
+  "               W==============,===,======W              ",
+  "               W========,================W              ",
+  "               W===========,=======,=====W              ",
+  "               W===R=====,=,==,======R===W              ",
+  "               W=B===============,=====B=W              ",
+  "               W,,,======================W              ",
+  "               WWWWWWWWWWWW===WWWWWWWWWWWW              ",
+  "                          W===W                         ",
+  "                          W===W                         ",
+  "                          W===W                         ",
+  "               WWWWWWWWWWWW===WWWWWWWWWWWW              ",
+  "               W=======,======,==========W              ",
+  "               W=B=,============,======B=W              ",
+  "               W=========================W              ",
+  "               W===R=,===============R===W              ",
+  "               W=====,================,==W              ",
+  "               W====,=================,==W              ",
+  "               W=====,===================W              ",
+  "               W=========================W              ",
+  "               W==,R==,===,==========R===W              ",
+  "               W=============,===========W              ",
+  "               W=========,==============,W              ",
+  "               W=========================W              ",
+  "               W=,=======================W              ",
+  "               W===R=================R===W              ",
+  "               W,==========,==,==,=======W              ",
+  "               W==============,==========W              ",
+  "               W===,,,=======,===========W              ",
+  "               W===========,=============W              ",
+  "               W===R==,==============R===W              ",
+  "               W=B=====================B=W              ",
+  "               W==,=========,============W              ",
+  "               WWWWWWWWWWWW===WWWWWWWWWWWW              ",
+  "                          W===W                         ",
+  "                          W===W                         ",
+  "                          W===W                         ",
+  "               WWWWWWWWWWWW===WWWWWWWWWWWW              ",
+  "               W===,=====================W              ",
+  "               W=B=================,===B=W              ",
+  "               W==,============,=========W              ",
+  "               W===R=================R===W              ",
+  "               W==============,==========W              ",
+  "               W=========================W              ",
+  "               W=========================W              ",
+  "               W=====,===================W              ",
+  "               W===R========,========R===W              ",
+  "               W==================,=====,W              ",
+  "               W=========================W              ",
+  "               W========,================W              ",
+  "               W==,=,=,==================W              ",
+  "               W===R=================R===W              ",
+  "               W==,=========,==,=========W              ",
+  "               W=========================W              ",
+  "               W=,===========,==========,W              ",
+  "               W,,======,================W              ",
+  "               W===R,====,===,=======R=,=W              ",
+  "               W=B===================,=B=W              ",
+  "               W====,==========,=========W              ",
+  "               WWWWWWWWWWWW===WWWWWWWWWWWW              ",
+  "                          W===W                         ",
+  "                          W===W                         ",
+  "                          W===W                         ",
+  "                 WWWWWWWWWW===WWWWWWWWWW                ",
+  "                 W=====,===============W                ",
+  "                 W=B=================B=W                ",
+  "                 W====,==========,=====W                ",
+  "                 W===R====,========R===W                ",
+  "                 W=====================W                ",
+  "                 W====,==b==b==b=======W                ",
+  "                 W=,====,==============W                ",
+  "                 W===,=================W                ",
+  "                 W,==R=============R===W                ",
+  "                 W====S===============,W                ",
+  "                 W=====================W                ",
+  "                 W=B=================B=W                ",
+  "                 W==============,==,===W                ",
+  "                 WWWWWWWWWWWWWWWWWWWWWWW                ",
+  "                                                        ",
+  "                                                        "
+ ],
+ "legend": {
+  ".": {
+   "ground": "ash"
+  },
+  ",": {
+   "ground": "ash",
+   "tiles": [
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55
+   ]
+  },
+  "=": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  "~": {
+   "ground": "lava"
+  },
+  "#": {
+   "ground": "lava",
+   "objects": [
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239
+   ],
+   "bridge": true
+  },
+  "e": {
+   "ground": "embers"
+  },
+  "C": {
+   "ground": "ash",
+   "objects": [
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    153
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "o": {
+   "ground": "ash",
+   "objects": [
+    150,
+    151,
+    152
+   ],
+   "blocks": true,
+   "cover": true
+  },
+  "W": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1223,
+    1224,
+    1225,
+    1226,
+    1227,
+    1228,
+    1229
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "R": {
+   "ground": "ash",
+   "objects": [
+    1185,
+    1186
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "B": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1295
+   ],
+   "blocks": true,
+   "light": 4.5
+  },
+  "S": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    264
+   ],
+   "light": 3.5,
+   "lightColor": "#ffd9a0"
+  },
+  "X": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  " ": {
+   "ground": "none",
+   "blocks": true,
+   "blocksSight": true
+  },
+  "b": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025
+   ],
+   "objects": [
+    1291,
+    1292
+   ],
+   "blocks": true
+  }
+ },
+ "playerStart": [
+  28,
+  6
+ ],
+ "spawns": [
+  {
+   "at": [
+    28,
+    27
+   ],
+   "radius": 3,
+   "pack": [
+    {
+     "creature": "inquisitor_captain",
+     "rank": "Elite",
+     "count": 1,
+     "affixes": [
+      "shielded"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "inquisitor",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "inquisitor_zealot",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 19,
+   "unless": {
+    "act4.beacon": "lit"
+   }
+  },
+  {
+   "at": [
+    35,
+    23
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cinder_wraith",
+     "rank": "Elite",
+     "count": 1,
+     "affixes": [
+      "mirrored"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "cinder_wraith",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 19,
+   "unless": {
+    "act4.beacon": "lit"
+   }
+  },
+  {
+   "at": [
+    23,
+    46
+   ],
+   "radius": 3,
+   "pack": [
+    {
+     "creature": "inquisitor_captain",
+     "rank": "Elite",
+     "count": 1,
+     "affixes": [
+      "vengeful",
+      "hasted"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "inquisitor",
+     "rank": "Normal",
+     "count": 3
+    },
+    {
+     "creature": "inquisitor_zealot",
+     "rank": "Normal",
+     "count": 1
+    }
+   ],
+   "level": 19
+  },
+  {
+   "at": [
+    34,
+    51
+   ],
+   "radius": 3,
+   "pack": [
+    {
+     "creature": "tainted_antlion",
+     "rank": "Elite",
+     "count": 1,
+     "affixes": [
+      "tainted"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "tainted_antlion",
+     "rank": "Normal",
+     "count": 1
+    },
+    {
+     "creature": "fire_ant",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 19
+  },
+  {
+   "at": [
+    28,
+    54
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cinder_drake",
+     "rank": "Elite",
+     "count": 1,
+     "affixes": [
+      "shielded"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "cinder_drake",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 19
+  },
+  {
+   "at": [
+    28,
+    74
+   ],
+   "radius": 0,
+   "pack": [
+    {
+     "creature": "mother_sallow",
+     "rank": "Herald",
+     "count": 1,
+     "echo": true
+    }
+   ],
+   "level": 19,
+   "unless": {
+    "act1.sallow_relic": "destroyed"
+   },
+   "flag": "act4.echo.sallow",
+   "value": "laid",
+   "says": "The Echo of Mother Sallow sinks into the floor, and the ward across the vault's south door gutters out."
+  },
+  {
+   "at": [
+    28,
+    100
+   ],
+   "radius": 0,
+   "pack": [
+    {
+     "creature": "ser_hadric",
+     "rank": "Herald",
+     "count": 1,
+     "echo": true
+    }
+   ],
+   "level": 19,
+   "unless": {
+    "act2.hadric_relic": "returned"
+   },
+   "flag": "act4.echo.hadric",
+   "value": "laid",
+   "says": "Ser Hadric's Echo goes down on one knee and is ash. The ward beyond him burns out."
+  },
+  {
+   "at": [
+    28,
+    126
+   ],
+   "radius": 0,
+   "pack": [
+    {
+     "creature": "choir_agnete",
+     "rank": "Herald",
+     "count": 1,
+     "echo": true
+    }
+   ],
+   "level": 19,
+   "requires": {
+    "act3.candles": ""
+   },
+   "flag": "act4.echo.choir",
+   "value": "laid",
+   "says": "The Choir's Echo falls silent, and the last ward goes out."
+  },
+  {
+   "at": [
+    28,
+    126
+   ],
+   "radius": 0,
+   "pack": [
+    {
+     "creature": "choir_agnete",
+     "rank": "Herald",
+     "count": 1,
+     "echo": true,
+     "alone": true
+    }
+   ],
+   "level": 19,
+   "requires": {
+    "act3.candles": "snuffed"
+   },
+   "flag": "act4.echo.choir",
+   "value": "laid",
+   "says": "Agnete's Echo falls silent, alone, and the last ward goes out."
+  },
+  {
+   "at": [
+    28,
+    152
+   ],
+   "radius": 0,
+   "pack": [
+    {
+     "creature": "vorthrax",
+     "rank": "Herald",
+     "count": 1,
+     "echo": true
+    }
+   ],
+   "level": 19,
+   "unless": {
+    "act4.egg": "smashed"
+   },
+   "flag": "act4.echo.vorthrax",
+   "value": "laid",
+   "says": "Vorthrax's Echo folds its wings and burns down to nothing, and the last ward before the Sanctum goes out."
+  },
+  {
+   "at": [
+    28,
+    176
+   ],
+   "radius": 3,
+   "pack": [
+    {
+     "creature": "inquisitor_captain",
+     "rank": "Elite",
+     "count": 1,
+     "affixes": [
+      "mirrored",
+      "shielded"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "inquisitor_zealot",
+     "rank": "Normal",
+     "count": 2
+    },
+    {
+     "creature": "inquisitor",
+     "rank": "Normal",
+     "count": 2
+    }
+   ],
+   "level": 20
+  },
+  {
+   "at": [
+    22,
+    171
+   ],
+   "radius": 2.0,
+   "pack": [
+    {
+     "creature": "cinder_wraith",
+     "rank": "Elite",
+     "count": 1,
+     "affixes": [
+      "tainted"
+     ],
+     "leads": true
+    },
+    {
+     "creature": "ash_husk",
+     "rank": "Normal",
+     "count": 3
+    }
+   ],
+   "level": 20
+  }
+ ],
+ "gates": [
+  {
+   "id": "stealth_way",
+   "name": "The old stealth way's ward",
+   "cells": [
+    [
+     16,
+     26
+    ],
+    [
+     16,
+     27
+    ],
+    [
+     16,
+     28
+    ]
+   ],
+   "requires": {
+    "act4.beacon": "dark"
+   }
+  },
+  {
+   "id": "vault_of_rot",
+   "name": "The ward of the Vault of Rot",
+   "cells": [
+    [
+     27,
+     86
+    ],
+    [
+     28,
+     86
+    ],
+    [
+     29,
+     86
+    ]
+   ],
+   "requires": {
+    "act4.echo.sallow": "laid"
+   }
+  },
+  {
+   "id": "vault_of_iron",
+   "name": "The ward of the Vault of Iron",
+   "cells": [
+    [
+     27,
+     112
+    ],
+    [
+     28,
+     112
+    ],
+    [
+     29,
+     112
+    ]
+   ],
+   "requires": {
+    "act4.echo.hadric": "laid"
+   }
+  },
+  {
+   "id": "vault_of_whispers",
+   "name": "The ward of the Vault of Whispers",
+   "cells": [
+    [
+     27,
+     138
+    ],
+    [
+     28,
+     138
+    ],
+    [
+     29,
+     138
+    ]
+   ],
+   "requires": {
+    "act4.echo.choir": "laid"
+   }
+  },
+  {
+   "id": "vault_of_flame",
+   "name": "The ward of the Vault of Flame",
+   "cells": [
+    [
+     27,
+     164
+    ],
+    [
+     28,
+     164
+    ],
+    [
+     29,
+     164
+    ]
+   ],
+   "requires": {
+    "act4.echo.vorthrax": "laid"
+   }
+  }
+ ],
+ "shrines": [
+  {
+   "id": "reliquary_narthex_shrine",
+   "name": "The Narthex",
+   "at": [
+    25,
+    10
+   ]
+  },
+  {
+   "id": "sanctum_shrine",
+   "name": "The Sanctum's Door",
+   "at": [
+    22,
+    177
+   ]
+  }
+ ],
+ "exits": [
+  {
+   "id": "gate",
+   "label": "The Ember Gate",
+   "at": [
+    28,
+    2
+   ],
+   "radius": 1.5,
+   "to": "wyrms_nest",
+   "toExit": "reliquary",
+   "arrive": [
+    28,
+    6
+   ]
+  },
+  {
+   "id": "throne",
+   "label": "The Cinder Throne",
+   "at": [
+    28,
+    179
+   ],
+   "radius": 1.5,
+   "to": "cinder_throne",
+   "toExit": "stair",
+   "arrive": [
+    28,
+    176
+   ]
+  }
+ ],
+ "caches": [
+  {
+   "id": "narthex",
+   "at": [
+    32,
+    12
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "hall_of_vigil",
+   "at": [
+    19,
+    32
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "stealth_way",
+   "at": [
+    11,
+    44
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "vault_of_rot",
+   "at": [
+    38,
+    82
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "vault_of_iron",
+   "at": [
+    18,
+    108
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "vault_of_whispers",
+   "at": [
+    38,
+    134
+   ],
+   "kind": "Cache",
+   "facing": 1
+  },
+  {
+   "id": "vault_of_flame",
+   "at": [
+    18,
+    160
+   ],
+   "kind": "Cache",
+   "facing": 0
+  },
+  {
+   "id": "sanctum",
+   "at": [
+    28,
+    177
+   ],
+   "kind": "Reliquary",
+   "facing": 0
+  }
+ ],
+ "npcs": [
+  {
+   "id": "aldren",
+   "name": "Ser Aldren",
+   "title": "Knight of the Last Lantern",
+   "at": [
+    24,
+    30
+   ],
+   "facing": 3,
+   "portrait": "flare/male03",
+   "dialogue": "reliquary_aldren",
+   "requires": {
+    "act4.beacon": "lit"
+   },
+   "look": {
+    "head": "plate_helm",
+    "chest": "plate_cuirass",
+    "hands": "plate_gauntlets",
+    "legs": "plate_greaves",
+    "feet": "plate_boots",
+    "main": "longsword",
+    "off": "kite_shield"
+   }
+  }
+ ],
+ "interactables": [
+  {
+   "id": "biers",
+   "name": "The empty biers",
+   "at": [
+    28,
+    172
+   ],
+   "dialogue": "reliquary_biers"
+  },
+  {
+   "id": "daughter_journal",
+   "name": "Malachar's journal",
+   "at": [
+    34,
+    172
+   ],
+   "dialogue": "daughter_journal",
+   "action": "keepsake",
+   "blocks": false
+  }
+ ]
+}

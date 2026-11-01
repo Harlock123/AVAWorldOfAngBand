@@ -1,0 +1,440 @@
+{
+ "id": "ember_gate",
+ "name": "The Ember Gate Camp",
+ "level": 16,
+ "act": 4,
+ "revision": 1,
+ "tileset": "tileset_cinder",
+ "town": true,
+ "tagline": "The last lanterns of the Order burn at the foot of the burning mountain.",
+ "darkness": 0.5,
+ "rows": [
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCC===CCCCCCCCCCCCCCCCCCCCC",
+  "CCC.CC.C,CC.C.C..Co.CC===C.CC.oCC.C.CCC,C.CCCC",
+  "CC.C.C,CCCC.CCC......C===CC.....CCCCCCC.C,..CC",
+  "CC................o..,===,......,......,...CCC",
+  "CCC....,.............,===,..,........,.,...CCC",
+  "CCCC.........,.......,===B...,...,.....o..C.CC",
+  "CCCC.................,===,......o.....,....CCC",
+  "CCC.........,........,===,...........,...,CCCC",
+  "CCC..................,===,.......,.....o..C.CC",
+  "CCC....,.RWWWWWWWWWWWW===WWWWWWW.WWWR......CCC",
+  "CC.C.....W===========B===B==========W..,...CCC",
+  "CCCC.....W==L==L====================W.....CCCC",
+  "CC......,W===t=================R=R==W.....CCCC",
+  "CCCC...,.W======================X===W,....CCCC",
+  "CCC,......=====================R=R==W...,oC.CC",
+  "CCC....,..==========================W......CCC",
+  "CCCC.....W==========================Wo...o.CCC",
+  "CC...,..,W========================k=W.....CCCC",
+  "CC.C.....W==========================W.....C.CC",
+  "CCCC..,.,W==========================W.,,..C.CC",
+  "CC.C...,.W========S=================W.....CCCC",
+  "CCC......W==========================W..,..,CCC",
+  "CCC,,....W==========================W.....C,CC",
+  "CC.C....,W==========================....,.CCCC",
+  "CC.C.....W======================k===......CCCC",
+  "CC,......W=====================B=B==W.....,.CC",
+  "CC..,...oW==========================W..oo.CCCC",
+  "CC.C.....W=k========================W.....CCCC",
+  "CCC......W=kk=======================W.....CCCC",
+  "CCCC.....W===========B===B==========W.....C.CC",
+  "CCC......RWWWWW.WWWWWW===WWWWWWWWWWWR.....C.CC",
+  "CC,....,.....,...,...,===,................CCCC",
+  "CC,C.,...............,===,.....,..,.......C.CC",
+  "CCC................,.,===,.,...,............CC",
+  "CC.Co.........,......,===,............o..,,CCC",
+  "CC...p.....,.........,===,.....,.....p....C.CC",
+  "CCC...,...,..........B===,..o,............C,CC",
+  "CC......p........,...,===,....o,...........CCC",
+  "CCCC..........,.,....,===,....o.........p.CCCC",
+  "CCCCC.CC.CCCCCCCCCCC.C===CC.CCC.C,CCCCCCCC.CCC",
+  "CCCC.CC.CCC...C..CCCCC===,.C...CC.CC,CC.CCC.CC",
+  "CCCCCCCCCCCCCCCCCCCCCC===CCCCCCCCCCCCCCCCCCCCC",
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+ ],
+ "legend": {
+  ".": {
+   "ground": "ash"
+  },
+  ",": {
+   "ground": "ash",
+   "tiles": [
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55
+   ]
+  },
+  "=": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  "~": {
+   "ground": "lava"
+  },
+  "#": {
+   "ground": "lava",
+   "objects": [
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239
+   ],
+   "bridge": true
+  },
+  "e": {
+   "ground": "embers"
+  },
+  "C": {
+   "ground": "ash",
+   "objects": [
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    153
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "o": {
+   "ground": "ash",
+   "objects": [
+    150,
+    151,
+    152
+   ],
+   "blocks": true,
+   "cover": true
+  },
+  "W": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1223,
+    1224,
+    1225,
+    1226,
+    1227,
+    1228,
+    1229
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "R": {
+   "ground": "ash",
+   "objects": [
+    1185,
+    1186
+   ],
+   "blocks": true,
+   "blocksSight": true
+  },
+  "B": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    1295
+   ],
+   "blocks": true,
+   "light": 4.5
+  },
+  "S": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ],
+   "objects": [
+    264
+   ],
+   "light": 3.5,
+   "lightColor": "#ffd9a0"
+  },
+  "X": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+   ]
+  },
+  " ": {
+   "ground": "none",
+   "blocks": true,
+   "blocksSight": true
+  },
+  "k": {
+   "ground": "ash",
+   "tiles": [
+    1024,
+    1025
+   ],
+   "objects": [
+    1285,
+    1286,
+    1287,
+    162,
+    163
+   ],
+   "blocks": true
+  },
+  "t": {
+   "ground": "ash",
+   "tiles": [
+    1024
+   ],
+   "objects": [
+    1281,
+    1282
+   ],
+   "blocks": true
+  },
+  "L": {
+   "ground": "ash",
+   "tiles": [
+    1024
+   ],
+   "objects": [
+    1274,
+    1275
+   ],
+   "blocks": true
+  },
+  "p": {
+   "ground": "ash",
+   "objects": [
+    224,
+    225,
+    226,
+    227
+   ]
+  }
+ },
+ "playerStart": [
+  23,
+  39
+ ],
+ "spawns": [],
+ "shrines": [
+  {
+   "id": "ember_gate_shrine",
+   "name": "The Ember Gate Shrine",
+   "at": [
+    18,
+    21
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "corwen",
+   "name": "Warden Corwen",
+   "title": "Warden of the Last Lantern",
+   "at": [
+    13,
+    15
+   ],
+   "facing": 2,
+   "portrait": "flare/female04",
+   "dialogue": "ember_corwen",
+   "look": {
+    "head": "plate_helm",
+    "chest": "plate_cuirass",
+    "hands": "plate_gauntlets",
+    "legs": "plate_greaves",
+    "feet": "plate_boots",
+    "main": "longsword",
+    "off": "kite_shield"
+   }
+  }
+ ],
+ "interactables": [
+  {
+   "id": "stash",
+   "name": "Stash",
+   "at": [
+    27,
+    25
+   ],
+   "tile": 1264,
+   "action": "stash"
+  },
+  {
+   "id": "altar",
+   "name": "Lantern altar",
+   "at": [
+    28,
+    14
+   ],
+   "tile": 1293,
+   "dialogue": "ember_altar"
+  },
+  {
+   "id": "daughter_ember_gate",
+   "name": "A small grave",
+   "at": [
+    29,
+    17
+   ],
+   "dialogue": "daughter_ember_gate",
+   "action": "keepsake",
+   "blocks": false
+  },
+  {
+   "id": "beacon",
+   "name": "The beacon",
+   "at": [
+    32,
+    14
+   ],
+   "tile": 1295,
+   "action": "beacon",
+   "dialogue": "ember_beacon"
+  }
+ ],
+ "vendors": [
+  {
+   "id": "brannoc",
+   "name": "Brannoc",
+   "title": "Smith",
+   "at": [
+    32,
+    28
+   ],
+   "facing": 5,
+   "stockSize": 12,
+   "sells": [
+    "weapons",
+    "firearms",
+    "armour"
+   ],
+   "runework": true,
+   "greeting": "The mountain's hot enough to forge in, if you stand close. I'd rather not. What needs mending?",
+   "look": {
+    "head": "leather_hood",
+    "chest": "leather_chest",
+    "hands": "leather_gloves",
+    "legs": "leather_pants",
+    "feet": "leather_boots",
+    "main": "war_hammer"
+   }
+  },
+  {
+   "id": "hesk",
+   "name": "Old Hesk",
+   "title": "Quartermaster",
+   "at": [
+    13,
+    27
+   ],
+   "facing": 6,
+   "stockSize": 12,
+   "greeting": "Water, salt, powder and bombs. Ash in all of it, I'm afraid.",
+   "supplies": [
+    "alchemists_fire",
+    "frost_vial",
+    "bottled_lightning",
+    "acid_flask",
+    "antidote",
+    "incendiary_round",
+    "silver_round",
+    "scatter_round",
+    "black_powder",
+    "lead_shot",
+    "gun_parts"
+   ],
+   "look": {
+    "head": "leather_hood",
+    "chest": "mage_vest_alt2",
+    "hands": "cloth_gloves",
+    "legs": "cloth_pants",
+    "feet": "leather_boots",
+    "main": "rod"
+   }
+  }
+ ],
+ "exits": [
+  {
+   "id": "cliff_road",
+   "label": "The Cliff Road",
+   "at": [
+    23,
+    42
+   ],
+   "radius": 1.5,
+   "to": "bell_tower",
+   "toExit": "cliff_road",
+   "arrive": [
+    23,
+    39
+   ]
+  },
+  {
+   "id": "wastes",
+   "label": "The Ash Wastes",
+   "at": [
+    23,
+    1
+   ],
+   "radius": 1.5,
+   "to": "ash_wastes",
+   "toExit": "camp",
+   "arrive": [
+    23,
+    5
+   ]
+  }
+ ]
+}

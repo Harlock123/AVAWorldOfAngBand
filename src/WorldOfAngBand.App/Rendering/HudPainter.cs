@@ -42,8 +42,17 @@ public sealed class HudPainter : IDisposable
     public void Draw(SKCanvas canvas, SKSize size, DungeonSession session, ViewState view)
     {
         var depth = session.Depth;
-        Text(canvas, IsoView.Stratum(depth), 16, 30, _title, Ink);
-        Text(canvas, depth == 0 ? "The town" : $"Level {depth}  ·  {depth * DungeonSession.FeetPerLevel} ft", 16, 52, _small, Dim);
+        if (session.Zone is { } zone)
+        {
+            // Above ground: the zone's name, and the level of what lives there.
+            Text(canvas, zone.Name, 16, 30, _title, Ink);
+            Text(canvas, $"The province  ·  creatures of level {zone.Level}", 16, 52, _small, Dim);
+        }
+        else
+        {
+            Text(canvas, IsoView.Stratum(depth), 16, 30, _title, Ink);
+            Text(canvas, depth == 0 ? "The town" : $"Level {depth}  ·  {depth * DungeonSession.FeetPerLevel} ft", 16, 52, _small, Dim);
+        }
         Text(canvas, $"Turn {session.Turn / 10}", size.Width - 16, 30, _small, Dim, SKTextAlign.Right);
         if (session.Birth.Challenge is { } challenge)
         {

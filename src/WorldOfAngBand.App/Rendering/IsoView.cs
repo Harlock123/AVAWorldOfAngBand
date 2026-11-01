@@ -65,7 +65,7 @@ public sealed class IsoView : Control
 
     private void Dress()
     {
-        _dressed = Session is { } session ? LevelDressing.Dress(session.Level) : null;
+        _dressed = Session?.Dressed;
         InvalidateVisual();
     }
 
@@ -168,6 +168,7 @@ public sealed class IsoView : Control
             Tint.Magma => SKColorFilter.CreateLighting(new SKColor(170, 118, 104), new SKColor(18, 2, 0)),
             Tint.Quartz => SKColorFilter.CreateLighting(new SKColor(205, 212, 232), new SKColor(22, 24, 34)),
             Tint.Lava => SKColorFilter.CreateLighting(new SKColor(255, 130, 70), new SKColor(110, 34, 0)),
+            Tint.Bog => SKColorFilter.CreateLighting(new SKColor(120, 132, 92), new SKColor(6, 10, 4)),
             _ => null,
         };
         // What is only remembered is drawn dim and cold, as Angband draws remembered squares darker.
