@@ -69,7 +69,7 @@ public static class ModCatalog
     /// <summary>The folder name of the example mod.</summary>
     public const string ExampleName = "example-mod";
 
-    private enum Shape { Keyed, Whole, Colors, Lines }
+    private enum Shape { Keyed, Whole, Colors, Lines, Layer }
 
     private sealed record FileKind(string File, string Group, Shape Shape, Func<JsonElement, string?>? Key = null);
 
@@ -125,6 +125,11 @@ public static class ModCatalog
         new(DataLoader.TemplatesFolder + "/" + DataLoader.VaultsFile, "vaults", Shape.Keyed, Id),
         new(DataLoader.TemplatesFolder + "/" + DataLoader.AvaVaultsFile, "vaults", Shape.Keyed, Id),
         new(DataLoader.TemplatesFolder + "/" + DataLoader.RoomTemplatesFile, "room_templates", Shape.Keyed, Id),
+        // AVAWorldOfAngBand's own layers: what a mod brings into the game through the bridge, and its names in the
+        // Ashen setting (each merged over the game's, by id).
+        new("bridge/monsters.json", "bridge_monsters", Shape.Layer),
+        new("bridge/items.json", "bridge_items", Shape.Layer),
+        new("ashen_names.json", "setting_names", Shape.Layer),
         new(DataLoader.TownFile, "town", Shape.Whole),
         new(DataLoader.ConstantsFile, "constants", Shape.Whole),
         new(DataLoader.StartingKitFile, "starting_kit", Shape.Whole),
@@ -202,6 +207,15 @@ public static class ModCatalog
                 {
                     case Shape.Whole:
                         info.Files.Add(new ModFileChange(kind.File, 0, 0, ReplacesWhole: true));
+                        break;
+                    case Shape.Layer when root.ValueKind == JsonValueKind.Object:
+                        // Sections laid over the game's by id: each entry in each section counts as one.
+                        info.Files.Add(new ModFileChange(kind.File, root.EnumerateObject().Sum(section => section.Value.ValueKind switch
+                        {
+                            JsonValueKind.Array => section.Value.GetArrayLength(),
+                            JsonValueKind.Object => section.Value.EnumerateObject().Count(),
+                            _ => 0,
+                        }), 0));
                         break;
                     case Shape.Lines when root.ValueKind == JsonValueKind.Array:
                         info.Files.Add(new ModFileChange(kind.File, root.GetArrayLength(), 0));
@@ -315,6 +329,10 @@ public static class ModCatalog
         File.WriteAllText(Path.Combine(dir, ManifestFile), ExampleManifest);
         File.WriteAllText(Path.Combine(dir, DataLoader.AvaMonstersFile), ExampleMonsters);
         File.WriteAllText(Path.Combine(dir, DataLoader.AvaObjectsFile), ExampleObjects);
+        // In AVAWorldOfAngBand a monster or item comes into the game through the bridge.
+        System.IO.Directory.CreateDirectory(Path.Combine(dir, "bridge"));
+        File.WriteAllText(Path.Combine(dir, "bridge", "monsters.json"), ExampleBridgeMonsters);
+        File.WriteAllText(Path.Combine(dir, "bridge", "items.json"), ExampleBridgeItems);
         return dir;
     }
 
@@ -325,7 +343,7 @@ public static class ModCatalog
           "name": "Example mod",
           "author": "AVABand",
           "version": "1.0",
-          "description": "A small working mod to copy from: adds the mud newt (a monster near the surface) and the miner's pick-knife (a dagger). Switch it off in Settings → Mods, or delete its folder."
+          "description": "A small working mod to copy from: adds the mud newt (a monster near the surface) and the miner's pick-knife (a dagger). Switch it off in the Mods window, or delete its folder."
         }
         """;
 
@@ -351,6 +369,18 @@ public static class ModCatalog
             "description": "A slick brown newt as long as your arm, at home in the wet mud of the upper caves."
           }
         ]
+        """;
+
+    internal const string ExampleBridgeMonsters = """
+        {
+          "monsters": [ { "id": "example_mud_newt", "sprite": "antlion", "scale": 0.6, "tint": true } ]
+        }
+        """;
+
+    internal const string ExampleBridgeItems = """
+        {
+          "weapons": { "example_pick_knife": { "die": 6, "type": "Piercing", "gfx": "dagger", "traits": ["Agile", "Thrown"] } }
+        }
         """;
 
     internal const string ExampleObjects = """

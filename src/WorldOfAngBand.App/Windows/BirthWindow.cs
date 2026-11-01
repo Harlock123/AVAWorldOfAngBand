@@ -67,8 +67,21 @@ public sealed class BirthWindow : Window
         _subclass.SelectionChanged += (_, _) => Refresh();
         _name.TextChanged += (_, _) => Refresh();
 
-        var begin = new Button { Content = "Go down", MinWidth = 140, HorizontalAlignment = HorizontalAlignment.Right, IsDefault = true };
+        var begin = new Button { Content = "Go down", MinWidth = 140, IsDefault = true };
         begin.Click += (_, _) => Begin();
+        var challenges = new Button { Content = "Daily and weekly challenges…", MinWidth = 140 };
+        challenges.Click += (_, _) =>
+        {
+            Close();
+            ChallengesWanted?.Invoke();
+        };
+        var mods = new Button { Content = "Mods…", MinWidth = 80, Margin = new Thickness(8, 0, 0, 0) };
+        mods.Click += (_, _) => ModsWanted?.Invoke();
+        var buttons = new DockPanel { LastChildFill = false };
+        DockPanel.SetDock(begin, Dock.Right);
+        buttons.Children.Add(begin);
+        buttons.Children.Add(challenges);
+        buttons.Children.Add(mods);
         Content = new ScrollViewer
         {
             MaxHeight = 820,
@@ -86,7 +99,7 @@ public sealed class BirthWindow : Window
                     Label("How you heard it ended"), _rumour,
                     Label("Birth options"), _randarts,
                     _summary,
-                    begin,
+                    buttons,
                 },
             },
         };
@@ -121,6 +134,12 @@ public sealed class BirthWindow : Window
 
     /// <summary>Raised when the player goes down.</summary>
     public event Action<Birth>? Chosen;
+
+    /// <summary>Raised when the player asks for the mods.</summary>
+    public event Action? ModsWanted;
+
+    /// <summary>Raised when the player would rather play today's dungeon or this week's challenge.</summary>
+    public event Action? ChallengesWanted;
 
     private static ComboBox Wide() => new() { HorizontalAlignment = HorizontalAlignment.Stretch };
 

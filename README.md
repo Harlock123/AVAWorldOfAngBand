@@ -6,18 +6,20 @@ hero, rules, art and story. Ten years after the Cinder Throne, the Reliquary und
 lid: below it a shaft goes down a hundred levels, to where the Order of the Pale Lantern first burned Ashur. You go
 down it as one of the Lantern-sworn, with no Ember Heart. When you die, you stay dead.
 
-**Status: milestone 5 of 6 ("To the Cinder").** The whole game is there, from Gallowmere to the Cinder of Ashur at
+**Status: milestone 6 of 6 ("Breadth").** The whole game is there, from Gallowmere to the Cinder of Ashur at
 depth 100. Levels are generated as Angband 4.2.5 generates them and drawn isometrically in Flare's art. The hero is a
-Pathfinder 2e fighter on AshenReliquary's rules, fighting turn by turn on Angband's energy system. All of Angband's
+Pathfinder 2e character on AshenReliquary's rules, one of seven classes with their abilities and feats, fighting turn
+by turn on Angband's energy system. All of Angband's
 monsters are in, with their 91 spells and innate attacks in Pathfinder's terms, and every name Angband takes from
 Tolkien is renamed for the Ashen setting. Angband's items lie on the floor with Pathfinder's runes, Gallowmere's shops
 buy and sell, and the Smith etches runes. Ashen Reliquary's story goes on through five story levels, Saint Ysmere and
-the Cinder, and past level 20 the hero rises through five mythic tiers. Balance bots play it to the bottom and win.
-Death is final. What is left is in [the design specification](docs/SPECIFICATION.md).
+the Cinder, and past level 20 the hero rises through five mythic tiers. Angband's artifacts come in renamed (or as
+randarts), there are daily and weekly challenges, mods, and a Legacy from an AVAAshenReliquary save. Balance bots play
+it to the bottom and win. Death is final. What is left is in [the design specification](docs/SPECIFICATION.md).
 
 ![A fight on the first level: a skeleton kobold, a jackal, a giant centipede and a rock lizard round the hero in a
-lit hall, a "miss" floating over the hero, the hit points, round and Second Breath at the top right, and the rolls in
-the message log](docs/images/WorldOfAngBand-fight.png)
+lit hall; at the top right the hit points, round, Second Breath and Fury, and the fighter's abilities on keys 1 to 6;
+the rolls in the message log](docs/images/WorldOfAngBand-fight.png)
 
 ![Gallowmere: grass between the town's stone buildings, a wood of dead trees round it, the Apothecary's sign over its
 door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-town.png)
@@ -117,10 +119,49 @@ door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-t
   through), or Escape goes on deeper.
 - **Mythic tiers.** Past level 20, experience raises the hero through five mythic tiers: 10 more hit points each, and
   attack, AC and saves rising by one every other tier.
+- **Seven classes, played one action at a time** (the spec's sections 4.1 and 5.1). AshenReliquary's Fighter, Champion,
+  Rogue and Wizard, and three new ones from Angband:
+  - the **Priest** (Wisdom, Mana): Divine Lance, Heal, Bless, Orb of Draining, Turn the Wicked, Holy Word; a
+    Confessor's wards or an Inquisitor's smiting;
+  - the **Druid** (Wisdom, Mana): Stinging Swarm, Lightning Strike, Barkskin, Tangling Vines, Earthquake, Storm of
+    Vengeance; a Stormwarden's wind or a Thornkeeper's briars;
+  - the **Blackguard** (Strength, Fury): Unholy Blow, Leap into Battle, Howl of the Damned, Berserk Strength, Maim
+    Foe, Bloodbath; a Reaver's rage or a Tormentor's fear.
+
+  Each ability takes its one to three actions and pays its Fury, Mana, Devotion or Momentum. Cooldowns run on the game's
+  clock, and spells heighten with the hero's level. Weapon abilities are Strikes with more dice, feints and riders.
+  Spells are spell attacks or basic saves, and wards, auras, tumbles, hiding and traps last their seconds. Keys 1 to 0
+  use them, on the monster under the pointer or the nearest one. The Ranger, Necromancer and Gunslinger wait for
+  companions, raised dead, bows and guns.
+- **Levels and feats.** Each new level asks for its picks: a class feat, a skill feat, a general or ancestry feat, a
+  skill increase (`f`). Feats give new abilities and make old ones stronger.
+- **Birth.** Name, ancestry and heritage, background, class and subclass, then how the hero heard Ashen Reliquary
+  ended: a rumour at random, a rumour chosen, or a **Legacy**, the ending a hero reached in an AVAAshenReliquary save
+  (read from its saves folder, never written).
+- **Artifacts** (the spec's section 6.3). Angband's 147, each renamed for the setting ('Ringil' is 'Coldflame'), on the
+  kinds the game has. With the **randarts** birth option, Angband's generator makes a new set for the game instead,
+  named from the setting's words. An activation is the game's own effect (healing, curing, speed, resistance, light,
+  mapping, recall) or a one-off attack (a bolt, a ball, a drain), with Angband's recharge. Activate one from the pack.
+- **Daily and weekly challenges** (AVABand's). Everyone gets the same dungeon and hero on the same day, or in the same
+  week with one of seven twists:
+  - Darkness, Glass Cannon, Thin Flasks, Swarm, Restless Foes, Gold Rush and Lean Times;
+  - the twist turns by three a week, so none comes twice running.
+
+  Every try goes on the day's or week's board, best first.
+- **Mods** (AVABand's, with this game's layers). Each folder in the mods folder holds data files named as the game's
+  own, laid over them by id. A modded monster or item comes into the game through the mod's `bridge/monsters.json` and
+  `bridge/items.json`, and its names through `ashen_names.json`. The Mods window shows what each adds and switches it
+  off, and "Make an example mod" writes one to copy.
 - **The balance bots** (the spec's M5). A hero made ready for a depth (the spec's level for it, runes, the protections
   Angband heroes have by then, potions) dives three levels from 5, 30, 60 and 90, and one made ready for the bottom
   goes down through Saint Ysmere and the Cinder. The tests hold them to it: most dives live, and a hero ready for the
   bottom puts out the Cinder.
+
+![The birth window: a human priest, a Confessor, who heard it ended as Vessa's Legacy, The Lantern Rekindled, with the
+randarts option below](docs/images/WorldOfAngBand-birth.png)
+
+![This week's challenge: Lean Times, everyone going down as an elf champion; and today's dungeon, a human
+wizard](docs/images/WorldOfAngBand-challenges.png)
 
 ![The Rot-Mother's Font: grey water seeps from the font into the Pyre's wells, and the altar offers two choices, to
 seal the font with the Lantern's wax or to quench a blade in it](docs/images/WorldOfAngBand-altar.png)
@@ -153,7 +194,9 @@ classic views up is north, as in Angband.
 | `,` or keypad `5` | Stay put a turn |
 | `R` | Rest until healed (stops when a monster appears) |
 | `g` | Pick up what lies here (gold is picked up as you walk) |
-| `i` | The pack: wear, take off, drink, read or drop (Enter does what suits the item) |
+| `1` … `9`, `0` | Use an ability: on the monster under the pointer, or the nearest one in sight |
+| `f` | A new level's picks: feats and a skill increase |
+| `i` | The pack: wear, take off, drink, read, activate or drop (Enter does what suits the item) |
 | `q` | Drink from a healing flask |
 | Click | Travel to a square you have seen, or strike a monster beside you |
 | Walk into a shop's door | Its window: buy and sell; at the Smith, runework |

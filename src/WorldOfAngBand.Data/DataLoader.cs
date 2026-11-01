@@ -385,6 +385,7 @@ public static class DataLoader
             constants ?? new GameConstants())
         {
             Mods = [.. directories.Skip(1).Select(ModName)],
+            ModDirectories = [.. directories.Skip(1)],
             Elements = elements.Items,
             TimedEffects = timedEffects.Items,
             BlowMethods = blowMethods.Items,

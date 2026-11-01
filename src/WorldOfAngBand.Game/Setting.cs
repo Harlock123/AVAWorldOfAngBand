@@ -24,27 +24,68 @@ public static class Setting
         ["artificer"] = "Artificer",
     };
 
-    private static readonly Lazy<NamesFile> Names = new(() =>
-    {
-        var path = Path.Combine(DataLoader.DefaultDataDirectory, "setting", "ashen_names.json");
-        using var stream = File.OpenRead(path);
-        return JsonSerializer.Deserialize<NamesFile>(stream, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
-               ?? throw new InvalidDataException($"{path} is empty.");
-    });
+    private static Lazy<NamesFile> Names = new(() => Read([]));
 
-    private sealed record NamesFile(Dictionary<string, string> Monsters, Dictionary<string, string> Egos, Dictionary<string, string> Objects,
+    private static IReadOnlyList<string> _modDirectories = [];
+
+    /// <summary>
+    /// The mods in play: each one's ashen_names.json goes over the setting's own names (a name with the same id replaces
+    /// the shipped one). The names are read again only when the mods change.
+    /// </summary>
+    public static void UseMods(IReadOnlyList<string> modDirectories)
+    {
+        if (modDirectories.SequenceEqual(_modDirectories))
+            return;
+        _modDirectories = modDirectories.ToList();
+        var dirs = _modDirectories;
+        Names = new Lazy<NamesFile>(() => Read(dirs));
+    }
+
+    private static NamesFile Read(IReadOnlyList<string> modDirectories)
+    {
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        var path = Path.Combine(DataLoader.DefaultDataDirectory, "setting", "ashen_names.json");
+        NamesFile names;
+        using (var stream = File.OpenRead(path))
+            names = JsonSerializer.Deserialize<NamesFile>(stream, options) ?? throw new InvalidDataException($"{path} is empty.");
+        foreach (var dir in modDirectories)
+        {
+            var mod = Path.Combine(dir, "ashen_names.json");
+            if (Path.GetFullPath(mod) == Path.GetFullPath(path) || !File.Exists(mod))
+                continue;
+            using var stream = File.OpenRead(mod);
+            if (JsonSerializer.Deserialize<NamesFile>(stream, options) is not { } over)
+                continue;
+            names = new NamesFile(Over(names.Monsters, over.Monsters), Over(names.Egos, over.Egos), Over(names.Objects, over.Objects),
+                Over(names.Artifacts, over.Artifacts), names.NameWords);
+        }
+        return names;
+    }
+
+    /// <summary>The monster names with these mods over the setting's (tests).</summary>
+    internal static IReadOnlyDictionary<string, string> MonsterNamesWith(IReadOnlyList<string> modDirectories) => Read(modDirectories).Monsters ?? [];
+
+    private static Dictionary<string, string> Over(Dictionary<string, string>? under, Dictionary<string, string>? over)
+    {
+        var merged = new Dictionary<string, string>(under ?? []);
+        foreach (var (id, name) in over ?? [])
+            merged[id] = name;
+        return merged;
+    }
+
+    private sealed record NamesFile(Dictionary<string, string>? Monsters, Dictionary<string, string>? Egos, Dictionary<string, string>? Objects,
         Dictionary<string, string>? Artifacts = null, List<string>? NameWords = null);
 
     /// <summary>A Gallowmere shop's name, by the shop id its entrance carries.</summary>
     public static string ShopName(string shopId) => Shops.GetValueOrDefault(shopId, shopId);
 
     /// <summary>A monster's name in the setting, or null when 4.2.5's name stands.</summary>
-    public static string? MonsterName(string id) => Names.Value.Monsters.GetValueOrDefault(id);
+    public static string? MonsterName(string id) => Names.Value.Monsters?.GetValueOrDefault(id);
 
-    public static string? EgoName(string id) => Names.Value.Egos.GetValueOrDefault(id);
+    public static string? EgoName(string id) => Names.Value.Egos?.GetValueOrDefault(id);
 
     /// <summary>An object kind's name in the setting (with Angband's ~ plural mark), or null.</summary>
-    public static string? ObjectName(string id) => Names.Value.Objects.GetValueOrDefault(id);
+    public static string? ObjectName(string id) => Names.Value.Objects?.GetValueOrDefault(id);
 
     /// <summary>A standard artifact's name in the setting ('Ringil' is 'Coldflame'), or null when Angband's own stands.</summary>
     public static string? ArtifactName(string id) => Names.Value.Artifacts?.GetValueOrDefault(id);
@@ -54,5 +95,5 @@ public static class Setting
     /// <summary>The setting's names, from which random artifacts' names are made (in place of Angband's Tolkien words).</summary>
     public static IReadOnlyList<string> NameWords => Names.Value.NameWords ?? [];
 
-    public static IReadOnlyDictionary<string, string> RenamedMonsters => Names.Value.Monsters;
+    public static IReadOnlyDictionary<string, string> RenamedMonsters => Names.Value.Monsters ?? [];
 }

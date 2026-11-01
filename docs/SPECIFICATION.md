@@ -514,6 +514,11 @@ the Pathfinder name.
 | **M5: To the Cinder** | The whole game | All profiles, vaults and pits; the five story levels; Saint Ysmere and the Cinder of Ashur; mythic tiers; bots clear it |
 | **M6: Breadth** | Polish | Priest, Druid and Blackguard; challenges; randarts; mods; Legacy from an AVAAshenReliquary save |
 
+M6 as built: the Priest, Druid and Blackguard come with AshenReliquary's ability system played one action at a time,
+which makes its Fighter, Champion, Rogue and Wizard playable too. The Ranger, Necromancer and Gunslinger wait for
+companions, raised dead, bows and guns. AVABand's Famine twist has no food to work on here, so it becomes Thin Flasks
+(two healing flasks, not three).
+
 **Tests and CI** (from both games):
 - `-warnaserror`, and tests with every change;
 - headless screenshot tests;

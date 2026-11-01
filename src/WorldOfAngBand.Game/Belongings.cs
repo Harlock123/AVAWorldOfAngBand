@@ -66,7 +66,8 @@ internal sealed class Belongings(DungeonSession session)
     private void TakeGold(Item gold)
     {
         session.Level.Objects.Remove(Hero.Position, gold);
-        Hero.Gold += gold.GoldValue;
+        // Gold Rush: worth twice as much.
+        Hero.Gold += gold.GoldValue * (session.Birth.Twist == "gold" ? 2 : 1);
         session.Say($"You have found {gold.GoldValue} gold pieces worth of {ItemNaming.Plain(gold.Kind.Name, false)}.");
     }
 

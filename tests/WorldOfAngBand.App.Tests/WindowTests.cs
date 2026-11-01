@@ -26,6 +26,7 @@ public class WindowTests
         var window = new MainWindow(new DungeonSession(Data.Value, seed), graveyard) { Width = 1280, Height = 800 };
         window.State.Frozen = true;
         window.ShowDialogs = false;
+        window.Challenges = new ChallengeBoard(Path.Combine(Path.GetDirectoryName(book)!, "challenges.json"));
         window.Show();
         Pump();
         return window;
@@ -322,6 +323,42 @@ public class WindowTests
         Assert.Contains(game.Powers.Bar, a => a.Id == "ray_of_frost");
         // The bar's keys: 1 is Ignition, a spell needing a monster in sight.
         Assert.True(window.UseAbility(0) || game.VisibleFoes().Any() == false);
+        window.Close();
+    }
+
+    [AvaloniaFact]
+    public void A_weekly_challenge_goes_down_with_its_twist_and_a_death_goes_on_the_board()
+    {
+        var window = Open();
+        var challenges = window.OpenChallenges(new DateOnly(2026, 11, 1));
+        Assert.Equal("2026-W44", challenges.Weekly.Birth.Challenge!.Stamp);
+        CaptureDialog(challenges, "WorldOfAngBand-challenges");
+        window.NewGame(challenges.Weekly.Seed, challenges.Weekly.Birth);
+        var game = window.Session;
+        Assert.Equal(challenges.Weekly.Birth.Twist, game.Birth.Twist);
+        game.HurtHero(10_000, "a test");
+        game.HurtHero(10_000, "a kobold");
+        Pump();
+        var tried = Assert.Single(window.Challenges.For(Challenges.Weekly, "2026-W44"));
+        Assert.Equal(1, tried.Attempt);
+        Assert.Contains("killed by a kobold", tried.ShareLine);
+        window.Close();
+    }
+
+    [AvaloniaFact]
+    public void The_mods_window_makes_an_example_and_switches_it_off_for_next_time()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "worldofangband-tests", Guid.NewGuid().ToString("N"));
+        var window = Open();
+        window.ModsRoot = Path.Combine(root, "mods");
+        window.SettingsPath = Path.Combine(root, "settings.json");
+        var mods = window.OpenMods();
+        Assert.Empty(mods.Mods);
+        mods.MakeExample();
+        Assert.Equal([WorldOfAngBand.Data.ModCatalog.ExampleName], mods.Mods);
+        CaptureDialog(mods, "WorldOfAngBand-mods");
+        mods.Switch(WorldOfAngBand.Data.ModCatalog.ExampleName, on: false);
+        Assert.Contains(WorldOfAngBand.Data.ModCatalog.ExampleName, AppSettings.Read(window.SettingsPath).DisabledMods);
         window.Close();
     }
 

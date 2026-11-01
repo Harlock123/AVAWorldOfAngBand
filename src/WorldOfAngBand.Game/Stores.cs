@@ -140,6 +140,12 @@ public sealed class Stores
     public bool Buy(Store store, Item item)
     {
         var hero = _session.Hero;
+        // Lean Times: only the Quartermaster and the hero's room trade.
+        if (_session.Birth.Twist == "lean" && !store.IsHome && store.Id != "general")
+        {
+            _session.Say("The shutters are down this week.");
+            return false;
+        }
         var price = store.IsHome ? 0 : PriceToBuy(store, item);
         if (hero.Gold < price)
         {

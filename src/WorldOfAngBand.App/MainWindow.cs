@@ -118,6 +118,39 @@ public sealed class MainWindow : Window
 
     private Birth? _lastBirth;
 
+    /// <summary>The player's settings (the mods switched off).</summary>
+    public AppSettings Settings { get; set; } = new();
+
+    /// <summary>How each mod fared when the game's data was loaded.</summary>
+    public IReadOnlyList<Data.ModLoadResult> ModsLoaded { get; set; } = [];
+
+    /// <summary>Where the mods are, and where the settings are kept (tests point them elsewhere).</summary>
+    public string ModsRoot { get; set; } = Data.DataLoader.UserModsRoot;
+
+    public string? SettingsPath { get; set; }
+
+    /// <summary>The mods: what each adds, and a switch to leave it out next time.</summary>
+    public ModsWindow OpenMods()
+    {
+        var window = new ModsWindow(ModsRoot, Settings, ModsLoaded, SettingsPath);
+        if (ShowDialogs)
+            _ = window.ShowDialog(this);
+        return window;
+    }
+
+    /// <summary>The daily and weekly boards (tests point it elsewhere).</summary>
+    public ChallengeBoard Challenges { get; set; } = new(ChallengeBoard.DefaultPath);
+
+    /// <summary>Today's dungeon and this week's challenge: the chosen one begins at once.</summary>
+    public ChallengeWindow OpenChallenges(DateOnly? day = null)
+    {
+        var name = _lastBirth?.Character?.Name ?? Session.Hero.Name;
+        var window = new ChallengeWindow(Session.Content, Challenges, name, day ?? Game.Challenges.Today(), (seed, birth) => NewGame(seed, birth));
+        if (ShowDialogs)
+            _ = window.ShowDialog(this);
+        return window;
+    }
+
     /// <summary>Where AVAAshenReliquary's saves are read from for a Legacy; null for its own folder.</summary>
     public string? LegacyFolder { get; set; }
 
@@ -129,6 +162,8 @@ public sealed class MainWindow : Window
     {
         var window = new BirthWindow(Session.Content, AshenLegacy.Read(LegacyFolder), _lastBirth);
         window.Chosen += birth => NewGame(seed, birth);
+        window.ChallengesWanted += () => OpenChallenges();
+        window.ModsWanted += () => OpenMods();
         if (ShowDialogs)
             _ = window.ShowDialog(this);
         return window;
@@ -145,6 +180,8 @@ public sealed class MainWindow : Window
             case HeroDiedEvent died:
                 Stop();
                 Hud.Book = _graveyard.Add(died.Record);
+                if (Session.Birth.Challenge is not null)
+                    Challenges.Record(Session);
                 break;
             case StoryChoiceEvent story:
                 Stop();
@@ -347,6 +384,8 @@ public sealed class MainWindow : Window
     public void Retire()
     {
         Hud.Book = _graveyard.Add(Session.Retire());
+        if (Session.Birth.Challenge is not null)
+            Challenges.Record(Session);
         NewGame();
         if (ShowDialogs)
             OpenBirth();

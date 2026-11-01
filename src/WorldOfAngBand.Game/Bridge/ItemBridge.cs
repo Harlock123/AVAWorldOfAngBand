@@ -57,11 +57,21 @@ public sealed class ItemBridge
 
     public static ItemBridge Load(GameData data, string? dataDirectory = null)
     {
-        var path = Path.Combine(dataDirectory ?? DataLoader.DefaultDataDirectory, "bridge", "items.json");
-        using var stream = System.IO.File.OpenRead(path);
+        // The shipped bridge, then each mod's bridge/items.json over it, section by section.
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, Converters = { new JsonStringEnumConverter() } };
-        var file = JsonSerializer.Deserialize<File>(stream, options) ?? throw new GameDataException($"{path} is empty.");
-        return new ItemBridge(data, file);
+        var merged = File.Empty;
+        var found = false;
+        foreach (var dir in new[] { dataDirectory ?? DataLoader.DefaultDataDirectory }.Concat(data.ModDirectories))
+        {
+            var path = Path.Combine(dir, "bridge", "items.json");
+            if (!System.IO.File.Exists(path))
+                continue;
+            using var stream = System.IO.File.OpenRead(path);
+            var file = JsonSerializer.Deserialize<FileJson>(stream, options) ?? throw new GameDataException($"{path} is empty.");
+            merged = merged.Over(file);
+            found = true;
+        }
+        return found ? new ItemBridge(data, merged) : throw new GameDataException("data/bridge/items.json is missing.");
     }
 
     private sealed record File(
@@ -70,7 +80,32 @@ public sealed class ItemBridge
         Dictionary<string, BridgedShield> Shields,
         Dictionary<string, string?> Worn,
         Dictionary<string, string> Use,
-        List<string> Egos);
+        List<string> Egos)
+    {
+        public static readonly File Empty = new([], [], [], [], [], []);
+
+        /// <summary>A bridge file laid over this one: its entries replace these by id, and its egos join them.</summary>
+        public File Over(FileJson over) => new(
+            Merge(Weapons, over.Weapons), Merge(Armour, over.Armour), Merge(Shields, over.Shields), Merge(Worn, over.Worn),
+            Merge(Use, over.Use), [.. Egos.Union(over.Egos ?? [])]);
+
+        private static Dictionary<string, T> Merge<T>(Dictionary<string, T> under, Dictionary<string, T>? over)
+        {
+            var merged = new Dictionary<string, T>(under);
+            foreach (var (id, entry) in over ?? [])
+                merged[id] = entry;
+            return merged;
+        }
+    }
+
+    /// <summary>A bridge file as written: a mod's may hold only the sections it adds to.</summary>
+    private sealed record FileJson(
+        Dictionary<string, BridgedWeapon>? Weapons,
+        Dictionary<string, BridgedArmour>? Armour,
+        Dictionary<string, BridgedShield>? Shields,
+        Dictionary<string, string?>? Worn,
+        Dictionary<string, string>? Use,
+        List<string>? Egos);
 
     /// <summary>Whether a kind is in the game yet (gold always is).</summary>
     public bool Has(ObjectKindDef kind) =>

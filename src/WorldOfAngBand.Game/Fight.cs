@@ -172,6 +172,7 @@ internal sealed class Fight(DungeonSession session)
     /// <summary>Damage to a monster: it wakes, may lose its nerve (Angband mon_take_hit), and dies below 0 HP.</summary>
     public void Hurt(Foe foe, int damage)
     {
+        damage = session.Twisted(damage);
         var monster = foe.Monster;
         Wake(foe);
         monster.Hp -= damage;

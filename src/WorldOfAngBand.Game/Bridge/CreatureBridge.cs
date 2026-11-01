@@ -50,14 +50,25 @@ public sealed class CreatureBridge
 
     public IReadOnlyCollection<BridgedMonster> Monsters => _monsters.Values;
 
-    /// <summary>The bridge as shipped, data/bridge/monsters.json beside the game data.</summary>
+    /// <summary>
+    /// The bridge as shipped, data/bridge/monsters.json beside the game data, with each mod's own bridge/monsters.json
+    /// over it (an entry with the same id replaces the shipped one; a new id brings a modded monster into the game).
+    /// </summary>
     public static CreatureBridge Load(GameData data, string? dataDirectory = null)
     {
-        var path = Path.Combine(dataDirectory ?? DataLoader.DefaultDataDirectory, "bridge", "monsters.json");
-        using var stream = File.OpenRead(path);
-        var file = JsonSerializer.Deserialize<BridgeFile>(stream, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
-            ?? throw new GameDataException($"{path} is empty.");
-        return new CreatureBridge(data, file.Monsters);
+        var monsters = new Dictionary<string, BridgedMonster>();
+        foreach (var dir in new[] { dataDirectory ?? DataLoader.DefaultDataDirectory }.Concat(data.ModDirectories))
+        {
+            var path = Path.Combine(dir, "bridge", "monsters.json");
+            if (!File.Exists(path))
+                continue;
+            using var stream = File.OpenRead(path);
+            var file = JsonSerializer.Deserialize<BridgeFile>(stream, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
+                ?? throw new GameDataException($"{path} is empty.");
+            foreach (var m in file.Monsters)
+                monsters[m.Id] = m;
+        }
+        return new CreatureBridge(data, monsters.Values);
     }
 
     private sealed record BridgeFile(List<BridgedMonster> Monsters);

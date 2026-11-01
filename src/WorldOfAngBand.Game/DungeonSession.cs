@@ -56,6 +56,7 @@ public sealed class DungeonSession : ITurnHandler
         ItemBridge? itemBridge = null, Birth? birth = null)
     {
         Birth = birth ?? new Birth();
+        Setting.UseMods(data.ModDirectories);
         Data = data;
         _seed = seed;
         Content = content ?? ContentDatabase.Embedded;
@@ -83,12 +84,16 @@ public sealed class DungeonSession : ITurnHandler
         Hero = Birth.Character is { } choices ? Hero.Create(Content, choices) : Hero.Create(Content);
         Powers = new Powers(this);
         Kit();
+        ThinFlasks();
         // The rumour: drawn at birth, unless the player chose it (a Legacy).
         var drawn = Story.Rumours[Rng.RandInt0(Story.Rumours.Count)];
         var rumour = Birth.Rumour is { } chosen && Story.Rumours.FirstOrDefault(r => r.Ending == chosen) is { Ending: not null } picked ? picked : drawn;
         Rumour = rumour.Ending;
         Stores = new Stores(this);
         Scheduler.Add(Hero);
+        // Restless Foes: every monster a little quicker.
+        if (Birth.Twist == "restless")
+            Scheduler.SpeedBonus = actor => actor is Monster ? 2 : 0;
         Enter(0, StairArrival.None);
         Opening = rumour.Rumour;
     }
@@ -586,6 +591,7 @@ public sealed class DungeonSession : ITurnHandler
         {
             // Gallowmere: the flasks are filled again, Second Breath comes back, and the shops have new stock.
             Hero.Character.Potion.Refill();
+            ThinFlasks();
             Hero.Character.SecondBreath.Refresh();
             Stores?.Restock();
         }
@@ -594,6 +600,9 @@ public sealed class DungeonSession : ITurnHandler
             // The story's monsters take their places before the level's own. On a quest level the rest of the deep
             // keeps half its distance from the keeper: half the monsters a level that deep would have.
             PlaceStory(story);
+            // Swarm: half as many monsters again.
+            if (Birth.Twist == "swarm")
+                Level.Population = Level.Population with { Monsters = Level.Population.Monsters * 3 / 2 };
             if (quest)
             {
                 Level.Population = Level.Population with { Monsters = Level.Population.Monsters / 2 };
@@ -606,6 +615,12 @@ public sealed class DungeonSession : ITurnHandler
             }
             _spawner.Populate(Level, Rng, Hero.Position, _uniquesGone);
             Loot.Populate();
+        }
+        // Darkness: nothing in the deep is lit but what glows by itself.
+        if (Birth.Twist == "darkness" && depth > 0)
+        {
+            foreach (var p in Level.AllLocs().Where(p => !Level.FeatureAt(p).Has(TerrainFlags.Bright)))
+                Level[p].Flags &= ~SquareFlags.Glow;
         }
         foreach (var monster in Level.Monsters.All)
             Enlist(monster);
@@ -855,6 +870,16 @@ public sealed class DungeonSession : ITurnHandler
     }
 
     // --- What potions and scrolls do to the level ---
+
+    /// <summary>Thin Flasks: two healing flasks, not three.</summary>
+    private void ThinFlasks()
+    {
+        if (Birth.Twist == "flasks")
+            Hero.Character.Potion.Restore(Math.Min(Hero.Character.Potion.Charges, HealingPotion.MaxCharges - 1));
+    }
+
+    /// <summary>Glass Cannon: blows struck either way land half again as hard (all but the killing ones).</summary>
+    internal int Twisted(int damage) => Birth.Twist == "glass" && damage < 9000 ? damage + damage / 2 : damage;
 
     /// <summary>The hero moves to a square without walking there (a charge, a tumble, a blink).</summary>
     internal void MoveHero(Loc to)
@@ -1114,6 +1139,7 @@ public sealed class DungeonSession : ITurnHandler
 
     internal void HurtHero(int damage, string killer)
     {
+        damage = Twisted(damage);
         switch (Hero.Character.TakeDamage(damage))
         {
             case DeathOutcome.SavedBySecondBreath:

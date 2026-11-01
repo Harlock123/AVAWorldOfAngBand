@@ -48,6 +48,12 @@ The code is **copied** from the two parent games, not linked, so neither has to 
     - `Loot`: floor objects and monster drops;
     - `ItemEffects`: what potions and scrolls do;
     - `Stores`: the shops, the home and the Smith's runework.
+  - `Powers`: the class abilities on the action system (AshenReliquary's ability kinds), with the class resource,
+    cooldowns on the game clock, wards, auras, hiding and traps. `Powers.IsPlayable` says which classes the game can
+    play; `LevelPicks` suggests a level's feats.
+  - `Birth`: what the player chose (the hero, the rumour or a Legacy, randarts, a challenge). `Challenges`: the daily
+    and weekly seeds, heroes and twists. `Activations`: an artifact's activation as the game's effects or a one-off
+    ability.
   - `Round`: Pathfinder's three-action round, with the multiple attack penalty and the reaction.
   - `Hero`: the character, their Angband pack and equipment, gold and timed effects.
   - `Foe`: an engine `Monster` with its Pathfinder numbers and conditions.
@@ -60,7 +66,8 @@ The code is **copied** from the two parent games, not linked, so neither has to 
   - `Dressing/LevelDressing`: turns a level's terrain into Flare tiles. The wall faces follow AshenReliquary's map
     scripts.
   - `Flare/`: AshenReliquary's parsers for Flare's tileset and animation files.
-  - `Setting`: names in the Ashen setting, from `data/setting/ashen_names.json`.
+  - `Setting`: names in the Ashen setting, from `data/setting/ashen_names.json` and each mod's own (`Setting.UseMods`,
+    set by the session from the data's mod folders), and the words random artifacts are named from.
 - `src/WorldOfAngBand.App/`: Avalonia, built in code with no XAML.
   - `Rendering/ViewState`: what the views show besides the game, followed from its events: messages, slides,
     swings, floating numbers, the slain.
@@ -68,9 +75,12 @@ The code is **copied** from the two parent games, not linked, so neither has to 
     darkness. Monsters are drawn by their bridge entry: a Flare creature, the paper doll, or a DCSS card.
   - `Rendering/ClassicView`: AVABand's letters and tiles from above.
   - `Rendering/HudPainter`: the HUD, the death screen and the epilogue, over either view.
-  - `Services/Graveyard`: the book of the dead (`graveyard.json`).
+  - `Services/Graveyard`: the book of the dead (`graveyard.json`); `Services/ChallengeBoard` the challenge tries
+    (`challenges.json`); `Services/AppSettings` the mods switched off (`settings.json`); `Services/AshenLegacy` reads
+    AVAAshenReliquary's saves for a Legacy, and never writes them.
   - `Windows/InventoryWindow`, `Windows/StoreWindow` and `Windows/StoryWindow`: the pack, the shops and a story
-    level's altar.
+    level's altar. `Windows/BirthWindow`, `LevelUpWindow`, `ChallengeWindow` and `ModsWindow`: a new hero, a level's
+    feats, the challenges, and the mods.
   - `Rendering/ItemArt`: Flare's loot sprites (or DCSS tiles) for things on the floor.
   - `MainWindow`: keys, clicks, travel and rest.
   - `Assets/Flare` holds the embedded art; `tilesets/dcss` (AVABand's DCSS tiles) ships beside the executable.
@@ -106,6 +116,10 @@ The code is **copied** from the two parent games, not linked, so neither has to 
   gone, and nothing takes the hero past them (`DungeonSession.NoDeeperThan`). A keeper never teleports away or sends
   the hero off its level, and keeps its vigil without escorts. A unique left alive on a level the hero leaves can turn
   up again, as in Angband.
+- **Content files keep their layout.** `Rules/Content/Data/classes.json` and `data/setting/ashen_names.json` are laid out
+  by hand; add to them without rewriting the rest (a script's `json.dump` reflows the whole file).
+- **Mods layer, never replace.** A mod's `bridge/*.json` and `ashen_names.json` go over the shipped ones by id
+  (`CreatureBridge.Load`, `ItemBridge.Load`, `Setting`), as its data files do (`DataLoader`).
 - **Warnings are errors** (`TreatWarningsAsErrors`), nullable reference types are on, and every change comes with
   tests.
 

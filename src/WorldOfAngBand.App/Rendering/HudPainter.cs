@@ -45,6 +45,11 @@ public sealed class HudPainter : IDisposable
         Text(canvas, IsoView.Stratum(depth), 16, 30, _title, Ink);
         Text(canvas, depth == 0 ? "The town" : $"Level {depth}  ·  {depth * DungeonSession.FeetPerLevel} ft", 16, 52, _small, Dim);
         Text(canvas, $"Turn {session.Turn / 10}", size.Width - 16, 30, _small, Dim, SKTextAlign.Right);
+        if (session.Birth.Challenge is { } challenge)
+        {
+            var twist = challenge.Twist is { } id ? Challenges.Twists.FirstOrDefault(t => t.Id == id)?.Name : null;
+            Text(canvas, $"{(challenge.IsDaily ? "Daily" : "Weekly")} {challenge.Stamp}{(twist is null ? "" : $": {twist}")}", 16, 72, _small, Ember);
+        }
         DrawHero(canvas, size, session);
         DrawMessages(canvas, size, view);
         if (Hover is { } hover)

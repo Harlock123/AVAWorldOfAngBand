@@ -43,6 +43,9 @@ public sealed class GameData
     /// </summary>
     public IReadOnlyList<string> Mods { get; init; } = [];
 
+    /// <summary>The folders loaded over the base data, in order (the setting's own layer, then the user's mods).</summary>
+    public IReadOnlyList<string> ModDirectories { get; init; } = [];
+
     public IReadOnlyList<ElementDef> Elements { get; init; } = [];
     public IReadOnlyList<TimedEffectDef> TimedEffects { get; init; } = [];
     public IReadOnlyList<BlowMethodDef> BlowMethods { get; init; } = [];

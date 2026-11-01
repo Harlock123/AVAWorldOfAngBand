@@ -64,7 +64,7 @@ public sealed class HealingPotion
 
     public void Refill() => Charges = MaxCharges;
 
-    internal void Restore(int charges, int spares = 0)
+    public void Restore(int charges, int spares = 0)
     {
         Charges = Math.Clamp(charges, 0, MaxCharges);
         Spares = Math.Clamp(spares, 0, CaseCapacity);
