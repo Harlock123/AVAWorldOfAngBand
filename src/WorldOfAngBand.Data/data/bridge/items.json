@@ -1,5 +1,5 @@
 {
- "_comment": "How Angband 4.2.5's items come into the game (the spec's section 6.3). weapons: the Pathfinder die, damage type, traits and paper-doll layer of each melee weapon (its potency comes from its to-hit, its striking from its to-dam). armour: body armour's Pathfinder category, AC, Dex cap, check penalty and Strength, with the paper-doll layers for chest and legs. shields: Shield Block's hardness. worn: other wearables and their paper-doll layer (or null). use: what a potion or scroll does. egos: the egos that may be made so far. egoNames: ego names in the Ashen setting.",
+ "_comment": "How Angband 4.2.5's items come into the game (the spec's section 6.3). weapons: the Pathfinder die, damage type, traits and paper-doll layer of each melee weapon (its potency comes from its to-hit, its striking from its to-dam). armour: body armour's Pathfinder category, AC, Dex cap, check penalty and Strength, with the paper-doll layers for chest and legs. shields: Shield Block's hardness. worn: other wearables and their paper-doll layer (or null). use: what a potion or scroll does. egos: the egos that may be made so far.",
  "weapons": {
   "dagger": {
    "die": 4,
@@ -642,10 +642,5 @@
   "stealth_cloak",
   "of_brightness",
   "everburning"
- ],
- "egoNames": {
-  "westernesse": "of the Pale Lantern",
-  "holy_avenger": "of the Order",
-  "defender": "(Defender)"
- }
+ ]
 }

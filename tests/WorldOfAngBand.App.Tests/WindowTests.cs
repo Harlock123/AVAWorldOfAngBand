@@ -329,4 +329,34 @@ public class WindowTests
     /// <summary>The isometric key that walks a map direction.</summary>
     private static Key IsoKey(Direction direction) =>
         new[] { Key.Up, Key.PageUp, Key.Right, Key.PageDown, Key.Down, Key.End, Key.Left, Key.Home }.First(k => MainWindow.DirectionFor(k) == direction);
+
+    [AvaloniaFact]
+    public void Deep_monsters_come_in_their_families_and_their_spells_flash()
+    {
+        var window = Open(4243);
+        var game = window.Session;
+        game.JumpTo(40);
+        foreach (var f in game.Foes.ToList())
+            game.Banish(f);
+        while (game.Hero.Level < 12)
+            game.Hero.Character.LevelUp();
+        // Deep rooms are seldom lit: walk to the nearest room and light it, as a Scroll of Light would.
+        foreach (var p in game.Level.AllLocs())
+            game.Known.Remember(game.Level, p);
+        var room = game.Level.AllLocs().Where(p => game.Level[p].Has(Engine.World.SquareFlags.Room) && game.Level.IsEmptyFloor(p)
+                && game.Level.Neighbors(p).All(n => game.Level.IsPassable(n)))
+            .OrderBy(p => p.DistanceTo(game.Hero.Position)).First(p => game.PathTo(p) is not null);
+        window.TravelTo(room);
+        Walk(window);
+        game.LightArea(game.Hero.Position, 6);
+        window.Press(Key.NumPad5);
+        Surround(window, "mature_white_dragon", "cave_orc", "white_wraith", "stone_golem", "vrock", "hill_giant", "moaning_spirit", "quylthulg");
+        var dragon = game.Foes.FirstOrDefault(f => f.Monster.Race.Id == "mature_white_dragon");
+        if (dragon is not null)
+            game.Publish(new SpellEvent(dragon.Monster.Position, game.Hero.Position, MonsterSpellKind.Breath, "cold", 0));
+        var frame = Capture(window, "WorldOfAngBand-deep");
+        Assert.True(DrawnShare(frame) > 0.12);
+        Assert.True(game.VisibleFoes().Count() >= 4);
+        window.Close();
+    }
 }

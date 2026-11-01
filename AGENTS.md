@@ -35,7 +35,11 @@ The code is **copied** from the two parent games, not linked, so neither has to 
     experience. The other work goes to helpers:
     - `Fight`: Strikes, blows, Shield Block and blow effects;
     - `MonsterBrain`: AVABand's port of mon-move.c, trimmed;
-    - `Bridge/CreatureBridge`: Angband monsters in Pathfinder terms, from `data/bridge/monsters.json`;
+    - `Bridge/CreatureBridge`: Angband monsters in Pathfinder terms, from `data/bridge/monsters.json` (made by
+      `tools/bridge/make_monster_bridge.py`; edit the script, not the file), and the depth scale for their damage and
+      hit points;
+    - `MonsterSpells`: Angband's 91 monster spells in Pathfinder terms;
+    - `Elements`: Angband's 25 elements as damage types and riders;
     - `Bridge/ItemBridge`: Angband items in Pathfinder terms (weapons, armour, shields, what potions and scrolls do,
       the egos in the game), from `data/bridge/items.json`;
     - `Gear`: what the worn Angband items come to in Pathfinder's terms, set on the character whenever they change;
@@ -50,7 +54,7 @@ The code is **copied** from the two parent games, not linked, so neither has to 
   - `Dressing/LevelDressing`: turns a level's terrain into Flare tiles. The wall faces follow AshenReliquary's map
     scripts.
   - `Flare/`: AshenReliquary's parsers for Flare's tileset and animation files.
-  - `Setting`: names in the Ashen setting.
+  - `Setting`: names in the Ashen setting, from `data/setting/names.json`.
 - `src/WorldOfAngBand.App/`: Avalonia, built in code with no XAML.
   - `Rendering/ViewState`: what the views show besides the game, followed from its events: messages, slides,
     swings, floating numbers, the slain.
@@ -77,7 +81,11 @@ The code is **copied** from the two parent games, not linked, so neither has to 
   story), never one class across a hundred partial files. Both parent games ended up that way; this one mustn't.
 - **The 4.2.5 data stays as AVABand converted it.** What this game changes (names, PF2 translations) goes in its own
   files beside it.
-- **No Tolkien names on screen.** The setting renames them (see the spec's section 3).
+- **No Tolkien names on screen.** The setting renames them (`data/setting/names.json`, the spec's section 3), and
+  `BridgeCheckTests` fails on any name it shows that matches its list of Tolkien's names. Add a rename there, never
+  an exception to the test.
+- **The bridge check** (`BridgeCheckTests`): every monster, spell and element is bridged; the test output reports
+  sprite coverage.
 - **The view is changed under `IsoView.Gate`**, since Avalonia draws on its own thread.
 - **Items stay Angband's.** The hero carries engine `Item`s in an engine `Inventory`; Pathfinder's numbers are derived
   (`Gear`), never stored. Only bridged kinds and egos are made (`ObjectFactory.AllowedKind`, `AllowedEgo`); artifacts

@@ -150,6 +150,7 @@ public sealed class IsoView : Control
         }
         DrawDepthSorted(canvas, session, dressed, x0, y0, x1, y1);
         DrawDark(canvas, size, session, dressed, x0, y0, x1, y1);
+        DrawFlashes(canvas);
         DrawHealthBars(canvas, session);
         DrawFloats(canvas);
         DrawShopSigns(canvas, session, x0, y0, x1, y1);
@@ -311,8 +312,10 @@ public sealed class IsoView : Control
         var race = foe.Monster.Race;
         var bridged = session.Bridge.For(race);
         var tint = bridged?.Tint == true ? TintFor(race.Color) : null;
+        // A ghost is half seen.
+        using var ghost = bridged?.Ghost == true ? new SKPaint { Color = SKColors.White.WithAlpha(120), ColorFilter = tint?.ColorFilter } : null;
         DrawMonsterArt(canvas, race.Id, bridged, FlareAssets.SpriteDirection(State.Facing(foe.Monster.Id)),
-            State.Animation(foe.Monster.Id), foot, tint, 1f);
+            State.Animation(foe.Monster.Id), foot, ghost ?? tint, bridged?.Ghost == true ? 0.5f : 1f);
     }
 
     /// <summary>A monster just slain: its death throes, fading away.</summary>
@@ -394,6 +397,72 @@ public sealed class IsoView : Control
         if (frame.Width == 0)
             return;
         Blit(canvas, sheet, frame.X, frame.Y, frame.Width, frame.Height, frame.OffsetX, frame.OffsetY, foot, (float)Zoom * scale, paint);
+    }
+
+    /// <summary>A spell element's colour.</summary>
+    private static SKColor ElementColour(string? element) => element switch
+    {
+        "fire" or "plasma" or "meteor" => new SKColor(255, 120, 40),
+        "cold" or "ice" => new SKColor(150, 210, 255),
+        "elec" => new SKColor(170, 170, 255),
+        "acid" => new SKColor(150, 230, 60),
+        "pois" => new SKColor(90, 200, 90),
+        "light" or "holy_orb" => new SKColor(255, 250, 200),
+        "dark" or "nether" => new SKColor(120, 60, 160),
+        "water" => new SKColor(60, 120, 230),
+        "chaos" or "disen" or "nexus" => new SKColor(220, 80, 220),
+        "sound" or "shards" or "force" or "gravity" or "inertia" or "time" => new SKColor(220, 200, 150),
+        "arrow" or null => new SKColor(230, 220, 200),
+        _ => new SKColor(255, 210, 120),
+    };
+
+    /// <summary>Monsters' spells: a bolt's streak flying to the hero, a ball's burst round them, a breath's cone, a status spell's glow.</summary>
+    private void DrawFlashes(SKCanvas canvas)
+    {
+        var z = (float)Zoom;
+        foreach (var f in State.Flashes)
+        {
+            var t = (float)Math.Clamp((State.Time - f.At) / ViewState.FlashSeconds, 0, 1);
+            var colour = ElementColour(f.Element);
+            var from = ToScreen(f.From.X + 0.5, f.From.Y + 0.5);
+            var to = ToScreen(f.To.X + 0.5, f.To.Y + 0.5);
+            from.Y -= 70 * z;
+            to.Y -= 60 * z;
+            using var paint = new SKPaint { IsAntialias = true, Color = colour.WithAlpha((byte)(230 * (1 - t))), BlendMode = SKBlendMode.Plus };
+            switch (f.Kind)
+            {
+                case Engine.Definitions.MonsterSpellKind.Bolt:
+                    var head = new SKPoint(from.X + (to.X - from.X) * Math.Min(1, t * 2), from.Y + (to.Y - from.Y) * Math.Min(1, t * 2));
+                    paint.StrokeWidth = 4 * z + 2;
+                    paint.StrokeCap = SKStrokeCap.Round;
+                    canvas.DrawLine(new SKPoint(head.X - (to.X - from.X) * 0.15f, head.Y - (to.Y - from.Y) * 0.15f), head, paint);
+                    canvas.DrawCircle(head, 10 * z, paint);
+                    break;
+                case Engine.Definitions.MonsterSpellKind.Ball or Engine.Definitions.MonsterSpellKind.Storm:
+                    canvas.DrawOval(to.X, to.Y + 40 * z, HalfTileWidth * z * (0.6f + 2 * t), HalfTileHeight * z * (0.6f + 2 * t), paint);
+                    break;
+                case Engine.Definitions.MonsterSpellKind.Breath:
+                    using (var path = new SKPath())
+                    {
+                        var dx = to.X - from.X;
+                        var dy = to.Y - from.Y;
+                        var length = MathF.Max(1, MathF.Sqrt(dx * dx + dy * dy));
+                        var spread = length * 0.45f;
+                        path.MoveTo(from);
+                        path.LineTo(to.X - dy / length * spread, to.Y + dx / length * spread);
+                        path.LineTo(to.X + dy / length * spread, to.Y - dx / length * spread);
+                        path.Close();
+                        paint.Color = colour.WithAlpha((byte)(170 * (1 - t)));
+                        canvas.DrawPath(path, paint);
+                    }
+                    break;
+                default:
+                    paint.Style = SKPaintStyle.Stroke;
+                    paint.StrokeWidth = 3 * z + 1;
+                    canvas.DrawOval(from.X, from.Y + 60 * z, 50 * z * (1 + t), 22 * z * (1 + t), paint);
+                    break;
+            }
+        }
     }
 
     /// <summary>A bar over each hurt monster the hero can see.</summary>

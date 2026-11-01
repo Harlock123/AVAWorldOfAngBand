@@ -40,9 +40,9 @@ public sealed class DiveBot(DungeonSession game)
                 && game.ItemBridge.UseOf(i.Kind)?.StartsWith("heal:", StringComparison.Ordinal) == true) is { } potion
             && game.Perform(new UseItem(potion)))
             return;
-        // Things that never move (molds, floating eyes) and monsters that haven't noticed the hero are left alone
-        // unless they are right beside them.
-        foes.RemoveAll(f => (f.Monster.Race.Has(MonsterFlags.NeverMove) || !f.Monster.Aware) && f.Monster.Position.ChebyshevTo(hero.Position) > 1);
+        // Things that never move (molds, jellies, floating eyes) are left alone: walk on by. Monsters that haven't noticed
+        // the hero are left alone unless they are right beside them.
+        foes.RemoveAll(f => f.Monster.Race.Has(MonsterFlags.NeverMove) || (!f.Monster.Aware && f.Monster.Position.ChebyshevTo(hero.Position) > 1));
         if (foes.Count > 0)
         {
             var nearest = foes.MinBy(f => f.Monster.Position.DistanceTo(hero.Position))!;

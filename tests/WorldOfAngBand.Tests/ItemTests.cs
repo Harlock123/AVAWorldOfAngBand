@@ -146,7 +146,7 @@ public class ItemTests
         Assert.Equal(2, game.Depth);
         var recall = Carry(game, Make(game, "scroll_of_word_of_recall", 2));
         foreach (var f in game.Foes.ToList())
-            game.Level.Monsters.Remove(f.Monster);
+            game.Banish(f);
         game.Perform(new UseItem(recall));
         for (var i = 0; i < 60 && game.Depth != 0; i++)
             game.Perform(new Hold());

@@ -30,6 +30,7 @@ public sealed class ViewState
     private readonly Dictionary<int, Direction> _facing = [];
     private readonly List<FloatingText> _floats = [];
     private readonly List<Corpse> _corpses = [];
+    private readonly List<SpellFlash> _flashes = [];
     private DungeonSession? _session;
 
     /// <summary>The hero's key in the slide and action tables (monsters use their ids, which start at 1).</summary>
@@ -81,6 +82,12 @@ public sealed class ViewState
 
     public IReadOnlyList<Corpse> Corpses => _corpses;
 
+    /// <summary>Spells in flight or bursting: a bolt's streak, a ball's burst, a breath's cone.</summary>
+    public IReadOnlyList<SpellFlash> Flashes => _flashes;
+
+    /// <summary>How long a spell's flash lasts.</summary>
+    public const double FlashSeconds = 0.5;
+
     /// <summary>True while anyone is still sliding into the square they moved to.</summary>
     public bool Sliding => !Frozen && _slides.Values.Any(s => Time - s.At < StepSeconds);
 
@@ -104,6 +111,14 @@ public sealed class ViewState
             case StrikeEvent strike:
                 Strike(strike, now);
                 break;
+            case SpellEvent spell:
+                if (IdAt(spell.From) is { } caster)
+                {
+                    _actions[caster] = (spell.Kind is Engine.Definitions.MonsterSpellKind.Bolt && spell.Element is null ? "shoot" : "cast", now);
+                    _facing[caster] = DirectionExtensions.FromOffset(spell.To.X - spell.From.X, spell.To.Y - spell.From.Y);
+                }
+                _flashes.Add(new SpellFlash(spell.From, spell.To, spell.Kind, spell.Element, spell.Radius, now));
+                break;
             case MonsterDiedEvent died:
                 _corpses.Add(new Corpse(died.Id, died.At, died.RaceId, Facing(died.Id), now));
                 _slides.Remove(died.Id);
@@ -114,6 +129,7 @@ public sealed class ViewState
                 break;
             case LevelEnteredEvent:
                 TerrainChanged?.Invoke();
+                _flashes.Clear();
                 _slides.Clear();
                 _actions.Clear();
                 _floats.Clear();
@@ -177,11 +193,15 @@ public sealed class ViewState
         var now = Time;
         _floats.RemoveAll(f => now - f.At > FloatSeconds);
         _corpses.RemoveAll(c => now - c.At > CorpseSeconds);
+        _flashes.RemoveAll(f => now - f.At > FlashSeconds);
     }
 }
 
 /// <summary>A number (or "miss") floating up from where a blow landed; <see cref="Hurt"/> when it was the hero hit.</summary>
 public sealed record FloatingText(Loc Where, string Text, bool Hurt, double At);
+
+/// <summary>A monster's spell on its way: from the caster toward the hero, of a kind and an element.</summary>
+public sealed record SpellFlash(Loc From, Loc To, Engine.Definitions.MonsterSpellKind Kind, string? Element, int Radius, double At);
 
 /// <summary>A monster just slain, falling where it stood.</summary>
 public sealed record Corpse(int Id, Loc Where, string RaceId, Direction Facing, double At);

@@ -7,7 +7,7 @@ using WorldOfAngBand.Rules.Creatures;
 namespace WorldOfAngBand.Game.Bridge;
 
 /// <summary>One Angband monster as data/bridge/monsters.json brings it into the game.</summary>
-public sealed record BridgedMonster(string Id, string? Sprite = null, double Scale = 1, bool Tint = false, string? Name = null,
+public sealed record BridgedMonster(string Id, string? Sprite = null, double Scale = 1, bool Tint = false, bool Ghost = false,
     IReadOnlyDictionary<string, string>? Doll = null);
 
 /// <summary>A monster's Pathfinder numbers, worked out from its Angband entry (the spec's section 6.1).</summary>
@@ -60,7 +60,31 @@ public sealed class CreatureBridge
     public BridgedMonster? For(MonsterRaceDef race) => _monsters.GetValueOrDefault(race.Id);
 
     /// <summary>The monster's name in the Ashen setting.</summary>
-    public string NameOf(MonsterRaceDef race) => For(race)?.Name ?? race.Name;
+    public string NameOf(MonsterRaceDef race) => Setting.MonsterName(race.Id) ?? race.Name;
+
+    /// <summary>
+    /// What Angband's damage and hit points are worth in Pathfinder's, by depth: all of them to depth 10, then less and
+    /// less (a Pathfinder hero has far fewer hit points, and deals far less damage, than an Angband hero of the same
+    /// depth): 0.8 at 20, 0.55 at 40, 0.42 at 60, 0.35 at 80, 0.3 from 100. The balance bots tune it.
+    /// </summary>
+    public static double DamageScale(int depth)
+    {
+        (int Depth, double Scale)[] curve = [(10, 1.0), (20, 0.8), (40, 0.55), (60, 0.42), (80, 0.35), (100, 0.3)];
+        if (depth <= curve[0].Depth)
+            return 1.0;
+        for (var i = 1; i < curve.Length; i++)
+        {
+            if (depth > curve[i].Depth)
+                continue;
+            var (d0, s0) = curve[i - 1];
+            var (d1, s1) = curve[i];
+            return s0 + (s1 - s0) * (depth - d0) / (d1 - d0);
+        }
+        return curve[^1].Scale;
+    }
+
+    /// <summary>Scales an Angband amount (damage, hit points) for a monster of <paramref name="depth"/>; never below 1.</summary>
+    public static int Scaled(int amount, int depth) => amount <= 0 ? amount : Math.Max(1, (int)Math.Round(amount * DamageScale(depth)));
 
     public static int LevelForDepth(int depth)
     {

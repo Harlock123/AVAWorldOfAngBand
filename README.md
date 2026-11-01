@@ -6,12 +6,12 @@ hero, rules, art and story. Ten years after the Cinder Throne, the Reliquary und
 lid: below it a shaft goes down a hundred levels, to where the Order of the Pale Lantern first burned Ashur. You go
 down it as one of the Lantern-sworn, with no Ember Heart. When you die, you stay dead.
 
-**Status: milestone 3 of 6 ("Loot").** Levels are generated as Angband 4.2.5 generates them and drawn
-isometrically in Flare's art. The hero is a Pathfinder 2e fighter on AshenReliquary's rules, and fights forty of
-Angband's monsters from its first ten levels, turn by turn on Angband's energy system. Angband's items lie on the
-floor and drop from monsters: weapons and armour with Pathfinder's runes, egos, potions and scrolls whose flavours
-are learned by trying them. Gallowmere's shops buy and sell, and the Smith etches runes. Death is final. The plan for
-the rest is in [the design specification](docs/SPECIFICATION.md).
+**Status: milestone 4 of 6 ("The whole bestiary").** Levels are generated as Angband 4.2.5 generates them and drawn
+isometrically in Flare's art. The hero is a Pathfinder 2e fighter on AshenReliquary's rules, fighting turn by turn on
+Angband's energy system. All of Angband's 633 monsters are in, with their 91 spells and innate attacks in Pathfinder's
+terms, and every name Angband takes from Tolkien is renamed for the Ashen setting. Angband's items lie on the floor
+with Pathfinder's runes, Gallowmere's shops buy and sell, and the Smith etches runes. Death is final. The plan for the
+rest is in [the design specification](docs/SPECIFICATION.md).
 
 ![A fight on the first level: a skeleton kobold, a jackal, a giant centipede and a rock lizard round the hero in a
 lit hall, a "miss" floating over the hero, the hit points, round and Second Breath at the top right, and the rolls in
@@ -35,17 +35,40 @@ door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-t
   - a fighter's Shield Block comes back each round.
   Every check is a d20 with four degrees of success, and the message log shows the roll: *You hit the kobold
   (14 + 9 = 23 vs AC 15): 9 slashing.*
-- **Forty monsters,** from Angband's first ten levels, brought into Pathfinder's terms (the spec's section 6):
+- **All of Angband's monsters,** 623 of 4.2.5's and AVABand's ten (its seasonal ones stay out), brought into
+  Pathfinder's terms (the spec's section 6):
   - their level comes from their depth, and their AC, attack and saves from AshenReliquary's creature formulas at
     that level;
   - each Angband blow is a Strike, and its effect (poison, fear, paralysis, blindness, drained strength) comes with a
     save;
   - they think as Angband's do, ported from AVABand: they wake by degrees, hunt by sight, noise and scent, gather in
     packs, surround the hero in the open, lurk while the hero holds a corridor, flee when hurt, open and bash doors,
-    and breed.
-  - **The art:** a kobold or a cutpurse is Flare's paper-doll body, dressed and tinted. A jackal is Danimal's wolf, and
-    ants, centipedes, skeletons and zombies are Flare's creatures. Anything with no sprite yet stands on the floor as
-    its DCSS tile.
+    and breed;
+  - Angband's damage and hit points count in full to depth 10, then for less and less (0.55 at depth 40, 0.3 from
+    100), since a Pathfinder hero has far fewer hit points than an Angband one.
+- **Their spells,** all 91 of Angband's, in Pathfinder's terms:
+  - bolts and arrows are attacks against AC;
+  - balls, breaths and storms call for a basic Reflex save, mind blasts and wounds for a basic Will save;
+  - blinding, confusion, fear, slowing and paralysis call for a save, and a worn protection turns them aside;
+  - monsters heal, blink, teleport, pull the hero to them, summon their kin, shriek and darken the room.
+  Laying traps, spinning webs and changing shape wait until traps, webs and shapes come into the game.
+- **Angband's 25 elements as Pathfinder's damage types:** nether is void and drains, sound is sonic and stuns, shards
+  slash and bleed, nexus throws the hero, chaos confuses, gravity and inertia slow, light and dark blind.
+- **The art,** by monster base (the spec's section 3.4):
+  - orcs, trolls, ogres, giants, kobolds and people are Flare's paper-doll body, dressed as warriors, mages, priests,
+    archers or rogues, tinted and scaled;
+  - dogs are Danimal's wolf; insects are Flare's ants and antlions; skeletons, zombies, wraiths and liches are
+    Flare's dead;
+  - dragons and hydras are its wyvern, demons and yetis its minotaur, golems its skeleton knight;
+  - ghosts are drawn half seen.
+  Anything with no sprite stands on the floor as its DCSS tile. Every spell flashes on its way: a bolt's streak, a
+  ball's burst, a breath's cone.
+- **The Ashen setting's names.** Every unique and every Tolkien coinage is renamed (`data/setting/names.json`):
+  - Grip and Fang are Ash and Ember, the Ferryman's Hounds; the Nazgûl are the Nine Unburied, Ser Hadric's
+    oath-knights; Balrogs are the Cinder-Born;
+  - Saruman is Malachar's Shadow; Sauron is Saint Ysmere the Unburnt, and Morgoth the Cinder of Ashur;
+  - mithril is moonsilver.
+  A test fails if a Tolkien name would reach the screen.
 - **One life.** At 0 HP, Second Breath holds the hero at 1 HP once per trip down; it comes back in town. After that,
   death is final. The hero's line goes into the Order's book of the Lantern-sworn, struck through, and the next one
   starts from Gallowmere.
@@ -82,6 +105,9 @@ with Flare's loot sprites](docs/images/WorldOfAngBand-loot.png)
 ![The Smith's window: swords and axes for sale with their Pathfinder dice and runes, the pack beside them, and the
 runework below: +1 potency on the long sword for 400 gold, and striking and armour potency waiting on the hero's
 level](docs/images/WorldOfAngBand-smith.png)
+
+![Two thousand feet down: a dragon's cold breath across the hero, with a demon, a golem, a wraith and a cinder-orc
+round them in a room lit by a Scroll of Light](docs/images/WorldOfAngBand-deep.png)
 
 ![The first level in the classic tile view: DCSS tiles seen from above, the hero in a corridor with a kobold ahead and a jackal in the room behind](docs/images/WorldOfAngBand-tiles.png)
 

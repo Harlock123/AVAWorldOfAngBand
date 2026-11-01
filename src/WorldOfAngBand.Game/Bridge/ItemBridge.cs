@@ -19,8 +19,7 @@ public sealed record BridgedShield(int Hardness, string Gfx);
 
 /// <summary>
 /// The bridge from Angband's items to the game (data/bridge/items.json, the spec's section 6.3): which kinds and egos
-/// may be made, what a melee weapon or body armour is in Pathfinder's terms, what a potion or scroll does, and the
-/// Ashen setting's names for egos. The items themselves stay Angband's: the hero's Pathfinder numbers are worked out
+/// may be made, what a melee weapon or body armour is in Pathfinder's terms, and what a potion or scroll does. The items themselves stay Angband's: the hero's Pathfinder numbers are worked out
 /// from them (<see cref="Gear"/>).
 /// </summary>
 public sealed class ItemBridge
@@ -36,7 +35,7 @@ public sealed class ItemBridge
         foreach (var id in file.Weapons.Keys.Concat(file.Armour.Keys).Concat(file.Shields.Keys).Concat(file.Worn.Keys).Concat(file.Use.Keys))
             if (data.Objects.All(k => k.Id != id))
                 throw new GameDataException($"The item bridge names unknown object '{id}'.");
-        foreach (var id in file.Egos.Concat(file.EgoNames.Keys))
+        foreach (var id in file.Egos)
             if (data.Egos.All(e => e.Id != id))
                 throw new GameDataException($"The item bridge names unknown ego '{id}'.");
         foreach (var (id, w) in file.Weapons)
@@ -71,8 +70,7 @@ public sealed class ItemBridge
         Dictionary<string, BridgedShield> Shields,
         Dictionary<string, string?> Worn,
         Dictionary<string, string> Use,
-        List<string> Egos,
-        Dictionary<string, string> EgoNames);
+        List<string> Egos);
 
     /// <summary>Whether a kind is in the game yet (gold always is).</summary>
     public bool Has(ObjectKindDef kind) =>
@@ -84,7 +82,8 @@ public sealed class ItemBridge
     /// <summary>The Egos brought in so far.</summary>
     public IReadOnlyList<string> Egos => _file.Egos;
 
-    public string EgoName(EgoItemDef ego) => _file.EgoNames.GetValueOrDefault(ego.Id, ego.Name);
+    /// <summary>An ego's name in the Ashen setting.</summary>
+    public string EgoName(EgoItemDef ego) => Setting.EgoName(ego.Id) ?? ego.Name;
 
     public WeaponDefinition? WeaponFor(AngbandItem item) => _weapons.GetValueOrDefault(item.Kind.Id);
 

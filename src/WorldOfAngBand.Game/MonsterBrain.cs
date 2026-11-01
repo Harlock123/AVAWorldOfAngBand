@@ -53,6 +53,12 @@ internal sealed class MonsterBrain(DungeonSession session)
         GroupRouse(monster);
         if (monster.Race.Has(MonsterFlags.Multiply) && TryMultiply(monster))
             return EnergyTable.MoveEnergy;
+        // Angband make_ranged_attack: a spell or an innate attack, before moving.
+        if (session.Spells.TryCast(foe))
+        {
+            foe.Round.EndAction();
+            return EnergyTable.MoveEnergy;
+        }
         MoveTurn(foe);
         foe.Round.EndAction();
         return EnergyTable.MoveEnergy;
@@ -111,7 +117,7 @@ internal sealed class MonsterBrain(DungeonSession session)
         {
             monster.Fear = Math.Max(0, monster.Fear - Rng.RandInt1(monster.Race.Depth / 10 + 1));
             if (monster.Fear == 0 && session.SeenMonster(monster))
-                session.Say($"The {session.NameOf(monster)} recovers its courage.");
+                session.Say($"{session.Subject(monster)} recovers its courage.");
         }
         if (monster.Held > 0)
         {
@@ -135,7 +141,7 @@ internal sealed class MonsterBrain(DungeonSession session)
         var reduction = noise is > 0 and < 50 ? 100 / noise : 1;
         monster.Sleep = Math.Max(0, monster.Sleep - reduction);
         if (monster.Sleep == 0 && session.SeenMonster(monster))
-            session.Say($"The {session.NameOf(monster)} wakes up.");
+            session.Say($"{session.Subject(monster)} wakes up.");
     }
 
     /// <summary>Angband monster_group_rouse: a monster aware of the hero may wake the sleeping friends it can see.</summary>

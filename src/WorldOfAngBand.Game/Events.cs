@@ -38,3 +38,6 @@ public sealed record ItemsChangedEvent : IGameEvent;
 
 /// <summary>The hero walked into a shop (or their room at the inn).</summary>
 public sealed record ShopEnteredEvent(string StoreId) : IGameEvent;
+
+/// <summary>A monster's spell or innate attack, from where it stands toward the hero (the view draws its flash).</summary>
+public sealed record SpellEvent(Loc From, Loc To, WorldOfAngBand.Engine.Definitions.MonsterSpellKind Kind, string? Element, int Radius) : IGameEvent;

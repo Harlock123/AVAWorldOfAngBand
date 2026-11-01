@@ -67,6 +67,7 @@ public sealed class DungeonSession : ITurnHandler
         _spawner = new MonsterSpawner(data) { Allowed = Bridge.Has };
         _brain = new MonsterBrain(this);
         Fight = new Fight(this);
+        Spells = new MonsterSpells(this);
         Loot = new Loot(this);
         Belongings = new Belongings(this);
         Effects = new ItemEffects(this);
@@ -155,6 +156,8 @@ public sealed class DungeonSession : ITurnHandler
     internal RulesRandom Roller { get; }
 
     internal Fight Fight { get; }
+
+    internal MonsterSpells Spells { get; }
 
     /// <summary>Set when the hero dies: the line in the Order's book. Nothing more can be done.</summary>
     public DeathRecord? Death { get; private set; }
@@ -464,6 +467,13 @@ public sealed class DungeonSession : ITurnHandler
 
     // --- Levels ---
 
+    /// <summary>Takes the hero straight to a depth (tests and, later, the debug menu).</summary>
+    internal void JumpTo(int depth)
+    {
+        Hero.MaxDepth = Math.Max(Hero.MaxDepth, depth);
+        Enter(depth, StairArrival.None);
+    }
+
     /// <summary>Makes the level at <paramref name="depth"/> and puts the hero on it. The town is the same on every visit.</summary>
     private void Enter(int depth, StairArrival arrival)
     {
@@ -510,6 +520,9 @@ public sealed class DungeonSession : ITurnHandler
 
     private Foe Enlist(Monster monster)
     {
+        // Angband's hit points, scaled for depth (CreatureBridge.DamageScale).
+        monster.MaxHp = CreatureBridge.Scaled(monster.MaxHp, monster.Race.Depth);
+        monster.Hp = Math.Min(monster.Hp, monster.MaxHp);
         var foe = new Foe(monster, Bridge.StatsFor(monster.Race), CreatureBridge.DefensesFor(monster.Race), Bridge.NameOf(monster.Race));
         _foes[monster.Id] = foe;
         Scheduler.Add(monster);
@@ -637,20 +650,73 @@ public sealed class DungeonSession : ITurnHandler
     }
 
     /// <summary>Calls up monsters of the depth round a square.</summary>
-    internal void SummonNear(Loc at, int count)
+    internal void SummonNear(Loc at, int count) => SummonNear(at, count, Math.Max(1, Depth), null);
+
+    /// <summary>Calls up to <paramref name="count"/> monsters of <paramref name="depth"/> (of a kind, if asked) round a square; returns how many came.</summary>
+    internal int SummonNear(Loc at, int count, int depth, Func<MonsterRaceDef, bool>? kind)
     {
         var placed = 0;
         foreach (var p in Level.Neighbors(at).Concat(Level.AllLocs().Where(q => q.ChebyshevTo(at) == 2)).OrderBy(_ => Rng.RandInt0(100)))
         {
             if (placed >= count || !Level.IsEmptyFloor(p) || p == Hero.Position)
                 continue;
-            if (_spawner.PickRace(Rng, Math.Max(1, Depth), _uniquesGone) is not { } race)
+            if (_spawner.PickRace(Rng, depth, _uniquesGone, kind) is not { } race)
                 break;
             Spawn(race, p, asleep: false);
+            if (race.IsUnique)
+                _uniquesGone.Add(race.Id);
             placed++;
         }
         if (placed > 0)
-            Say("You hear something appear nearby!");
+            Say(placed == 1 ? "You hear something appear nearby!" : "You hear many things appear nearby!");
+        return placed;
+    }
+
+    /// <summary>A monster blinks or teleports: to an open square within the range, away from where it was.</summary>
+    internal void TeleportMonster(Monster monster, int range)
+    {
+        var spots = Level.AllLocs().Where(p => Level.IsEmptyFloor(p) && p != Hero.Position && p.DistanceTo(monster.Position) <= range
+                                               && p.DistanceTo(monster.Position) > range / 3).ToList();
+        if (spots.Count == 0)
+            return;
+        var seen = SeenMonster(monster);
+        MoveMonster(monster, Rng.Pick(spots));
+        if (seen)
+            Say($"{Subject(monster)} blinks away.");
+    }
+
+    /// <summary>A monster steps through space to beside a square.</summary>
+    internal void MoveMonsterNear(Monster monster, Loc at)
+    {
+        var spot = Level.Neighbors(at).Where(p => Level.IsEmptyFloor(p) && p != Hero.Position).OrderBy(p => p.DistanceTo(monster.Position)).FirstOrDefault();
+        if (spot == default)
+            return;
+        MoveMonster(monster, spot);
+        if (SeenMonster(monster))
+            Say($"{Subject(monster)} appears beside you!");
+    }
+
+    /// <summary>The hero is pulled to beside a square (Angband TELE_TO).</summary>
+    internal void PullHeroTo(Loc at)
+    {
+        var spot = Level.Neighbors(at).Where(Level.IsEmptyFloor).OrderBy(p => p.DistanceTo(Hero.Position)).FirstOrDefault();
+        if (spot == default)
+            return;
+        var from = Hero.Position;
+        Hero.Position = spot;
+        Say("You are commanded to return.");
+        Publish(new HeroMovedEvent(from, spot));
+        Publish(new LevelEnteredEvent(Depth));
+    }
+
+    /// <summary>Angband's amnesia: the hero forgets the level, all but what they can see.</summary>
+    internal void Forget()
+    {
+        foreach (var p in Level.AllLocs())
+            if (!Level[p].Has(SquareFlags.View))
+                Known.Forget(p);
+        Say("Your memories fade away.");
+        Publish(new DoorOpenedEvent(Hero.Position));
     }
 
     // --- Seeing, fighting and dying ---
@@ -668,6 +734,14 @@ public sealed class DungeonSession : ITurnHandler
 
     /// <summary>What to call a monster in a sentence: a unique by name, the rest with "a" or "an".</summary>
     internal string Called(Foe foe) => foe.Monster.Race.IsUnique ? foe.Name : Article(foe.Name);
+
+    /// <summary>A monster at the start of a sentence: a unique by name, the rest as "The kobold".</summary>
+    internal string Subject(Monster monster) => monster.Race.IsUnique
+        ? char.ToUpperInvariant(NameOf(monster)[0]) + NameOf(monster)[1..]
+        : $"The {NameOf(monster)}";
+
+    /// <summary>A monster after a verb: a unique by name, the rest as "the kobold".</summary>
+    internal string Object(Monster monster) => monster.Race.IsUnique ? NameOf(monster) : $"the {NameOf(monster)}";
 
     internal string NameOf(Monster monster) => _foes.TryGetValue(monster.Id, out var foe) ? foe.Name : Bridge.NameOf(monster.Race);
 
@@ -710,6 +784,14 @@ public sealed class DungeonSession : ITurnHandler
         Publish(new HeroDiedEvent(Death));
     }
 
+    /// <summary>A monster sent away: gone from the level with nothing learned and nothing dropped (Angband's banishment).</summary>
+    internal void Banish(Foe foe)
+    {
+        Level.Monsters.Remove(foe.Monster);
+        foe.Monster.IsRemoved = true;
+        _foes.Remove(foe.Monster.Id);
+    }
+
     /// <summary>A monster slain: it is gone, and the hero learns from it (Pathfinder's experience by level).</summary>
     internal void Kill(Foe foe)
     {
@@ -722,7 +804,7 @@ public sealed class DungeonSession : ITurnHandler
         if (monster.Race.IsUnique)
             _uniquesGone.Add(monster.Race.Id);
         var living = !monster.Race.Has(MonsterFlags.Undead) && !monster.Race.Has("NONLIVING");
-        Say(seen ? $"You have {(living ? "slain" : "destroyed")} the {foe.Name}." : "You have killed it.");
+        Say(seen ? $"You have {(living ? "slain" : "destroyed")} {Object(monster)}." : "You have killed it.");
         Publish(new MonsterDiedEvent(monster.Id, monster.Position, foe.Name, monster.Race.Id));
         Loot.Drop(monster);
         GainExperience(Encounter.CreatureXp(foe.Level, Hero.Level) * ExperienceMultiplier);

@@ -27,6 +27,9 @@ public static class ItemText
     public static string Describe(Item item, PlayerKnowledge knowledge, ItemBridge bridge, bool withArticle = true)
     {
         var name = ItemNaming.Describe(item, knowledge, withArticle, full: false);
+        // The setting's name for a kind Angband names after Tolkien (mithril is moonsilver).
+        if (Setting.ObjectName(item.Kind.Id) is { } renamed)
+            name = name.Replace(ItemNaming.Plain(item.Kind.Name, item.Number != 1), ItemNaming.Plain(renamed, item.Number != 1), StringComparison.Ordinal);
         if (item.Ego is { } ego && knowledge.IsFullyKnown(item))
             name = name.Replace(ego.Name, bridge.EgoName(ego), StringComparison.Ordinal);
         if (item.IsGold)

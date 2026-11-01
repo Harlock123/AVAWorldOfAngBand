@@ -24,7 +24,7 @@ internal sealed class Fight(DungeonSession session)
         var agile = weapon.Definition.Has(WeaponTrait.Agile);
         var penalty = hero.Round.AttackPenalty(agile);
         hero.Round.Strike();
-        var name = session.Seen(foe) ? $"the {foe.Name}" : "it";
+        var name = session.Seen(foe) ? session.Object(foe.Monster) : "it";
         // Asleep or held fast, it can't defend itself: off-guard.
         var offGuard = foe.Monster.IsAsleep || foe.Monster.Held > 0 ? -ConditionSet.OffGuardAcPenalty : 0;
         var ac = foe.ArmorClass().Total + offGuard;
@@ -79,7 +79,7 @@ internal sealed class Fight(DungeonSession session)
     {
         var hero = session.Hero;
         var seen = session.Seen(foe);
-        var name = seen ? $"The {foe.Name}" : "It";
+        var name = seen ? session.Subject(foe.Monster) : "It";
         var flanked = session.Flanked() ? -ConditionSet.OffGuardAcPenalty : 0;
         var ac = hero.Character.ArmorClass().Total + flanked;
         var blows = foe.Monster.Race.Blows;
@@ -104,7 +104,8 @@ internal sealed class Fight(DungeonSession session)
                 continue;
             }
             var type = TypeOf(blow);
-            var rolled = blow.Damage.Roll(session.Rng);
+            // Angband's blow, scaled for depth as everything a monster does is.
+            var rolled = Bridge.CreatureBridge.Scaled(blow.Damage.Roll(session.Rng), foe.Monster.Race.Depth);
             var damage = rolled <= 0 ? 0 : DamageCalculator.Compute(rolled, 0, check.Degree, type, hero.Character.Defenses);
             // Being hit shows the armour's potency; a resistance that took something off shows itself.
             session.Belongings.Learn(Engine.Definitions.RuneIds.ToAc);
@@ -171,7 +172,7 @@ internal sealed class Fight(DungeonSession session)
         {
             monster.Fear = Math.Max(monster.Fear, rng.RandInt1(10) + (damage >= monster.Hp && percentage > 7 ? 20 : (11 - (int)percentage) * 5));
             if (session.Seen(foe))
-                session.Say($"The {foe.Name} flees in terror!");
+                session.Say($"{session.Subject(foe.Monster)} flees in terror!");
         }
     }
 
