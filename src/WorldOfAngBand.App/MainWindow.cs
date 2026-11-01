@@ -94,8 +94,8 @@ public sealed class MainWindow : Window
             Classic.Tiles = value == ViewMode.Tiles;
             Content = value == ViewMode.Isometric ? View : Classic;
             Hud.KeysLine = value == ViewMode.Isometric
-                ? "Arrows/keypad: walk · 1–0: abilities · < >: stairs · g: pick up · i: pack · f: feats · R: rest · q: flask · click: travel · wheel: zoom · Ctrl+T: classic view"
-                : "Arrows/keypad: walk (up is north) · 1–0: abilities · < >: stairs · g: pick up · i: pack · f: feats · R: rest · q: flask · click: travel · Ctrl+T: next view";
+                ? "Arrows/keypad: walk · 1–0: abilities · < >: stairs · g: pick up · i: pack · f: feats · R: rest · q: flask · click: travel · wheel: zoom · Ctrl+T: classic view · Ctrl+Q: quit"
+                : "Arrows/keypad: walk (up is north) · 1–0: abilities · < >: stairs · g: pick up · i: pack · f: feats · R: rest · q: flask · click: travel · Ctrl+T: next view · Ctrl+Q: quit";
             Redraw();
         }
     }
@@ -242,10 +242,18 @@ public sealed class MainWindow : Window
     {
         if (modifiers.HasFlag(KeyModifiers.Control))
         {
-            if (key != Key.T)
-                return false;
-            Mode = (ViewMode)(((int)Mode + 1) % 3);
-            return true;
+            switch (key)
+            {
+                case Key.T:
+                    Mode = (ViewMode)(((int)Mode + 1) % 3);
+                    return true;
+                case Key.Q:
+                    Stop();
+                    OpenQuit();
+                    return true;
+                default:
+                    return false;
+            }
         }
         if (Session.IsOver)
         {
@@ -340,6 +348,15 @@ public sealed class MainWindow : Window
         Stop();
         Do(new UsePower(bar[index].Id, _pointed is { } at && Session.FoeAt(at) is { } foe && Session.Seen(foe) ? at : null));
         return true;
+    }
+
+    /// <summary>Leaving the game (Ctrl+Q), asked first: confirmed, the window closes.</summary>
+    public QuitWindow OpenQuit()
+    {
+        var window = new QuitWindow(!Session.IsOver, Close);
+        if (ShowDialogs)
+            _ = window.ShowDialog(this);
+        return window;
     }
 
     /// <summary>The square under the pointer, when a monster stands there.</summary>

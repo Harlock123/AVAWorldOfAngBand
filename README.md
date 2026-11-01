@@ -204,6 +204,7 @@ classic views up is north, as in Angband.
 | `Enter` / `Escape` after the Cinder | Lay down the lantern / go on deeper |
 | `Escape` | Stop travelling or resting |
 | `Ctrl+T` | Isometric, letters, tiles |
+| `Ctrl+Q` | Leave the game (asked first: there is no saving yet) |
 | Mouse wheel | Zoom |
 
 `--seed N` on the command line plays game N again.

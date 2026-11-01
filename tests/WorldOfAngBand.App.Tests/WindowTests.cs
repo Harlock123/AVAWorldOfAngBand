@@ -363,6 +363,23 @@ public class WindowTests
     }
 
     [AvaloniaFact]
+    public void Ctrl_q_asks_before_leaving_and_staying_keeps_the_game()
+    {
+        var window = Open();
+        var closed = false;
+        window.Closed += (_, _) => closed = true;
+        Assert.True(window.Press(Key.Q, KeyModifiers.Control));
+        var ask = window.OpenQuit();
+        ask.Show();
+        ask.Close();
+        Pump();
+        Assert.False(closed);
+        window.OpenQuit().Confirm(window.Close);
+        Pump();
+        Assert.True(closed);
+    }
+
+    [AvaloniaFact]
     public void Things_lie_on_the_floor_and_are_named_under_the_pointer()
     {
         var window = OnFirstLevel(1234);
