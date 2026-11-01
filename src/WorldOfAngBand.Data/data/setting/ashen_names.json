@@ -1,5 +1,5 @@
 {
- "_comment": "Names in the Ashen setting for what Angband 4.2.5 names after Tolkien (the spec's section 3): monsters, egos and objects by id. The 4.2.5 data keeps its own names; the game shows these. The bridge check fails if a Tolkien name would reach the screen.",
+ "_comment": "Names in the Ashen setting for what Angband 4.2.5 names after Tolkien (the spec's section 3): monsters, egos and objects by id. The 4.2.5 data keeps its own names; the game shows these. The bridge check fails if a Tolkien name would reach the screen. This folder is also a data layer over the 4.2.5 data, loaded after it: ava_monsters.json adds the story's Herald echoes and templates/ava_vaults.json its story rooms.",
  "monsters": {
   "fang": "Ash, the Ferryman's Hound",
   "grip": "Ember, the Ferryman's Hound",
@@ -110,7 +110,7 @@
   "dwar_dog_lord_of_waw": "Dwar, Sixth of the Nine Unburied",
   "hoarmurath_of_dir": "Hoarmur, Seventh of the Nine Unburied",
   "khamul_the_black_easterling": "Khamel, Eighth of the Nine Unburied",
-  "the_witch_king_of_angmar": "the Unburied Commander, Ninth of the Nine",
+  "the_witch_king_of_angmar": "the Hollow King, Ninth of the Nine",
   "maeglin_the_traitor_of_gondolin": "Maeglor, Traitor of the Order",
   "draugluin_sire_of_all_werewolves": "Gravemane, Sire of All Werewolves",
   "lungorthin_the_balrog_of_white_fire": "Lunthar, the Cinder-Born of White Fire",

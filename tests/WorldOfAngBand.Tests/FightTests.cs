@@ -73,8 +73,9 @@ public class FightTests
     [InlineData(1, -1)]
     [InlineData(4, 1)]
     [InlineData(10, 3)]
-    [InlineData(30, 9)]
-    [InlineData(100, 24)]
+    [InlineData(30, 8)]
+    [InlineData(60, 12)]
+    [InlineData(100, 20)]
     public void Creature_level_follows_depth_along_the_curve(int depth, int level) =>
         Assert.Equal(level, CreatureBridge.LevelForDepth(depth));
 
@@ -115,6 +116,8 @@ public class FightTests
     {
         var game = FirstLevel(4);
         var foe = Beside(game, "white_jelly", out var toward);
+        // Sturdy enough to last the round.
+        foe.Monster.MaxHp = foe.Monster.Hp = 1000;
         var penalties = new List<string>();
         game.Published += e => { if (e is MessageEvent m && m.Text.StartsWith("You ", StringComparison.Ordinal) && m.Text.Contains("vs AC")) penalties.Add(m.Text); };
         while (game.Hero.Round.Actions != 0)

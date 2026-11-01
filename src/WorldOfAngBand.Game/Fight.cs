@@ -104,8 +104,8 @@ internal sealed class Fight(DungeonSession session)
                 continue;
             }
             var type = TypeOf(blow);
-            // Angband's blow, scaled for depth as everything a monster does is.
-            var rolled = Bridge.CreatureBridge.Scaled(blow.Damage.Roll(session.Rng), foe.Monster.Race.Depth);
+            // Angband's blow, scaled for depth as everything a monster does is, and at most Pathfinder's for its level.
+            var rolled = Math.Min(Bridge.CreatureBridge.Scaled(blow.Damage.Roll(session.Rng), foe.Monster.Race.Depth), Bridge.CreatureBridge.BlowCap(foe.Level, foe.Stats.Rank));
             var damage = rolled <= 0 ? 0 : DamageCalculator.Compute(rolled, 0, check.Degree, type, hero.Character.Defenses);
             // Being hit shows the armour's potency; a resistance that took something off shows itself.
             session.Belongings.Learn(Engine.Definitions.RuneIds.ToAc);

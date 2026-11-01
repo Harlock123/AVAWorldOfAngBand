@@ -3,6 +3,7 @@ using WorldOfAngBand.Engine.Geometry;
 using WorldOfAngBand.Engine.Randomness;
 using WorldOfAngBand.Game;
 using WorldOfAngBand.Game.Bridge;
+using WorldOfAngBand.Rules.Creatures;
 
 namespace WorldOfAngBand.Tests;
 
@@ -50,20 +51,42 @@ public class SpellTests
 
     [Theory]
     [InlineData(5, 1.0)]
-    [InlineData(20, 0.8)]
-    [InlineData(40, 0.55)]
-    [InlineData(100, 0.3)]
-    public void Damage_and_hit_points_scale_down_past_depth_ten(int depth, double scale) =>
+    [InlineData(10, 0.8)]
+    [InlineData(30, 0.55)]
+    [InlineData(60, 0.42)]
+    [InlineData(100, 0.33)]
+    public void Damage_scales_down_past_depth_five(int depth, double scale) =>
         Assert.Equal(scale, CreatureBridge.DamageScale(depth), 3);
 
+    [Theory]
+    [InlineData(5, 24, 20)]
+    [InlineData(16, 63, 48)]
+    [InlineData(20, 77, 58)]
+    public void A_monsters_damage_is_held_to_pathfinders_for_its_level(int level, int spell, int blow)
+    {
+        Assert.Equal(spell, CreatureBridge.SpellCap(level));
+        Assert.Equal(blow, CreatureBridge.BlowCap(level));
+        Assert.True(CreatureBridge.SpellCap(level, CreatureRank.Normal) < spell);
+    }
+
     [Fact]
-    public void A_deep_monsters_hit_points_are_scaled()
+    public void A_deep_monsters_hit_points_are_pathfinders_for_its_level()
     {
         var game = FirstLevel(41);
         var dragon = InSight(game, "ancient_red_dragon", 6);
         var race = dragon.Monster.Race;
-        Assert.True(dragon.Monster.MaxHp <= (int)Math.Ceiling(race.HitPoints * 1.5 * CreatureBridge.DamageScale(race.Depth)));
-        Assert.True(dragon.Monster.MaxHp < race.HitPoints);
+        var normal = CreatureStats.For(CreatureBridge.LevelForDepth(race.Depth), CreatureRank.Normal).HitPoints;
+        // A quarter of Pathfinder's, nudged up to three times for a dragon's Angband hit points: far fewer than Angband's.
+        Assert.InRange(dragon.Monster.MaxHp, (int)(normal * 0.4), normal * 3);
+        Assert.True(dragon.Monster.MaxHp < race.HitPoints / 4);
+    }
+
+    [Fact]
+    public void Monsters_are_half_as_fast_above_normal()
+    {
+        Assert.Equal(15, CreatureBridge.SpeedFor(30));
+        Assert.Equal(0, CreatureBridge.SpeedFor(0));
+        Assert.Equal(-10, CreatureBridge.SpeedFor(-10));
     }
 
     [Fact]

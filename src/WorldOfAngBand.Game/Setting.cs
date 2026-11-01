@@ -5,7 +5,7 @@ namespace WorldOfAngBand.Game;
 
 /// <summary>
 /// Names in the Ashen setting for what Angband 4.2.5 names after Tolkien (the spec's section 3): monsters, egos and
-/// objects, from data/setting/names.json, and Gallowmere's shops. The 4.2.5 data keeps its own names; the game shows these.
+/// objects, from data/setting/ashen_names.json, and Gallowmere's shops. The 4.2.5 data keeps its own names; the game shows these.
 /// </summary>
 public static class Setting
 {
@@ -26,7 +26,7 @@ public static class Setting
 
     private static readonly Lazy<NamesFile> Names = new(() =>
     {
-        var path = Path.Combine(DataLoader.DefaultDataDirectory, "setting", "names.json");
+        var path = Path.Combine(DataLoader.DefaultDataDirectory, "setting", "ashen_names.json");
         using var stream = File.OpenRead(path);
         return JsonSerializer.Deserialize<NamesFile>(stream, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
                ?? throw new InvalidDataException($"{path} is empty.");

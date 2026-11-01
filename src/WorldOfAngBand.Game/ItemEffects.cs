@@ -31,8 +31,8 @@ internal sealed class ItemEffects(DungeonSession session)
             return false;
         }
         var wasKnown = session.Knowledge.IsAware(item.Kind);
-        session.Say(reading ? $"You read {session.Belongings.Name(item)}." : $"You drink {session.Belongings.Name(item)}.");
         var used = Hero.Pack.Remove(item, 1, () => session.Factory.NextSerial++);
+        session.Say(reading ? $"You read {session.Belongings.Name(used)}." : $"You drink {session.Belongings.Name(used)}.");
         Hero.Pack.Prune();
         session.Knowledge.MarkTried(used.Kind);
         foreach (var effect in effects.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries))

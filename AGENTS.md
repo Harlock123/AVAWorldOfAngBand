@@ -36,8 +36,9 @@ The code is **copied** from the two parent games, not linked, so neither has to 
     - `Fight`: Strikes, blows, Shield Block and blow effects;
     - `MonsterBrain`: AVABand's port of mon-move.c, trimmed;
     - `Bridge/CreatureBridge`: Angband monsters in Pathfinder terms, from `data/bridge/monsters.json` (made by
-      `tools/bridge/make_monster_bridge.py`; edit the script, not the file), and the depth scale for their damage and
-      hit points;
+      `tools/bridge/make_monster_bridge.py`; edit the script, not the file): level by depth, hit points from
+      AshenReliquary's `CreatureStats` nudged by Angband's, the depth scale and Pathfinder caps for their damage, and
+      their speed;
     - `MonsterSpells`: Angband's 91 monster spells in Pathfinder terms;
     - `Elements`: Angband's 25 elements as damage types and riders;
     - `Bridge/ItemBridge`: Angband items in Pathfinder terms (weapons, armour, shields, what potions and scrolls do,
@@ -50,25 +51,31 @@ The code is **copied** from the two parent games, not linked, so neither has to 
   - `Round`: Pathfinder's three-action round, with the multiple attack penalty and the reaction.
   - `Hero`: the character, their Angband pack and equipment, gold and timed effects.
   - `Foe`: an engine `Monster` with its Pathfinder numbers and conditions.
-  - `Bots/DiveBot`: plays the game, for balance tests.
+  - `Story`: the story levels, rumours, altar choices, Wren's lines and the epilogue (the spec's section 2). The
+    session places the story (`PlaceStory`, `Altar`, `Choose`, `StoryKill`); the rooms are
+    `data/setting/templates/ava_vaults.json` and the story's own monsters `data/setting/ava_monsters.json`.
+  - `Bots/DiveBot`: plays the game, for balance tests. `Wary` dives as a player does; `Hunt` goes for a quest level's
+    keeper.
+  - `Bots/Campaign`: makes a hero ready for a depth and runs the dive bot from there, or through the finale.
   - `Dressing/LevelDressing`: turns a level's terrain into Flare tiles. The wall faces follow AshenReliquary's map
     scripts.
   - `Flare/`: AshenReliquary's parsers for Flare's tileset and animation files.
-  - `Setting`: names in the Ashen setting, from `data/setting/names.json`.
+  - `Setting`: names in the Ashen setting, from `data/setting/ashen_names.json`.
 - `src/WorldOfAngBand.App/`: Avalonia, built in code with no XAML.
   - `Rendering/ViewState`: what the views show besides the game, followed from its events: messages, slides,
     swings, floating numbers, the slain.
   - `Rendering/IsoView`: the isometric view, using AshenReliquary's projection, sprite cache, depth sorting and
     darkness. Monsters are drawn by their bridge entry: a Flare creature, the paper doll, or a DCSS card.
   - `Rendering/ClassicView`: AVABand's letters and tiles from above.
-  - `Rendering/HudPainter`: the HUD and the death screen, over either view.
+  - `Rendering/HudPainter`: the HUD, the death screen and the epilogue, over either view.
   - `Services/Graveyard`: the book of the dead (`graveyard.json`).
-  - `Windows/InventoryWindow` and `Windows/StoreWindow`: the pack and the shops.
+  - `Windows/InventoryWindow`, `Windows/StoreWindow` and `Windows/StoryWindow`: the pack, the shops and a story
+    level's altar.
   - `Rendering/ItemArt`: Flare's loot sprites (or DCSS tiles) for things on the floor.
   - `MainWindow`: keys, clicks, travel and rest.
   - `Assets/Flare` holds the embedded art; `tilesets/dcss` (AVABand's DCSS tiles) ships beside the executable.
 - `tests/WorldOfAngBand.Tests/` (the engine and the game) and `tests/WorldOfAngBand.App.Tests/` (the window, headless,
-  with real Skia drawing).
+  with real Skia drawing). `BalanceTests` runs the campaign bots and takes about a minute.
 
 ## Rules that keep it working
 
@@ -81,7 +88,7 @@ The code is **copied** from the two parent games, not linked, so neither has to 
   story), never one class across a hundred partial files. Both parent games ended up that way; this one mustn't.
 - **The 4.2.5 data stays as AVABand converted it.** What this game changes (names, PF2 translations) goes in its own
   files beside it.
-- **No Tolkien names on screen.** The setting renames them (`data/setting/names.json`, the spec's section 3), and
+- **No Tolkien names on screen.** The setting renames them (`data/setting/ashen_names.json`, the spec's section 3), and
   `BridgeCheckTests` fails on any name it shows that matches its list of Tolkien's names. Add a rename there, never
   an exception to the test.
 - **The bridge check** (`BridgeCheckTests`): every monster, spell and element is bridged; the test output reports
@@ -92,8 +99,13 @@ The code is **copied** from the two parent games, not linked, so neither has to 
   and curses are off until they come in.
 - **Monsters come in through the bridge.** The spawner only places races in `data/bridge/monsters.json`. Bring one in
   by adding its entry, with a sprite family if Flare has one; otherwise it stands as its DCSS tile.
-- **Balance is measured, not guessed.** `FightTests` runs the dive bot over fixed seeds. If a change moves those
-  numbers, look at why before changing the test.
+- **Balance is measured, not guessed.** `FightTests` and `BalanceTests` run the bots over fixed seeds. If a change
+  moves those numbers, look at why before changing the test: run `Campaign.Dive` and `Campaign.Finale` over more seeds
+  to see the spread.
+- **The quest levels hold.** Saint Ysmere's level (99) and the Cinder's (100) have no way down until their keeper is
+  gone, and nothing takes the hero past them (`DungeonSession.NoDeeperThan`). A keeper never teleports away or sends
+  the hero off its level, and keeps its vigil without escorts. A unique left alive on a level the hero leaves can turn
+  up again, as in Angband.
 - **Warnings are errors** (`TreatWarningsAsErrors`), nullable reference types are on, and every change comes with
   tests.
 

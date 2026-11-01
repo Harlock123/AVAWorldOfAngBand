@@ -1,0 +1,185 @@
+[
+ {
+  "id": "rot_mother",
+  "name": "the Rot-Mother, Echo of Mother Sallow",
+  "glyph": "p",
+  "color": "Green",
+  "depth": 15,
+  "spellPower": 20,
+  "rarity": 1,
+  "speed": 10,
+  "hitPoints": 420,
+  "armour": 40,
+  "sleep": 0,
+  "hearing": 30,
+  "smell": 20,
+  "experience": 900,
+  "blows": [
+   {
+    "method": "touch",
+    "effect": "poison",
+    "damage": "3d6"
+   },
+   {
+    "method": "touch",
+    "effect": "poison",
+    "damage": "3d6"
+   },
+   {
+    "method": "hit",
+    "effect": "lose_con",
+    "damage": "2d8"
+   }
+  ],
+  "flags": [
+   "UNIQUE",
+   "QUESTOR",
+   "FEMALE",
+   "EVIL",
+   "IM_POIS",
+   "NO_CONF",
+   "NO_SLEEP",
+   "FORCE_SLEEP",
+   "ONLY_ITEM",
+   "DROP_2",
+   "DROP_GOOD",
+   "OPEN_DOOR",
+   "BASH_DOOR"
+  ],
+  "spellFrequency": 4,
+  "spells": [
+   "BA_POIS",
+   "CONF",
+   "SCARE",
+   "HEAL",
+   "S_UNDEAD"
+  ],
+  "description": "What is left of Mother Sallow, the plague-witch the Ashbound drowned in her own mire: a shape of grey water and old rot, still tending the font that fouls the Pyre's wells.",
+  "base": "person"
+ },
+ {
+  "id": "hollow_choir",
+  "name": "the Hollow Choir, Echo of the Choir of Whispers",
+  "glyph": "G",
+  "color": "LightViolet",
+  "depth": 33,
+  "spellPower": 40,
+  "rarity": 1,
+  "speed": 10,
+  "hitPoints": 900,
+  "armour": 60,
+  "sleep": 0,
+  "hearing": 40,
+  "smell": 0,
+  "experience": 4000,
+  "blows": [
+   {
+    "method": "touch",
+    "effect": "terrify",
+    "damage": "4d6"
+   },
+   {
+    "method": "touch",
+    "effect": "lose_wis",
+    "damage": "4d6"
+   },
+   {
+    "method": "wail",
+    "effect": "confuse",
+    "damage": "3d8"
+   }
+  ],
+  "flags": [
+   "UNIQUE",
+   "QUESTOR",
+   "FEMALE",
+   "EVIL",
+   "UNDEAD",
+   "PASS_WALL",
+   "IM_COLD",
+   "IM_POIS",
+   "NO_CONF",
+   "NO_SLEEP",
+   "FORCE_SLEEP",
+   "ONLY_ITEM",
+   "DROP_2",
+   "DROP_GOOD"
+  ],
+  "spellFrequency": 3,
+  "spells": [
+   "SCARE",
+   "CONF",
+   "HOLD",
+   "MIND_BLAST",
+   "BLINK",
+   "S_UNDEAD"
+  ],
+  "description": "Three voices that were three sisters, singing in the dark under the drowned monastery. The song has forgotten the words; it has not forgotten how to bend a mind.",
+  "base": "ghost"
+ },
+ {
+  "id": "unburied_commander",
+  "name": "the Unburied Commander, Echo of Ser Hadric",
+  "glyph": "W",
+  "color": "Slate",
+  "depth": 45,
+  "spellPower": 55,
+  "rarity": 1,
+  "speed": 10,
+  "hitPoints": 1800,
+  "armour": 120,
+  "sleep": 0,
+  "hearing": 40,
+  "smell": 20,
+  "experience": 12000,
+  "blows": [
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "6d8"
+   },
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "6d8"
+   },
+   {
+    "method": "hit",
+    "effect": "hurt",
+    "damage": "5d8"
+   },
+   {
+    "method": "touch",
+    "effect": "exp_40",
+    "damage": "4d6"
+   }
+  ],
+  "flags": [
+   "UNIQUE",
+   "QUESTOR",
+   "MALE",
+   "EVIL",
+   "UNDEAD",
+   "IM_COLD",
+   "IM_POIS",
+   "NO_CONF",
+   "NO_SLEEP",
+   "NO_FEAR",
+   "FORCE_SLEEP",
+   "ONLY_ITEM",
+   "DROP_3",
+   "DROP_GOOD",
+   "OPEN_DOOR",
+   "BASH_DOOR"
+  ],
+  "spellFrequency": 5,
+  "spells": [
+   "SCARE",
+   "HOLD",
+   "BO_NETH",
+   "S_UNDEAD"
+  ],
+  "description": "Ser Hadric's oath outlived Ser Hadric. It stands in the Oath Hall in his armour, holding the Nine Unburied to a war the province forgot.",
+  "base": "wraith"
+ }
+]

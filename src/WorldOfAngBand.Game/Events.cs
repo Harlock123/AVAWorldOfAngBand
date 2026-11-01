@@ -41,3 +41,12 @@ public sealed record ShopEnteredEvent(string StoreId) : IGameEvent;
 
 /// <summary>A monster's spell or innate attack, from where it stands toward the hero (the view draws its flash).</summary>
 public sealed record SpellEvent(Loc From, Loc To, WorldOfAngBand.Engine.Definitions.MonsterSpellKind Kind, string? Element, int Radius) : IGameEvent;
+
+/// <summary>The hero stands at a story level's altar: what it is, and what they can choose.</summary>
+public sealed record StoryChoiceEvent(string StoryId, string Title, string Prompt, IReadOnlyList<StoryChoice> Choices) : IGameEvent;
+
+/// <summary>The Cinder of Ashur is out: the game is won, and the epilogue is these lines.</summary>
+public sealed record HeroWonEvent(IReadOnlyList<string> Epilogue) : IGameEvent;
+
+/// <summary>The hero has gone past level 20 into a mythic tier.</summary>
+public sealed record MythicTierEvent(int Tier) : IGameEvent;

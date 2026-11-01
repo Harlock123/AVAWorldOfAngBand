@@ -101,6 +101,8 @@ public static class LevelDressing
                 objects[i] = Furnish(terrain, hash) is { } piece ? [piece] : null;
                 if (terrain.Has(TerrainFlags.Shop))
                     lights.Add(new DressLight(p, 3.4f));
+                if (terrain.Id == "quest_altar")
+                    lights.Add(new DressLight(p, 3.2f, "#8ea6ff"));
                 continue;
             }
 
@@ -129,6 +131,9 @@ public static class LevelDressing
     /// <summary>What stands on an open square: a door, a staircase, rubble.</summary>
     private static Piece? Furnish(TerrainDef terrain, uint hash)
     {
+        // A story level's altar: Flare's stone altar.
+        if (terrain.Id == "quest_altar")
+            return new Piece(Dungeon, 134);
         if (terrain.Has(TerrainFlags.DoorClosed))
             return new Piece(Dungeon, DoorShut);
         if (terrain.Has(TerrainFlags.DoorAny) || terrain.Has(TerrainFlags.Shop))

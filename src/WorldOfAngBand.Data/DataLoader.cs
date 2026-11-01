@@ -102,14 +102,20 @@ public static class DataLoader
     }
 
     public static GameData LoadDefault(bool includeUserMods = true) =>
-        Load(includeUserMods ? [DefaultDataDirectory, .. UserModDirectories()] : [DefaultDataDirectory]);
+        Load(includeUserMods ? [DefaultDataDirectory, SettingDirectory, .. UserModDirectories()] : [DefaultDataDirectory, SettingDirectory]);
+
+    /// <summary>
+    /// AVAWorldOfAngBand's own layer over the 4.2.5 data: the story's monsters and rooms (and the setting's names, which
+    /// the game reads itself). Loaded after the 4.2.5 data and before any mods.
+    /// </summary>
+    public static string SettingDirectory => Path.Combine(DefaultDataDirectory, "setting");
 
     /// <summary>
     /// The game's data with the user's mods, skipping those switched off (Settings → Mods) and any
     /// that fail to load; <paramref name="results"/> says what became of each mod folder.
     /// </summary>
     public static GameData LoadDefault(IEnumerable<string> disabledMods, out IReadOnlyList<ModLoadResult> results) =>
-        LoadWithMods(DefaultDataDirectory, [.. UserModDirectories()], disabledMods, out results);
+        LoadWithMods(DefaultDataDirectory, [SettingDirectory, .. UserModDirectories()], disabledMods, out results);
 
     /// <summary>
     /// Loads <paramref name="baseDirectory"/> with each mod folder layered on in turn, skipping the ones

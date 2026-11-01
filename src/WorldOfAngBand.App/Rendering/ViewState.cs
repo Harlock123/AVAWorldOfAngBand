@@ -43,6 +43,9 @@ public sealed class ViewState
     /// <summary>The time a frozen clock shows.</summary>
     public const double FrozenAt = 0.4;
 
+    /// <summary>Whether the epilogue is on screen (after the win, until the player goes on or retires).</summary>
+    public bool ShowEpilogue { get; set; }
+
     /// <summary>A stopped clock (tests): nothing slides or swings, and torches stop flickering, so pictures repeat.</summary>
     public bool Frozen { get; set; }
 
@@ -61,7 +64,10 @@ public sealed class ViewState
             _corpses.Clear();
             _facing.Clear();
             if (value is not null)
+            {
                 value.Published += OnPublished;
+                _messages.Add((value.Opening, Time));
+            }
             TerrainChanged?.Invoke();
             Changed?.Invoke();
         }

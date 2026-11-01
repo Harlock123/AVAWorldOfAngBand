@@ -6,12 +6,14 @@ hero, rules, art and story. Ten years after the Cinder Throne, the Reliquary und
 lid: below it a shaft goes down a hundred levels, to where the Order of the Pale Lantern first burned Ashur. You go
 down it as one of the Lantern-sworn, with no Ember Heart. When you die, you stay dead.
 
-**Status: milestone 4 of 6 ("The whole bestiary").** Levels are generated as Angband 4.2.5 generates them and drawn
-isometrically in Flare's art. The hero is a Pathfinder 2e fighter on AshenReliquary's rules, fighting turn by turn on
-Angband's energy system. All of Angband's 633 monsters are in, with their 91 spells and innate attacks in Pathfinder's
-terms, and every name Angband takes from Tolkien is renamed for the Ashen setting. Angband's items lie on the floor
-with Pathfinder's runes, Gallowmere's shops buy and sell, and the Smith etches runes. Death is final. The plan for the
-rest is in [the design specification](docs/SPECIFICATION.md).
+**Status: milestone 5 of 6 ("To the Cinder").** The whole game is there, from Gallowmere to the Cinder of Ashur at
+depth 100. Levels are generated as Angband 4.2.5 generates them and drawn isometrically in Flare's art. The hero is a
+Pathfinder 2e fighter on AshenReliquary's rules, fighting turn by turn on Angband's energy system. All of Angband's
+monsters are in, with their 91 spells and innate attacks in Pathfinder's terms, and every name Angband takes from
+Tolkien is renamed for the Ashen setting. Angband's items lie on the floor with Pathfinder's runes, Gallowmere's shops
+buy and sell, and the Smith etches runes. Ashen Reliquary's story goes on through five story levels, Saint Ysmere and
+the Cinder, and past level 20 the hero rises through five mythic tiers. Balance bots play it to the bottom and win.
+Death is final. What is left is in [the design specification](docs/SPECIFICATION.md).
 
 ![A fight on the first level: a skeleton kobold, a jackal, a giant centipede and a rock lizard round the hero in a
 lit hall, a "miss" floating over the hero, the hit points, round and Second Breath at the top right, and the rolls in
@@ -35,7 +37,8 @@ door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-t
   - a fighter's Shield Block comes back each round.
   Every check is a d20 with four degrees of success, and the message log shows the roll: *You hit the kobold
   (14 + 9 = 23 vs AC 15): 9 slashing.*
-- **All of Angband's monsters,** 623 of 4.2.5's and AVABand's ten (its seasonal ones stay out), brought into
+- **All of Angband's monsters,** 623 of 4.2.5's, AVABand's ten (its seasonal ones stay out) and the story's three
+  echoes, brought into
   Pathfinder's terms (the spec's section 6):
   - their level comes from their depth, and their AC, attack and saves from AshenReliquary's creature formulas at
     that level;
@@ -44,8 +47,10 @@ door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-t
   - they think as Angband's do, ported from AVABand: they wake by degrees, hunt by sight, noise and scent, gather in
     packs, surround the hero in the open, lurk while the hero holds a corridor, flee when hurt, open and bash doors,
     and breed;
-  - Angband's damage and hit points count in full to depth 10, then for less and less (0.55 at depth 40, 0.3 from
-    100), since a Pathfinder hero has far fewer hit points than an Angband one.
+  - their hit points are AshenReliquary's for their level (a common monster has a quarter of Pathfinder's, a unique
+    all of them), more or fewer as Angband's rank against others of their depth;
+  - Angband's damage counts in full to depth 5, then for less and less (0.55 at depth 30, 0.33 at 100), and never
+    more than Pathfinder's for the monster's level; their speed above normal counts for half.
 - **Their spells,** all 91 of Angband's, in Pathfinder's terms:
   - bolts and arrows are attacks against AC;
   - balls, breaths and storms call for a basic Reflex save, mind blasts and wounds for a basic Will save;
@@ -63,7 +68,7 @@ door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-t
   - ghosts are drawn half seen.
   Anything with no sprite stands on the floor as its DCSS tile. Every spell flashes on its way: a bolt's streak, a
   ball's burst, a breath's cone.
-- **The Ashen setting's names.** Every unique and every Tolkien coinage is renamed (`data/setting/names.json`):
+- **The Ashen setting's names.** Every unique and every Tolkien coinage is renamed (`data/setting/ashen_names.json`):
   - Grip and Fang are Ash and Ember, the Ferryman's Hounds; the Nazgûl are the Nine Unburied, Ser Hadric's
     oath-knights; Balrogs are the Cinder-Born;
   - Saruman is Malachar's Shadow; Sauron is Saint Ysmere the Unburnt, and Morgoth the Cinder of Ashur;
@@ -97,7 +102,32 @@ door, and the hero in mail with a sword and shield](docs/images/WorldOfAngBand-t
 - **The classic views.** `Ctrl+T` turns from the isometric view to AVABand's letters and then its DCSS tiles, seen from
   above.
 - **Gallowmere,** the town, by day: stone shops with their names over the doors, and a wood of dead trees round them.
-- **A dive bot** that plays the game: in tests it takes a level-1 fighter to depth 5 in most games.
+- **The story,** Ashen Reliquary's carried on (the spec's section 2). Each hero hears one of four rumours of how Ashen
+  Reliquary ended, and Wren, at the Lantern Archive, says where to go next. Five story levels have their own room, the
+  keeper of their choice, and an altar:
+  - the Rot-Mother's Font at 15 (seal it, or quench your blade in it), the Drowned Library at 33 (read the last
+    chapters, or leave them), the Oath Hall at 45 (free Ser Hadric, or hold him to his oath), the Brood Nest at 72 (let
+    the Cinderwyrm's dam go, or smash the egg);
+  - the First Pyre at 99, where Saint Ysmere keeps her vigil alone: if you read the Library you can tell her the truth,
+    and if not you have to kill a saint;
+  - the Cinder of Ashur at 100.
+  The two quest levels have no way down until their keeper is gone, and nothing (stairs, Deep Descent, a monster's
+  spell) takes the hero past them. The rumour sets which Herald's echo waits at 98. When the Cinder goes out, the
+  epilogue reads every choice; then Enter lays down the lantern (the hero's line goes in the book, not struck
+  through), or Escape goes on deeper.
+- **Mythic tiers.** Past level 20, experience raises the hero through five mythic tiers: 10 more hit points each, and
+  attack, AC and saves rising by one every other tier.
+- **The balance bots** (the spec's M5). A hero made ready for a depth (the spec's level for it, runes, the protections
+  Angband heroes have by then, potions) dives three levels from 5, 30, 60 and 90, and one made ready for the bottom
+  goes down through Saint Ysmere and the Cinder. The tests hold them to it: most dives live, and a hero ready for the
+  bottom puts out the Cinder.
+
+![The Rot-Mother's Font: grey water seeps from the font into the Pyre's wells, and the altar offers two choices, to
+seal the font with the Lantern's wax or to quench a blade in it](docs/images/WorldOfAngBand-altar.png)
+
+![The epilogue after the Cinder of Ashur goes out: the wells run clear, the Library's chapters rot, the oath still
+holds, no drakes over the Ember Peaks, Saint Ysmere struck through, and the human fighter who did it never quite warm
+again](docs/images/WorldOfAngBand-epilogue.png)
 
 ![Things on the floor of a lit hall: a long sword, a potion, a coat of mail and a scatter of coins round the hero, drawn
 with Flare's loot sprites](docs/images/WorldOfAngBand-loot.png)
@@ -106,8 +136,8 @@ with Flare's loot sprites](docs/images/WorldOfAngBand-loot.png)
 runework below: +1 potency on the long sword for 400 gold, and striking and armour potency waiting on the hero's
 level](docs/images/WorldOfAngBand-smith.png)
 
-![Two thousand feet down: a dragon's cold breath across the hero, with a demon, a golem, a wraith and a cinder-orc
-round them in a room lit by a Scroll of Light](docs/images/WorldOfAngBand-deep.png)
+![Two thousand feet down: a cone of frost across the hero in a hall lit by a Scroll of Light, with a vrock and a moaning
+spirit at them and an archer behind](docs/images/WorldOfAngBand-deep.png)
 
 ![The first level in the classic tile view: DCSS tiles seen from above, the hero in a corridor with a kobold ahead and a jackal in the room behind](docs/images/WorldOfAngBand-tiles.png)
 
@@ -127,6 +157,8 @@ classic views up is north, as in Angband.
 | `q` | Drink from a healing flask |
 | Click | Travel to a square you have seen, or strike a monster beside you |
 | Walk into a shop's door | Its window: buy and sell; at the Smith, runework |
+| Walk onto a story level's altar | Its choice |
+| `Enter` / `Escape` after the Cinder | Lay down the lantern / go on deeper |
 | `Escape` | Stop travelling or resting |
 | `Ctrl+T` | Isometric, letters, tiles |
 | Mouse wheel | Zoom |

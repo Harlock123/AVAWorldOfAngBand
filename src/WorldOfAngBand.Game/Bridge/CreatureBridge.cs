@@ -16,18 +16,21 @@ public sealed record FoeStats(int Level, CreatureRank Rank, int ArmorClass, int 
 
 /// <summary>
 /// The bridge from Angband's monsters to Pathfinder's creatures: which monsters are in the game, what they are called
-/// in the Ashen setting, how they are drawn, and their level, AC, attack and saves. Hit points and speed stay
-/// Angband's; level comes from depth along a curve; AC, attack and saves come from AshenReliquary's creature formulas
-/// at that level, with AC nudged by how the monster's Angband armour ranks against others of its depth.
+/// in the Ashen setting, how they are drawn, and their level, AC, attack, saves and hit points. Level comes from depth
+/// along a curve; AC, attack, saves and hit points come from AshenReliquary's creature formulas at that level, with AC
+/// and hit points nudged by how the monster's Angband armour and hit points rank against others of its depth. Angband's
+/// damage is scaled for depth and held to Pathfinder's for the level, and its speed above normal counts for half.
 /// </summary>
 public sealed class CreatureBridge
 {
     /// <summary>Depth against creature level, between which levels are interpolated (the spec's section 4.3).</summary>
     private static readonly (int Depth, int Level)[] LevelCurve =
-        [(0, -1), (1, -1), (4, 1), (10, 3), (20, 6), (30, 9), (60, 15), (90, 20), (100, 24), (127, 25)];
+        [(0, -1), (1, -1), (4, 1), (10, 3), (20, 5), (30, 8), (60, 12), (90, 16), (100, 20), (127, 24)];
 
     private readonly Dictionary<string, BridgedMonster> _monsters;
     private readonly Dictionary<int, double> _armourAtDepth = [];
+    private readonly double[] _hitPointsNear = new double[128];
+    private readonly double[] _uniqueHitPointsNear = new double[128];
 
     public CreatureBridge(GameData data, IEnumerable<BridgedMonster> monsters)
     {
@@ -36,6 +39,10 @@ public sealed class CreatureBridge
             throw new GameDataException($"The bridge names unknown monster '{m}'.");
         foreach (var group in data.Monsters.GroupBy(m => m.Depth))
             _armourAtDepth[group.Key] = group.Average(m => m.Armour);
+        // The middle of Angband's hit points round each depth (three levels either side), for common monsters and for
+        // uniques, against which a monster's own are measured.
+        Median(data.Monsters.Where(m => !m.IsUnique && m.HitPoints > 0).ToList(), 3, _hitPointsNear);
+        Median(data.Monsters.Where(m => m.IsUnique && m.HitPoints > 1 && !m.Has(MonsterFlags.Questor)).ToList(), 6, _uniqueHitPointsNear);
         Data = data;
     }
 
@@ -63,15 +70,18 @@ public sealed class CreatureBridge
     public string NameOf(MonsterRaceDef race) => Setting.MonsterName(race.Id) ?? race.Name;
 
     /// <summary>
-    /// What Angband's damage and hit points are worth in Pathfinder's, by depth: all of them to depth 10, then less and
-    /// less (a Pathfinder hero has far fewer hit points, and deals far less damage, than an Angband hero of the same
-    /// depth): 0.8 at 20, 0.55 at 40, 0.42 at 60, 0.35 at 80, 0.3 from 100. The balance bots tune it.
+    /// What Angband's monster damage is worth against a Pathfinder hero, by depth: a Pathfinder hero has fewer hit points
+    /// than an Angband hero of the same depth (about 70 against 110 at depth 10, 300 against 900 at 90), so the damage
+    /// shrinks with them: all of it to depth 5, 0.8 at 10, 0.55 at 30, 0.42 at 60, 0.35 at 90, 0.33 at 100. Past that,
+    /// <see cref="SpellCap"/> and <see cref="BlowCap"/> hold it to Pathfinder's for the monster's level. The balance bots
+    /// (Bots/Campaign) tune it.
     /// </summary>
-    public static double DamageScale(int depth)
+    public static double DamageScale(int depth) => Curve(depth, [(5, 1.0), (10, 0.8), (20, 0.65), (30, 0.55), (60, 0.42), (90, 0.35), (100, 0.33)]);
+
+    private static double Curve(int depth, (int Depth, double Scale)[] curve)
     {
-        (int Depth, double Scale)[] curve = [(10, 1.0), (20, 0.8), (40, 0.55), (60, 0.42), (80, 0.35), (100, 0.3)];
         if (depth <= curve[0].Depth)
-            return 1.0;
+            return curve[0].Scale;
         for (var i = 1; i < curve.Length; i++)
         {
             if (depth > curve[i].Depth)
@@ -83,8 +93,33 @@ public sealed class CreatureBridge
         return curve[^1].Scale;
     }
 
-    /// <summary>Scales an Angband amount (damage, hit points) for a monster of <paramref name="depth"/>; never below 1.</summary>
+    /// <summary>Scales an Angband amount of damage for a monster of <paramref name="depth"/>; never below 1.</summary>
     public static int Scaled(int amount, int depth) => amount <= 0 ? amount : Math.Max(1, (int)Math.Round(amount * DamageScale(depth)));
+
+    /// <summary>
+    /// The most a monster's spell or breath does at a creature level: Pathfinder's limited-use area damage, about a d6 a
+    /// level and two more (24 at level 5, 63 at 16, 77 at 20, 91 at 24). A basic save still doubles it on a critical
+    /// failure. A common monster does three quarters of that, as AshenReliquary's pack ranks hit a lone hero less hard
+    /// than its elites.
+    /// </summary>
+    public static int SpellCap(int level, CreatureRank rank = CreatureRank.Elite) =>
+        (int)Math.Round(3.5 * (Math.Max(0, level) + 2) * RankShare(rank));
+
+    /// <summary>
+    /// The most one of a monster's blows does at a creature level: about Pathfinder's extreme Strike damage (20 at 5,
+    /// 48 at 16, 58 at 20); three quarters of that for a common monster.
+    /// </summary>
+    public static int BlowCap(int level, CreatureRank rank = CreatureRank.Elite) =>
+        (int)Math.Round((2.5 * Math.Max(0, level) + 8) * RankShare(rank));
+
+    private static double RankShare(CreatureRank rank) => rank < CreatureRank.Elite ? 0.75 : 1.0;
+
+    /// <summary>
+    /// A monster's speed in this game, relative to normal as the scheduler takes it: half of what Angband gives it above normal,
+    /// since a Pathfinder hero's gear rarely brings the +20 an Angband hero has at the bottom (a +30 great wyrm is +15,
+    /// two and a half turns to the hero's one, not four). Slow monsters stay as slow.
+    /// </summary>
+    public static int SpeedFor(int angbandSpeed) => angbandSpeed <= 0 ? angbandSpeed : angbandSpeed / 2;
 
     public static int LevelForDepth(int depth)
     {
@@ -100,6 +135,41 @@ public sealed class CreatureBridge
         }
         return LevelCurve[^1].Level;
     }
+
+    private static void Median(List<MonsterRaceDef> races, int spread, double[] into)
+    {
+        for (var depth = 0; depth < into.Length; depth++)
+        {
+            var near = races.Where(m => Math.Abs(m.Depth - depth) <= spread).Select(m => (double)m.HitPoints).Order().ToList();
+            if (near.Count == 0)
+                near = races.Select(m => (double)m.HitPoints).Order().ToList();
+            into[depth] = near.Count == 0 ? 1 : Math.Max(1, near[near.Count / 2]);
+        }
+    }
+
+    /// <summary>
+    /// A monster's hit points (the spec's section 5.1): AshenReliquary's for its level and rank (a common monster has a
+    /// quarter of Pathfinder's, as a lone hero's foes do there; a unique has all of them, two levels up), nudged by how
+    /// its Angband hit points (<paramref name="angbandHitPoints"/>, as rolled) rank against others of its depth (uniques
+    /// against uniques): the square root of the ratio, from 0.4 to 3. The story's keepers (Saint Ysmere, the Cinder)
+    /// are measured against nobody: they have two and a half times a unique's.
+    /// </summary>
+    public int HitPointsFor(MonsterRaceDef race, int angbandHitPoints)
+    {
+        var stats = CreatureStats.For(LevelForDepth(race.Depth), race.IsUnique ? CreatureRank.Elite : CreatureRank.Normal);
+        var depth = Math.Clamp(race.Depth, 0, _hitPointsNear.Length - 1);
+        var ratio = angbandHitPoints / (race.IsUnique ? _uniqueHitPointsNear : _hitPointsNear)[depth];
+        if (race.Has(MonsterFlags.Questor))
+            return (int)Math.Round(stats.HitPoints * 2.5);
+        return Math.Max(1, (int)Math.Round(stats.HitPoints * Math.Clamp(Math.Sqrt(ratio), 0.4, 3.0)));
+    }
+
+    /// <summary>
+    /// An Angband amount measured in a monster's hit points (a breath's share, a heal) as the same share of this game's:
+    /// a dragon at half its hit points breathes half as hard, here as there.
+    /// </summary>
+    public static int ShareOfHitPoints(int angbandAmount, MonsterRaceDef race, int maxHitPoints) =>
+        angbandAmount <= 0 ? angbandAmount : Math.Max(1, (int)Math.Round((double)angbandAmount * maxHitPoints / Math.Max(1, race.HitPoints)));
 
     public FoeStats StatsFor(MonsterRaceDef race)
     {

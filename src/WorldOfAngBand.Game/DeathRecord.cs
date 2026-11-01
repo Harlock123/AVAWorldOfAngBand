@@ -14,10 +14,13 @@ public sealed record DeathRecord(
     string Killer,
     long Turns,
     ulong Seed,
-    DateTimeOffset When)
+    DateTimeOffset When,
+    bool Won = false)
 {
     /// <summary>The line as the book has it.</summary>
-    public string Epitaph => Depth == 0
+    public string Epitaph => Won
+        ? $"{Name}, a level {Level} {Ancestry} {Class}, who put out the Cinder of Ashur and came home."
+        : Depth == 0
         ? $"{Name}, a level {Level} {Ancestry} {Class}, killed by {Killer} in Gallowmere."
         : $"{Name}, a level {Level} {Ancestry} {Class}, killed by {Killer} {Depth * DungeonSession.FeetPerLevel} ft down.";
 }

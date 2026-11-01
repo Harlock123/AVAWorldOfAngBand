@@ -111,6 +111,14 @@ public sealed class Gear
                     extras.Add(new ExtraDamage(RuneIds.Slay(slay.MonsterFlag), slay.Multiplier >= 4 ? 2 : 1, 6, c.Weapon.Definition.DamageType, slay.MonsterFlag));
             }
         }
+        // The story's gifts.
+        foreach (var boon in hero.Boons)
+        {
+            if (boon.StartsWith("resist:", StringComparison.Ordinal) && Enum.TryParse<DamageType>(boon[7..], out var gift))
+                resist[gift] = Math.Max(resist.GetValueOrDefault(gift), ResistRune);
+            else
+                protections.Add(boon);
+        }
         // Temporary effects: a potion's resistance, heroism, berserking, a blessing.
         foreach (var (effect, _) in hero.Timed)
         {
@@ -120,13 +128,23 @@ public sealed class Gear
                 protections.Add("fear");
         }
 
+        // Mythic tiers: ten hit points each, and an untyped point to attack, AC and saves for every two.
+        var mythic = (hero.MythicTier + 1) / 2;
         c.ApplyGear(new GearBonuses
         {
-            MaxHitPoints = hp,
+            MaxHitPoints = hp + 10 * hero.MythicTier,
             WeaponDamage = damage + otherDam / 4,
             Resistances = resist,
-            Saves = new Dictionary<StatisticKind, int> { [StatisticKind.Reflex] = reflex, [StatisticKind.Will] = will },
+            Saves = new Dictionary<StatisticKind, int>
+            {
+                [StatisticKind.Fortitude] = mythic, [StatisticKind.Reflex] = reflex + mythic, [StatisticKind.Will] = will + mythic,
+            },
         });
+        if (mythic > 0)
+        {
+            c.AddModifier(StatisticKind.Attack, new Modifier(Character.GearSource, mythic));
+            c.AddModifier(StatisticKind.ArmorClass, new Modifier(Character.GearSource, mythic));
+        }
         // Bonuses from other pieces, and from what the hero has drunk or read: small, untyped or status (re-added each
         // time, since ApplyGear takes the gear's modifiers away).
         if (otherHit / 6 != 0)

@@ -57,7 +57,11 @@ internal sealed class MonsterSpells(DungeonSession session)
         return true;
     }
 
-    /// <summary>Angband's spell choice, simplified: no healing unhurt, no escape unless hurt or afraid, nothing pointless.</summary>
+    /// <summary>
+    /// Angband's spell choice, simplified: no healing unhurt, no escape unless hurt or afraid, nothing pointless. The
+    /// story's keepers (Saint Ysmere, the Cinder) hold their ground: they never teleport away, or send the hero off their
+    /// level.
+    /// </summary>
     private bool Worthwhile(Foe foe, MonsterSpellDef spell)
     {
         var m = foe.Monster;
@@ -65,6 +69,7 @@ internal sealed class MonsterSpells(DungeonSession session)
         return spell.Kind switch
         {
             _ when Deferred.Contains(spell.Kind) => false,
+            MonsterSpellKind.Blink or MonsterSpellKind.Teleport or MonsterSpellKind.TeleportLevel when m.Race.Has(MonsterFlags.Questor) => false,
             MonsterSpellKind.Heal => m.Hp < m.MaxHp * 7 / 10,
             MonsterSpellKind.Blink or MonsterSpellKind.Teleport => m.Hp < m.MaxHp / 2 || m.IsAfraid,
             MonsterSpellKind.TeleportTo or MonsterSpellKind.TeleportSelfTo => !near,
@@ -116,14 +121,14 @@ internal sealed class MonsterSpells(DungeonSession session)
                     session.Say("You resist the effects!");
                 break;
             case MonsterSpellKind.Heal:
-                var healed = BridgeScaled(foe, spell.HealPerLevel * Math.Max(1, monster.Race.Power));
+                var healed = CreatureBridge.ShareOfHitPoints(spell.HealPerLevel * Math.Max(1, monster.Race.Power), monster.Race, monster.MaxHp);
                 monster.Hp = Math.Min(monster.MaxHp, monster.Hp + healed);
                 if (seen)
                     session.Say($"{name} looks healthier.");
                 break;
             case MonsterSpellKind.HealKin:
                 foreach (var kin in session.Foes.Where(f => f != foe && f.Monster.Race.Base == monster.Race.Base && session.Seen(f)))
-                    kin.Monster.Hp = Math.Min(kin.Monster.MaxHp, kin.Monster.Hp + BridgeScaled(foe, spell.HealPerLevel * Math.Max(1, monster.Race.Power)));
+                    kin.Monster.Hp = Math.Min(kin.Monster.MaxHp, kin.Monster.Hp + CreatureBridge.ShareOfHitPoints(spell.HealPerLevel * Math.Max(1, monster.Race.Power), kin.Monster.Race, kin.Monster.MaxHp));
                 break;
             case MonsterSpellKind.DrainMana:
                 // There is no mana to drain from a fighter: it drinks of the Taint instead, a little.
@@ -351,13 +356,21 @@ internal sealed class MonsterSpells(DungeonSession session)
             session.Say("Nothing answers.");
     }
 
-    /// <summary>A spell's damage: Angband's formula at the monster's spell power (or a breath's share of its hit points), scaled for depth.</summary>
-    private int Damage(Foe foe, MonsterSpellDef spell)
+    /// <summary>A spell's damage: Angband's formula at the monster's spell power (or a breath's share of its hit points), scaled for depth, at most Pathfinder's for the monster's level.</summary>
+    private int Damage(Foe foe, MonsterSpellDef spell) => Math.Min(AngbandDamage(foe, spell), CreatureBridge.SpellCap(foe.Level, foe.Stats.Rank));
+
+    private int AngbandDamage(Foe foe, MonsterSpellDef spell)
     {
         var race = foe.Monster.Race;
         if (spell.Kind == MonsterSpellKind.Breath)
-            // The monster's hit points are already scaled, so its breath is too; its cap is scaled with it.
-            return Math.Min(Math.Max(1, foe.Monster.Hp) / Math.Max(1, spell.BreathDivisor), BridgeScaled(foe, spell.BreathCap));
+        {
+            // A breath is a share of the monster's hit points: Angband's share of what it has left of its Angband hit
+            // points, scaled for depth as damage is (and capped as Angband caps it).
+            var monster = foe.Monster;
+            var angbandHp = (double)race.HitPoints * Math.Max(1, monster.Hp) / Math.Max(1, monster.MaxHp);
+            var breath = (int)(angbandHp / Math.Max(1, spell.BreathDivisor));
+            return CreatureBridge.Scaled(Math.Min(breath, spell.BreathCap), race.Depth);
+        }
         var rng = session.Rng;
         int raw;
         if (spell.DamageFormula is { } formula)

@@ -125,6 +125,14 @@ public sealed class MainWindow : Window
                 Stop();
                 Hud.Book = _graveyard.Add(died.Record);
                 break;
+            case StoryChoiceEvent story:
+                Stop();
+                Dispatcher.UIThread.Post(() => OpenStory(story));
+                break;
+            case HeroWonEvent:
+                Stop();
+                State.ShowEpilogue = true;
+                break;
             case ShopEnteredEvent shop:
                 Stop();
                 // Once the step is done: the shop's window.
@@ -181,6 +189,14 @@ public sealed class MainWindow : Window
         {
             if (key is Key.Enter or Key.Return)
                 NewGame();
+            return true;
+        }
+        if (Session.Won && State.ShowEpilogue)
+        {
+            if (key is Key.Enter or Key.Return)
+                Retire();
+            else if (key == Key.Escape)
+                State.ShowEpilogue = false;
             return true;
         }
         var direction = Mode == ViewMode.Isometric ? DirectionFor(key) : ClassicDirectionFor(key);
@@ -250,6 +266,25 @@ public sealed class MainWindow : Window
         if (ShowDialogs)
             _ = window.ShowDialog(this);
         return window;
+    }
+
+    /// <summary>A story level's altar.</summary>
+    public StoryWindow OpenStory(StoryChoiceEvent story)
+    {
+        var window = new StoryWindow(story, Do);
+        if (ShowDialogs)
+            _ = window.ShowDialog(this);
+        return window;
+    }
+
+    /// <summary>
+    /// The winner lays down the lantern: their line goes into the Order's book (not struck through), and the next
+    /// Lantern-sworn starts.
+    /// </summary>
+    public void Retire()
+    {
+        Hud.Book = _graveyard.Add(Session.Retire());
+        NewGame();
     }
 
     /// <summary>A shop's window.</summary>

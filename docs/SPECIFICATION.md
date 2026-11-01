@@ -121,7 +121,7 @@ Cinder Relic, by that version of the story, was never destroyed.
 
 ## 3. Renaming Angband for the Ashen setting
 
-All renaming is **data**: `data/setting/names.json` maps each 4.2.5 id to a new name, description and (for uniques)
+All renaming is **data**: `data/setting/ashen_names.json` maps each 4.2.5 id to a new name, description and (for uniques)
 a few lines of lore. The game mechanics do not change. The 4.2.5 data in `data/angband/` stays exactly as AVABand
 has it, so the drift check still passes. The bridge check (section 9) fails if a Tolkien name would appear in game:
 it uses a list of Tolkien proper nouns and checks every string shown to the player.
@@ -217,14 +217,17 @@ rules that depend on them:
 | Depth | Feet | Creature levels | Player expects |
 | --- | --- | --- | --- |
 | Town | 0 | 0–1 | 1 |
-| 1–10 | 50–500 | 1–4 | 1–5 |
-| 11–30 | 550–1500 | 4–9 | 5–10 |
-| 31–60 | 1550–3000 | 9–15 | 10–16 |
-| 61–90 | 3050–4500 | 15–20 | 16–20 |
-| 91–100 | 4550–5000 | 20–24 | 20, plus mythic tiers 1–5 |
-| 101–127 | to 6350 | 24–25 | after the win |
+| 1–10 | 50–500 | 1–3 | 1–5 |
+| 11–30 | 550–1500 | 3–8 | 5–10 |
+| 31–60 | 1550–3000 | 8–12 | 10–16 |
+| 61–90 | 3050–4500 | 12–16 | 16–20 |
+| 91–100 | 4550–5000 | 16–20 | 20, plus mythic tiers 1–5 |
+| 101–127 | to 6350 | 20–24 | after the win |
 
-- **Creature level** comes from a fitted curve of Angband depth, tuned by the balance bots.
+- **Creature level** comes from a fitted curve of Angband depth, tuned by the balance bots. From depth 30 the deep's
+  monsters stand a few levels below the hero who reaches them, since an Angband level throws far more of them at one
+  hero than a Pathfinder encounter does; uniques fight two levels up, and kills are worth three times Pathfinder's
+  experience.
 - **XP** uses PF2's table by level difference, so diving deep pays off as it does in Angband.
 - **Mythic tiers 21–25** come after level 20. They are AshenReliquary's planned milestone M6, built here first.
 

@@ -78,6 +78,14 @@ public sealed class Hero : IActor
 
     public Round Round { get; } = new();
 
+    /// <summary>Mythic tiers past level 20 (the spec's section 4.3): 0 to 5.</summary>
+    public int MythicTier { get; set; }
+
+    public const int MaxMythicTier = 5;
+
+    /// <summary>Lasting gifts from the story's choices: "resist:Poison", "hold_life".</summary>
+    public HashSet<string> Boons { get; } = [];
+
     /// <summary>Experience toward the next level.</summary>
     public int Experience { get; set; }
 

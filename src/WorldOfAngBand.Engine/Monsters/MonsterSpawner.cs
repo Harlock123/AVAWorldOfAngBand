@@ -29,6 +29,8 @@ public sealed class MonsterSpawner(GameData data)
     /// Picks a race for <paramref name="depth"/>, weighted by 1/rarity. Town monsters only appear in
     /// town; unavailable uniques are skipped.
     /// </summary>
+    private HashSet<string>? _shapes;
+
     public MonsterRaceDef? PickRace(GameRandom rng, int depth, ISet<string> unavailableUniques,
         Func<MonsterRaceDef, bool>? filter = null, bool allowOutOfDepth = true)
     {
@@ -36,11 +38,13 @@ public sealed class MonsterSpawner(GameData data)
         if (allowOutOfDepth && depth > 0 && rng.OneIn(OutOfDepthChance))
             depth += Math.Min(depth / 4 + 2, OutOfDepthAmount);
 
-        // Quest monsters (Sauron, Morgoth) only ever appear where their quest puts them, and
-        // FORCE_DEPTH ones never out of depth (Angband get_mon_num).
+        // Quest monsters (Sauron, Morgoth) only ever appear where their quest puts them, FORCE_DEPTH ones never
+        // out of depth, and the shapes a shapechanger takes never by themselves (rarity 0 in Angband's get_mon_num).
+        _shapes ??= data.Monsters.SelectMany(m => m.Shapes).ToHashSet(StringComparer.Ordinal);
         var eligible = (Seasonal?.Invoke() is { Count: > 0 } seasonal ? data.Monsters.Concat(seasonal) : data.Monsters).Where(r =>
                 (depth == 0 ? r.Depth == 0 : r.Depth > 0 && r.Depth <= depth)
                 && !r.Has(MonsterFlags.Questor)
+                && !_shapes.Contains(r.Id)
                 && !(r.Has(MonsterFlags.ForceDepth) && r.Depth > levelDepth)
                 && !(r.IsUnique && unavailableUniques.Contains(r.Id))
                 && (filter?.Invoke(r) ?? true)

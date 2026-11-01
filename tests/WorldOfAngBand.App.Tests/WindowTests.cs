@@ -17,10 +17,13 @@ public class WindowTests
     private static readonly Lazy<GameData> Data = new(() => DataLoader.LoadDefault(includeUserMods: false));
 
     /// <summary>A game window, shown headless, with the clock stopped so pictures repeat.</summary>
-    private static MainWindow Open(ulong seed = 1234)
+    private static MainWindow Open(ulong seed = 1234) => Open(seed, out _);
+
+    private static MainWindow Open(ulong seed, out Graveyard graveyard)
     {
         var book = Path.Combine(Path.GetTempPath(), "worldofangband-tests", Guid.NewGuid().ToString("N"), "graveyard.json");
-        var window = new MainWindow(new DungeonSession(Data.Value, seed), new Graveyard(book)) { Width = 1280, Height = 800 };
+        graveyard = new Graveyard(book);
+        var window = new MainWindow(new DungeonSession(Data.Value, seed), graveyard) { Width = 1280, Height = 800 };
         window.State.Frozen = true;
         window.ShowDialogs = false;
         window.Show();
@@ -243,6 +246,38 @@ public class WindowTests
             frame.Save(path, PngBitmapEncoderOptions.Default);
         }
         return frame;
+    }
+
+    [AvaloniaFact]
+    public void An_altar_offers_its_choice_and_the_cinders_end_shows_the_epilogue()
+    {
+        var window = Open(1301, out var graveyard);
+        var game = window.Session;
+        game.JumpTo(15);
+        var font = Story.Levels[0];
+        var altar = window.OpenStory(new StoryChoiceEvent(font.Id, font.Title, font.Prompt, Story.Choices(font.Id, game.Flags, true)));
+        CaptureDialog(altar, "WorldOfAngBand-altar");
+        altar.Choose(0, game.Perform);
+        Assert.Equal("sealed", game.Flags["font"]);
+
+        // A winner's numbers for the picture.
+        while (game.Hero.Level < 20)
+            game.Hero.Character.LevelUp();
+        game.Hero.MythicTier = Hero.MaxMythicTier;
+        game.Belongings.Refit();
+        game.Hero.Character.Heal(game.Hero.MaxHitPoints);
+        game.JumpTo(Story.CinderDepth);
+        var cinder = game.Foes.Single(f => f.Monster.Race.Id == Story.Cinder);
+        game.Fight.Hurt(cinder, 1_000_000);
+        Assert.True(game.Won);
+        Pump();
+        Assert.True(window.State.ShowEpilogue);
+        Capture(window, "WorldOfAngBand-epilogue");
+        Assert.True(window.Press(Key.Enter));
+        var record = Assert.Single(graveyard.Read());
+        Assert.True(record.Won);
+        Assert.NotSame(game, window.Session);
+        window.Close();
     }
 
     [AvaloniaFact]

@@ -52,6 +52,8 @@ public sealed class HudPainter : IDisposable
         Text(canvas, KeysLine, 16, size.Height - 12, _tiny, Dim);
         if (session.Death is { } death)
             DrawDeath(canvas, size, death);
+        else if (session.Won && view.ShowEpilogue)
+            DrawEpilogue(canvas, size, session.Epilogue);
     }
 
     private void DrawHero(SKCanvas canvas, SKSize size, DungeonSession session)
@@ -90,6 +92,8 @@ public sealed class HudPainter : IDisposable
 
         Text(canvas, $"AC {c.ArmorClass().Total}  ·  attack +{c.AttackModifier().Total}  ·  flasks {c.Potion.Charges}  ·  {hero.Gold} gold", x, y + 70, _tiny, Dim);
         Text(canvas, c.SecondBreath.Ready ? "Second Breath ready" : "Second Breath spent", x, y + 88, _tiny, c.SecondBreath.Ready ? Ink : Blood);
+        if (hero.MythicTier > 0)
+            Text(canvas, $"mythic tier {hero.MythicTier}", x + 248, y + 88, _tiny, Ink, SKTextAlign.Right);
         var conditions = c.Conditions.Active.Select(a => a.Value > 1 ? $"{a.Kind} {a.Value}" : a.Kind.ToString())
             .Concat(c.Persistent.Types.Select(t => t == DamageType.Poison ? "Poisoned" : $"{t} (persistent)"))
             .Concat(hero.Timed.Keys.Select(t => t switch
@@ -139,6 +143,49 @@ public sealed class HudPainter : IDisposable
             canvas.DrawLine(page.MidX - width / 2, ly - 5, page.MidX + width / 2, ly - 5, strike);
         }
         Text(canvas, "Press Enter to send another down.", page.MidX, page.Bottom - 24, _small, ink, SKTextAlign.Center, shadow: false);
+    }
+
+    /// <summary>The win: the epilogue on a page, and the choice to go on (past the bottom, to depth 127) or lay down the lantern.</summary>
+    private void DrawEpilogue(SKCanvas canvas, SKSize size, IReadOnlyList<string> lines)
+    {
+        using var shroud = new SKPaint { Color = new SKColor(6, 4, 4, 200) };
+        canvas.DrawRect(SKRect.Create(size), shroud);
+        var page = SKRect.Create(size.Width / 2 - 360, size.Height / 2 - 230, 720, 460);
+        using (var parchment = new SKPaint { Color = new SKColor(222, 206, 168), IsAntialias = true })
+            canvas.DrawRoundRect(page, 6, 6, parchment);
+        var ink = new SKColor(52, 34, 24);
+        using var heading = new SKFont(_typeface, 24);
+        Text(canvas, "The Cinder of Ashur", page.MidX, page.Top + 44, heading, ink, SKTextAlign.Center, shadow: false);
+        var y = page.Top + 84;
+        foreach (var line in lines)
+        {
+            foreach (var wrapped in Wrap(line, page.Width - 60, _small))
+            {
+                Text(canvas, wrapped, page.Left + 30, y, _small, ink, shadow: false);
+                y += 20;
+            }
+            y += 6;
+        }
+        Text(canvas, "Enter: lay down the lantern (your line goes in the book).   Escape: go on, deeper.", page.MidX, page.Bottom - 22,
+            _small, ink, SKTextAlign.Center, shadow: false);
+    }
+
+    private static IEnumerable<string> Wrap(string text, float width, SKFont font)
+    {
+        var line = "";
+        foreach (var word in text.Split(' '))
+        {
+            var next = line.Length == 0 ? word : line + " " + word;
+            if (font.MeasureText(next) > width && line.Length > 0)
+            {
+                yield return line;
+                line = word;
+            }
+            else
+                line = next;
+        }
+        if (line.Length > 0)
+            yield return line;
     }
 
     private void Label(SKCanvas canvas, string text, float x, float y)

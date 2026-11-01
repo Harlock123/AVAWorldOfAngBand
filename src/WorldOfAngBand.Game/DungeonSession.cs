@@ -34,9 +34,10 @@ public sealed class DungeonSession : ITurnHandler
 
     /// <summary>
     /// A monster is worth this many times Pathfinder's experience: Pathfinder's numbers pace a party through a few
-    /// fights a level, Angband's hero through dozens.
+    /// fights a level, Angband's hero through dozens, and the deep's monsters stand a few levels below the hero who
+    /// reaches them (CreatureBridge.LevelForDepth against Bots/Campaign.ExpectedLevel).
     /// </summary>
-    public const int ExperienceMultiplier = 2;
+    public const int ExperienceMultiplier = 3;
 
     private readonly DungeonGenerator _generator;
     private readonly MonsterSpawner _spawner;
@@ -73,10 +74,30 @@ public sealed class DungeonSession : ITurnHandler
         Effects = new ItemEffects(this);
         Hero = Hero.Create(Content);
         Kit();
+        var rumour = Story.Rumours[Rng.RandInt0(Story.Rumours.Count)];
+        Rumour = rumour.Ending;
         Stores = new Stores(this);
         Scheduler.Add(Hero);
         Enter(0, StairArrival.None);
+        Opening = rumour.Rumour;
     }
+
+    /// <summary>What Gallowmere says as a new character sets out: the rumour of how Ashen Reliquary ended.</summary>
+    public string Opening { get; }
+
+    /// <summary>Which of Ashen Reliquary's four endings Gallowmere tells this character (destroy, bind, claim, mercy).</summary>
+    public string Rumour { get; }
+
+    /// <summary>What the hero has chosen and done in the story, by story level: font, library, oath, nest, pyre, cinder.</summary>
+    public IReadOnlyDictionary<string, string> Flags => _flags;
+
+    private readonly Dictionary<string, string> _flags = [];
+
+    /// <summary>The Cinder of Ashur is out.</summary>
+    public bool Won => _flags.ContainsKey("cinder");
+
+    /// <summary>The epilogue, once won.</summary>
+    public IReadOnlyList<string> Epilogue { get; private set; } = [];
 
     /// <summary>
     /// A Lantern-sworn's kit: a long sword, a leather shield, chain mail, boots and gloves, a torch, two potions of
@@ -193,6 +214,7 @@ public sealed class DungeonSession : ITurnHandler
             WieldItem wield => Belongings.Wield(wield.Item),
             TakeOffItem takeOff => Belongings.TakeOff(takeOff.Item),
             UseItem use => Effects.Use(use.Item, use.Target),
+            ChooseStory choose => Choose(choose.StoryId, choose.Choice),
             _ => throw new ArgumentOutOfRangeException(nameof(command), command, "Unknown command."),
         };
         if (!took)
@@ -379,8 +401,16 @@ public sealed class DungeonSession : ITurnHandler
         }
         if (Hero.DescentIn > 0 && --Hero.DescentIn == 0)
         {
-            Say("The floor opens beneath you!");
-            _pendingLevel = (Math.Min(Data.Constants.MaxDepth, Math.Max(Depth, 1) + 5), StairArrival.None);
+            var to = NoDeeperThan(Math.Min(Data.Constants.MaxDepth, Math.Max(Depth, 1) + 5));
+            if (to > Depth)
+            {
+                Say("The floor opens beneath you!");
+                _pendingLevel = (to, StairArrival.None);
+            }
+            else
+            {
+                Say("The floor shudders beneath you, and holds.");
+            }
         }
     }
 
@@ -418,6 +448,7 @@ public sealed class DungeonSession : ITurnHandler
         Hero.Position = to;
         Publish(new HeroMovedEvent(from, to));
         Belongings.Arrive();
+        Altar();
         if (terrain.Shop is { } shop && Data.Stores.Any(st => st.Id == shop))
             Publish(new ShopEnteredEvent(shop));
         return true;
@@ -480,7 +511,11 @@ public sealed class DungeonSession : ITurnHandler
         var seed = depth == 0
             ? GameRandom.DeriveSeed(_seed, 0)
             : GameRandom.DeriveSeed(_seed, depth, ++_levelsMade);
-        var generated = _generator.Generate(new LevelRequest(depth, seed, arrival));
+        var story = Story.At(depth);
+        // The quest levels (Saint Ysmere's, the Cinder's) have no way down until their keeper is gone.
+        var quest = Unfinished(depth);
+        var generated = _generator.Generate(new LevelRequest(depth, seed, arrival, Quest: quest,
+            QuestRoom: story is not null && (!_flags.ContainsKey(story.Id) || Unfinished(depth)) ? story.Room : null));
         if (Level is not null)
             _vision.Reset(Level);
         Level = generated.Level;
@@ -495,6 +530,9 @@ public sealed class DungeonSession : ITurnHandler
         Noise.Reset(Level);
         Scent.Reset(Level);
 
+        // Uniques left alive on the old level can be met again (Angband resets their count when a level goes).
+        foreach (var foe in _foes.Values.Where(f => f.Monster.Race.IsUnique))
+            _uniquesGone.Remove(foe.Monster.Race.Id);
         Scheduler.Clear();
         _foes.Clear();
         Scheduler.Add(Hero);
@@ -509,6 +547,19 @@ public sealed class DungeonSession : ITurnHandler
         }
         else
         {
+            // The story's monsters take their places before the level's own. On a quest level the rest of the deep
+            // keeps half its distance from the keeper: half the monsters a level that deep would have.
+            PlaceStory(story);
+            if (quest)
+            {
+                Level.Population = Level.Population with { Monsters = Level.Population.Monsters / 2 };
+                // The shaft comes down by the keeper: the hero arrives just outside its room.
+                if (Level.QuestSpots.Where(q => q.Symbol == ')').Select(q => (Loc?)q.Loc).FirstOrDefault() is { } keeper
+                    && Level.AllLocs().Where(p => Level.IsEmptyFloor(p) && !Level[p].Has(SquareFlags.Vault)
+                                                  && p.ChebyshevTo(keeper) is >= 13 and <= 22)
+                        .OrderBy(p => p.DistanceTo(keeper)).Select(p => (Loc?)p).FirstOrDefault() is { } door)
+                    Hero.Position = door;
+            }
             _spawner.Populate(Level, Rng, Hero.Position, _uniquesGone);
             Loot.Populate();
         }
@@ -520,9 +571,11 @@ public sealed class DungeonSession : ITurnHandler
 
     private Foe Enlist(Monster monster)
     {
-        // Angband's hit points, scaled for depth (CreatureBridge.DamageScale).
-        monster.MaxHp = CreatureBridge.Scaled(monster.MaxHp, monster.Race.Depth);
-        monster.Hp = Math.Min(monster.Hp, monster.MaxHp);
+        // Pathfinder's hit points for its level, nudged by Angband's as rolled (CreatureBridge.HitPointsFor).
+        var wounded = monster.MaxHp > 0 ? (double)monster.Hp / monster.MaxHp : 1;
+        monster.MaxHp = Bridge.HitPointsFor(monster.Race, monster.MaxHp);
+        monster.Hp = Math.Max(1, (int)Math.Round(monster.MaxHp * wounded));
+        monster.Speed = CreatureBridge.SpeedFor(monster.Speed);
         var foe = new Foe(monster, Bridge.StatsFor(monster.Race), CreatureBridge.DefensesFor(monster.Race), Bridge.NameOf(monster.Race));
         _foes[monster.Id] = foe;
         Scheduler.Add(monster);
@@ -556,6 +609,205 @@ public sealed class DungeonSession : ITurnHandler
         square.Feature = Data.Terrain.Ids.Floor;
         square.Flags &= ~SquareFlags.AnyWallMarker;
         Publish(new DoorOpenedEvent(at));
+    }
+
+    // --- The story ---
+
+    /// <summary>
+    /// A story level's room: its altar where the room's '(' is, its monster (with any escort) where ')' is, a good thing
+    /// where '[' is. At depth 98, the echo of the Herald the rumour names, if it still stands.
+    /// </summary>
+    private void PlaceStory(StoryLevel? story)
+    {
+        foreach (var (symbol, at) in Level.QuestSpots)
+        {
+            switch (symbol)
+            {
+                case '(' when story is not null:
+                    Level.SetFeature(at, Data.Terrain["quest_altar"].Index);
+                    break;
+                // The story's monster, with its friends; a keeper (Saint Ysmere, the Cinder) keeps its vigil alone.
+                case ')' when story?.Monster is { } id && !_uniquesGone.Contains(id) && Data.Monster(id) is { } race:
+                    var placed = race.Has(MonsterFlags.Questor)
+                        ? [_spawner.Place(Level, Rng, race, at, asleep: true)]
+                        : _spawner.PlaceWithFriends(Level, Rng, race, at, _uniquesGone, asleep: true);
+                    _uniquesGone.Add(race.Id);
+                    foreach (var m in placed)
+                        m.Sleep = Math.Max(m.Sleep, 40);
+                    break;
+                case '[':
+                    if (Factory.Make(Rng, Depth + 5, good: true) is { } item)
+                        Level.Objects.Add(at, item);
+                    break;
+            }
+        }
+        // (Placed directly: Angband's spawner never picks a quest monster.)
+        if (Depth == Story.EchoDepth && Story.Rumours.First(r => r.Ending == Rumour).Echo is var echo
+            && !_uniquesGone.Contains(echo) && Data.Monster(echo) is { } herald)
+        {
+            var spots = Level.AllLocs().Where(p => Level.IsEmptyFloor(p) && p.DistanceTo(Hero.Position) > 20 && !Level[p].Has(SquareFlags.Vault)).ToList();
+            if (spots.Count > 0)
+                _spawner.PlaceWithFriends(Level, Rng, herald, Rng.Pick(spots), _uniquesGone, asleep: false);
+        }
+    }
+
+    /// <summary>The hero walked onto a story level's altar: if its choice is still to be made, they are offered it.</summary>
+    private void Altar()
+    {
+        if (Story.At(Depth) is not { } story || _flags.ContainsKey(story.Id) || Level.FeatureAt(Hero.Position).Id != "quest_altar")
+            return;
+        var choices = Story.Choices(story.Id, _flags, StoryMonster(story) is not null);
+        if (choices.Count > 0)
+            Publish(new StoryChoiceEvent(story.Id, story.Title, story.Prompt, choices));
+    }
+
+    private Foe? StoryMonster(StoryLevel story) => _foes.Values.FirstOrDefault(f => f.Monster.Race.Id == story.Monster);
+
+    /// <summary>Makes a story choice: its flag is set, and it does what it says. Takes the hero's turn.</summary>
+    private bool Choose(string id, int index)
+    {
+        if (Story.At(Depth) is not { } story || story.Id != id || _flags.ContainsKey(id))
+            return false;
+        var choices = Story.Choices(id, _flags, StoryMonster(story) is not null);
+        if (index < 0 || index >= choices.Count)
+            return false;
+        var value = choices[index].Value;
+        _flags[id] = value;
+        var monster = StoryMonster(story);
+        switch (id, value)
+        {
+            case ("font", "sealed"):
+                Hero.Boons.Add("resist:Poison");
+                Say("The wax hisses and holds. The grey water stops. (You resist poison.)");
+                break;
+            case ("font", "taken"):
+                if (Hero.Pack.Weapon is { } weapon && weapon.Brands.All(b => b.Element != "pois"))
+                {
+                    weapon.Brands.Add(new BrandDef { Element = "pois", Multiplier = 3, Verb = "poison", Name = "poison" });
+                    Belongings.Learn(RuneIds.Brand("pois"));
+                }
+                Say("Your blade drinks the grey water, and stays wet with it.");
+                break;
+            case ("library", "read"):
+                Hero.Boons.Add("conf");
+                Say("The first Order did not burn Ashur once. They burned him every year, and Ysmere was the one who lit the pyre, "
+                    + "and they never told her what she was burning. (Your mind is clearer for knowing.)");
+                break;
+            case ("library", "left"):
+                Say("The pages sink. Whatever they said is the water's now.");
+                break;
+            case ("oath", "freed"):
+                if (monster is not null)
+                {
+                    Say($"You strike Ser Hadric's name from the stone. {Subject(monster.Monster)} lowers his sword, and is gone.");
+                    Banish(monster);
+                    _uniquesGone.Add(monster.Monster.Race.Id);
+                }
+                Hero.Boons.Add("hold_life");
+                Say("(Your life holds fast against draining.)");
+                break;
+            case ("oath", _):
+                if (monster is not null)
+                {
+                    monster.Monster.Sleep = 0;
+                    monster.Monster.Aware = true;
+                    Say($"{Subject(monster.Monster)} draws his sword.");
+                }
+                else
+                {
+                    Say("The oath-stone cracks in two.");
+                }
+                break;
+            case ("nest", "spared"):
+                if (monster is not null)
+                {
+                    Say($"{Subject(monster.Monster)} takes the egg in her jaws and goes, up the shaft and away.");
+                    Banish(monster);
+                    _uniquesGone.Add(monster.Monster.Race.Id);
+                }
+                break;
+            case ("nest", "smashed"):
+                Say("The egg breaks. Something in the dark screams.");
+                if (monster is not null)
+                {
+                    monster.Monster.Sleep = 0;
+                    monster.Monster.Aware = true;
+                }
+                break;
+            case ("pyre", "spared"):
+                if (monster is not null)
+                {
+                    Say("Saint Ysmere listens. Then she puts down the torch she has held for nine hundred years, and lowers the last seal.");
+                    var at = monster.Monster.Position;
+                    Banish(monster);
+                    _uniquesGone.Add(monster.Monster.Race.Id);
+                    OpenTheWayDown(at);
+                }
+                break;
+            case ("pyre", _):
+                if (monster is not null)
+                {
+                    monster.Monster.Sleep = 0;
+                    monster.Monster.Aware = true;
+                    Say("Saint Ysmere turns from the pyre.");
+                }
+                break;
+        }
+        // The Cinderwyrm's dam, let go, has her own quarrel with Saint Ysmere: she is waiting for her.
+        if (id == "pyre" && value == "fought" && _flags.GetValueOrDefault("nest") == "spared" && monster is not null)
+        {
+            monster.Monster.Hp = monster.Monster.MaxHp * 7 / 10;
+            Say("A shadow falls across the pyre: the Cinderwyrm's dam, come for Saint Ysmere. Her breath burns the saint before she flies.");
+        }
+        Belongings.Refit();
+        return true;
+    }
+
+    /// <summary>A staircase down where the quest's keeper stood (Angband: the quest's stairs appear).</summary>
+    private void OpenTheWayDown(Loc at)
+    {
+        var spot = Level.IsEmptyFloor(at) ? at : Level.Neighbors(at).FirstOrDefault(Level.IsEmptyFloor);
+        if (spot == default)
+            return;
+        Level.SetFeature(spot, Data.Terrain.Ids.DownStair);
+        Known.Remember(Level, spot);
+        Say("A staircase down opens in the floor.");
+        Publish(new DoorOpenedEvent(spot));
+    }
+
+    /// <summary>A story monster or quest keeper slain.</summary>
+    private void StoryKill(Monster monster)
+    {
+        var id = monster.Race.Id;
+        if (Story.Levels.FirstOrDefault(l => l.Monster == id) is { } story && !_flags.ContainsKey(story.Id)
+            && story.Id is "oath" or "nest" or "font")
+            _flags.TryAdd($"{story.Id}.slain", "yes");
+        if (id == Story.Ysmere)
+        {
+            _flags.TryAdd("pyre", "slain");
+            _flags["pyre.slain"] = "yes";
+            OpenTheWayDown(monster.Position);
+        }
+        if (id == Story.Cinder)
+            Win();
+    }
+
+    /// <summary>The Cinder of Ashur is out: the epilogue, and the hero's line in the book (not struck through).</summary>
+    private void Win()
+    {
+        _flags["cinder"] = "out";
+        var c = Hero.Character;
+        Epilogue = Story.Epilogue(Rumour, _flags, c.Ancestry.Name, c.Class.Name);
+        Say("The Cinder of Ashur goes out.");
+        Publish(new HeroWonEvent(Epilogue));
+    }
+
+    /// <summary>The winner's line in the Order's book, when they lay down the lantern.</summary>
+    public DeathRecord Retire()
+    {
+        var c = Hero.Character;
+        return new DeathRecord(c.Name, c.Ancestry.Name, c.Class.Name, c.Level, Depth, Hero.MaxDepth, "", Turn / EnergyTable.GameTurnsPerNormalTurn,
+            _seed, DateTimeOffset.Now, Won: true);
     }
 
     // --- What potions and scrolls do to the level ---
@@ -634,9 +886,29 @@ public sealed class DungeonSession : ITurnHandler
     /// <summary>Angband teleport_level: up or down a level (only down from the town).</summary>
     internal void TeleportLevel()
     {
-        var up = Depth > 0 && Rng.OneIn(2);
+        // Never down past a quest level whose keeper still stands.
+        var up = Depth > 0 && (Rng.OneIn(2) || Unfinished(Depth));
         Say(up ? "You rise up through the ceiling." : "You sink through the floor.");
         _pendingLevel = (Depth + (up ? -1 : 1), StairArrival.None);
+    }
+
+    /// <summary>A quest level whose keeper still stands (Saint Ysmere's before the pyre's choice, the Cinder's before the win).</summary>
+    private bool Unfinished(int depth) =>
+        depth == Story.YsmereDepth && !(_flags.ContainsKey("pyre.slain") || _flags.GetValueOrDefault("pyre") == "spared")
+        || depth == Story.CinderDepth && !Won;
+
+    /// <summary>
+    /// How far down a level change toward <paramref name="depth"/> may go: no further than the first unfinished quest
+    /// level below the hero (Angband's dungeon_get_next_level), and nowhere down from one.
+    /// </summary>
+    private int NoDeeperThan(int depth)
+    {
+        for (var d = Depth; d < depth; d++)
+        {
+            if (Unfinished(d))
+                return d;
+        }
+        return depth;
     }
 
     /// <summary>Wakes every monster on the level and hastens none (Angband's aggravation, without the haste).</summary>
@@ -807,6 +1079,7 @@ public sealed class DungeonSession : ITurnHandler
         Say(seen ? $"You have {(living ? "slain" : "destroyed")} {Object(monster)}." : "You have killed it.");
         Publish(new MonsterDiedEvent(monster.Id, monster.Position, foe.Name, monster.Race.Id));
         Loot.Drop(monster);
+        StoryKill(monster);
         GainExperience(Encounter.CreatureXp(foe.Level, Hero.Level) * ExperienceMultiplier);
     }
 
@@ -824,6 +1097,18 @@ public sealed class DungeonSession : ITurnHandler
             Say($"Welcome to level {Hero.Level}.");
             Publish(new LevelUpEvent(Hero.Level));
         }
+        // Past level 20, the hero rises through the mythic tiers instead.
+        while (Hero.Experience >= Hero.ExperiencePerLevel && Hero.Level >= Character.MaxLevel && Hero.MythicTier < Hero.MaxMythicTier)
+        {
+            Hero.Experience -= Hero.ExperiencePerLevel;
+            Hero.MythicTier++;
+            Belongings.Refit();
+            Hero.Character.Heal(10);
+            Say($"You rise to mythic tier {Hero.MythicTier}.");
+            Publish(new MythicTierEvent(Hero.MythicTier));
+        }
+        if (Hero.Level >= Character.MaxLevel && Hero.MythicTier >= Hero.MaxMythicTier)
+            Hero.Experience = Math.Min(Hero.Experience, Hero.ExperiencePerLevel - 1);
     }
 
     private void UpdateView()

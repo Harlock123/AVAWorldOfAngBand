@@ -57,6 +57,9 @@ public sealed class StoreWindow : Window
         columns.Children.Add(left);
         columns.Children.Add(right);
         var owner = string.IsNullOrEmpty(store.Owner) ? "" : $"Kept by {store.Owner}.";
+        // At the Archive, Wren says where the story goes next.
+        if (store.Id == "bookseller")
+            owner += "\n" + WorldOfAngBand.Game.Story.WrenSays(session.Flags, session.Hero.MaxDepth);
         Content = new ScrollViewer
         {
             Content = new StackPanel
