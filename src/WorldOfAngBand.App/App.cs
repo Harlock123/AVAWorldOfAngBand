@@ -23,7 +23,10 @@ public sealed class App : Application
             var args = desktop.Args ?? [];
             var at = Array.IndexOf(args, "--seed");
             var seed = at >= 0 && at + 1 < args.Length && ulong.TryParse(args[at + 1], out var given) ? given : (ulong)Environment.TickCount64;
-            desktop.MainWindow = new MainWindow(new DungeonSession(DataLoader.LoadDefault(), seed));
+            var window = new MainWindow(new DungeonSession(DataLoader.LoadDefault(), seed));
+            // A new hero to begin with (closed without choosing, the default Lantern-sworn goes down).
+            window.Opened += (_, _) => window.OpenBirth(seed);
+            desktop.MainWindow = window;
         }
         base.OnFrameworkInitializationCompleted();
     }

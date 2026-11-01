@@ -2617,5 +2617,808 @@
    "Attack"
   ],
   "description": "Load a charge of shot and fire: a Strike at your target and up to three more within reach and 35° of it."
+ },
+ {
+  "id": "priest_strike",
+  "name": "Strike",
+  "class": "priest",
+  "slot": "lmb",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "repeat": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Strike with your weapon."
+ },
+ {
+  "id": "divine_lance",
+  "name": "Divine Lance",
+  "class": "priest",
+  "slot": "rmb",
+  "kind": "SpellBolt",
+  "actions": 2,
+  "range": 8,
+  "damageType": "Spirit",
+  "dice": "2d4",
+  "heightenDice": "1d4",
+  "traits": [
+   "Attack",
+   "Cantrip",
+   "Divine",
+   "Concentrate"
+  ],
+  "description": "A cantrip: a lance of the Lantern's light, 2d4 spirit (+1d4 a rank above 1) against a spell attack."
+ },
+ {
+  "id": "heal",
+  "name": "Heal",
+  "class": "priest",
+  "slot": "1",
+  "kind": "Heal",
+  "actions": 2,
+  "cost": 15,
+  "cooldown": 6,
+  "heal": 8,
+  "traits": [
+   "Divine",
+   "Healing",
+   "Vitality"
+  ],
+  "description": "Lay the Lantern's light on your wounds: 8 HP a rank. 15 Mana, 6 s cooldown."
+ },
+ {
+  "id": "bless",
+  "name": "Bless",
+  "class": "priest",
+  "slot": "2",
+  "kind": "Aura",
+  "actions": 1,
+  "cost": 12,
+  "buffSeconds": 20,
+  "auraAc": 1,
+  "traits": [
+   "Aura",
+   "Divine"
+  ],
+  "description": "A blessing on you for 20 s: +1 status bonus to AC and saves. 12 Mana."
+ },
+ {
+  "id": "orb_of_draining",
+  "name": "Orb of Draining",
+  "class": "priest",
+  "slot": "4",
+  "kind": "Blast",
+  "level": 4,
+  "actions": 2,
+  "cost": 14,
+  "cooldown": 3,
+  "range": 8,
+  "radius": 1.5,
+  "save": "Fortitude",
+  "damageType": "Spirit",
+  "dice": "2d6",
+  "heightenDice": "1d6",
+  "traits": [
+   "Spell",
+   "Divine",
+   "Concentrate"
+  ],
+  "description": "An orb of holy light bursts on a monster: 2d6 spirit (+1d6 a rank above 1) to every enemy within 1.5 tiles, basic Fortitude save. 14 Mana."
+ },
+ {
+  "id": "turn_the_wicked",
+  "name": "Turn the Wicked",
+  "class": "priest",
+  "slot": "6",
+  "kind": "Burst",
+  "level": 6,
+  "actions": 1,
+  "cost": 15,
+  "cooldown": 15,
+  "radius": 3,
+  "save": "Will",
+  "onHit": "Frightened",
+  "onHitValue": 2,
+  "traits": [
+   "Spell",
+   "Divine",
+   "Emotion",
+   "Fear"
+  ],
+  "description": "Hold up the Lantern: every enemy within 3 tiles makes a Will save or is frightened 2. 15 Mana, 15 s cooldown."
+ },
+ {
+  "id": "restoration",
+  "name": "Restoration",
+  "class": "priest",
+  "slot": "11",
+  "kind": "Heal",
+  "level": 11,
+  "actions": 2,
+  "cost": 30,
+  "cooldown": 20,
+  "heal": 15,
+  "cleansesTaint": 30,
+  "traits": [
+   "Divine",
+   "Healing",
+   "Vitality"
+  ],
+  "description": "A greater healing: 15 HP a rank, and the Taint in you eases. 30 Mana, 20 s cooldown."
+ },
+ {
+  "id": "holy_word",
+  "name": "Holy Word",
+  "class": "priest",
+  "slot": "16",
+  "kind": "Burst",
+  "level": 16,
+  "actions": 2,
+  "cost": 40,
+  "cooldown": 20,
+  "radius": 5,
+  "save": "Will",
+  "damageType": "Spirit",
+  "dice": "6d6",
+  "heightenDice": "1d6",
+  "drain": 0.3,
+  "onHit": "Stunned",
+  "onHitValue": 1,
+  "onHitSeconds": 1,
+  "traits": [
+   "Spell",
+   "Divine",
+   "Auditory"
+  ],
+  "description": "A word of the first Order: 6d6 spirit (+1d6 a rank above 1) to every enemy within 5 tiles, basic Will save; those that fail are stunned. You heal a third of the harm. 40 Mana, 20 s cooldown."
+ },
+ {
+  "id": "shield_of_the_faithful",
+  "name": "Shield of the Faithful",
+  "class": "priest",
+  "slot": "feat",
+  "kind": "Ward",
+  "feat": true,
+  "actions": 1,
+  "wardAc": 2,
+  "wardHardness": 5,
+  "hardnessPerTwoRanks": 5,
+  "wardSeconds": 8,
+  "blockLockout": 6,
+  "traits": [
+   "Divine",
+   "Cantrip"
+  ],
+  "description": "Confessor: a ward of faith for 8 s, +2 AC, and it soaks 5 (+5 every two ranks) from the next blow."
+ },
+ {
+  "id": "smite_evil",
+  "name": "Smite Evil",
+  "class": "priest",
+  "slot": "feat",
+  "kind": "WeaponStrike",
+  "feat": true,
+  "actions": 2,
+  "cost": 10,
+  "extraDice": 1,
+  "onHit": "Enfeebled",
+  "onHitValue": 1,
+  "onHitSeconds": 6,
+  "traits": [
+   "Attack",
+   "Divine"
+  ],
+  "description": "Inquisitor: a Strike one die heavier that leaves its target enfeebled 1 for 6 s. 10 Mana."
+ },
+ {
+  "id": "spiritual_weapon",
+  "name": "Spiritual Weapon",
+  "class": "priest",
+  "slot": "feat",
+  "kind": "SpellBolt",
+  "feat": true,
+  "level": 2,
+  "actions": 2,
+  "cost": 8,
+  "range": 8,
+  "damageType": "Force",
+  "dice": "1d8",
+  "heightenDice": "1d8",
+  "traits": [
+   "Attack",
+   "Spell",
+   "Divine",
+   "Force"
+  ],
+  "description": "A spectral hammer strikes from afar: 1d8 force (+1d8 a rank above 1). 8 Mana."
+ },
+ {
+  "id": "protection_from_evil",
+  "name": "Protection from Evil",
+  "class": "priest",
+  "slot": "feat",
+  "kind": "Aura",
+  "feat": true,
+  "level": 4,
+  "actions": 1,
+  "cost": 18,
+  "buffSeconds": 20,
+  "soak": 3,
+  "traits": [
+   "Aura",
+   "Divine"
+  ],
+  "description": "A ward for 20 s: every blow on you loses 3. 18 Mana."
+ },
+ {
+  "id": "searing_light",
+  "name": "Searing Light",
+  "class": "priest",
+  "slot": "feat",
+  "kind": "SpellBolt",
+  "feat": true,
+  "level": 8,
+  "actions": 2,
+  "cost": 18,
+  "cooldown": 3,
+  "range": 9,
+  "damageType": "Fire",
+  "dice": "5d6",
+  "heightenDice": "1d6",
+  "onHit": "Dazzled",
+  "onHitSeconds": 4,
+  "traits": [
+   "Attack",
+   "Spell",
+   "Divine",
+   "Fire",
+   "Light"
+  ],
+  "description": "A ray of the Lantern's fire: 5d6 fire (+1d6 a rank above 3); it dazzles on a hit. 18 Mana."
+ },
+ {
+  "id": "divine_vessel",
+  "name": "Divine Vessel",
+  "class": "priest",
+  "slot": "feat",
+  "kind": "Aura",
+  "feat": true,
+  "level": 14,
+  "actions": 1,
+  "cost": 40,
+  "cooldown": 30,
+  "buffSeconds": 15,
+  "radius": 3,
+  "dice": "2d6",
+  "save": "Fortitude",
+  "holy": true,
+  "auraAc": 2,
+  "traits": [
+   "Aura",
+   "Divine",
+   "Light"
+  ],
+  "description": "The Lantern fills you for 15 s: +2 AC and saves, and its light burns enemies within 3 tiles for 2d6 (vitality against the undead, fire against the living). 40 Mana."
+ },
+ {
+  "id": "druid_strike",
+  "name": "Strike",
+  "class": "druid",
+  "slot": "lmb",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "repeat": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Strike with your staff."
+ },
+ {
+  "id": "stinging_swarm",
+  "name": "Stinging Swarm",
+  "class": "druid",
+  "slot": "rmb",
+  "kind": "SpellBolt",
+  "actions": 2,
+  "range": 7,
+  "damageType": "Poison",
+  "dice": "1d6",
+  "heightenDice": "1d6",
+  "critPersistent": "1d4",
+  "traits": [
+   "Attack",
+   "Cantrip",
+   "Primal",
+   "Concentrate"
+  ],
+  "description": "A cantrip: a swarm of ash-wasps, 1d6 poison (+1d6 a rank above 1), and a critical hit leaves them stinging (1d4 persistent poison)."
+ },
+ {
+  "id": "lightning_strike",
+  "name": "Lightning Strike",
+  "class": "druid",
+  "slot": "1",
+  "kind": "SpellBolt",
+  "actions": 2,
+  "cost": 10,
+  "range": 8,
+  "damageType": "Electricity",
+  "dice": "2d8",
+  "heightenDice": "1d8",
+  "traits": [
+   "Attack",
+   "Spell",
+   "Primal",
+   "Electricity"
+  ],
+  "description": "A bolt from the vault of the deep: 2d8 electricity (+1d8 a rank above 1). 10 Mana."
+ },
+ {
+  "id": "barkskin",
+  "name": "Barkskin",
+  "class": "druid",
+  "slot": "2",
+  "kind": "Ward",
+  "actions": 1,
+  "cost": 8,
+  "wardAc": 1,
+  "wardHardness": 3,
+  "hardnessPerTwoRanks": 3,
+  "wardSeconds": 15,
+  "traits": [
+   "Primal",
+   "Plant"
+  ],
+  "description": "Your skin turns to bark for 15 s: +1 AC, and it soaks 3 (+3 every two ranks) from the next blow. 8 Mana."
+ },
+ {
+  "id": "herbal_healing",
+  "name": "Herbal Healing",
+  "class": "druid",
+  "slot": "4",
+  "kind": "Heal",
+  "level": 4,
+  "actions": 2,
+  "cost": 16,
+  "cooldown": 8,
+  "heal": 6,
+  "traits": [
+   "Primal",
+   "Healing"
+  ],
+  "description": "Ash-moss and bitter root: 6 HP a rank. 16 Mana, 8 s cooldown."
+ },
+ {
+  "id": "tangling_vines",
+  "name": "Tangling Vines",
+  "class": "druid",
+  "slot": "6",
+  "kind": "Blast",
+  "level": 6,
+  "actions": 2,
+  "cost": 16,
+  "cooldown": 6,
+  "range": 8,
+  "radius": 2,
+  "save": "Reflex",
+  "damageType": "Piercing",
+  "dice": "1d6",
+  "heightenDice": "1d6",
+  "onHit": "Immobilized",
+  "onHitSeconds": 4,
+  "traits": [
+   "Spell",
+   "Primal",
+   "Plant"
+  ],
+  "description": "Grey vines burst from the stone round a monster: 1d6 piercing (+1d6 a rank above 1) to every enemy within 2 tiles, basic Reflex save; those that fail are held fast for 4 s. 16 Mana."
+ },
+ {
+  "id": "earthquake",
+  "name": "Earthquake",
+  "class": "druid",
+  "slot": "11",
+  "kind": "Burst",
+  "level": 11,
+  "actions": 2,
+  "cost": 28,
+  "cooldown": 10,
+  "radius": 4,
+  "save": "Reflex",
+  "damageType": "Bludgeoning",
+  "dice": "4d6",
+  "heightenDice": "1d6",
+  "onHit": "Prone",
+  "onHitSeconds": 2,
+  "traits": [
+   "Spell",
+   "Primal",
+   "Earth"
+  ],
+  "description": "The deep heaves: 4d6 bludgeoning (+1d6 a rank above 3) to every enemy within 4 tiles, basic Reflex save; those that fail fall prone. 28 Mana."
+ },
+ {
+  "id": "storm_of_vengeance",
+  "name": "Storm of Vengeance",
+  "class": "druid",
+  "slot": "16",
+  "kind": "Blast",
+  "level": 16,
+  "actions": 3,
+  "cost": 45,
+  "cooldown": 15,
+  "range": 10,
+  "radius": 4,
+  "save": "Reflex",
+  "damageType": "Electricity",
+  "dice": "6d6",
+  "heightenDice": "1d6",
+  "onHit": "Stunned",
+  "onHitValue": 1,
+  "onHitSeconds": 1,
+  "traits": [
+   "Spell",
+   "Primal",
+   "Electricity"
+  ],
+  "description": "A storm breaks over a monster: 6d6 electricity (+1d6 a rank above 1) within 4 tiles, basic Reflex save; those that fail are stunned. 45 Mana."
+ },
+ {
+  "id": "gust_of_wind",
+  "name": "Gust of Wind",
+  "class": "druid",
+  "slot": "feat",
+  "kind": "Burst",
+  "feat": true,
+  "actions": 2,
+  "cost": 12,
+  "radius": 3,
+  "arc": 90,
+  "save": "Fortitude",
+  "damageType": "Bludgeoning",
+  "dice": "2d4",
+  "heightenDice": "1d4",
+  "knockback": 2,
+  "onHit": "Prone",
+  "onHitSeconds": 1,
+  "traits": [
+   "Spell",
+   "Primal",
+   "Air"
+  ],
+  "description": "Stormwarden: a blast of wind in a 3-tile cone, 2d4 bludgeoning (+1d4 a rank above 1), basic Fortitude save; those that fail are thrown back and knocked prone. 12 Mana."
+ },
+ {
+  "id": "briar_patch",
+  "name": "Briar Patch",
+  "class": "druid",
+  "slot": "feat",
+  "kind": "Trap",
+  "feat": true,
+  "actions": 1,
+  "cost": 12,
+  "cooldown": 3,
+  "radius": 1.5,
+  "save": "Reflex",
+  "damageType": "Piercing",
+  "dice": "2d6",
+  "heightenDice": "1d6",
+  "onHit": "Immobilized",
+  "onHitSeconds": 3,
+  "buffSeconds": 45,
+  "traits": [
+   "Primal",
+   "Plant",
+   "Trap"
+  ],
+  "description": "Thornkeeper: sow briars at your feet; the first enemy to come close takes 2d6 piercing (+1d6 a rank above 1) and is held fast. 12 Mana."
+ },
+ {
+  "id": "rejuvenation",
+  "name": "Rejuvenation",
+  "class": "druid",
+  "slot": "feat",
+  "kind": "Aura",
+  "feat": true,
+  "level": 4,
+  "actions": 1,
+  "cost": 18,
+  "cooldown": 10,
+  "buffSeconds": 20,
+  "auraHeal": 2,
+  "traits": [
+   "Primal",
+   "Healing"
+  ],
+  "description": "Green life in you for 20 s: you heal 2 every 2 s. 18 Mana."
+ },
+ {
+  "id": "fire_seeds",
+  "name": "Fire Seeds",
+  "class": "druid",
+  "slot": "feat",
+  "kind": "Blast",
+  "feat": true,
+  "level": 8,
+  "actions": 2,
+  "cost": 22,
+  "cooldown": 4,
+  "range": 8,
+  "radius": 2,
+  "save": "Reflex",
+  "damageType": "Fire",
+  "dice": "4d6",
+  "heightenDice": "1d6",
+  "traits": [
+   "Spell",
+   "Primal",
+   "Fire"
+  ],
+  "description": "Seeds of the Pyre's fire burst on a monster: 4d6 fire (+1d6 a rank above 3) within 2 tiles, basic Reflex save. 22 Mana."
+ },
+ {
+  "id": "sunbeam",
+  "name": "Sunbeam",
+  "class": "druid",
+  "slot": "feat",
+  "kind": "SpellBolt",
+  "feat": true,
+  "level": 14,
+  "actions": 2,
+  "cost": 26,
+  "cooldown": 5,
+  "range": 10,
+  "damageType": "Vitality",
+  "dice": "6d6",
+  "heightenDice": "1d6",
+  "onHit": "Dazzled",
+  "onHitSeconds": 4,
+  "traits": [
+   "Attack",
+   "Spell",
+   "Primal",
+   "Light"
+  ],
+  "description": "A beam of remembered sun: 6d6 vitality (+1d6 a rank above 5), and it dazzles. 26 Mana."
+ },
+ {
+  "id": "blackguard_strike",
+  "name": "Strike",
+  "class": "blackguard",
+  "slot": "lmb",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "repeat": true,
+  "traits": [
+   "Attack"
+  ],
+  "description": "Strike with your weapon. Builds Fury on a hit."
+ },
+ {
+  "id": "unholy_blow",
+  "name": "Unholy Blow",
+  "class": "blackguard",
+  "slot": "rmb",
+  "kind": "WeaponStrike",
+  "actions": 1,
+  "cost": 15,
+  "extraDice": 1,
+  "drain": 0.5,
+  "traits": [
+   "Attack",
+   "Unholy"
+  ],
+  "description": "A Strike one die heavier; you drink half the harm as life. 15 Fury."
+ },
+ {
+  "id": "leap_into_battle",
+  "name": "Leap into Battle",
+  "class": "blackguard",
+  "slot": "1",
+  "kind": "ChargeStrike",
+  "actions": 2,
+  "range": 5,
+  "cooldown": 8,
+  "extraDice": 1,
+  "traits": [
+   "Attack",
+   "Flourish",
+   "Move"
+  ],
+  "description": "Leap up to 5 tiles to a monster and Strike it, one die heavier. 8 s cooldown."
+ },
+ {
+  "id": "howl_of_the_damned",
+  "name": "Howl of the Damned",
+  "class": "blackguard",
+  "slot": "2",
+  "kind": "Burst",
+  "actions": 1,
+  "cost": 15,
+  "cooldown": 12,
+  "radius": 4,
+  "save": "Will",
+  "onHit": "Frightened",
+  "onHitValue": 1,
+  "traits": [
+   "Auditory",
+   "Emotion",
+   "Fear",
+   "Mental"
+  ],
+  "description": "Every enemy within 4 tiles makes a Will save or is frightened 1 (2 on a critical failure). 15 Fury, 12 s cooldown."
+ },
+ {
+  "id": "berserk_strength",
+  "name": "Berserk Strength",
+  "class": "blackguard",
+  "slot": "4",
+  "kind": "Aura",
+  "level": 4,
+  "actions": 1,
+  "cost": 30,
+  "cooldown": 20,
+  "buffSeconds": 12,
+  "steadfast": true,
+  "regenShare": 0.02,
+  "traits": [
+   "Rage",
+   "Emotion"
+  ],
+  "description": "Blood-rage for 12 s: you shrug off fear and stuns, and heal 2% of your hit points a second. 30 Fury, 20 s cooldown."
+ },
+ {
+  "id": "maim_foe",
+  "name": "Maim Foe",
+  "class": "blackguard",
+  "slot": "6",
+  "kind": "WeaponStrike",
+  "level": 6,
+  "actions": 2,
+  "cost": 20,
+  "cooldown": 6,
+  "extraDice": 1,
+  "onHit": "Stunned",
+  "onHitValue": 1,
+  "onHitSeconds": 1,
+  "traits": [
+   "Attack",
+   "Flourish"
+  ],
+  "description": "A Strike one die heavier that stuns its target. 20 Fury, 6 s cooldown."
+ },
+ {
+  "id": "grim_purpose",
+  "name": "Grim Purpose",
+  "class": "blackguard",
+  "slot": "11",
+  "kind": "Aura",
+  "level": 11,
+  "actions": 1,
+  "cost": 35,
+  "cooldown": 30,
+  "buffSeconds": 15,
+  "soak": 4,
+  "steadfast": true,
+  "traits": [
+   "Rage"
+  ],
+  "description": "Nothing turns you for 15 s: every blow on you loses 4, and nothing frightens or stuns you. 35 Fury, 30 s cooldown."
+ },
+ {
+  "id": "bloodbath",
+  "name": "Bloodbath",
+  "class": "blackguard",
+  "slot": "16",
+  "kind": "WeaponStrike",
+  "level": 16,
+  "actions": 2,
+  "cost": 40,
+  "cooldown": 12,
+  "targets": 8,
+  "arc": 360,
+  "extraDice": 3,
+  "drain": 0.3,
+  "traits": [
+   "Attack",
+   "Flourish",
+   "Sweep"
+  ],
+  "description": "One sweep at every enemy within reach, three dice heavier; you drink a third of the harm. 40 Fury, 12 s cooldown."
+ },
+ {
+  "id": "reckless_swing",
+  "name": "Reckless Swing",
+  "class": "blackguard",
+  "slot": "feat",
+  "kind": "WeaponStrike",
+  "feat": true,
+  "actions": 2,
+  "cost": 20,
+  "extraDice": 2,
+  "traits": [
+   "Attack",
+   "Flourish"
+  ],
+  "description": "Reaver: a Strike two dice heavier. 20 Fury."
+ },
+ {
+  "id": "torment",
+  "name": "Torment",
+  "class": "blackguard",
+  "slot": "feat",
+  "kind": "WeaponStrike",
+  "feat": true,
+  "actions": 1,
+  "cost": 10,
+  "onHit": "Frightened",
+  "onHitValue": 1,
+  "traits": [
+   "Attack",
+   "Emotion",
+   "Fear"
+  ],
+  "description": "Tormentor: a Strike that leaves its target frightened 1 and sickened 1. 10 Fury."
+ },
+ {
+  "id": "seek_battle",
+  "name": "Seek Battle",
+  "class": "blackguard",
+  "slot": "feat",
+  "kind": "Burst",
+  "feat": true,
+  "level": 2,
+  "actions": 1,
+  "cooldown": 6,
+  "radius": 6,
+  "save": "Will",
+  "onHit": "OffGuard",
+  "onHitSeconds": 4,
+  "traits": [
+   "Auditory"
+  ],
+  "description": "Bellow a challenge: every enemy within 6 tiles that fails a Will save is off-guard for 4 s, and you gain Fury from the din. 6 s cooldown."
+ },
+ {
+  "id": "shatter_stone",
+  "name": "Shatter Stone",
+  "class": "blackguard",
+  "slot": "feat",
+  "kind": "Burst",
+  "feat": true,
+  "level": 8,
+  "actions": 2,
+  "cost": 25,
+  "cooldown": 6,
+  "radius": 2,
+  "save": "Reflex",
+  "weaponDamage": true,
+  "extraDice": 1,
+  "onHit": "Prone",
+  "onHitSeconds": 1.5,
+  "traits": [
+   "Attack",
+   "Flourish"
+  ],
+  "description": "Slam the floor: your weapon's damage to every enemy within 2 tiles, basic Reflex save; those that fail fall prone. 25 Fury."
+ },
+ {
+  "id": "unholy_reprieve",
+  "name": "Unholy Reprieve",
+  "class": "blackguard",
+  "slot": "feat",
+  "kind": "Heal",
+  "feat": true,
+  "level": 8,
+  "actions": 1,
+  "cost": 30,
+  "cooldown": 15,
+  "heal": 8,
+  "traits": [
+   "Unholy",
+   "Healing"
+  ],
+  "description": "Burn your rage to close your wounds: 8 HP a rank. 30 Fury, 15 s cooldown."
  }
 ]

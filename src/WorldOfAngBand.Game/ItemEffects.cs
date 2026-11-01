@@ -47,6 +47,40 @@ internal sealed class ItemEffects(DungeonSession session)
         return true;
     }
 
+    /// <summary>
+    /// Activates a worn artifact: its effects and its attack (on the monster at <paramref name="at"/>, or the nearest),
+    /// then it recharges for Angband's time. One action.
+    /// </summary>
+    public bool Activate(Item item, WorldOfAngBand.Engine.Geometry.Loc? at)
+    {
+        if (!Hero.Pack.Equipped.Contains(item) || item.Artifact is not { } art)
+        {
+            session.Say("You can only activate an artifact you are wearing.");
+            return false;
+        }
+        var activation = Activation.Parse(art.Activation, art.Level, session.Belongings.Name(item));
+        if (activation.IsEmpty)
+        {
+            session.Say("It has nothing to give you.");
+            return false;
+        }
+        if (item.Timeout > 0)
+        {
+            session.Say("It whispers to you, but it is still charging.");
+            return false;
+        }
+        if (activation.Attack is { } attack && session.Powers.Unleash(attack, at, pay: false) == 0)
+            return false;
+        if (activation.Attack is null)
+            session.Say($"You activate {session.Belongings.Name(item)}.");
+        foreach (var effect in activation.Effects)
+            Apply(effect, null);
+        item.Timeout = art.Recharge is { } recharge ? Math.Max(1, Engine.Items.RandomValue.Parse(recharge).Roll(session.Rng, art.Level)) : 50;
+        session.Belongings.Refit();
+        session.Publish(new ItemsChangedEvent());
+        return true;
+    }
+
     private void Apply(string effect, Item? target)
     {
         var parts = effect.Split(':');

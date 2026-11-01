@@ -37,3 +37,12 @@ public sealed record UseItem(WorldOfAngBand.Engine.Items.Item Item, WorldOfAngBa
 
 /// <summary>Choose at a story level's altar (one of <see cref="Story.Choices"/>).</summary>
 public sealed record ChooseStory(string StoryId, int Choice) : GameCommand;
+
+/// <summary>Use a class ability (by id) on the monster at <see cref="Target"/>, or the nearest one in sight.</summary>
+public sealed record UsePower(string Id, Loc? Target = null) : GameCommand;
+
+/// <summary>Make a level's picks (Pathfinder's feats, a skill increase, boosts). Takes no time.</summary>
+public sealed record ChooseLevel(int Level, WorldOfAngBand.Rules.Characters.LevelChoice Choice) : GameCommand;
+
+/// <summary>Activate a worn artifact, at the monster at <see cref="Target"/> when it attacks (else the nearest in sight).</summary>
+public sealed record ActivateItem(WorldOfAngBand.Engine.Items.Item Item, Loc? Target = null) : GameCommand;

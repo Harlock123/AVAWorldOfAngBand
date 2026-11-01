@@ -32,6 +32,9 @@ public static class ItemText
             name = name.Replace(ItemNaming.Plain(item.Kind.Name, item.Number != 1), ItemNaming.Plain(renamed, item.Number != 1), StringComparison.Ordinal);
         if (item.Ego is { } ego && knowledge.IsFullyKnown(item))
             name = name.Replace(ego.Name, bridge.EgoName(ego), StringComparison.Ordinal);
+        // An artifact's name in the setting ('Ringil' is 'Coldflame').
+        if (item.Artifact is { } art && Setting.ArtifactName(art.Id) is { } artName)
+            name = name.Replace(art.Name, artName, StringComparison.Ordinal);
         if (item.IsGold)
             return name;
         var parts = new List<string>();

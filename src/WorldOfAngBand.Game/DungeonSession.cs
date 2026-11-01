@@ -29,6 +29,9 @@ public sealed class DungeonSession : ITurnHandler
     /// <summary>Seconds of the rules' clock per game turn: an action at normal speed (ten game turns) is half a second, as in AshenReliquary.</summary>
     public const double SecondsPerGameTurn = 0.05;
 
+    /// <summary>The randart set's seed is the game's, salted ("RAND", as AVABand's).</summary>
+    public const long RandartSeedSalt = 0x52414E44;
+
     /// <summary>How long a rest takes to heal the hero fully, in their turns.</summary>
     public const int TurnsToRestFully = 60;
 
@@ -50,8 +53,9 @@ public sealed class DungeonSession : ITurnHandler
     private double _restHealing;
 
     public DungeonSession(GameData data, ulong seed, ContentDatabase? content = null, CreatureBridge? bridge = null,
-        ItemBridge? itemBridge = null)
+        ItemBridge? itemBridge = null, Birth? birth = null)
     {
+        Birth = birth ?? new Birth();
         Data = data;
         _seed = seed;
         Content = content ?? ContentDatabase.Embedded;
@@ -62,8 +66,12 @@ public sealed class DungeonSession : ITurnHandler
         Knowledge = new PlayerKnowledge(data, GameRandom.DeriveSeed(seed, -2));
         Factory = new ObjectFactory(data)
         {
-            AllowArtifacts = false, AllowCurses = false, AllowedKind = ItemBridge.Has, AllowedEgo = ItemBridge.Allows,
+            AllowCurses = false, AllowedKind = ItemBridge.Has, AllowedEgo = ItemBridge.Allows,
         };
+        // Artifacts (the spec's section 6.3): the standard set, or with the randarts birth option a new one made for this
+        // game; only those on kinds brought into the game.
+        var artifacts = Birth.Randarts ? RandartGenerator.Generate(data, GameRandom.DeriveSeed(seed, RandartSeedSalt), Setting.NameWords) : data.Artifacts;
+        Factory.Artifacts = artifacts.Where(a => data.Object(a.Kind) is { } kind && ItemBridge.Has(kind)).ToList();
         _generator = new DungeonGenerator(data);
         _spawner = new MonsterSpawner(data) { Allowed = Bridge.Has };
         _brain = new MonsterBrain(this);
@@ -72,9 +80,12 @@ public sealed class DungeonSession : ITurnHandler
         Loot = new Loot(this);
         Belongings = new Belongings(this);
         Effects = new ItemEffects(this);
-        Hero = Hero.Create(Content);
+        Hero = Birth.Character is { } choices ? Hero.Create(Content, choices) : Hero.Create(Content);
+        Powers = new Powers(this);
         Kit();
-        var rumour = Story.Rumours[Rng.RandInt0(Story.Rumours.Count)];
+        // The rumour: drawn at birth, unless the player chose it (a Legacy).
+        var drawn = Story.Rumours[Rng.RandInt0(Story.Rumours.Count)];
+        var rumour = Birth.Rumour is { } chosen && Story.Rumours.FirstOrDefault(r => r.Ending == chosen) is { Ending: not null } picked ? picked : drawn;
         Rumour = rumour.Ending;
         Stores = new Stores(this);
         Scheduler.Add(Hero);
@@ -100,12 +111,22 @@ public sealed class DungeonSession : ITurnHandler
     public IReadOnlyList<string> Epilogue { get; private set; } = [];
 
     /// <summary>
-    /// A Lantern-sworn's kit: a long sword, a leather shield, chain mail, boots and gloves, a torch, two potions of
-    /// Cure Light Wounds, two scrolls of Phase Door, and a little gold. All of it known.
+    /// A Lantern-sworn's kit, by class: a weapon and armour (a fighter's long sword, shield and mail; a wizard's staff and
+    /// robe; and so on), boots and gloves, a torch, two potions of Cure Light Wounds, two scrolls of Phase Door, and a
+    /// little gold. All of it known.
     /// </summary>
     private void Kit()
     {
-        foreach (var id in new[] { "long_sword", "leather_shield", "chain_mail", "leather_boots", "leather_gloves", "wooden_torch" })
+        string[] worn = Hero.Character.Class.Id switch
+        {
+            "rogue" => ["rapier", "soft_leather_armour"],
+            "wizard" => ["quarterstaff", "robe"],
+            "priest" => ["mace", "leather_shield", "hard_leather_armour"],
+            "druid" => ["quarterstaff", "soft_leather_armour"],
+            "blackguard" => ["battle_axe", "chain_mail"],
+            _ => ["long_sword", "leather_shield", "chain_mail"],
+        };
+        foreach (var id in worn.Concat(["leather_boots", "leather_gloves", "wooden_torch"]))
         {
             var item = Factory.Create(id);
             Belongings.LearnAll(item);
@@ -119,7 +140,14 @@ public sealed class DungeonSession : ITurnHandler
         }
         Hero.Gold = 150;
         Belongings.Refit();
+        Hero.Resource.Reset();
     }
+
+    /// <summary>What the player chose at birth: the hero, the rumour (a Legacy), the birth options.</summary>
+    public Birth Birth { get; }
+
+    /// <summary>The hero's class abilities.</summary>
+    public Powers Powers { get; }
 
     public GameData Data { get; }
 
@@ -202,6 +230,7 @@ public sealed class DungeonSession : ITurnHandler
     {
         if (IsOver)
             return false;
+        var actions = 1;
         var took = command switch
         {
             Walk walk => DoWalk(walk.Direction),
@@ -215,15 +244,24 @@ public sealed class DungeonSession : ITurnHandler
             TakeOffItem takeOff => Belongings.TakeOff(takeOff.Item),
             UseItem use => Effects.Use(use.Item, use.Target),
             ChooseStory choose => Choose(choose.StoryId, choose.Choice),
+            UsePower power => (actions = Powers.Use(power.Id, power.Target)) > 0,
+            ActivateItem activate => Effects.Activate(activate.Item, activate.Target),
+            ChooseLevel level => ChooseLevelPicks(level.Level, level.Choice),
             _ => throw new ArgumentOutOfRangeException(nameof(command), command, "Unknown command."),
         };
         if (!took)
             return false;
-        // A level change gives the hero a fresh first move; otherwise the action is paid for and the world runs on.
+        // A level change gives the hero a fresh first move, and choosing feats takes no time; otherwise each action is
+        // paid for and the world runs on.
+        if (command is ChooseLevel)
+            return true;
         if (command is not TakeStairs)
         {
-            Hero.Energy -= EnergyTable.MoveEnergy;
-            Hero.Round.EndAction();
+            for (var i = 0; i < actions; i++)
+            {
+                Hero.Energy -= EnergyTable.MoveEnergy;
+                Hero.Round.EndAction();
+            }
         }
         RunWorld();
         return true;
@@ -325,6 +363,9 @@ public sealed class DungeonSession : ITurnHandler
         HeroTimers();
         if (IsOver)
             return;
+        Powers.Tick(tick);
+        if (IsOver)
+            return;
         character.Conditions.Update(tick);
         foreach (var (type, amount) in character.Persistent.Update(tick, Roller))
         {
@@ -366,6 +407,9 @@ public sealed class DungeonSession : ITurnHandler
     private void HeroTimers()
     {
         var changed = false;
+        // Worn artifacts recharge, a turn at a time.
+        foreach (var item in Hero.Pack.Equipped.Where(i => i.Timeout > 0))
+            item.Timeout--;
         foreach (var effect in Hero.Timed.Keys.ToList())
         {
             if (--Hero.Timed[effect] > 0)
@@ -811,6 +855,42 @@ public sealed class DungeonSession : ITurnHandler
     }
 
     // --- What potions and scrolls do to the level ---
+
+    /// <summary>The hero moves to a square without walking there (a charge, a tumble, a blink).</summary>
+    internal void MoveHero(Loc to)
+    {
+        var from = Hero.Position;
+        Hero.Position = to;
+        Publish(new HeroMovedEvent(from, to));
+        Belongings.Arrive();
+    }
+
+    /// <summary>The hero heals (an ability, a drain), never past their maximum.</summary>
+    internal void HealHero(int amount)
+    {
+        if (amount > 0)
+            Hero.Character.Heal(amount);
+    }
+
+    /// <summary>
+    /// A level's picks (feats, a skill increase, boosts; the spec's section 5.2), made when the player chooses them.
+    /// False when they are not allowed.
+    /// </summary>
+    private bool ChooseLevelPicks(int level, Rules.Characters.LevelChoice choice)
+    {
+        try
+        {
+            Hero.Character.Choose(level, choice);
+        }
+        catch (Rules.Rules.RulesException e)
+        {
+            Say(e.Message);
+            return false;
+        }
+        Belongings.Refit();
+        Publish(new ItemsChangedEvent());
+        return true;
+    }
 
     /// <summary>Angband teleport_player: to a random open, empty square at most <paramref name="range"/> away (and not right beside).</summary>
     internal void Teleport(int range)

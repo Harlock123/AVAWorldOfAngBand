@@ -94,8 +94,8 @@ public sealed class MainWindow : Window
             Classic.Tiles = value == ViewMode.Tiles;
             Content = value == ViewMode.Isometric ? View : Classic;
             Hud.KeysLine = value == ViewMode.Isometric
-                ? "Arrows/keypad: walk · < >: stairs · g: pick up · i: pack · R: rest · q: flask · click: travel · wheel: zoom · Ctrl+T: classic view"
-                : "Arrows/keypad: walk (up is north) · < >: stairs · g: pick up · i: pack · R: rest · q: flask · click: travel · Ctrl+T: next view";
+                ? "Arrows/keypad: walk · 1–0: abilities · < >: stairs · g: pick up · i: pack · f: feats · R: rest · q: flask · click: travel · wheel: zoom · Ctrl+T: classic view"
+                : "Arrows/keypad: walk (up is north) · 1–0: abilities · < >: stairs · g: pick up · i: pack · f: feats · R: rest · q: flask · click: travel · Ctrl+T: next view";
             Redraw();
         }
     }
@@ -109,9 +109,30 @@ public sealed class MainWindow : Window
         State.Session = session;
     }
 
-    /// <summary>A new Lantern-sworn after a death: a new seed, the same game data.</summary>
-    public void NewGame(ulong? seed = null) => Start(new DungeonSession(Session.Data, seed ?? (ulong)Environment.TickCount64,
-        Session.Content, Session.Bridge));
+    /// <summary>A new Lantern-sworn: a new seed, the same game data, the hero as born (or the last one's birth again).</summary>
+    public void NewGame(ulong? seed = null, Birth? birth = null)
+    {
+        _lastBirth = birth ?? _lastBirth;
+        Start(new DungeonSession(Session.Data, seed ?? (ulong)Environment.TickCount64, Session.Content, Session.Bridge, birth: _lastBirth));
+    }
+
+    private Birth? _lastBirth;
+
+    /// <summary>Where AVAAshenReliquary's saves are read from for a Legacy; null for its own folder.</summary>
+    public string? LegacyFolder { get; set; }
+
+    /// <summary>
+    /// The birth window: a new hero, begun when the player goes down (on the seed given, or a new one). Closed without
+    /// choosing, the game goes on as it was.
+    /// </summary>
+    public BirthWindow OpenBirth(ulong? seed = null)
+    {
+        var window = new BirthWindow(Session.Content, AshenLegacy.Read(LegacyFolder), _lastBirth);
+        window.Chosen += birth => NewGame(seed, birth);
+        if (ShowDialogs)
+            _ = window.ShowDialog(this);
+        return window;
+    }
 
     private void OnHappened(IGameEvent e)
     {
@@ -128,6 +149,10 @@ public sealed class MainWindow : Window
             case StoryChoiceEvent story:
                 Stop();
                 Dispatcher.UIThread.Post(() => OpenStory(story));
+                break;
+            case LevelUpEvent when Session.Hero.Character.PendingLevels.Count > 0 && ShowDialogs:
+                Stop();
+                Dispatcher.UIThread.Post(() => OpenLevelUp());
                 break;
             case HeroWonEvent:
                 Stop();
@@ -188,7 +213,12 @@ public sealed class MainWindow : Window
         if (Session.IsOver)
         {
             if (key is Key.Enter or Key.Return)
-                NewGame();
+            {
+                if (ShowDialogs)
+                    OpenBirth();
+                else
+                    NewGame();
+            }
             return true;
         }
         if (Session.Won && State.ShowEpilogue)
@@ -206,6 +236,8 @@ public sealed class MainWindow : Window
             Do(new Walk(d));
             return true;
         }
+        if (key is >= Key.D0 and <= Key.D9)
+            return UseAbility(key == Key.D0 ? 9 : key - Key.D1);
         switch (key)
         {
             case Key.NumPad5 or Key.Clear:
@@ -252,8 +284,39 @@ public sealed class MainWindow : Window
                 Stop();
                 OpenInventory();
                 return true;
+            case "f":
+                Stop();
+                OpenLevelUp();
+                return true;
         }
         return false;
+    }
+
+    /// <summary>
+    /// Uses the ability in a bar slot (0 for key 1): on the monster under the pointer, or else the nearest one in sight.
+    /// </summary>
+    public bool UseAbility(int index)
+    {
+        var bar = Session.Powers.Bar;
+        if (index < 0 || index >= bar.Count)
+            return false;
+        Stop();
+        Do(new UsePower(bar[index].Id, _pointed is { } at && Session.FoeAt(at) is { } foe && Session.Seen(foe) ? at : null));
+        return true;
+    }
+
+    /// <summary>The square under the pointer, when a monster stands there.</summary>
+    private Loc? _pointed;
+
+    /// <summary>The level-up window, for the picks a new level brings (feats, a skill increase).</summary>
+    public LevelUpWindow? OpenLevelUp()
+    {
+        if (Session.Hero.Character.PendingLevels.Count == 0)
+            return null;
+        var window = new LevelUpWindow(Session, Do);
+        if (ShowDialogs)
+            _ = window.ShowDialog(this);
+        return window;
     }
 
     /// <summary>Whether a dialog (the pack, a shop) is open: tests open them without showing them.</summary>
@@ -285,6 +348,8 @@ public sealed class MainWindow : Window
     {
         Hud.Book = _graveyard.Add(Session.Retire());
         NewGame();
+        if (ShowDialogs)
+            OpenBirth();
     }
 
     /// <summary>A shop's window.</summary>
@@ -335,6 +400,7 @@ public sealed class MainWindow : Window
         lock (View.Gate)
         {
             var at = MapAt(p);
+            _pointed = Session.FoeAt(at) is { } pointed && Session.Seen(pointed) ? at : null;
             Hud.Hover = Session.FoeAt(at) is { } foe && Session.Seen(foe)
                 ? (new SKPoint((float)p.X, (float)p.Y),
                     $"{foe.Name}  ·  level {foe.Level}, AC {foe.ArmorClass().Total}, {Math.Max(0, foe.Monster.Hp)}/{foe.Monster.MaxHp} HP"

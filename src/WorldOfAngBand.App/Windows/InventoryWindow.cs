@@ -44,7 +44,7 @@ public sealed class InventoryWindow : Window
             Spacing = 8,
             Children =
             {
-                Make("Use / wear", Default), Make("Take off", TakeOff), Make("Drop", Drop), Make("Close", Close),
+                Make("Use / wear", Default), Make("Activate", ActivateSelected), Make("Take off", TakeOff), Make("Drop", Drop), Make("Close", Close),
             },
         };
         _worn.SelectionChanged += (_, _) =>
@@ -139,6 +139,13 @@ public sealed class InventoryWindow : Window
             Act(new WieldItem(item));
         else
             Act(new UseItem(item));
+    }
+
+    /// <summary>Activates the worn artifact selected (at the nearest monster in sight, if it attacks).</summary>
+    public void ActivateSelected()
+    {
+        if (Selected is { } item && _wornItems.Contains(item))
+            Act(new ActivateItem(item));
     }
 
     public void TakeOff()

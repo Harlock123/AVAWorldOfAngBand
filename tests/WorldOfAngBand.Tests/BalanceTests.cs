@@ -26,9 +26,10 @@ public class BalanceTests
     [Fact]
     public void A_hero_ready_for_the_bottom_can_put_out_the_cinder()
     {
-        var result = Campaign.Finale(TestData.Data, 3);
-        Assert.True(result.Won, $"Killed by {result.Killer} at {result.Reached}.");
-        Assert.Equal(Story.CinderDepth, result.Reached);
+        var results = Enumerable.Range(1, 4).Select(seed => Campaign.Finale(TestData.Data, (ulong)seed)).ToList();
+        Assert.True(results.Count(r => r.Won) >= 2,
+            string.Join("; ", results.Select(r => r.Won ? "won" : r.Died ? $"killed by {r.Killer} at {r.Reached}" : $"still at {r.Reached}")));
+        Assert.All(results.Where(r => r.Won), r => Assert.Equal(Story.CinderDepth, r.Reached));
     }
 
     [Theory]

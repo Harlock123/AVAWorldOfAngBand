@@ -15,9 +15,10 @@ internal sealed class Fight(DungeonSession session)
 {
     private RulesRandom Roller => session.Roller;
 
-    /// <summary>The hero Strikes a monster with their weapon: one action.</summary>
-    public void HeroStrikes(Foe foe)
+    /// <summary>The hero Strikes a monster with their weapon (one action; an ability's options change it). Returns the degree.</summary>
+    public DegreeOfSuccess HeroStrikes(Foe foe, StrikeOptions? options = null)
     {
+        var o = options ?? StrikeOptions.Plain;
         var hero = session.Hero;
         var character = hero.Character;
         var weapon = character.Weapon;
@@ -25,8 +26,9 @@ internal sealed class Fight(DungeonSession session)
         var penalty = hero.Round.AttackPenalty(agile);
         hero.Round.Strike();
         var name = session.Seen(foe) ? session.Object(foe.Monster) : "it";
-        // Asleep or held fast, it can't defend itself: off-guard.
-        var offGuard = foe.Monster.IsAsleep || foe.Monster.Held > 0 ? -ConditionSet.OffGuardAcPenalty : 0;
+        // Asleep or held fast, it can't defend itself: off-guard; so too against a feint, or out of hiding.
+        var hidden = session.Powers.ComeOutOfHiding();
+        var offGuard = foe.Monster.IsAsleep || foe.Monster.Held > 0 || o.OffGuard || hidden ? -ConditionSet.OffGuardAcPenalty : 0;
         var ac = foe.ArmorClass().Total + offGuard;
         var attack = character.AttackModifier().Total + penalty;
         var check = Check.Roll(Roller, attack, ac);
@@ -36,15 +38,17 @@ internal sealed class Fight(DungeonSession session)
             session.Say($"You miss {name} {roll}.");
             session.Publish(new StrikeEvent(hero.Position, foe.Monster.Position, true, check.Degree, 0));
             Wake(foe);
-            return;
+            return check.Degree;
         }
-        var critical = check.Degree == DegreeOfSuccess.CriticalSuccess;
+        var degree = o.SureCritical ? DegreeOfSuccess.CriticalSuccess : check.Degree;
+        var critical = degree == DegreeOfSuccess.CriticalSuccess;
+        hero.Resource.OnCombat(critical);
         var definition = weapon.Definition;
         var die = critical && definition.FatalDie is { } fatal ? fatal : definition.DamageDie;
-        var dice = new Dice(weapon.DiceCount, die).Roll(Roller);
+        var dice = new Dice(weapon.DiceCount + o.ExtraDice, die).Roll(Roller);
         var extra = critical ? Strike.CriticalExtraDice(weapon).Roll(Roller) : 0;
         var type = definition.TypeAgainst(foe.Defenses);
-        var damage = DamageCalculator.Compute(dice, character.DamageBonus().Total, check.Degree, type, foe.Defenses, GrazeEffect.None, extra);
+        var damage = DamageCalculator.Compute(dice, character.DamageBonus().Total, degree, type, foe.Defenses, GrazeEffect.None, extra);
         // A hit shows the weapon's potency and striking for what they are.
         if (hero.Gear.Weapon is not null)
         {
@@ -67,8 +71,13 @@ internal sealed class Fight(DungeonSession session)
         }
         var more = runes.Count > 0 ? $" ({string.Join(", ", runes)})" : "";
         session.Say($"You {(critical ? "critically hit" : "hit")} {name} {roll}: {damage} {type.ToString().ToLowerInvariant()}{more}.");
-        session.Publish(new StrikeEvent(hero.Position, foe.Monster.Position, true, check.Degree, damage));
+        session.Publish(new StrikeEvent(hero.Position, foe.Monster.Position, true, degree, damage));
+        if (o.Drain > 0 && damage > 0)
+            session.HealHero((int)Math.Round(damage * o.Drain));
         Hurt(foe, damage);
+        if (foe.Monster.IsActive && !foe.Monster.IsRemoved)
+            session.Powers.AfterHit(foe, o.OnHit, o.Persistent, o.Knockback, critical);
+        return degree;
     }
 
     /// <summary>
@@ -113,6 +122,10 @@ internal sealed class Fight(DungeonSession session)
                 session.Belongings.Learn(resisted);
             var blocked = ShieldBlock(damage);
             damage -= blocked;
+            // A ward or an aura takes its share.
+            var soaked = session.Powers.Soak(damage);
+            damage -= soaked;
+            blocked += soaked;
             var crit = check.Degree == DegreeOfSuccess.CriticalSuccess ? ", critically" : "";
             var shield = blocked > 0 ? $", {blocked} blocked by your shield" : "";
             session.Say(rolled > 0
@@ -121,6 +134,9 @@ internal sealed class Fight(DungeonSession session)
             session.Publish(new StrikeEvent(foe.Monster.Position, hero.Position, false, check.Degree, damage));
             if (damage > 0)
                 session.HurtHero(damage, session.Called(foe));
+            hero.Resource.OnCombat(taken: true);
+            if (!hero.Character.IsDead && foe.Monster.IsActive)
+                session.Powers.Retaliate(foe);
             if (!hero.Character.IsDead)
                 Effect(foe, blow, check.Degree == DegreeOfSuccess.CriticalSuccess);
         }
@@ -280,3 +296,22 @@ internal sealed class Fight(DungeonSession session)
         session.Say(message);
     }
 }
+
+/// <summary>
+/// What an ability adds to a Strike: more weapon dice, a feint (the target off-guard), a sure critical hit, a share of
+/// the harm drunk as life, and what a hit leaves behind (a condition, persistent damage, a shove).
+/// </summary>
+internal sealed record StrikeOptions(
+    int ExtraDice = 0,
+    bool OffGuard = false,
+    bool SureCritical = false,
+    double Drain = 0,
+    OnHit? OnHit = null,
+    (Dice Dice, DamageType Type)? Persistent = null,
+    int Knockback = 0)
+{
+    public static readonly StrikeOptions Plain = new();
+}
+
+/// <summary>A condition an ability leaves on a hit or a failed save: its kind, value and seconds (0 for until it fades).</summary>
+internal sealed record OnHit(ConditionKind Kind, int Value, double Seconds);

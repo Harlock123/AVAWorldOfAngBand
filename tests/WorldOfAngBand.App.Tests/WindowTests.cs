@@ -281,6 +281,51 @@ public class WindowTests
     }
 
     [AvaloniaFact]
+    public void The_birth_window_makes_a_priest_who_remembers_a_legacy()
+    {
+        var folder = Path.Combine(Path.GetTempPath(), "worldofangband-tests", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(folder);
+        File.WriteAllText(Path.Combine(folder, "the-ashbound-abc123.json"),
+            """{ "Version": 1, "SavedAt": "2026-10-01T12:00:00+00:00", "Choices": { "Name": "Vessa" }, "Flags": { "act5.ending": "bind" } }""");
+        File.WriteAllText(Path.Combine(folder, "unfinished.json"), """{ "Choices": { "Name": "Nobody" }, "Flags": {} }""");
+        var window = Open();
+        window.LegacyFolder = folder;
+        var birth = window.OpenBirth(4242);
+        Assert.Contains("Legacy: Vessa, The Lantern Rekindled", birth.RumourLabels);
+        Assert.DoesNotContain(birth.RumourLabels, l => l.Contains("Nobody"));
+        birth.Pick("priest", "confessor");
+        birth.PickRumour("bind", legacy: true);
+        CaptureDialog(birth, "WorldOfAngBand-birth");
+        birth.Begin();
+        var game = window.Session;
+        Assert.Equal("priest", game.Hero.Character.Class.Id);
+        Assert.Equal("confessor", game.Hero.Character.Subclass?.Id);
+        Assert.Equal("bind", game.Rumour);
+        window.Close();
+    }
+
+    [AvaloniaFact]
+    public void A_new_level_asks_for_its_feats_and_the_bar_shows_what_they_give()
+    {
+        var window = Open();
+        var game = window.Session;
+        window.NewGame(77, new Birth(Rules.Characters.CharacterBuilder.Recommend(game.Content, "Ilse", "elf", "hedge-scholar", "wizard")
+            with { Subclass = "pyromancer" }));
+        game = window.Session;
+        game.Hero.Character.LevelUp();
+        var level = window.OpenLevelUp()!;
+        Assert.Equal(2, level.Level);
+        level.Pick("Wizard feat", "ray_of_frost");
+        CaptureDialog(level, "WorldOfAngBand-levelup");
+        level.Choose();
+        Assert.Empty(game.Hero.Character.PendingLevels);
+        Assert.Contains(game.Powers.Bar, a => a.Id == "ray_of_frost");
+        // The bar's keys: 1 is Ignition, a spell needing a monster in sight.
+        Assert.True(window.UseAbility(0) || game.VisibleFoes().Any() == false);
+        window.Close();
+    }
+
+    [AvaloniaFact]
     public void Things_lie_on_the_floor_and_are_named_under_the_pointer()
     {
         var window = OnFirstLevel(1234);

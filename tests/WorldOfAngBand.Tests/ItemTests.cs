@@ -35,7 +35,7 @@ public class ItemTests
     }
 
     [Fact]
-    public void Only_bridged_kinds_and_egos_are_made_with_no_curses_or_artifacts()
+    public void Only_bridged_kinds_and_egos_are_made_with_no_curses()
     {
         var game = NewGame();
         for (var i = 0; i < 400; i++)
@@ -44,7 +44,6 @@ public class ItemTests
                 continue;
             Assert.True(game.ItemBridge.Has(item.Kind), item.Kind.Id);
             Assert.True(item.Ego is null || game.ItemBridge.Allows(item.Ego), item.Ego?.Id);
-            Assert.Null(item.Artifact);
             Assert.Empty(item.Curses);
         }
     }

@@ -67,8 +67,14 @@ public sealed class RandartGenerator
             _freqByGroup.TryGetValue(group, out var f) ? f : _freqByGroup[group] = new Dictionary<string, int>();
     }
 
-    /// <summary>Designs a random artifact set for a game (Angband do_randart).</summary>
-    public static IReadOnlyList<ArtifactDef> Generate(GameData data, ulong seed) => new RandartGenerator(data, seed).CreateSet();
+    /// <summary>
+    /// Designs a random artifact set for a game (Angband do_randart). Names are made from <paramref name="nameWords"/>
+    /// (a setting's own names) in place of the data's Tolkien word list, when given.
+    /// </summary>
+    public static IReadOnlyList<ArtifactDef> Generate(GameData data, ulong seed, IReadOnlyList<string>? nameWords = null) =>
+        new RandartGenerator(data, seed) { _nameWords = nameWords ?? data.NameWords }.CreateSet();
+
+    private IReadOnlyList<string> _nameWords = [];
 
     // --- The set ----------------------------------------------------------------------------------
 
@@ -428,7 +434,7 @@ public sealed class RandartGenerator
     /// </summary>
     private string MakeName()
     {
-        var word = Capitalise(RandomName.Make(_rng, _data.NameWords, MinNameLength, MaxNameLength));
+        var word = Capitalise(RandomName.Make(_rng, _nameWords, MinNameLength, MaxNameLength));
         return _rng.OneIn(3) ? $"'{word}'" : $"of {word}";
     }
 

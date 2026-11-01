@@ -4306,5 +4306,882 @@
     "reloadSpeed": 0.25
    }
   ]
+ },
+ {
+  "id": "confessor",
+  "name": "Confessor",
+  "type": "Subclass",
+  "level": 1,
+  "class": "priest",
+  "description": "Healing and wards. Shield of the Faithful: a ward of faith, +2 AC for 8 s, that soaks the next blow.",
+  "effects": [
+   {
+    "ability": "shield_of_the_faithful"
+   },
+   {
+    "healShare": 0.25
+   }
+  ]
+ },
+ {
+  "id": "inquisitor",
+  "name": "Inquisitor",
+  "type": "Subclass",
+  "level": 1,
+  "class": "priest",
+  "description": "The bane of the wicked. Smite Evil: a heavier Strike that enfeebles. +1 to spell attacks.",
+  "effects": [
+   {
+    "ability": "smite_evil"
+   },
+   {
+    "statistic": "SpellAttack",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "spiritual_weapon",
+  "name": "Spiritual Weapon",
+  "type": "Class",
+  "level": 2,
+  "class": "priest",
+  "description": "A new spell: a spectral hammer that strikes from afar.",
+  "effects": [
+   {
+    "ability": "spiritual_weapon"
+   }
+  ]
+ },
+ {
+  "id": "healing_font",
+  "name": "Healing Font",
+  "type": "Class",
+  "level": 2,
+  "class": "priest",
+  "description": "Heal heals a quarter more.",
+  "effects": [
+   {
+    "healShare": 0.25
+   }
+  ]
+ },
+ {
+  "id": "steady_prayer",
+  "name": "Steady Prayer",
+  "type": "Class",
+  "level": 2,
+  "class": "priest",
+  "description": "Confessor: Shield of the Faithful lasts 4 s longer.",
+  "effects": [
+   {
+    "ability": "shield_of_the_faithful",
+    "wardSeconds": 4
+   }
+  ],
+  "subclass": "confessor"
+ },
+ {
+  "id": "zeal",
+  "name": "Zeal",
+  "type": "Class",
+  "level": 2,
+  "class": "priest",
+  "description": "Inquisitor: Smite Evil costs 5 less Mana.",
+  "effects": [
+   {
+    "ability": "smite_evil",
+    "cost": -5
+   }
+  ],
+  "subclass": "inquisitor"
+ },
+ {
+  "id": "protection_from_evil",
+  "name": "Protection from Evil",
+  "type": "Class",
+  "level": 4,
+  "class": "priest",
+  "description": "A new spell: a ward that takes 3 off every blow for 20 s.",
+  "effects": [
+   {
+    "ability": "protection_from_evil"
+   }
+  ]
+ },
+ {
+  "id": "deep_prayer",
+  "name": "Deep Prayer",
+  "type": "Class",
+  "level": 4,
+  "class": "priest",
+  "description": "Your Mana returns a quarter faster.",
+  "effects": [
+   {
+    "resourceRegen": 0.25
+   }
+  ]
+ },
+ {
+  "id": "wide_orb",
+  "name": "Wide Orb",
+  "type": "Class",
+  "level": 6,
+  "class": "priest",
+  "description": "Orb of Draining bursts a tile wider.",
+  "effects": [
+   {
+    "ability": "orb_of_draining",
+    "radius": 1
+   }
+  ]
+ },
+ {
+  "id": "faithful_health",
+  "name": "Faithful Health",
+  "type": "Class",
+  "level": 6,
+  "class": "priest",
+  "description": "+2 HP a level.",
+  "effects": [
+   {
+    "hitPointsPerLevel": 2
+   }
+  ]
+ },
+ {
+  "id": "searing_light",
+  "name": "Searing Light",
+  "type": "Class",
+  "level": 8,
+  "class": "priest",
+  "description": "A new spell: a ray of the Lantern's fire that dazzles.",
+  "effects": [
+   {
+    "ability": "searing_light"
+   }
+  ]
+ },
+ {
+  "id": "sacred_ground",
+  "name": "Sacred Ground",
+  "type": "Class",
+  "level": 8,
+  "class": "priest",
+  "description": "Confessor: Protection from Evil lasts 10 s longer.",
+  "effects": [
+   {
+    "ability": "protection_from_evil",
+    "buffSeconds": 10
+   }
+  ],
+  "subclass": "confessor"
+ },
+ {
+  "id": "judgement",
+  "name": "Judgement",
+  "type": "Class",
+  "level": 8,
+  "class": "priest",
+  "description": "Inquisitor: +1 to spell attacks and spell DCs.",
+  "effects": [
+   {
+    "statistic": "SpellAttack",
+    "value": 1
+   },
+   {
+    "statistic": "SpellDc",
+    "value": 1
+   }
+  ],
+  "subclass": "inquisitor"
+ },
+ {
+  "id": "iron_faith",
+  "name": "Iron Faith",
+  "type": "Class",
+  "level": 10,
+  "class": "priest",
+  "description": "+1 to every save.",
+  "effects": [
+   {
+    "statistic": "Fortitude",
+    "value": 1
+   },
+   {
+    "statistic": "Reflex",
+    "value": 1
+   },
+   {
+    "statistic": "Will",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "divine_focus",
+  "name": "Divine Focus",
+  "type": "Class",
+  "level": 12,
+  "class": "priest",
+  "description": "+1 to spell attacks and spell DCs.",
+  "effects": [
+   {
+    "statistic": "SpellAttack",
+    "value": 1
+   },
+   {
+    "statistic": "SpellDc",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "divine_vessel",
+  "name": "Divine Vessel",
+  "type": "Class",
+  "level": 14,
+  "class": "priest",
+  "description": "A new spell: the Lantern fills you, guarding you and burning those round you.",
+  "effects": [
+   {
+    "ability": "divine_vessel"
+   }
+  ]
+ },
+ {
+  "id": "great_heal",
+  "name": "Great Heal",
+  "type": "Class",
+  "level": 16,
+  "class": "priest",
+  "description": "Restoration costs 10 less Mana, and Heal heals a quarter more.",
+  "effects": [
+   {
+    "ability": "restoration",
+    "cost": -10
+   },
+   {
+    "healShare": 0.25
+   }
+  ]
+ },
+ {
+  "id": "word_of_the_order",
+  "name": "Word of the Order",
+  "type": "Class",
+  "level": 18,
+  "class": "priest",
+  "description": "Holy Word reaches a tile further and costs 10 less Mana.",
+  "effects": [
+   {
+    "ability": "holy_word",
+    "radius": 1,
+    "cost": -10
+   }
+  ]
+ },
+ {
+  "id": "saint",
+  "name": "Living Saint",
+  "type": "Class",
+  "level": 20,
+  "class": "priest",
+  "description": "+4 HP a level, and +2 to spell attacks and spell DCs.",
+  "effects": [
+   {
+    "hitPointsPerLevel": 4
+   },
+   {
+    "statistic": "SpellAttack",
+    "value": 2
+   },
+   {
+    "statistic": "SpellDc",
+    "value": 2
+   }
+  ]
+ },
+ {
+  "id": "stormwarden",
+  "name": "Stormwarden",
+  "type": "Subclass",
+  "level": 1,
+  "class": "druid",
+  "description": "Wind and lightning. Gust of Wind: a cone of wind that throws enemies back. Lightning Strike costs 2 less Mana.",
+  "effects": [
+   {
+    "ability": "gust_of_wind"
+   },
+   {
+    "ability": "lightning_strike",
+    "cost": -2
+   }
+  ]
+ },
+ {
+  "id": "thornkeeper",
+  "name": "Thornkeeper",
+  "type": "Subclass",
+  "level": 1,
+  "class": "druid",
+  "description": "Thorns and growing things. Briar Patch: briars that hold the first enemy to come close. +1 AC.",
+  "effects": [
+   {
+    "ability": "briar_patch"
+   },
+   {
+    "statistic": "ArmorClass",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "rejuvenation",
+  "name": "Rejuvenation",
+  "type": "Class",
+  "level": 2,
+  "class": "druid",
+  "description": "A new spell: green life that heals you a little at a time.",
+  "effects": [
+   {
+    "ability": "rejuvenation"
+   }
+  ]
+ },
+ {
+  "id": "thick_bark",
+  "name": "Thick Bark",
+  "type": "Class",
+  "level": 2,
+  "class": "druid",
+  "description": "Barkskin lasts 5 s longer.",
+  "effects": [
+   {
+    "ability": "barkskin",
+    "wardSeconds": 5
+   }
+  ]
+ },
+ {
+  "id": "thunderhead",
+  "name": "Thunderhead",
+  "type": "Class",
+  "level": 2,
+  "class": "druid",
+  "description": "Stormwarden: Gust of Wind reaches a tile further.",
+  "effects": [
+   {
+    "ability": "gust_of_wind",
+    "radius": 1
+   }
+  ],
+  "subclass": "stormwarden"
+ },
+ {
+  "id": "thorn_bed",
+  "name": "Thorn Bed",
+  "type": "Class",
+  "level": 2,
+  "class": "druid",
+  "description": "Thornkeeper: Briar Patch costs 4 less Mana.",
+  "effects": [
+   {
+    "ability": "briar_patch",
+    "cost": -4
+   }
+  ],
+  "subclass": "thornkeeper"
+ },
+ {
+  "id": "wild_reservoir",
+  "name": "Wild Reservoir",
+  "type": "Class",
+  "level": 4,
+  "class": "druid",
+  "description": "Your Mana returns a quarter faster.",
+  "effects": [
+   {
+    "resourceRegen": 0.25
+   }
+  ]
+ },
+ {
+  "id": "green_health",
+  "name": "Green Health",
+  "type": "Class",
+  "level": 4,
+  "class": "druid",
+  "description": "+2 HP a level.",
+  "effects": [
+   {
+    "hitPointsPerLevel": 2
+   }
+  ]
+ },
+ {
+  "id": "creeping_vines",
+  "name": "Creeping Vines",
+  "type": "Class",
+  "level": 6,
+  "class": "druid",
+  "description": "Tangling Vines reaches a tile further.",
+  "effects": [
+   {
+    "ability": "tangling_vines",
+    "radius": 1
+   }
+  ]
+ },
+ {
+  "id": "nature_attunement",
+  "name": "Nature Attunement",
+  "type": "Class",
+  "level": 6,
+  "class": "druid",
+  "description": "+1 to spell attacks and spell DCs.",
+  "effects": [
+   {
+    "statistic": "SpellAttack",
+    "value": 1
+   },
+   {
+    "statistic": "SpellDc",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "fire_seeds",
+  "name": "Fire Seeds",
+  "type": "Class",
+  "level": 8,
+  "class": "druid",
+  "description": "A new spell: seeds of fire that burst on a monster.",
+  "effects": [
+   {
+    "ability": "fire_seeds"
+   }
+  ]
+ },
+ {
+  "id": "storm_born",
+  "name": "Storm-Born",
+  "type": "Class",
+  "level": 8,
+  "class": "druid",
+  "description": "Stormwarden: resistance 5 to electricity, and Lightning Strike costs 2 less Mana.",
+  "effects": [
+   {
+    "resist": "Electricity",
+    "value": 5
+   },
+   {
+    "ability": "lightning_strike",
+    "cost": -2
+   }
+  ],
+  "subclass": "stormwarden"
+ },
+ {
+  "id": "thornskin",
+  "name": "Thornskin",
+  "type": "Class",
+  "level": 8,
+  "class": "druid",
+  "description": "Thornkeeper: +1 AC and +2 HP a level.",
+  "effects": [
+   {
+    "statistic": "ArmorClass",
+    "value": 1
+   },
+   {
+    "hitPointsPerLevel": 2
+   }
+  ],
+  "subclass": "thornkeeper"
+ },
+ {
+  "id": "deep_roots",
+  "name": "Deep Roots",
+  "type": "Class",
+  "level": 10,
+  "class": "druid",
+  "description": "+1 to every save.",
+  "effects": [
+   {
+    "statistic": "Fortitude",
+    "value": 1
+   },
+   {
+    "statistic": "Reflex",
+    "value": 1
+   },
+   {
+    "statistic": "Will",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "primal_focus",
+  "name": "Primal Focus",
+  "type": "Class",
+  "level": 12,
+  "class": "druid",
+  "description": "+1 to spell attacks and spell DCs.",
+  "effects": [
+   {
+    "statistic": "SpellAttack",
+    "value": 1
+   },
+   {
+    "statistic": "SpellDc",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "sunbeam",
+  "name": "Sunbeam",
+  "type": "Class",
+  "level": 14,
+  "class": "druid",
+  "description": "A new spell: a beam of remembered sun.",
+  "effects": [
+   {
+    "ability": "sunbeam"
+   }
+  ]
+ },
+ {
+  "id": "aftershock",
+  "name": "Aftershock",
+  "type": "Class",
+  "level": 16,
+  "class": "druid",
+  "description": "Earthquake reaches a tile further and costs 8 less Mana.",
+  "effects": [
+   {
+    "ability": "earthquake",
+    "radius": 1,
+    "cost": -8
+   }
+  ]
+ },
+ {
+  "id": "eye_of_the_storm_druid",
+  "name": "Heart of the Storm",
+  "type": "Class",
+  "level": 18,
+  "class": "druid",
+  "description": "Storm of Vengeance costs 10 less Mana.",
+  "effects": [
+   {
+    "ability": "storm_of_vengeance",
+    "cost": -10
+   }
+  ]
+ },
+ {
+  "id": "archdruid",
+  "name": "Archdruid",
+  "type": "Class",
+  "level": 20,
+  "class": "druid",
+  "description": "+4 HP a level, and +2 to spell attacks and spell DCs.",
+  "effects": [
+   {
+    "hitPointsPerLevel": 4
+   },
+   {
+    "statistic": "SpellAttack",
+    "value": 2
+   },
+   {
+    "statistic": "SpellDc",
+    "value": 2
+   }
+  ]
+ },
+ {
+  "id": "reaver",
+  "name": "Reaver",
+  "type": "Subclass",
+  "level": 1,
+  "class": "blackguard",
+  "description": "Two-handed rage. Reckless Swing: a Strike two dice heavier. +2 damage with every hit.",
+  "effects": [
+   {
+    "ability": "reckless_swing"
+   },
+   {
+    "statistic": "Damage",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "tormentor",
+  "name": "Tormentor",
+  "type": "Subclass",
+  "level": 1,
+  "class": "blackguard",
+  "description": "Fear and pain. Torment: a Strike that frightens. Your hits build 3 more Fury.",
+  "effects": [
+   {
+    "ability": "torment"
+   },
+   {
+    "furyPerHit": 3
+   }
+  ]
+ },
+ {
+  "id": "seek_battle",
+  "name": "Seek Battle",
+  "type": "Class",
+  "level": 2,
+  "class": "blackguard",
+  "description": "A new ability: a bellowed challenge that leaves enemies off-guard.",
+  "effects": [
+   {
+    "ability": "seek_battle"
+   }
+  ]
+ },
+ {
+  "id": "bloodlust",
+  "name": "Bloodlust",
+  "type": "Class",
+  "level": 2,
+  "class": "blackguard",
+  "description": "Every hit builds 4 more Fury.",
+  "effects": [
+   {
+    "furyPerHit": 4
+   }
+  ]
+ },
+ {
+  "id": "red_rage",
+  "name": "Red Rage",
+  "type": "Class",
+  "level": 2,
+  "class": "blackguard",
+  "description": "Reaver: Reckless Swing costs 5 less Fury.",
+  "effects": [
+   {
+    "ability": "reckless_swing",
+    "cost": -5
+   }
+  ],
+  "subclass": "reaver"
+ },
+ {
+  "id": "cruelty",
+  "name": "Cruelty",
+  "type": "Class",
+  "level": 2,
+  "class": "blackguard",
+  "description": "Tormentor: Torment costs 5 less Fury.",
+  "effects": [
+   {
+    "ability": "torment",
+    "cost": -5
+   }
+  ],
+  "subclass": "tormentor"
+ },
+ {
+  "id": "iron_hide",
+  "name": "Iron Hide",
+  "type": "Class",
+  "level": 4,
+  "class": "blackguard",
+  "description": "+1 AC.",
+  "effects": [
+   {
+    "statistic": "ArmorClass",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "brutal",
+  "name": "Brutal",
+  "type": "Class",
+  "level": 4,
+  "class": "blackguard",
+  "description": "Your critical hits deal 4 more damage.",
+  "effects": [
+   {
+    "critDamage": 4
+   }
+  ]
+ },
+ {
+  "id": "dreadful_howl",
+  "name": "Dreadful Howl",
+  "type": "Class",
+  "level": 6,
+  "class": "blackguard",
+  "description": "Howl of the Damned reaches 2 tiles further.",
+  "effects": [
+   {
+    "ability": "howl_of_the_damned",
+    "radius": 2
+   }
+  ]
+ },
+ {
+  "id": "scarred",
+  "name": "Scarred",
+  "type": "Class",
+  "level": 6,
+  "class": "blackguard",
+  "description": "+2 HP a level and +1 to Fortitude saves.",
+  "effects": [
+   {
+    "hitPointsPerLevel": 2
+   },
+   {
+    "statistic": "Fortitude",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "shatter_stone",
+  "name": "Shatter Stone",
+  "type": "Class",
+  "level": 8,
+  "class": "blackguard",
+  "description": "A new ability: slam the floor round you.",
+  "effects": [
+   {
+    "ability": "shatter_stone"
+   }
+  ]
+ },
+ {
+  "id": "unholy_reprieve",
+  "name": "Unholy Reprieve",
+  "type": "Class",
+  "level": 8,
+  "class": "blackguard",
+  "description": "A new ability: burn your Fury to close your wounds.",
+  "effects": [
+   {
+    "ability": "unholy_reprieve"
+   }
+  ]
+ },
+ {
+  "id": "heavy_hand",
+  "name": "Heavy Hand",
+  "type": "Class",
+  "level": 10,
+  "class": "blackguard",
+  "description": "+2 damage on every hit.",
+  "effects": [
+   {
+    "statistic": "Damage",
+    "value": 2
+   }
+  ]
+ },
+ {
+  "id": "iron_will",
+  "name": "Iron Will",
+  "type": "Class",
+  "level": 12,
+  "class": "blackguard",
+  "description": "+1 to Will saves and +3 HP a level.",
+  "effects": [
+   {
+    "statistic": "Will",
+    "value": 1
+   },
+   {
+    "hitPointsPerLevel": 3
+   }
+  ]
+ },
+ {
+  "id": "endless_rage",
+  "name": "Endless Rage",
+  "type": "Class",
+  "level": 14,
+  "class": "blackguard",
+  "description": "Berserk Strength lasts 4 s longer and costs 10 less Fury.",
+  "effects": [
+   {
+    "ability": "berserk_strength",
+    "buffSeconds": 4,
+    "cost": -10
+   }
+  ]
+ },
+ {
+  "id": "master_of_slaughter",
+  "name": "Master of Slaughter",
+  "type": "Class",
+  "level": 16,
+  "class": "blackguard",
+  "description": "+1 to attack rolls, and 4 more damage on a critical hit.",
+  "effects": [
+   {
+    "statistic": "Attack",
+    "value": 1
+   },
+   {
+    "critDamage": 4
+   }
+  ]
+ },
+ {
+  "id": "unbowed",
+  "name": "Unbowed",
+  "type": "Class",
+  "level": 18,
+  "class": "blackguard",
+  "description": "Grim Purpose costs 10 less Fury and lasts 4 s longer.",
+  "effects": [
+   {
+    "ability": "grim_purpose",
+    "cost": -10,
+    "buffSeconds": 4
+   }
+  ]
+ },
+ {
+  "id": "dread_lord",
+  "name": "Dread Lord",
+  "type": "Class",
+  "level": 20,
+  "class": "blackguard",
+  "description": "+5 HP a level, +1 AC and +1 to every save.",
+  "effects": [
+   {
+    "hitPointsPerLevel": 5
+   },
+   {
+    "statistic": "ArmorClass",
+    "value": 1
+   },
+   {
+    "statistic": "Fortitude",
+    "value": 1
+   },
+   {
+    "statistic": "Reflex",
+    "value": 1
+   },
+   {
+    "statistic": "Will",
+    "value": 1
+   }
+  ]
  }
 ]

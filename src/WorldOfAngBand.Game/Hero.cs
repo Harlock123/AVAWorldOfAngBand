@@ -1,6 +1,7 @@
 using WorldOfAngBand.Engine.Geometry;
 using WorldOfAngBand.Engine.Items;
 using WorldOfAngBand.Engine.Time;
+using WorldOfAngBand.Rules.Abilities;
 using WorldOfAngBand.Rules.Characters;
 using WorldOfAngBand.Rules.Combat;
 using WorldOfAngBand.Rules.Content;
@@ -16,7 +17,11 @@ public sealed class Hero : IActor
     /// <summary>Pathfinder's experience to the next level.</summary>
     public const int ExperiencePerLevel = 1000;
 
-    public Hero(Character character) => Character = character;
+    public Hero(Character character)
+    {
+        Character = character;
+        Resource = new ClassResource(character);
+    }
 
     /// <summary>
     /// A new Lantern-sworn: until character creation comes, a human fighter (a Bulwark, from the Deserter background).
@@ -30,7 +35,21 @@ public sealed class Hero : IActor
         return hero;
     }
 
+    /// <summary>A Lantern-sworn as the player built them at birth (their subclass taken from the choices).</summary>
+    public static Hero Create(ContentDatabase content, CharacterChoices choices)
+    {
+        var character = CharacterBuilder.Create(content, choices);
+        if (choices.Subclass is { } subclass && character.NeedsSubclass)
+            character.ChooseSubclass(subclass);
+        var hero = new Hero(character);
+        hero.Character.RestAtShrine();
+        return hero;
+    }
+
     public Character Character { get; }
+
+    /// <summary>The class's resource (Fury, Mana, Devotion, Momentum), spent on its abilities.</summary>
+    public ClassResource Resource { get; }
 
     /// <summary>What the hero carries and wears: Angband's pack and equipment.</summary>
     public Inventory Pack { get; } = new();

@@ -4,8 +4,8 @@ using WorldOfAngBand.Data;
 namespace WorldOfAngBand.Game;
 
 /// <summary>
-/// Names in the Ashen setting for what Angband 4.2.5 names after Tolkien (the spec's section 3): monsters, egos and
-/// objects, from data/setting/ashen_names.json, and Gallowmere's shops. The 4.2.5 data keeps its own names; the game shows these.
+/// Names in the Ashen setting for what Angband 4.2.5 names after Tolkien (the spec's section 3): monsters, egos,
+/// objects and artifacts, from data/setting/ashen_names.json, and Gallowmere's shops. The 4.2.5 data keeps its own names; the game shows these.
 /// </summary>
 public static class Setting
 {
@@ -32,7 +32,8 @@ public static class Setting
                ?? throw new InvalidDataException($"{path} is empty.");
     });
 
-    private sealed record NamesFile(Dictionary<string, string> Monsters, Dictionary<string, string> Egos, Dictionary<string, string> Objects);
+    private sealed record NamesFile(Dictionary<string, string> Monsters, Dictionary<string, string> Egos, Dictionary<string, string> Objects,
+        Dictionary<string, string>? Artifacts = null, List<string>? NameWords = null);
 
     /// <summary>A Gallowmere shop's name, by the shop id its entrance carries.</summary>
     public static string ShopName(string shopId) => Shops.GetValueOrDefault(shopId, shopId);
@@ -44,6 +45,14 @@ public static class Setting
 
     /// <summary>An object kind's name in the setting (with Angband's ~ plural mark), or null.</summary>
     public static string? ObjectName(string id) => Names.Value.Objects.GetValueOrDefault(id);
+
+    /// <summary>A standard artifact's name in the setting ('Ringil' is 'Coldflame'), or null when Angband's own stands.</summary>
+    public static string? ArtifactName(string id) => Names.Value.Artifacts?.GetValueOrDefault(id);
+
+    public static IReadOnlyDictionary<string, string> RenamedArtifacts => Names.Value.Artifacts ?? [];
+
+    /// <summary>The setting's names, from which random artifacts' names are made (in place of Angband's Tolkien words).</summary>
+    public static IReadOnlyList<string> NameWords => Names.Value.NameWords ?? [];
 
     public static IReadOnlyDictionary<string, string> RenamedMonsters => Names.Value.Monsters;
 }

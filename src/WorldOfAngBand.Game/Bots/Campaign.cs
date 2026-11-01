@@ -8,7 +8,7 @@ public sealed record CampaignResult(int From, int Reached, bool Died, bool Won, 
 
 /// <summary>
 /// The balance bots (the spec's M5: the bots clear it). A hero is made ready for a depth as the spec's section 4.3
-/// expects them to be by then: their level, Pathfinder's runes for that level (potency at 2, 10 and 16, striking at 4,
+/// expects them to be by then: their level (with its feats), Pathfinder's runes for that level (potency at 2, 10 and 16, striking at 4,
 /// 12 and 19, armour potency at 5, 11 and 18), the protections Angband heroes have found by then, healing potions and
 /// escape scrolls, and mythic tiers at the bottom. Then the dive
 /// bot plays: a few levels on from there, or, at the bottom, Saint Ysmere and the Cinder of Ashur.
@@ -40,6 +40,7 @@ public static class Campaign
             hero.Character.LevelUp(Rules.Rules.AttributeSet.BoostLevels.Contains(hero.Level + 1)
                 ? [hero.Character.KeyAttribute, Rules.Rules.AttributeKind.Constitution, Rules.Rules.AttributeKind.Dexterity, Rules.Rules.AttributeKind.Wisdom]
                 : null);
+        LevelPicks.TakeAll(game);
         hero.MythicTier = depth >= 91 ? Math.Min(Hero.MaxMythicTier, (depth - 90) / 2 + 1) : 0;
         var level = hero.Level;
         if (hero.Pack.Weapon is { } weapon)

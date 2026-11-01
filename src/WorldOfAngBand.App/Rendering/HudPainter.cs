@@ -62,7 +62,7 @@ public sealed class HudPainter : IDisposable
         var c = hero.Character;
         float x = size.Width - 276, y = 52;
         using var back = new SKPaint { Color = new SKColor(12, 10, 9, 190), IsAntialias = true };
-        canvas.DrawRoundRect(SKRect.Create(x - 12, y - 16, 272, 132), 8, 8, back);
+        canvas.DrawRoundRect(SKRect.Create(x - 12, y - 16, 272, 152), 8, 8, back);
 
         Text(canvas, $"{c.Name}  ·  level {hero.Level} {c.Ancestry.Name} {c.Class.Name}", x, y, _small, Ink);
         // Hit points, as a bar.
@@ -104,8 +104,37 @@ public sealed class HudPainter : IDisposable
             }))
             .Concat(hero.RecallIn > 0 ? ["Recall"] : [])
             .Concat(hero.DescentIn > 0 ? ["Descending"] : []).ToList();
+        // The class's resource, as a bar.
+        var resource = hero.Resource;
+        var pool = SKRect.Create(x, y + 98, 248, 10);
+        using (var trough = new SKPaint { Color = new SKColor(24, 22, 40), IsAntialias = true })
+            canvas.DrawRoundRect(pool, 3, 3, trough);
+        using (var fill = new SKPaint { Color = new SKColor(96, 120, 220), IsAntialias = true })
+            canvas.DrawRoundRect(SKRect.Create(pool.Left, pool.Top, pool.Width * (float)Math.Clamp(resource.Current / Math.Max(1, resource.Max), 0, 1), pool.Height), 3, 3, fill);
+        Text(canvas, $"{resource.Current:0} / {resource.Max:0} {resource.Name}", pool.MidX, pool.Bottom - 1, _tiny, Ink, SKTextAlign.Center);
+        if (c.PendingLevels.Count > 0)
+            Text(canvas, "Level up: press f", x + 248, y + 88, _tiny, Ember, SKTextAlign.Right);
         if (conditions.Count > 0)
-            Text(canvas, string.Join(", ", conditions), x, y + 106, _tiny, new SKColor(220, 140, 120));
+            Text(canvas, string.Join(", ", conditions), x, y + 126, _tiny, new SKColor(220, 140, 120));
+        DrawPowers(canvas, x, y + 150, session);
+    }
+
+    /// <summary>The ability bar: each ability with its key (1 to 0), its actions and its cost, dim while it can't be used.</summary>
+    private void DrawPowers(SKCanvas canvas, float x, float y, DungeonSession session)
+    {
+        var bar = session.Powers.Bar;
+        for (var i = 0; i < Math.Min(10, bar.Count); i++)
+        {
+            var a = bar[i];
+            var cooldown = session.Powers.CooldownLeft(a);
+            var ready = cooldown <= 0 && (a.Cost <= 0 || session.Hero.Resource.CanSpend(a.Cost));
+            var ly = y + i * 18;
+            Text(canvas, $"{(i + 1) % 10}  {a.Name}", x, ly, _tiny, ready ? Ink : Dim);
+            var note = cooldown > 0 ? $"{cooldown:0} s" : $"{Math.Clamp(a.Actions, 1, 3)} act{(a.Cost > 0 ? $"  ·  {a.Cost:0}" : "")}";
+            Text(canvas, note, x + 248, ly, _tiny, ready ? Ember : Dim, SKTextAlign.Right);
+        }
+        if (session.Powers.Aura is { } aura)
+            Text(canvas, $"{aura.Ability.Name}: {aura.Remaining:0} s", x, y + Math.Min(10, bar.Count) * 18 + 4, _tiny, Ember);
     }
 
     private void DrawMessages(SKCanvas canvas, SKSize size, ViewState view)

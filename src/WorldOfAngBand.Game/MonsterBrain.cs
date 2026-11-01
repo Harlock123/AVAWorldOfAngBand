@@ -212,7 +212,8 @@ internal sealed class MonsterBrain(DungeonSession session)
                 didSomething = true;
                 break;
             }
-            if (monster.Race.Has(MonsterFlags.NeverMove))
+            // Never moving, or held where it is (prone, grabbed, immobilized).
+            if (monster.Race.Has(MonsterFlags.NeverMove) || !foe.Conditions.CanMove)
                 return;
             if (Level.Monsters.At(grid) is not null)
                 continue;

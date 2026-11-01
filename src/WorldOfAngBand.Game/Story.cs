@@ -49,6 +49,16 @@ public static class Story
         ("mercy", "They say Malachar took the Heart and walked into the fire with it, and that the Cinderwyrm's dam flew south that night.", "smaug_the_golden"),
     ];
 
+    /// <summary>Ashen Reliquary's four endings by their titles: destroy, bind, claim and mercy.</summary>
+    public static string EndingTitle(string ending) => ending switch
+    {
+        "destroy" => "Ashes to Ashes",
+        "bind" => "The Lantern Rekindled",
+        "claim" => "The New Prophet",
+        "mercy" => "The Lantern-Bird",
+        _ => ending,
+    };
+
     /// <summary>What the hero can do at a story level's altar, given what they have done so far.</summary>
     public static IReadOnlyList<StoryChoice> Choices(string id, IReadOnlyDictionary<string, string> flags, bool monsterAlive) => id switch
     {

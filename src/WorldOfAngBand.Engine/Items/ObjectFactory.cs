@@ -403,7 +403,7 @@ public sealed class ObjectFactory(GameData data)
         item.Brands.AddRange(art.Brands);
         foreach (var r in art.Resists) item.Resists.Add(r);
         foreach (var f in art.Flags) item.Flags.Add(f);
-        foreach (var c in art.Curses)
+        foreach (var c in AllowCurses ? art.Curses : [])
         {
             if (!item.Curses.Contains(c)) item.Curses.Add(c);
             item.CursePowers[c] = art.CursePowers.GetValueOrDefault(c, Item.DefaultCursePower);
